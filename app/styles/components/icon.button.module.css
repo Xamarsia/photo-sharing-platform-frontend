@@ -1,0 +1,61 @@
+.icon-button {
+    @apply inline-flex justify-center items-center aspect-square cursor-pointer
+}
+
+/* style */
+
+.transparent-button {
+    @apply focus:outline-none focus:ring focus:ring-gray-300 bg-transparent hover:bg-gray-200 text-gray-400 hover:text-gray-800
+}
+
+/* size */
+
+.extra-small {
+    @apply p-1
+}
+
+.small {
+    @apply sm:p-1 p-2
+}
+
+.base {
+    @apply sm:p-2 p-2.5
+}
+
+.large {
+    @apply sm:p-2 p-2.5
+}
+
+.extra-large {
+    @apply sm:p-2 p-2.5
+}
+
+.extra-extra-large {
+    @apply sm:p-2 p-2.5
+}
+
+/* icon size */
+
+.extra-small-icon {
+    @apply size-[16px]
+}
+
+.small-icon {
+    @apply size-[20px]
+}
+
+.base-icon {
+    @apply size-[24px]
+}
+
+.large-icon {
+    @apply size-[28px]
+}
+
+.extra-large-icon {
+    @apply size-[32px]
+}
+
+.extra-extra-large-icon {
+    @apply size-[40px]
+}
