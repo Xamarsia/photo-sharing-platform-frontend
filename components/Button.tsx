@@ -1,6 +1,7 @@
 "use client"
 
 import styles from '@/app/styles/components/button.module.css'
+import textStyles from '@/app/styles/components/text.module.css'
 import { useState } from 'react'
 import Image from 'next/image'
 
@@ -31,6 +32,7 @@ export default function Button({ icon, text, style, type = 'button', size = 'bas
         <button type={type}
             className={`
                 ${styles['base-button']} 
+                ${textStyles[style]} 
                 ${styles[style]} 
                 ${styles[size]}
                 ${rounded}

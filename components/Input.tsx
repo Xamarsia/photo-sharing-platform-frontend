@@ -1,13 +1,14 @@
 import { ChangeEvent, KeyboardEvent } from "react"
 import styles from '@/app/styles/components/input.module.css'
+import textStyles from '@/app/styles/components/text.module.css'
 
 
 type InputProps = {
     name: string;
-    state: 'invalid' | 'valid';
     type: 'text' | 'number' | 'email' | 'password';
     size: 'small' | 'base' | 'large';
     placeholder: string | undefined;
+    state?: 'invalid' | 'valid';
     required?: boolean | undefined;
     pattern?: string | undefined;
     disabled?: boolean | undefined;
@@ -19,7 +20,7 @@ type InputProps = {
 }
 
 
-export default function InputField({ name, state, type, size, required, pattern, disabled, value, accept, id, placeholder, onKeyDown, onChange }: InputProps) {
+export default function InputField({ name, type, size, required, pattern, disabled, value, accept, id, placeholder, state = 'valid', onKeyDown, onChange }: InputProps) {
     return (
         <input
             type={type}
@@ -35,8 +36,9 @@ export default function InputField({ name, state, type, size, required, pattern,
             onKeyDown={onKeyDown}
             className={`peer 
                 ${styles['base-input-field']} 
-                ${state == 'invalid' ? '[&:not(:placeholder-shown):not(:focus)]:border-red-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500' : ''}
                 ${styles[size]}
+                ${styles[state]}
+                ${textStyles['placeholder']}
             `}
         />
     )
