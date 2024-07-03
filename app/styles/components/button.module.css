@@ -1,53 +1,53 @@
 /* style */
 
 .base-button {
-    @apply border border-gray-300 outline-none shadow shadow-gray-100 disabled:shadow-none cursor-pointer items-center
+    @apply outline-none shadow shadow-gray-100 disabled:shadow-none cursor-pointer items-center
 }
 
 .primary-button {
-    @apply text-white text-center bg-blue-600 hover:bg-blue-700 disabled:bg-blue-600 disabled:opacity-50 dark:bg-blue-600 dark:hover:bg-blue-700 dark:disabled:bg-blue-600
+    @apply bg-blue-600 hover:bg-blue-700 disabled:bg-blue-600 disabled:opacity-50 dark:bg-blue-600 dark:hover:bg-blue-700 dark:disabled:bg-blue-600
 }
 
 .secondary-button {
-    @apply bg-white ring-gray-300 hover:bg-gray-50 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 text-gray-900 text-gray-600 hover:text-gray-800
+    @apply bg-white ring-gray-300 hover:bg-gray-50 disabled:bg-slate-50 disabled:border-slate-200
 }
 
 .transparent-button {
-    @apply underline inline-flex w-full justify-center text-base font-semibold ring-inset sm:mt-0 sm:w-auto sm:w-auto bg-transparent text-blue-500 shadow-none hover:text-blue-700 border-none disabled:text-slate-500
+    @apply inline-flex w-full justify-center ring-inset sm:mt-0 sm:w-auto bg-transparent shadow-none border-none
 }
 
 .dropdown-button {
-    @apply block px-4 py-2 w-full min-w-40 sm:min-w-full text-sm text-left text-sm hover:bg-gray-100
+    @apply block px-4 py-2 w-full min-w-40 sm:min-w-full hover:bg-gray-100
 }
 
 .delete-button {
-    @apply text-white bg-red-600 ring-gray-300 hover:bg-red-500
+    @apply bg-red-600 ring-gray-300 hover:bg-red-500
 }
 
 .delete-transparent-button {
-    @apply underline inline-flex w-full justify-center text-base font-semibold ring-inset sm:mt-0 sm:w-auto sm:w-auto bg-transparent text-red-500 shadow-none hover:text-red-700 border-none disabled:text-slate-500
+    @apply w-full justify-center ring-inset sm:mt-0 sm:w-auto bg-transparent shadow-none border-none
 }
 
 /* size */
 
 .extra-small {
-    @apply px-2 py-1 text-xs
+    @apply px-2 py-1 text-xs min-h-6
 }
 
 .small {
-    @apply px-3 py-2 sm:text-xs text-sm
+    @apply px-3 py-2 sm:text-xs text-sm min-h-8
 }
 
 .base-button {
-    @apply px-5 py-2.5 sm:text-sm text-base
+    @apply px-5 py-2.5 sm:text-sm text-base min-h-10
 }
 
 .large {
-    @apply px-5 py-3 sm:text-sm md:text-base text-lg
+    @apply px-5 py-3 sm:text-sm md:text-base text-lg min-h-10
 }
 
 .extra-large {
-    @apply px-6 py-3.5 sm:text-sm md:text-base text-lg
+    @apply px-6 py-3.5 sm:text-sm md:text-base text-lg min-h-12
 }
 
 /* gap */
