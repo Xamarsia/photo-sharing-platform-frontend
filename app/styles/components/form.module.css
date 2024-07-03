@@ -1,0 +1,7 @@
+.form-container {
+    @apply bg-white shadow-lg rounded-lg sm:p-12 p-8 w-11/12 max-w-xl h-auto
+}
+
+.form {
+    @apply flex flex-col gap-y-6 my-4
+}
