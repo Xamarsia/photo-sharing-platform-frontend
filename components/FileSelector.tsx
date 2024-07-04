@@ -96,12 +96,12 @@ export default function FileSelector({ local, removable, textOnly, fill = 'conte
             }
 
             {(selectedImage || textOnly) &&
-                <div className={`flex justify-evenly items-center`}>
+                <div className={`flex justify-evenly items-center mt-1`}>
                     <label>
                         <Span text={local.selectImage} style='upload-button' />
                         <Input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
                     </label>
-                    {removable && <Button type='button' onClick={removeImage} style='delete-transparent-button' text={local.removeImage} />}
+                    {(removable && selectedImage) && <Button type='button' onClick={removeImage} style='delete-transparent-button' text={local.removeImage} />}
                 </div>
             }
         </>

@@ -9,7 +9,7 @@ type SpanProps = {
 
 
 export default function Span({ text, required, style = 'input' }: SpanProps) {
-    const uploadButtonStyles = `${textStyles["transparent-button"]} ${buttonStyles["transparent-button"]}`
+    const uploadButtonStyles = `${textStyles["transparent-button"]} ${textStyles["base"]} ${buttonStyles["transparent-button"]}`
 
     return (
         <span className={`
