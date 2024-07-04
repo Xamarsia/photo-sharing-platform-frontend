@@ -14,6 +14,7 @@ type ButtonProps = {
     rounded?: 'rounded' | 'rounded-md' | 'rounded-lg' | 'rounded-xl';
     fill?: 'content' | 'parent';
     disabled?: boolean;
+    hidden?: boolean;
     icon?: string;
     hoveredIcon?: string;
     iconSide?: 'left' | 'right';
@@ -21,7 +22,7 @@ type ButtonProps = {
 }
 
 
-export default function Button({ icon, text, style, type = 'button', size = 'base', rounded = 'rounded-md', fill = "content", disabled = false, iconSide = 'left', hoveredIcon = icon, onClick }: ButtonProps) {
+export default function Button({ icon, text, style, hidden, type = 'button', size = 'base', rounded = 'rounded-md', fill = "content", disabled = false, iconSide = 'left', hoveredIcon = icon, onClick }: ButtonProps) {
     const [isHovering, setIsHovered] = useState(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
@@ -44,6 +45,7 @@ export default function Button({ icon, text, style, type = 'button', size = 'bas
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
+            hidden={hidden}
         >
 
             {icon && hoveredIcon &&

@@ -9,6 +9,11 @@
     "fullName":"Full Name",
     "haveAccount":"I already have an account",
     "dontHaveAccount" : "I do not have an account",
+    "clickToUpload":"Click to upload",
+    "orDragAndDrop":"or drag and drop",
+    "fileFormatsForImageUploading":"JPG, JPEG up to 10MB",
+    "selectImage":"Select image",
+    "removeImage":"Remove image",
     "":"",
     "":""
     

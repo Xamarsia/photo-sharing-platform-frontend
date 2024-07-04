@@ -8,6 +8,7 @@ import { useState } from 'react'
 type ButtonProps = {
     icon: string;
     hoveredIcon: string;
+    hovered?: boolean
     style?: 'transparent-button';
     size?: 'extra-small' | 'small' | 'base' | 'large' | 'extra-large' | 'extra-extra-large';
     rounded?: 'rounded' | 'rounded-md' | 'rounded-lg' | 'rounded-xl' | 'rounded-full';
@@ -15,7 +16,7 @@ type ButtonProps = {
 }
 
 
-export default function IconButton({ icon, hoveredIcon, style, size = 'extra-large', rounded = 'rounded-md', onClick }: ButtonProps) {
+export default function IconButton({ icon, hoveredIcon, hovered, style, size = 'extra-large', rounded = 'rounded-md', onClick }: ButtonProps) {
     const [isHovering, setIsHovered] = useState(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
@@ -33,7 +34,7 @@ export default function IconButton({ icon, hoveredIcon, style, size = 'extra-lar
                 ${rounded}
             `}>
                 <div className={`${styles[iconSize]}`}>
-                    <Image src={isHovering ? hoveredIcon : icon} alt="icon" />
+                    <Image src={(isHovering || hovered) ? hoveredIcon : icon} alt="icon" />
                 </div>
             </button>
         </div>

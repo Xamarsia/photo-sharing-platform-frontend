@@ -3,7 +3,7 @@
 }
 
 .base-text {
-    @apply font-normal text-gray-900 leading-6 
+    @apply font-normal text-gray-900 leading-6
 }
 
 .small {
@@ -64,24 +64,6 @@
     @apply block text-sm font-normal leading-6 text-gray-500 truncate
 }
 
-
-/* .base-input-field {
-    @apply w-full font-light rounded-md border border-gray-300 bg-inherit shadow shadow-gray-100 appearance-none outline-none  invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 focus:border-blue-500 focus:ring-0 focus:ring-blue-500  disabled:border-slate-200 disabled:shadow-none
+.third-info {
+    @apply block text-xs font-normal leading-5 text-gray-500 truncate
 }
-
-.invalid {
-    @apply [&:not(:placeholder-shown):not(:focus)]:border-red-500
-}
-
-.small {
-    @apply py-1.5 px-2 text-sm min-h-8
-}
-
-.base {
-    @apply sm:py-1.5 sm:px-2.5 py-2 px-3 text-sm min-h-10
-}
-
-.large {
-    @apply sm:py-2 sm:px-3 py-2.5 px-3 text-base min-h-10
-} */
- 
