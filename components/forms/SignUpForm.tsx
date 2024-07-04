@@ -7,7 +7,10 @@ import Link from "@/components/Link";
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 
-import { FormEvent, useState } from "react";
+import { FormEvent, SetStateAction, useState } from "react";
+import FileSelector from "@/components/FileSelector";
+import ProfileImage from "../profile/image/ProfileImage";
+import DefaultProfileImage from "../profile/image/DefaultProfileImage";
 
 
 type Props = {
@@ -31,6 +34,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
     // const [email, setEmail] = useState("");
     // const [formIsValid, setFormIsValid] = useState(false);
 
+    const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -39,11 +43,21 @@ export default function SignUpForm({ local, onSubmit }: Props) {
         }
     }
 
+    const onImageSelected = (file: SetStateAction<File | undefined>) => {
+        setSelectedImage(file);
+    };
+
     return (
         <Form
             title={local.signUpFormTitle}
             onSubmit={handleSubmit}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}>
+
+            <div>
+                {selectedImage ? <ProfileImage src={URL.createObjectURL(selectedImage)} /> : <DefaultProfileImage />}
+                <FileSelector onImageSelected={onImageSelected} local={local} removable textOnly />
+            </div>
+
             <div>
                 <Span text={local.username} required />
                 <Input
@@ -83,7 +97,6 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                     required
                 />
             </div>
-
             <div className="my-1">
                 <Span text={local.repeatPassword} required />
                 <Input
@@ -96,7 +109,6 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                     required
                 />
             </div>
-
             <div>
                 <Span text={local.fullName} required />
                 <Input
@@ -110,7 +122,6 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                     required
                 />
             </div>
-
             <div>
                 <Button
                     type="submit"
