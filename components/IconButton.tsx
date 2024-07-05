@@ -16,7 +16,7 @@ type ButtonProps = {
 }
 
 
-export default function IconButton({ icon, hoveredIcon, hovered, style, size = 'extra-large', rounded = 'rounded-md', onClick }: ButtonProps) {
+export default function IconButton({ icon, hoveredIcon, hovered, style, size = 'base', rounded = 'rounded-md', onClick }: ButtonProps) {
     const [isHovering, setIsHovered] = useState(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
@@ -27,6 +27,7 @@ export default function IconButton({ icon, hoveredIcon, hovered, style, size = '
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}>
             <button type="button"
+                onClick={onClick}
                 className={`
                 ${styles['icon-button']} 
                 ${style ? styles[style] : ''} 
