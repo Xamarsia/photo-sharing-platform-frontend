@@ -1,0 +1,7 @@
+.profile-preview-layout {
+    @apply flex justify-around items-center gap-4 my-2 mx-4 hover:rounded-md hover:bg-gray-50
+}
+
+.profile-preview-container {
+    @apply hover:rounded-md hover:bg-gray-50 w-full
+}
