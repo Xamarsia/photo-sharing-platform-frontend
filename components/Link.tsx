@@ -1,23 +1,25 @@
-import styles from '@/app/styles/components/link.module.css'
-import textStyles from '@/app/styles/components/text.module.css'
-import Link from "next/link";
+import styles from '@/app/styles/components/link.module.css';
+import textStyles from '@/app/styles/components/text.module.css';
 
-type ButtonProps = {
+import Link from "next/link";
+import { ReactNode } from 'react';
+
+type LinkProps = {
     href: string;
-    text: string;
     prefetch?: boolean;
+    style?: 'none' | 'text-link';
+    children: ReactNode;
 }
 
 
-export default function LinkButton({ href, text, prefetch }: ButtonProps) {
+export default function LinkButton({ href, prefetch, children, style = 'none' }: LinkProps) {
+    const textStyle: string = `${styles["link"]} ${textStyles["link"]}`
 
     return (
         <Link href={href}
-            className={`
-            ${styles["link"]} 
-            ${textStyles["link"]}`}
-            prefetch={prefetch}>
-            {text}
+            prefetch={prefetch}
+            className={`${style == 'none' ? '' : textStyle}`}>
+            {children}
         </Link>
     )
 }
