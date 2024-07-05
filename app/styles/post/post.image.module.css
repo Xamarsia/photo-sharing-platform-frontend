@@ -1,0 +1,7 @@
+.post-image {
+    @apply w-full h-full max-h-full max-w-full object-center
+}
+
+.square-container {
+    @apply relative aspect-square bg-gray-100
+}
