@@ -12,7 +12,9 @@ export default function Dropdown({ children }: Props) {
     return (
         <div className={`${styles["dropdown-layout"]}`}>
             <div className={`${styles["dropdown"]}`}>
-                {children}
+                <div className="py-2">
+                    {children}
+                </div>
             </div>
         </div>
     )
