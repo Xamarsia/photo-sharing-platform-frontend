@@ -23,21 +23,19 @@ export default function IconButton({ icon, hoveredIcon, hovered, style, size = '
 
     var iconSize: string = size + `-icon`;
     return (
-        <div className="flex items-center flex-shrink-0"
+        <button type="button"
+            onClick={onClick}
             onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}>
-            <button type="button"
-                onClick={onClick}
-                className={`
+            onMouseLeave={onMouseLeave}
+            className={`
                 ${styles['icon-button']} 
                 ${style ? styles[style] : ''} 
                 ${styles[size]}
                 ${rounded}
             `}>
-                <div className={`${styles[iconSize]}`}>
-                    <Image src={(isHovering || hovered) ? hoveredIcon : icon} alt="icon" />
-                </div>
-            </button>
-        </div>
+            <div className={`${styles[iconSize]}`}>
+                <Image src={(isHovering || hovered) ? hoveredIcon : icon} alt="icon" />
+            </div>
+        </button>
     )
 }

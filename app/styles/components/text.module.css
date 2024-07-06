@@ -3,7 +3,7 @@
 }
 
 .base-text {
-    @apply font-normal text-gray-900 leading-6
+    @apply font-normal leading-6 text-base text-gray-900 text-justify
 }
 
 .small {
