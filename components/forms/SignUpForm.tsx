@@ -131,7 +131,9 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                     size="base"
                     disabled={!formIsValid}
                 />
-                <Link href="/auth/signin" text={local.haveAccount} />
+                <Link href="/auth/signin" prefetch={false} style="text-link">
+                    {local.haveAccount}
+                </Link>
             </div>
         </Form>
     )
