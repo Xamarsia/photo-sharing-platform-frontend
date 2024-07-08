@@ -5,7 +5,7 @@ import Form from "@/components/Form";
 import Span from "@/components/Span";
 import Link from "@/components/Link";
 import Input from '@/components/Input';
-import Button from '@/components/Button';
+import Button from '@/components/buttons/Button';
 
 import { FormEvent, useState } from "react";
 

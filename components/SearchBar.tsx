@@ -1,9 +1,9 @@
 "use client"
 
 import { ChangeEvent, FormEvent } from "react";
-import Button from "./Button";
-import styles from '@/app/styles/components/search.bar.module.css'
-import SearchInput from "./SearchInput";
+import Button from "@/components/buttons/Button";
+import styles from '@/app/styles/components/search.bar.module.css';
+import SearchInput from "@/components/SearchInput";
 
 export default function SearchBar() {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

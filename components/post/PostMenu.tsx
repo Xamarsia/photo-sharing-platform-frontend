@@ -9,8 +9,8 @@ import textStyles from '@/app/styles/components/text.module.css';
 import { UserState } from '@/constants';
 import { getProfileImagePreview } from '@/lib/profile-controller';
 
-import Button from '@/components/Button';
-import FollowButton from '@/components/FollowButton';
+import Button from '@/components/buttons/Button';
+import FollowButton from '@/components/buttons/FollowButton';
 import PostDropdown from '@/components/post/PostDropdown';
 
 

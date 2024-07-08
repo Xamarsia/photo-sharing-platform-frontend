@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import Image from 'next/image'
-import { useState } from 'react'
+import Image from 'next/image';
+import { useState } from 'react';
 
-import styles from '@/app/styles/components/button.module.css'
-import textStyles from '@/app/styles/components/text.module.css'
+import styles from '@/app/styles/components/button.module.css';
+import textStyles from '@/app/styles/components/text.module.css';
 
 
 type ButtonProps = {
@@ -48,7 +48,6 @@ export default function Button({ icon, text, style, hidden, type = 'button', siz
             onMouseLeave={onMouseLeave}
             hidden={hidden}
         >
-
             {icon && hoveredIcon &&
                 <div className={`${iconSide == 'right' ? 'order-last' : 'order-first'}`}>
                     <div className={`${styles[iconSize]}`}>

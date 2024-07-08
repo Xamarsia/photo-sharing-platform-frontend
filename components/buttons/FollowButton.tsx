@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { UserState } from '@/constants';
 
-import Button from '@/components/Button';
+import Button from '@/components/buttons/Button';
 
 type UserProps = {
     local: any,

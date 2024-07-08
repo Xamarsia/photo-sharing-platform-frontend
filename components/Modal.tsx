@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import Card from "@/components/Card";
-import IconButton from "@/components/IconButton";
+import IconButton from "@/components/buttons/IconButton";
 
 import xMark from '@/public/x-mark/x-mark.svg';
 import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';

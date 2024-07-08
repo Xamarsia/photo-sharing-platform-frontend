@@ -2,7 +2,7 @@
 
 import { ReactNode, useState } from 'react';
 import Dropdown from '@/components/Dropdown';
-import IconButton from '@/components/IconButton';
+import IconButton from '@/components/buttons/IconButton';;
 
 import ellipsisHorizontal from '@/public/ellipsis-horizontal/ellipsis-horizontal.svg'
 import hoveredEllipsisHorizontal from '@/public/ellipsis-horizontal/ellipsis-horizontal-hovered.svg'
