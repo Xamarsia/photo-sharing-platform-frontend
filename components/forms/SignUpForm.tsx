@@ -1,16 +1,16 @@
 "use client";
 
 
-import Form from "@/components/Form";
-import Span from "@/components/Span";
-import Link from "@/components/Link";
-import Input from '@/components/Input';
+import Form from "@/components/common/Form";
+import Span from "@/components/common/Span";
+import Link from "@/components/common/Link";
+import Input from '@/components/common/Input';
 import Button from '@/components/buttons/Button';
+import FileSelector from "@/components/common/FileSelector";
+import ProfileImage from "@/components/profile/image/ProfileImage";
+import DefaultProfileImage from "@/components/profile/image/DefaultProfileImage";
 
 import { FormEvent, SetStateAction, useState } from "react";
-import FileSelector from "@/components/FileSelector";
-import ProfileImage from "../profile/image/ProfileImage";
-import DefaultProfileImage from "../profile/image/DefaultProfileImage";
 
 
 type Props = {

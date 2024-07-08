@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import postImage from '@/public/profile5.jpg'
 
-import Card from '@/components/Card';
+import Card from '@/components/common/Card';
 import PostMenu from '@/components/post/PostMenu';
 import PostImage from '@/components/post/image/PostImage';
 

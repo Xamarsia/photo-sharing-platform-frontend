@@ -3,7 +3,7 @@ import 'server-only'
 
 import SignUpForm from '@/components/forms/SignUpForm';
 import { getDictionary } from '@/lib/localization'
-import Card from '@/components/Card';
+import Card from '@/components/common/Card';
 
 
 export default async function SigninPage() {

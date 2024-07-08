@@ -1,7 +1,7 @@
 "use client"
 
 import { ReactNode, useState } from 'react';
-import Dropdown from '@/components/Dropdown';
+import Dropdown from '@/components/common/Dropdown';
 import { getProfileImagePreview } from '@/lib/profile-controller';
 
 

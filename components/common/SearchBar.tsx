@@ -3,7 +3,7 @@
 import { ChangeEvent, FormEvent } from "react";
 import Button from "@/components/buttons/Button";
 import styles from '@/app/styles/components/search.bar.module.css';
-import SearchInput from "@/components/SearchInput";
+import SearchInput from "@/components/common/SearchInput";
 
 export default function SearchBar() {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

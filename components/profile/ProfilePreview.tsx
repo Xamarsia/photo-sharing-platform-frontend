@@ -1,7 +1,7 @@
 import textStyles from '@/app/styles/components/text.module.css';
 import styles from '@/app/styles/profile/profile.module.css';
 
-import Link from '@/components/Link';
+import Link from '@/components/common/Link';
 import { getProfileImagePreview } from '@/lib/profile-controller';
 
 import { ReactNode } from 'react';

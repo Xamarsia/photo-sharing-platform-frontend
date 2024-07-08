@@ -8,8 +8,8 @@ import photoHovered from '@/public/photo/photo-hovered.svg'
 import styles from '@/app/styles/components/file.selector.module.css'
 import textStyles from '@/app/styles/components/text.module.css'
 
-import Span from '@/components/Span';
-import Input from '@/components/Input';
+import Span from '@/components/common/Span';
+import Input from '@/components/common/Input';
 import Button from '@/components/buttons/Button';
 import IconButton from '@/components/buttons/IconButton';
 

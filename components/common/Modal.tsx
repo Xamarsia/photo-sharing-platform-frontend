@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import Card from "@/components/Card";
+import Card from "@/components/common/Card";
 import IconButton from "@/components/buttons/IconButton";
 
 import xMark from '@/public/x-mark/x-mark.svg';
