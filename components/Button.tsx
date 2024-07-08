@@ -1,15 +1,16 @@
 "use client"
 
+import Image from 'next/image'
+import { useState } from 'react'
+
 import styles from '@/app/styles/components/button.module.css'
 import textStyles from '@/app/styles/components/text.module.css'
-import { useState } from 'react'
-import Image from 'next/image'
 
 
 type ButtonProps = {
     type: 'button' | 'submit';
     text: string | undefined;
-    style: 'primary-button' | 'secondary-button' | 'transparent-button' | 'delete-button' | 'delete-transparent-button' | 'dropdown-button';
+    style: 'primary-button' | 'secondary-button' | 'transparent-button' | 'delete-button' | 'delete-transparent-button' | 'dropdown-button' | 'red-dropdown-button' | 'blue-dropdown-button';
     size?: 'extra-small' | 'small' | 'base' | 'large' | 'extra-large';
     rounded?: 'rounded' | 'rounded-md' | 'rounded-lg' | 'rounded-xl';
     fill?: 'content' | 'parent';
@@ -34,7 +35,7 @@ export default function Button({ icon, text, style, hidden, type = 'button', siz
             className={`
                 ${styles['base-button']} 
                 ${textStyles[style]} 
-                ${styles[style]} 
+                ${style.includes('dropdown-button') ? styles['dropdown-button'] : styles[style]} 
                 ${styles[size]}
                 ${rounded}
                 ${(text && icon) ? styles[iconGap] : ''}

@@ -35,6 +35,14 @@
     @apply text-sm text-left text-gray-700
 }
 
+.red-dropdown-button {
+    @apply text-sm text-left text-red-600
+}
+
+.blue-dropdown-button {
+    @apply text-sm text-left text-blue-600
+}
+
 .delete-button {
     @apply text-white font-semibold
 }
