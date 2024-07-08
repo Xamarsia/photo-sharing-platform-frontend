@@ -17,7 +17,7 @@
 }
 
 .dropdown-button {
-    @apply block px-4 py-2 w-full min-w-40 sm:min-w-full hover:bg-gray-100
+    @apply block px-4 py-2 w-full min-w-40 sm:min-w-full hover:bg-gray-100 shadow-none
 }
 
 .delete-button {

@@ -1,10 +1,11 @@
 .search-input-field {
-    @apply w-full rounded-lg appearance-none outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm shadow shadow-gray-100 focus:ring-blue-700 focus:border-blue-500 block w-full ps-10 p-2.5
+    @apply rounded-lg appearance-none outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm shadow shadow-gray-100 focus:ring-blue-700 focus:border-blue-500 block w-full ps-10 p-2.5
 }
 
 .icon-size {
     @apply w-4 h-4
 }
+
 .icon-layout {
     @apply absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none
 }

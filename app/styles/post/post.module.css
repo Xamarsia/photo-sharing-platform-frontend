@@ -1,0 +1,3 @@
+.post-menu-layout {
+    @apply flex justify-around items-center space-x-4
+}

@@ -1,0 +1,36 @@
+type UserState = 'CURRENT' | 'FOLLOWED' | 'UNFOLLOWED'
+
+type UserDTO = {
+    "id": string,
+    "fullName": string,
+    "username": string,
+    "email": string,
+    "roles": Array<string>,
+    "state": UserState,
+    "isProfileImageExist": boolean
+}
+
+type UserPreviewDTO = {
+    "id": string,
+    "fullName": string,
+    "username": string,
+    "state": UserState,
+    "isProfileImageExist": boolean
+}
+
+type PostPreviewDTO = {
+    "id": number,
+}
+
+type PostDTO = {
+    "id": number,
+    "createdDate": string,
+    "description": string,
+    "username": string,
+}
+
+type DetailedPostDTO = {
+    "postDTO": PostDTO
+    "authorDTO": UserPreviewDTO
+}
+

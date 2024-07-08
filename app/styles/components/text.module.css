@@ -3,7 +3,7 @@
 }
 
 .base-text {
-    @apply font-normal text-gray-900 leading-6
+    @apply font-normal leading-6 text-base text-gray-900 text-justify
 }
 
 .small {
@@ -33,6 +33,14 @@
 
 .dropdown-button {
     @apply text-sm text-left text-gray-700
+}
+
+.red-dropdown-button {
+    @apply text-sm text-left text-red-600
+}
+
+.blue-dropdown-button {
+    @apply text-sm text-left text-blue-600
 }
 
 .delete-button {
