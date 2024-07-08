@@ -6,7 +6,7 @@ import { UserState } from '@/constants';
 import Button from '@/components/Button';
 
 type UserProps = {
-    local: any
+    local: any,
     user: UserPreviewDTO,
     dropdown?: boolean,
 }
@@ -15,12 +15,10 @@ export default function FollowButton({ user, dropdown, local }: UserProps) {
     const [following, setFollowing] = useState<boolean>(user.state == UserState.Followed);
 
     async function followProfile() {
-
         setFollowing(true);
     }
 
     async function unfollowProfile() {
-
         setFollowing(false);
     }
 
@@ -33,5 +31,5 @@ export default function FollowButton({ user, dropdown, local }: UserProps) {
                 )
             }
         </>
-    )
+    );
 }
