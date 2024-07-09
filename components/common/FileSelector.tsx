@@ -75,7 +75,7 @@ export default function FileSelector({ local, removable, textOnly, fill = 'conte
             {(!selectedImage && !textOnly) &&
                 <div className={`
                         ${dragActive ? "bg-gray-100" : "bg-gray-50"} 
-                        ${fill == 'parent' ? 'w-full h-full' : 'w-[416px] h-[192px]'}
+                        ${fill == 'parent' ? 'w-full aspect-square' : 'w-[416px] h-[192px]'}
                         ${styles['file-selector']}
                     `}
                     onDragEnter={handleDragEnter}
