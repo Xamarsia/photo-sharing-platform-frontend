@@ -30,8 +30,10 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
     return (
         <Form title={local.createPost}>
             <div>
+                {/* {selectedImage && <PostImage src={URL.createObjectURL(selectedImage)} size={"uncropped-square"} />} */}
+                <FileSelector  onImageSelected={onImageSelected} local={local}>
                 {selectedImage && <PostImage src={URL.createObjectURL(selectedImage)} size={"uncropped-square"} />}
-                <FileSelector onImageSelected={onImageSelected} local={local} fill="parent" />
+                    </FileSelector> 
             </div>
             <div>
                 <Span text={local.description} />
