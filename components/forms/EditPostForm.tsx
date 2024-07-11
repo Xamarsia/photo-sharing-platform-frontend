@@ -13,13 +13,13 @@ import FileSelector from "@/components/common/FileSelector";
 
 type Props = {
     local: any;
+    detailedPost: DetailedPostDTO;
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
-export default function CreatePostForm({ local, onSubmit }: Props) {
-    // const [description, setDescription] = useState('');
-    const [description, setDescription] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum metus eros, ut rutrum nulla blandit eu. Curabitur ac molestie lorem. Nunc porttitor tempor justo sed tempor. ');
-
+export default function EditPostForm({ local, detailedPost, onSubmit }: Props) {
+    const [isFormChanged, setIsFormChanged] = useState<boolean>(false)
+    const [description, setDescription] = useState(detailedPost.postDTO?.description);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
 
     const onImageSelected = (file: SetStateAction<File | undefined>) => {
@@ -28,7 +28,7 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
 
 
     return (
-        <Form title={local.createPost} onSubmit={onSubmit}>
+        <Form title={local.editPost} onSubmit={onSubmit} onChange={() => setIsFormChanged(true)}>
             <div>
                 <FileSelector onImageSelected={onImageSelected} local={local}>
                     {selectedImage && <PostImage src={URL.createObjectURL(selectedImage)} size={"uncropped-square"} />}
@@ -41,7 +41,7 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
             </div>
 
             <div>
-                <Button type="submit" style="primary-button" text={local.create} disabled={!selectedImage} fill="parent" />
+                <Button type="submit" style="primary-button" text={local.update} disabled={!isFormChanged} fill="parent" />
             </div>
         </Form>
     )
