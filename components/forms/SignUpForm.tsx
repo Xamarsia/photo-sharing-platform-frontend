@@ -8,7 +8,6 @@ import Input from '@/components/common/Input';
 import Button from '@/components/buttons/Button';
 import FileSelector from "@/components/common/FileSelector";
 import ProfileImage from "@/components/profile/image/ProfileImage";
-import DefaultProfileImage from "@/components/profile/image/DefaultProfileImage";
 
 import { FormEvent, SetStateAction, useState } from "react";
 
@@ -52,12 +51,11 @@ export default function SignUpForm({ local, onSubmit }: Props) {
             title={local.signUpFormTitle}
             onSubmit={handleSubmit}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}>
-
-            <div>
-                {selectedImage ? <ProfileImage src={URL.createObjectURL(selectedImage)} /> : <DefaultProfileImage />}
-                <FileSelector onImageSelected={onImageSelected} local={local} removable textOnly />
+            <div className='h-80 w-80 m-auto'>
+                <FileSelector onImageSelected={onImageSelected} local={local} rounded="rounded-full"  >
+                    {selectedImage && <ProfileImage src={URL.createObjectURL(selectedImage)} />}
+                </FileSelector>
             </div>
-
             <div>
                 <Span text={local.username} required />
                 <Input

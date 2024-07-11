@@ -1,6 +1,6 @@
 "use client";
 
-import { SetStateAction, useEffect, useState } from 'react';
+import { ReactNode, SetStateAction, useEffect, useState } from 'react';
 
 import photo from '@/public/photo/photo.svg'
 import photoHovered from '@/public/photo/photo-hovered.svg'
@@ -8,25 +8,25 @@ import photoHovered from '@/public/photo/photo-hovered.svg'
 import styles from '@/app/styles/components/file.selector.module.css'
 import textStyles from '@/app/styles/components/text.module.css'
 
+import xMark from '@/public/x-mark/x-mark.svg';
+import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';
+
 import Span from '@/components/common/Span';
 import Input from '@/components/common/Input';
-import Button from '@/components/buttons/Button';
 import IconButton from '@/components/buttons/IconButton';
 
 
 type Props = {
     local: any;
-    removable?: boolean;
-    textOnly?: boolean;
-    fill?: 'content' | 'parent';
+    rounded?: 'rounded-full';
+    children?: ReactNode;
     onImageSelected?: (file: SetStateAction<File | undefined>) => void;
 }
 
 
-export default function FileSelector({ local, removable, textOnly, fill = 'content', onImageSelected }: Props) {
+export default function FileSelector({ local, children, rounded, onImageSelected }: Props) {
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [dragActive, setDragActive] = useState<boolean>(false);
-
 
     useEffect(() => {
         if (onImageSelected) onImageSelected(selectedImage);
@@ -65,24 +65,30 @@ export default function FileSelector({ local, removable, textOnly, fill = 'conte
         setSelectedImage(file);
     };
 
-    const removeImage = (): void => {
+    const handleCloseClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
         setSelectedImage(undefined);
     };
 
-
     return (
-        <>
-            {(!selectedImage && !textOnly) &&
-                <div className={`
-                        ${dragActive ? "bg-gray-100" : "bg-gray-50"} 
-                        ${fill == 'parent' ? 'w-full aspect-square' : 'w-[416px] h-[192px]'}
-                        ${styles['file-selector']}
-                    `}
-                    onDragEnter={handleDragEnter}
-                    onDrop={handleDrop}
-                    onDragLeave={handleDragLeave}
-                    onDragOver={handleDragOver}
-                >
+        <div className={`${styles['file-selector-layout']} ${rounded}`}
+            onDragEnter={handleDragEnter}
+            onDrop={handleDrop}
+            onDragLeave={handleDragLeave}
+            onDragOver={handleDragOver}
+        >
+            {children}
+            <div className={`
+            ${styles['file-selector']} ${rounded} 
+                    ${dragActive ? 'bg-gray-200 bg-opacity-50' : ''}
+                `}>
+
+                {selectedImage &&
+                    <div className={`absolute top-0 right-0`}>
+                        <IconButton style={'transparent-button'} icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
+                    </div>
+                }
+                <div className={`flex flex-col items-center justify-center  ${selectedImage ? 'invisible' : 'visible'}`}>
                     <IconButton size={'extra-extra-large'} rounded={'rounded'} icon={photo} hoveredIcon={photoHovered} hovered={dragActive} />
                     <div className='flex gap-1'>
                         <label>
@@ -91,19 +97,9 @@ export default function FileSelector({ local, removable, textOnly, fill = 'conte
                         </label>
                         <p className={`${textStyles['secondary-info']}`}>{local.orDragAndDrop}</p>
                     </div>
-                    <p className={`${textStyles['third-info']}`}>{local.fileFormatsForImageUploading}</p>
+                    <p className={`${textStyles['third-info']} `}>{local.fileFormatsForImageUploading}</p>
                 </div>
-            }
-
-            {(selectedImage || textOnly) &&
-                <div className={`flex justify-evenly items-center mt-1`}>
-                    <label>
-                        <Span text={local.selectImage} style='upload-button' />
-                        <Input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
-                    </label>
-                    {(removable && selectedImage) && <Button type='button' onClick={removeImage} style='delete-transparent-button' text={local.removeImage} />}
-                </div>
-            }
-        </>
+            </div>
+        </div>
     )
 }
