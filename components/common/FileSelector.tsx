@@ -8,6 +8,9 @@ import photoHovered from '@/public/photo/photo-hovered.svg'
 import styles from '@/app/styles/components/file.selector.module.css'
 import textStyles from '@/app/styles/components/text.module.css'
 
+import xMark from '@/public/x-mark/x-mark.svg';
+import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';
+
 import Span from '@/components/common/Span';
 import Input from '@/components/common/Input';
 import IconButton from '@/components/buttons/IconButton';
@@ -15,17 +18,15 @@ import IconButton from '@/components/buttons/IconButton';
 
 type Props = {
     local: any;
-    removable?: boolean;
-    rounded?: 'rounded-full' | 'aspect-square';
+    rounded?: 'rounded-full';
     children?: ReactNode;
     onImageSelected?: (file: SetStateAction<File | undefined>) => void;
 }
 
 
-export default function FileSelector({ local, removable, children, rounded = 'aspect-square', onImageSelected }: Props) {
+export default function FileSelector({ local, children, rounded, onImageSelected }: Props) {
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [dragActive, setDragActive] = useState<boolean>(false);
-
 
     useEffect(() => {
         if (onImageSelected) onImageSelected(selectedImage);
@@ -64,29 +65,40 @@ export default function FileSelector({ local, removable, children, rounded = 'as
         setSelectedImage(file);
     };
 
+    const handleCloseClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        setSelectedImage(undefined);
+    };
+
     return (
-        <div className={`relative w-full ${rounded}`}
+        <div className={`${styles['file-selector-layout']} ${rounded}`}
             onDragEnter={handleDragEnter}
             onDrop={handleDrop}
             onDragLeave={handleDragLeave}
             onDragOver={handleDragOver}
         >
             {children}
-            <div className={`absolute bottom-0 left-0 w-full hover:bg-gray-300 hover:bg-opacity-50
-                    ${rounded} 
-                    ${styles['file-selector']}
-                    ${selectedImage ? 'bg-opacity-0' : 'bg-gray-50 bg-opacity-100'}
-                    ${dragActive ? `bg-gray-100 bg-opacity-50` : "bg-gray-50 bg-opacity-70"} 
+            <div className={`
+            ${styles['file-selector']} ${rounded} 
+                    ${dragActive ? 'bg-gray-200 bg-opacity-50' : ''}
                 `}>
-                <IconButton size={'extra-extra-large'} rounded={'rounded'} icon={photo} hoveredIcon={photoHovered} hovered={dragActive} />
-                <div className='flex gap-1'>
-                    <label>
-                        <Span text={local.clickToUpload} style='upload-button' />
-                        <Input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
-                    </label>
-                    <p className={`${textStyles['secondary-info']}`}>{local.orDragAndDrop}</p>
+
+                {selectedImage &&
+                    <div className={`absolute top-0 right-0`}>
+                        <IconButton style={'transparent-button'} icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
+                    </div>
+                }
+                <div className={`flex flex-col items-center justify-center  ${selectedImage ? 'invisible' : 'visible'}`}>
+                    <IconButton size={'extra-extra-large'} rounded={'rounded'} icon={photo} hoveredIcon={photoHovered} hovered={dragActive} />
+                    <div className='flex gap-1'>
+                        <label>
+                            <Span text={local.clickToUpload} style='upload-button' />
+                            <Input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
+                        </label>
+                        <p className={`${textStyles['secondary-info']}`}>{local.orDragAndDrop}</p>
+                    </div>
+                    <p className={`${textStyles['third-info']} `}>{local.fileFormatsForImageUploading}</p>
                 </div>
-                <p className={`${textStyles['third-info']}`}>{local.fileFormatsForImageUploading}</p>
             </div>
         </div>
     )

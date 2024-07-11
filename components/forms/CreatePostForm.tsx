@@ -28,17 +28,18 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
 
 
     return (
-        <Form title={local.createPost}>
+        <Form title={local.createPost} onSubmit={onSubmit}>
             <div>
-                {/* {selectedImage && <PostImage src={URL.createObjectURL(selectedImage)} size={"uncropped-square"} />} */}
-                <FileSelector  onImageSelected={onImageSelected} local={local}>
-                {selectedImage && <PostImage src={URL.createObjectURL(selectedImage)} size={"uncropped-square"} />}
-                    </FileSelector> 
+                <FileSelector onImageSelected={onImageSelected} local={local}>
+                    {selectedImage && <PostImage src={URL.createObjectURL(selectedImage)} size={"uncropped-square"} />}
+                </FileSelector>
             </div>
+
             <div>
                 <Span text={local.description} />
-                <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder="Write your description here..." />
+                <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
             </div>
+
             <div>
                 <Button type="submit" style="primary-button" text="Create" disabled={!selectedImage} fill="parent" />
             </div>
