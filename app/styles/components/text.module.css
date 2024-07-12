@@ -2,6 +2,10 @@
     @apply text-slate-800 text-center text-2xl font-normal leading-9 tracking-normal
 }
 
+.title-large {
+    @apply text-slate-800 text-center text-3xl font-normal leading-10 tracking-normal
+}
+
 .base-text {
     @apply font-normal leading-6 text-base text-gray-900 text-justify
 }

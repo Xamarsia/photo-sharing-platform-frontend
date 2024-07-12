@@ -24,5 +24,17 @@
     "writeDescriptionHere": "Write your description here...",
     "update": "Update",
     "create": "Create",
+    "pageNotFound": "Page not found",
+    "pageDoesNotExist": "The page you are looking for doesn't exist.",
+    "userNotFound": "User not found",
+    "userDoesNotExist": "The user you are looking for doesn't exist.",
+    "postNotFound": "Post not found",
+    "postDoesNotExist": "The post you are looking for doesn't exist.",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
     "": ""
 }
