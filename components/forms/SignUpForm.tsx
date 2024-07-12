@@ -6,6 +6,7 @@ import Span from "@/components/common/Span";
 import Link from "@/components/common/Link";
 import Input from '@/components/common/Input';
 import Button from '@/components/buttons/Button';
+import Textarea from "@/components/common/Textarea";
 import FileSelector from "@/components/common/FileSelector";
 import ProfileImage from "@/components/profile/image/ProfileImage";
 
@@ -25,6 +26,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
     const [fullName, setfullName] = useState("Full Name");
     const [email, setEmail] = useState("localpart@domain.com");
     const [formIsValid, setFormIsValid] = useState(true);
+    const [description, setDescription] = useState("");
 
     // const [username, setUsername] = useState("");
     // const [password, setPassword] = useState("");
@@ -119,6 +121,10 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                     onChange={(e) => setfullName(e.target.value)}
                     required
                 />
+            </div>
+            <div>
+                <Span text={local.description} />
+                <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
             </div>
             <div>
                 <Button
