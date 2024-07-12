@@ -9,3 +9,28 @@ export const getProfileImagePreview = (user: UserPreviewDTO | UserDTO) => {
     }
 
 }
+
+export const getProfileImage = (user: UserPreviewDTO | UserDTO) => {
+    if (user.isProfileImageExist) {
+        return <ProfileImage src={`/api/auth/user/${user.username}/profile/image`} />
+    } else {
+        return <DefaultProfileImage username={user.username} />
+    }
+
+}
+
+const userDTO: UserDTO = {
+    id: '3',
+    roles: ["User role", "Admin role"],
+    email: "email@gmail.com",
+    state: 'CURRENT',
+    username: 'username',
+    fullName: 'Full Name',
+    description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et quod quis eaque aliquam necessitatibus vel eligendi laboriosam optio quisquam sunt.',
+    isProfileImageExist: false,
+  }
+
+
+export async function getUser(): Promise<UserDTO> {
+    return userDTO;
+}

@@ -5,6 +5,7 @@ type UserDTO = {
     "fullName": string,
     "username": string,
     "email": string,
+    "description": string,
     "roles": Array<string>,
     "state": UserState,
     "isProfileImageExist": boolean
@@ -34,3 +35,10 @@ type DetailedPostDTO = {
     "authorDTO": UserPreviewDTO
 }
 
+type ProfileDTO = {
+    "followingsCount": number
+    "followersCount": number
+    "postsCount": number
+    "description": string
+    "userPreviewDTO": UserPreviewDTO
+}
