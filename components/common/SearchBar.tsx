@@ -1,7 +1,7 @@
 "use client"
 
 import { ChangeEvent, FormEvent } from "react";
-import Button from "@/components/buttons/Button";
+import TextButton from "@/components/buttons/TextButton";
 import styles from '@/app/styles/components/search.bar.module.css';
 import SearchInput from "@/components/common/SearchInput";
 
@@ -15,7 +15,7 @@ export default function SearchBar() {
     return (
         <form className={`${styles['search-bar']}`} onSubmit={handleSubmit}>
             <SearchInput onChange={onSearchChanged} />
-            <Button type={"submit"} style={"primary-button"} size="small" text="Search" rounded="rounded-lg" />
+            <TextButton type={"submit"} style={"primary-button"} size="small" text="Search" rounded="rounded-lg" />
         </form>
     )
 }

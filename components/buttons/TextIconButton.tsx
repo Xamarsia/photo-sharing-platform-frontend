@@ -7,7 +7,7 @@ import styles from '@/app/styles/components/button.module.css';
 import textStyles from '@/app/styles/components/text.module.css';
 
 
-type ButtonProps = {
+type TextIconButtonProps = {
     type: 'button' | 'submit';
     text: string | undefined;
     style: 'primary-button' | 'secondary-button' | 'transparent-button' | 'delete-button' | 'delete-transparent-button' | 'dropdown-button' | 'red-dropdown-button' | 'blue-dropdown-button';
@@ -16,14 +16,14 @@ type ButtonProps = {
     fill?: 'content' | 'parent';
     disabled?: boolean;
     hidden?: boolean;
-    icon?: string;
+    icon: string;
     hoveredIcon?: string;
     iconSide?: 'left' | 'right';
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 
-export default function Button({ icon, text, style, hidden, type = 'button', size = 'base', rounded = 'rounded-md', fill = "content", disabled = false, iconSide = 'left', hoveredIcon = icon, onClick }: ButtonProps) {
+export default function TextIconButton({ icon, text, style, hidden, type = 'button', size = 'base', rounded = 'rounded-md', fill = "content", disabled = false, iconSide = 'left', hoveredIcon = icon, onClick }: TextIconButtonProps) {
     const [isHovering, setIsHovered] = useState(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
@@ -34,9 +34,10 @@ export default function Button({ icon, text, style, hidden, type = 'button', siz
         <button type={type}
             className={`
                 ${styles['base-button']} 
+                ${styles[size]}
+                ${textStyles[size]} 
                 ${textStyles[style]} 
                 ${style.includes('dropdown-button') ? styles['dropdown-button'] : styles[style]} 
-                ${styles[size]}
                 ${rounded}
                 ${(text && icon) ? styles[iconGap] : ''}
                 ${fill == 'parent' ? 'w-full' : ''}
@@ -48,13 +49,11 @@ export default function Button({ icon, text, style, hidden, type = 'button', siz
             onMouseLeave={onMouseLeave}
             hidden={hidden}
         >
-            {icon && hoveredIcon &&
-                <div className={`${iconSide == 'right' ? 'order-last' : 'order-first'}`}>
-                    <div className={`${styles[iconSize]}`}>
-                        <Image src={isHovering ? hoveredIcon : icon} alt="icon" />
-                    </div>
+            <div className={`${iconSide == 'right' ? 'order-last' : 'order-first'}`}>
+                <div className={`${styles[iconSize]}`}>
+                    <Image src={isHovering ? hoveredIcon : icon} alt="icon" />
                 </div>
-            }
+            </div>
             <h1 className={`items-center`}>{text}</h1>
 
         </button>

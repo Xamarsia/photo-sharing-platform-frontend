@@ -1,7 +1,7 @@
 /* style */
 
 .base-button {
-    @apply outline-none shadow shadow-gray-100 disabled:shadow-none cursor-pointer items-center
+    @apply outline-none shadow shadow-gray-100 disabled:shadow-none cursor-pointer items-center disabled:cursor-default
 }
 
 .primary-button {
@@ -13,7 +13,7 @@
 }
 
 .transparent-button {
-    @apply inline-flex w-full justify-center ring-inset sm:mt-0 sm:w-auto bg-transparent shadow-none border-none
+    @apply inline-flex w-full justify-center ring-inset bg-transparent shadow-none border-none
 }
 
 .dropdown-button {
@@ -31,23 +31,23 @@
 /* size */
 
 .extra-small {
-    @apply px-2 py-1 text-xs min-h-6
+    @apply px-2 py-1 min-h-6
 }
 
 .small {
-    @apply px-3 py-2 sm:text-xs text-sm min-h-8
+    @apply px-3 py-2 min-h-8
 }
 
-.base-button {
-    @apply px-5 py-2.5 sm:text-sm text-base min-h-10
+.base {
+    @apply px-5 py-2.5 min-h-10
 }
 
 .large {
-    @apply px-5 py-3 sm:text-sm md:text-base text-lg min-h-10
+    @apply px-5 py-3 min-h-10
 }
 
 .extra-large {
-    @apply px-6 py-3.5 sm:text-sm md:text-base text-lg min-h-12
+    @apply px-6 py-3.5 min-h-12
 }
 
 /* gap */

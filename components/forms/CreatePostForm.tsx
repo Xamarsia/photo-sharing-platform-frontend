@@ -5,7 +5,7 @@ import { FormEvent, SetStateAction, useState } from "react";
 
 import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
-import Button from "@/components/buttons/Button";
+import TextButton from "@/components/buttons/TextButton";
 import Textarea from "@/components/common/Textarea";
 import PostImage from "@/components/post/image/PostImage";
 import FileSelector from "@/components/common/FileSelector";
@@ -18,7 +18,7 @@ type Props = {
 
 export default function CreatePostForm({ local, onSubmit }: Props) {
     // const [description, setDescription] = useState('');
-    const [description, setDescription] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum metus eros, ut rutrum nulla blandit eu. Curabitur ac molestie lorem. Nunc porttitor tempor justo sed tempor. ');
+    const [description, setDescription] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum metus eros, ut rutrum nulla blandit eu. Curabitur ac molestie lorem. Nunc porttitor tempor justo sed tempor.');
 
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
 
@@ -41,7 +41,7 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
             </div>
 
             <div>
-                <Button type="submit" style="primary-button" text={local.create} disabled={!selectedImage} fill="parent" />
+                <TextButton type="submit" style="primary-button" text={local.create} disabled={!selectedImage} fill="parent" />
             </div>
         </Form>
     )

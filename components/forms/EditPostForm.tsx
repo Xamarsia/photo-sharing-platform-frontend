@@ -5,7 +5,7 @@ import { FormEvent, SetStateAction, useState } from "react";
 
 import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
-import Button from "@/components/buttons/Button";
+import TextButton from "@/components/buttons/TextButton";
 import Textarea from "@/components/common/Textarea";
 import PostImage from "@/components/post/image/PostImage";
 import FileSelector from "@/components/common/FileSelector";
@@ -41,7 +41,7 @@ export default function EditPostForm({ local, detailedPost, onSubmit }: Props) {
             </div>
 
             <div>
-                <Button type="submit" style="primary-button" text={local.update} disabled={!isFormChanged} fill="parent" />
+                <TextButton type="submit" style="primary-button" text={local.update} disabled={!isFormChanged} fill="parent" />
             </div>
         </Form>
     )

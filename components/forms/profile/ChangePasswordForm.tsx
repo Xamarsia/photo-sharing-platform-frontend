@@ -4,7 +4,7 @@
 import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
 import Input from '@/components/common/Input';
-import Button from '@/components/buttons/Button';
+import TextButton from '@/components/buttons/TextButton';
 
 import { FormEvent, useState } from "react";
 
@@ -45,9 +45,7 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
                 <Input
                     type="password"
                     name="oldPassword"
-                    size='base'
                     value={oldPassword}
-                    placeholder=" "
                     pattern=".{1,}"
                     onChange={(e) => setOldPassword(e.target.value)}
                     required
@@ -58,9 +56,7 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
                 <Input
                     type="password"
                     name="newPassword"
-                    size="base"
                     value={newPassword}
-                    placeholder=" "
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
                 />
@@ -71,21 +67,18 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
                 <Input
                     type="password"
                     name="rNewPassword"
-                    size="base"
                     value={rNewPassword}
-                    placeholder=" "
                     onChange={(e) => setRNewPassword(e.target.value)}
                     required
                 />
             </div>
 
             <div>
-                <Button
+                <TextButton
                     type="submit"
                     style="primary-button"
                     text={local.update}
                     fill="parent"
-                    size="base"
                     disabled={!formIsValid || !isFormChanged}
                 />
             </div>

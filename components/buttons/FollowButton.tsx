@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { UserState } from '@/constants';
 
-import Button from '@/components/buttons/Button';
+import TextButton from '@/components/buttons/TextButton';
 
 type UserProps = {
     local: any,
@@ -26,8 +26,8 @@ export default function FollowButton({ user, dropdown, local }: UserProps) {
         <>
             {user.state != UserState.Current &&
                 (following
-                    ? <Button type="submit" fill="parent" style={dropdown ? 'red-dropdown-button' : 'secondary-button'} onClick={unfollowProfile} text={local.unfollow} />
-                    : <Button type="submit" fill="parent" style={dropdown ? 'blue-dropdown-button' : 'primary-button'} onClick={followProfile} text={local.follow} />
+                    ? <TextButton type="submit" fill="parent" style={dropdown ? 'red-dropdown-button' : 'secondary-button'} onClick={unfollowProfile} text={local.unfollow} />
+                    : <TextButton type="submit" fill="parent" style={dropdown ? 'blue-dropdown-button' : 'primary-button'} onClick={followProfile} text={local.follow} />
                 )
             }
         </>

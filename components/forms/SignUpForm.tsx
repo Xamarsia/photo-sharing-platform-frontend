@@ -5,7 +5,7 @@ import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
 import Link from "@/components/common/Link";
 import Input from '@/components/common/Input';
-import Button from '@/components/buttons/Button';
+import TextButton from '@/components/buttons/TextButton';
 import Textarea from "@/components/common/Textarea";
 import FileSelector from "@/components/common/FileSelector";
 import ProfileImage from "@/components/profile/image/ProfileImage";
@@ -63,9 +63,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 <Input
                     type="text"
                     name="username"
-                    size="base"
                     value={username}
-                    placeholder=" "
                     pattern='^[a-zA-Z0-9]{1,30}$'
                     onChange={(e) => setUsername(e.target.value)}
                     required
@@ -76,9 +74,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 <Input
                     type="text"
                     name="email"
-                    size='base'
                     value={email}
-                    placeholder=" "
                     pattern=".{1,}"
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -89,9 +85,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 <Input
                     type="password"
                     name="password"
-                    size='base'
                     value={password}
-                    placeholder=" "
                     pattern=".{1,}"
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -102,9 +96,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 <Input
                     type="password"
                     name="rpassword"
-                    size="base"
                     value={rpassword}
-                    placeholder=" "
                     onChange={(e) => setRPassword(e.target.value)}
                     required
                 />
@@ -114,9 +106,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 <Input
                     type="text"
                     name="fullName"
-                    size="base"
                     value={fullName}
-                    placeholder=" "
                     pattern="^[a-zA-Z\s]{2,30}$"
                     onChange={(e) => setfullName(e.target.value)}
                     required
@@ -127,12 +117,11 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
             </div>
             <div>
-                <Button
+                <TextButton
                     type="submit"
                     style="primary-button"
                     text={local.submit}
                     fill="parent"
-                    size="base"
                     disabled={!formIsValid}
                 />
                 <Link href="/auth/signin" prefetch={false} style="text-link">
