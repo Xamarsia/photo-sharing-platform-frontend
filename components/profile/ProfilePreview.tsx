@@ -19,8 +19,8 @@ export default function ProfilePreview({ user, children }: ProfilePreviewProps) 
             <div className={`${styles["profile-preview-layout"]}`}>
                 <Link href={`/${user.username}`} >{profileImagePreview} </Link>
                 <div className="flex-1">
-                    <p className={`${textStyles["main-info"]}`}>{user.fullName}</p>
-                    <p className={`${textStyles["secondary-info"]}`}>{'@' + user.username}</p>
+                    <p className={`${textStyles["main-info"]} ${textStyles['small']}`}>{user.fullName}</p>
+                    <p className={`${textStyles["secondary-info"]} ${textStyles['small']}`}>{'@' + user.username}</p>
                 </div>
                 <div className="ml-12">
                     {children}

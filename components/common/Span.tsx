@@ -13,7 +13,7 @@ export default function Span({ text, required, style = 'input' }: SpanProps) {
 
     return (
         <span className={`
-            ${style == 'input' ? textStyles["main-info"] : ''}
+            ${style == 'input' ? `${textStyles["main-info"]} ${textStyles['small']}`  : ''}
             ${style == 'upload-button' ? uploadButtonStyles : ''}
             ${required ? textStyles["required"] : ''}`}>
             {text}

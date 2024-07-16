@@ -15,7 +15,7 @@ export default function NotFound({ alertTitle, alertBody }: Props) {
                 <Image src={blueExclamationCircle} alt="icon" />
             </div>
             <h1 className={`${textStyles["title-large"]}`}>{alertTitle}</h1>
-            <p className={`${textStyles["secondary-info"]}`}>{alertBody}</p>
+            <p className={`${textStyles["secondary-info"]} ${textStyles['small']}`}>{alertBody}</p>
         </div>
     );
 };

@@ -25,8 +25,9 @@ export default function Textarea({ id, value, size = 'base', placeholder, rows, 
             onChange={onChange}
             className={`resize-none
                 ${styles['textarea']} 
+                ${styles[size]}
                 ${textStyles['placeholder']}
-                ${size ? styles[size] : ''}
+                ${textStyles[size]}
             `}
         />
     )
