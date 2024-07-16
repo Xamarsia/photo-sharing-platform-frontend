@@ -4,15 +4,15 @@
 import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
 import Input from '@/components/common/Input';
-import Button from '@/components/buttons/Button';
+import TextButton from '@/components/buttons/TextButton';
 
 
-import { FormEvent, SetStateAction, useState } from "react";
+import { FormEvent, useState } from "react";
 
 
 type Props = {
     local: any;
-    user: UserDTO,
+    user: UserDTO;
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
@@ -33,28 +33,25 @@ export default function ChangeUsernameForm({ local, user, onSubmit }: Props) {
         <Form title={local.changeUsername}
             onSubmit={handleSubmit}
             onChange={(e) => {
-                setFormIsValid(e.currentTarget.checkValidity())
-                setIsFormChanged(true)
+                setFormIsValid(e.currentTarget.checkValidity());
+                setIsFormChanged(true);
             }}>
             <div>
                 <Span text={local.username} required />
                 <Input
                     type="text"
                     name="username"
-                    size="base"
                     value={username}
-                    placeholder=" "
                     pattern='^[a-zA-Z0-9]{1,30}$'
                     onChange={(e) => setUsername(e.target.value)}
                     required
                 />
             </div>
-            <Button
+            <TextButton
                 type="submit"
                 style="primary-button"
                 text={local.update}
                 fill="parent"
-                size="base"
                 disabled={!formIsValid || !isFormChanged}
             />
         </Form>

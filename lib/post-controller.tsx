@@ -18,7 +18,14 @@ const detailedPost: DetailedPostDTO = {
     authorDTO: user
 }
 
+const posts: Array<PostDTO> = [post, post, post, post, post, post, post, post, post, post, post]
+
 
 export async function getDetailedPost(postId: string): Promise<DetailedPostDTO> {
     return detailedPost;
+}
+
+export async function getPosts(): Promise<Array<PostDTO>> {
+    return posts;
+    
 }

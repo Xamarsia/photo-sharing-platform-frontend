@@ -16,7 +16,6 @@ export const getProfileImage = (user: UserPreviewDTO | UserDTO) => {
     } else {
         return <DefaultProfileImage username={user.username} />
     }
-
 }
 
 const userDTO: UserDTO = {
@@ -28,9 +27,21 @@ const userDTO: UserDTO = {
     fullName: 'Full Name',
     description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et quod quis eaque aliquam necessitatibus vel eligendi laboriosam optio quisquam sunt.',
     isProfileImageExist: false,
-  }
+}
 
 
 export async function getUser(): Promise<UserDTO> {
     return userDTO;
+}
+
+const profile: ProfileDTO = {
+    description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et quod quis eaque aliquam necessitatibus vel eligendi laboriosam optio quisquam sunt.',
+    followersCount: 4,
+    followingsCount: 5,
+    postsCount: 3,
+    userPreviewDTO: userDTO
+}
+
+export async function getProfile(): Promise<ProfileDTO> {
+    return profile;
 }

@@ -4,7 +4,7 @@
 import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
 import Input from '@/components/common/Input';
-import Button from '@/components/buttons/Button';
+import TextButton from '@/components/buttons/TextButton';
 import Textarea from "@/components/common/Textarea";
 
 import { FormEvent, useState } from "react";
@@ -44,9 +44,7 @@ export default function ChangeUserInfoForm({ local, user, onSubmit }: Props) {
                 <Input
                     type="text"
                     name="fullName"
-                    size="base"
                     value={fullName}
-                    placeholder=" "
                     pattern="^[a-zA-Z\s]{2,30}$"
                     onChange={(e) => setfullName(e.target.value)}
                     required
@@ -58,12 +56,11 @@ export default function ChangeUserInfoForm({ local, user, onSubmit }: Props) {
             </div>
 
             <div>
-                <Button
+                <TextButton
                     type="submit"
                     style="primary-button"
                     text={local.update}
                     fill="parent"
-                    size="base"
                     disabled={!formIsValid || !isFormChanged}
                 />
             </div>

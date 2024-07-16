@@ -4,7 +4,7 @@
 import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
 import Input from '@/components/common/Input';
-import Button from '@/components/buttons/Button';
+import TextButton from '@/components/buttons/TextButton';
 
 
 import { FormEvent, useState } from "react";
@@ -12,7 +12,7 @@ import { FormEvent, useState } from "react";
 
 type Props = {
     local: any;
-    user: UserDTO,
+    user: UserDTO;
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
@@ -40,20 +40,17 @@ export default function ChangeEmailForm({ local, user, onSubmit }: Props) {
                 <Input
                     type="text"
                     name="email"
-                    size='base'
                     value={email}
-                    placeholder=" "
                     pattern=".{1,}"
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
             </div>
-            <Button
+            <TextButton
                 type="submit"
                 style="primary-button"
                 text={local.update}
                 fill="parent"
-                size="base"
                 disabled={!formIsValid || !isFormChanged}
             />
         </Form>

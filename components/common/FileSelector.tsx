@@ -95,9 +95,9 @@ export default function FileSelector({ local, children, rounded, onImageSelected
                             <Span text={local.clickToUpload} style='upload-button' />
                             <Input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
                         </label>
-                        <p className={`${textStyles['secondary-info']}`}>{local.orDragAndDrop}</p>
+                        <p className={`${textStyles['secondary-info']} ${textStyles['small']}`}>{local.orDragAndDrop}</p>
                     </div>
-                    <p className={`${textStyles['third-info']} `}>{local.fileFormatsForImageUploading}</p>
+                    <p className={`${textStyles['secondary-info']} ${textStyles['extra-small']}`}>{local.fileFormatsForImageUploading}</p>
                 </div>
             </div>
         </div>

@@ -22,7 +22,7 @@ type InputProps = {
 }
 
 
-export default function InputField({ name, type, size, required, pattern, disabled, value, accept, id, placeholder, draggable, hidden, state = 'valid', onKeyDown, onChange }: InputProps) {
+export default function InputField({ name, type, required, pattern, disabled, value, accept, id, draggable, hidden, placeholder=" ", size = 'base', state = 'valid', onKeyDown, onChange }: InputProps) {
     return (
         <input
             id={id}
@@ -40,8 +40,9 @@ export default function InputField({ name, type, size, required, pattern, disabl
             onKeyDown={onKeyDown}
             className={`peer 
                 ${styles['base-input-field']} 
-                ${size ? styles[size] : ''}
                 ${styles[state]}
+                ${styles[size]}
+                ${textStyles[size]}
                 ${textStyles['placeholder']}
             `}
         />

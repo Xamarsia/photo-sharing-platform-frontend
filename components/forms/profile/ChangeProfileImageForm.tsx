@@ -2,7 +2,7 @@
 
 
 import Form from "@/components/common/Form";
-import Button from '@/components/buttons/Button';
+import TextButton from '@/components/buttons/TextButton';
 import FileSelector from "@/components/common/FileSelector";
 import ProfileImage from "@/components/profile/image/ProfileImage";
 
@@ -48,7 +48,7 @@ export default function ChangeProfileImageForm({ local, user, onSubmit }: Props)
                 </FileSelector>
             </div>
             <div>
-                <Button
+                <TextButton
                     type="submit"
                     style="primary-button"
                     text={local.update}

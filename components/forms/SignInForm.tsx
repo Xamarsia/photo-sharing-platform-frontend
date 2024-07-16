@@ -5,7 +5,7 @@ import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
 import Link from "@/components/common/Link";
 import Input from '@/components/common/Input';
-import Button from '@/components/buttons/Button';
+import TextButton from '@/components/buttons/TextButton';
 
 import { FormEvent, useState } from "react";
 
@@ -44,9 +44,7 @@ export default function SignInForm({ local, onSubmit }: Props) {
                 <Input
                     type="text"
                     name="email"
-                    size='base'
                     pattern=".{1,}"
-                    placeholder=" "
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -57,21 +55,18 @@ export default function SignInForm({ local, onSubmit }: Props) {
                 <Input
                     type="password"
                     name="password"
-                    size='base'
                     pattern=".{1,}"
-                    placeholder=" "
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
             </div>
             <div>
-                <Button
+                <TextButton
                     type="submit"
                     style="primary-button"
                     text={local.submit}
                     fill="parent"
-                    size="base"
                     disabled={!formIsValid}
                 />
                 <Link href="/auth/signup" prefetch={false} style="text-link">
