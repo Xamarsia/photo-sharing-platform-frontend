@@ -8,6 +8,11 @@
     @apply text-slate-800 text-center text-3xl font-normal leading-10 tracking-normal
 }
 
+/* logo */
+
+.logo {
+    @apply self-center text-2xl font-semibold whitespace-nowrap
+}
 
 /* size */
 

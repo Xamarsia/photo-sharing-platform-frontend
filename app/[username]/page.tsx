@@ -1,17 +1,22 @@
 import 'server-only';
 
-
 import { getDictionary } from '@/lib/localization';
+import { getUserPosts } from '@/lib/post-controller';
+
 import { getProfile } from '@/lib/profile-controller';
 import Profile from '@/components/common/Profile';
-import { getPosts } from '@/lib/post-controller';
 import PostsPreviewGrid from '@/components/post/PostsPreviewGrid';
 
 
-export default async function ProfilePage() {
+type PageProps = {
+    username: string,
+}
+
+
+export default async function ProfilePage({ params }: { params: PageProps }) {
     const dict = await getDictionary('en');
-    const profile: ProfileDTO = await getProfile();
-    const posts: Array<PostDTO> = await getPosts()
+    const profile: ProfileDTO = await getProfile(params.username);
+    const posts: Array<PostDTO> = await getUserPosts(params.username);
 
     return (
         <main className="min-h-screen bg-white flex items-center justify-center text-gray-500">
