@@ -13,20 +13,20 @@ type ButtonProps = {
     hoveredIcon: string;
     hovered?: boolean;
     fill?: 'content' | 'parent';
-    style?: 'transparent-button' | 'primary-button';
+    style?: 'transparent-button' | 'primary-button' | 'icon-only';
     size?: 'extra-small' | 'small' | 'base' | 'large' | 'extra-large';
     rounded?: 'rounded' | 'rounded-md' | 'rounded-lg' | 'rounded-xl' | 'rounded-full';
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 
-export default function IconButton({ icon, hoveredIcon, hovered, fill, style = 'transparent-button', size = 'small', rounded = 'rounded-md', onClick }: ButtonProps) {
+export default function IconButton({ icon, hoveredIcon, hovered, fill, style='icon-only', size = 'small', rounded = 'rounded-md', onClick }: ButtonProps) {
     const [isHovering, setIsHovered] = useState(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
 
     const iconSize: string = size + `-icon`;
-    const isBackgroundExist: boolean | undefined = !style?.includes('transparent');
+    const isBackgroundExist: boolean | undefined = !(style?.includes('transparent') || (style == 'icon-only'));
 
     return (
         <button type="button"
