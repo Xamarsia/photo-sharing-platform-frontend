@@ -50,11 +50,9 @@ export default function TextIconButton({ icon, text, style, hidden, type = 'butt
             hidden={hidden}
         >
             <div className={`${iconSide == 'right' ? 'order-last' : 'order-first'}`}>
-                <div className={`${styles[iconSize]}`}>
-                    <Image src={isHovering ? hoveredIcon : icon} alt="icon" />
-                </div>
+                <Image src={isHovering ? hoveredIcon : icon} alt="icon" className={`${styles[iconSize]}`} />
             </div>
-            <h1 className={`items-center`}>{text}</h1>
+            <h1 className={`hidden md:block`}>{text}</h1>
 
         </button>
     )

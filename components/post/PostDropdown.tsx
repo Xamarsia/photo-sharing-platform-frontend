@@ -1,12 +1,13 @@
 "use client"
 
+
 import { ReactNode, useState } from 'react';
 
 import Dropdown from '@/components/common/Dropdown';
 import IconButton from '@/components/buttons/IconButton';
 
-import ellipsisHorizontal from '@/public/ellipsis-horizontal/ellipsis-horizontal.svg'
-import hoveredEllipsisHorizontal from '@/public/ellipsis-horizontal/ellipsis-horizontal-hovered.svg'
+import ellipsisHorizontal from '@/public/ellipsis-horizontal/ellipsis-horizontal.svg';
+import hoveredEllipsisHorizontal from '@/public/ellipsis-horizontal/ellipsis-horizontal-hovered.svg';
 
 type Props = {
     children?: ReactNode;
@@ -18,7 +19,12 @@ export default function PostDropdown({ children }: Props) {
 
     return (
         <div>
-            <IconButton onClick={(e) => { setShowDropdown(!showDropdown) }} size={'extra-extra-large'} icon={ellipsisHorizontal} hoveredIcon={hoveredEllipsisHorizontal} />
+            <IconButton
+                size={'extra-large'}
+                icon={ellipsisHorizontal}
+                hoveredIcon={hoveredEllipsisHorizontal}
+                onClick={(e) => { setShowDropdown(!showDropdown) }}
+            />
             {showDropdown &&
                 <Dropdown>
                     {children}

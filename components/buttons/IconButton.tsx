@@ -1,27 +1,33 @@
 "use client"
 
-import styles from '@/app/styles/components/icon.button.module.css'
-import Image from 'next/image'
-import { useState } from 'react'
+
+import styles from '@/app/styles/components/icon.button.module.css';
+
+import Image from 'next/image';
+
+import { useState } from 'react';
 
 
 type ButtonProps = {
     icon: string;
     hoveredIcon: string;
-    hovered?: boolean
-    style?: 'transparent-button';
-    size?: 'extra-small' | 'small' | 'base' | 'large' | 'extra-large' | 'extra-extra-large';
+    hovered?: boolean;
+    fill?: 'content' | 'parent';
+    style?: 'transparent-button' | 'primary-button';
+    size?: 'extra-small' | 'small' | 'base' | 'large' | 'extra-large';
     rounded?: 'rounded' | 'rounded-md' | 'rounded-lg' | 'rounded-xl' | 'rounded-full';
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 
-export default function IconButton({ icon, hoveredIcon, hovered, style, size = 'base', rounded = 'rounded-md', onClick }: ButtonProps) {
+export default function IconButton({ icon, hoveredIcon, hovered, fill, style = 'transparent-button', size = 'small', rounded = 'rounded-md', onClick }: ButtonProps) {
     const [isHovering, setIsHovered] = useState(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
 
-    var iconSize: string = size + `-icon`;
+    const iconSize: string = size + `-icon`;
+    const isBackgroundExist: boolean | undefined = !style?.includes('transparent');
+
     return (
         <button type="button"
             onClick={onClick}
@@ -30,12 +36,11 @@ export default function IconButton({ icon, hoveredIcon, hovered, style, size = '
             className={`
                 ${styles['icon-button']} 
                 ${style ? styles[style] : ''} 
-                ${styles[size]}
+                ${fill == 'parent' ? 'w-full' : ''}
+                ${isBackgroundExist ? styles[size] : ''}
                 ${rounded}
             `}>
-            <div className={`${styles[iconSize]}`}>
-                <Image src={(isHovering || hovered) ? hoveredIcon : icon} alt="icon" />
-            </div>
+            <Image src={(isHovering || hovered) ? hoveredIcon : icon} alt="icon" className={`${styles[iconSize]}`} />
         </button>
     )
 }

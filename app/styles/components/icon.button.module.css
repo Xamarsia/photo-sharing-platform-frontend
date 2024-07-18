@@ -8,14 +8,18 @@
     @apply focus:outline-none focus:ring focus:ring-gray-300 bg-transparent hover:bg-gray-200 text-gray-400 hover:text-gray-800
 }
 
+.primary-button {
+    @apply bg-blue-500 hover:bg-blue-600 disabled:bg-blue-500 disabled:opacity-50 dark:bg-blue-500 dark:hover:bg-blue-600 dark:disabled:bg-blue-500
+}
+
 /* size */
 
 .extra-small {
-    @apply p-1
+    @apply sm:p-1 p-2
 }
 
 .small {
-    @apply sm:p-1 p-2
+    @apply sm:p-2 p-2.5
 }
 
 .base {
@@ -30,32 +34,29 @@
     @apply sm:p-2 p-2.5
 }
 
-.extra-extra-large {
-    @apply sm:p-2 p-2.5
-}
-
 /* icon size */
 
 .extra-small-icon {
-    @apply size-[16px]
+    @apply size-5
+    /* 20px */
 }
 
 .small-icon {
-    @apply size-[20px]
+    @apply size-6
+    /* 24px */
 }
 
 .base-icon {
-    @apply size-[24px]
+    @apply size-7
+    /* 28px */
 }
 
 .large-icon {
-    @apply size-[28px]
+    @apply size-8
+    /* 32px */
 }
 
 .extra-large-icon {
-    @apply size-[32px]
-}
-
-.extra-extra-large-icon {
-    @apply size-[40px]
+    @apply size-10
+    /* 40px */
 }

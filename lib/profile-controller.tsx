@@ -1,5 +1,6 @@
-import DefaultProfileImage from "@/components/profile/image/DefaultProfileImage"
-import ProfileImage from "@/components/profile/image/ProfileImage"
+import ProfileImage from "@/components/profile/image/ProfileImage";
+import DefaultProfileImage from "@/components/profile/image/DefaultProfileImage";
+
 
 export const getProfileImagePreview = (user: UserPreviewDTO | UserDTO) => {
     if (user.isProfileImageExist) {
@@ -30,7 +31,11 @@ const userDTO: UserDTO = {
 }
 
 
-export async function getUser(): Promise<UserDTO> {
+// export async function getUser(): Promise<UserDTO> {
+//     return userDTO;
+// }
+
+export function getUser(): UserDTO {
     return userDTO;
 }
 
@@ -42,6 +47,6 @@ const profile: ProfileDTO = {
     userPreviewDTO: userDTO
 }
 
-export async function getProfile(): Promise<ProfileDTO> {
+export async function getProfile(username: string): Promise<ProfileDTO> {
     return profile;
 }

@@ -16,13 +16,14 @@ type PostProps = {
     detailedPost: DetailedPostDTO
 }
 
+
 export default function PostComponent({ local, detailedPost }: PostProps) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
 
     return (
         <Card size='large'>
             <PostMenu local={local} detailedPost={detailedPost} />
-            <div className='px-4 my-3 pb-4'>
+            <div className='px-4 my-4 pb-4'>
                 <PostImage src={postImage} size={'full'} />
             </div>
             <p className={`${textStyles['base-text']}`}>{post.description}</p>

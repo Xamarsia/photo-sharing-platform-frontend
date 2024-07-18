@@ -89,7 +89,7 @@ export default function FileSelector({ local, children, rounded, onImageSelected
                     </div>
                 }
                 <div className={`flex flex-col items-center justify-center  ${selectedImage ? 'invisible' : 'visible'}`}>
-                    <IconButton size={'extra-extra-large'} rounded={'rounded'} icon={photo} hoveredIcon={photoHovered} hovered={dragActive} />
+                    <IconButton size={'extra-large'} rounded={'rounded'} icon={photo} hoveredIcon={photoHovered} hovered={dragActive} />
                     <div className='flex gap-1'>
                         <label>
                             <Span text={local.clickToUpload} style='upload-button' />
