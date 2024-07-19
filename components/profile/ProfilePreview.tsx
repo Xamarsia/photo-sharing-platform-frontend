@@ -1,7 +1,7 @@
-import textStyles from '@/app/styles/components/text.module.css';
 import styles from '@/app/styles/profile/profile.module.css';
 
 import Link from '@/components/common/Link';
+import Text from '@/components/common/Text';
 import { getProfileImagePreview } from '@/lib/profile-controller';
 
 import { ReactNode } from 'react';
@@ -19,8 +19,8 @@ export default function ProfilePreview({ user, children }: ProfilePreviewProps) 
             <div className={`${styles["profile-preview-layout"]}`}>
                 <Link href={`/${user.username}`} >{profileImagePreview} </Link>
                 <div className="flex-1">
-                    <p className={`${textStyles["main-info"]} ${textStyles['small']}`}>{user.fullName}</p>
-                    <p className={`${textStyles["secondary-info"]} ${textStyles['small']}`}>{'@' + user.username}</p>
+                    <Text style='main-info' size='small' text={user.fullName} />
+                    <Text style='secondary-info' size='small' text={'@' + user.username} />
                 </div>
                 <div className="ml-12">
                     {children}

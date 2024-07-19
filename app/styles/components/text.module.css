@@ -1,11 +1,11 @@
 /* title */
 
 .title {
-    @apply text-slate-800 text-center text-2xl font-normal leading-9 tracking-normal
+    @apply text-slate-800 text-center text-xl sm:text-2xl font-normal leading-9 tracking-normal
 }
 
 .title-large {
-    @apply text-slate-800 text-center text-3xl font-normal leading-10 tracking-normal
+    @apply text-slate-800 text-center text-2xl sm:text-3xl font-normal leading-10 tracking-normal
 }
 
 /* logo */
@@ -21,19 +21,19 @@
 }
 
 .small {
-    @apply text-sm leading-6
+    @apply text-xs sm:text-sm leading-6
 }
 
 .base {
-    @apply sm:text-sm text-base leading-6
+    @apply text-sm sm:text-base leading-6
 }
 
 .large {
-    @apply sm:text-sm md:text-base text-lg leading-6
+    @apply text-sm sm:text-base md:text-lg leading-6
 }
 
 .extra-large {
-    @apply sm:text-sm md:text-base text-lg leading-8
+    @apply text-sm sm:text-base md:text-lg leading-8
 }
 
 
@@ -78,7 +78,7 @@
 }
 
 .placeholder {
-    @apply text-gray-700 text-justify font-light disabled:bg-slate-50 disabled:text-slate-500 
+    @apply text-gray-700 font-light disabled:bg-slate-50 disabled:text-slate-500
 }
 
 .required {
@@ -97,5 +97,5 @@
 }
 
 .base-text {
-    @apply font-normal leading-6 text-base text-gray-800 text-justify
+    @apply block font-normal text-justify text-gray-800
 }

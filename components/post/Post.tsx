@@ -5,11 +5,11 @@ import { useState } from 'react';
 
 import postImage from '@/public/profile5.jpg'
 
+import Text from '@/components/common/Text';
 import Card from '@/components/common/Card';
 import PostMenu from '@/components/post/PostMenu';
 import PostImage from '@/components/post/image/PostImage';
 
-import textStyles from '@/app/styles/components/text.module.css';
 
 type PostProps = {
     local: any
@@ -26,7 +26,7 @@ export default function PostComponent({ local, detailedPost }: PostProps) {
             <div className='px-4 my-4 pb-4'>
                 <PostImage src={postImage} size={'full'} />
             </div>
-            <p className={`${textStyles['base-text']}`}>{post.description}</p>
+            <Text style='base-text' size='base' text={post.description} />
         </Card>
     )
 }

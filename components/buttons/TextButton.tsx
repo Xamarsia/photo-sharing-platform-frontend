@@ -6,11 +6,11 @@ import textStyles from '@/app/styles/components/text.module.css';
 
 
 type TextButtonProps = {
-    type: 'button' | 'submit';
     text: string | undefined;
     style: 'primary-button' | 'secondary-button' | 'transparent-button' | 'delete-button' | 'delete-transparent-button' | 'dropdown-button' | 'red-dropdown-button' | 'blue-dropdown-button';
     size?: 'extra-small' | 'small' | 'base' | 'large' | 'extra-large';
     rounded?: 'rounded' | 'rounded-md' | 'rounded-lg' | 'rounded-xl';
+    type?: 'button' | 'submit';
     fill?: 'content' | 'parent';
     padding?: boolean;
     disabled?: boolean;

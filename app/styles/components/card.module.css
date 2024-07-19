@@ -1,5 +1,5 @@
 .card {
-    @apply bg-white shadow-lg rounded-lg sm:p-12 p-8 w-11/12 h-auto
+    @apply bg-white shadow-2xl shadow-slate-200 rounded-lg sm:p-12 p-8 w-11/12 h-auto
 }
 
 .base {

@@ -2,18 +2,18 @@
 
 import { ReactNode, SetStateAction, useEffect, useState } from 'react';
 
-import photo from '@/public/photo/photo.svg'
-import photoHovered from '@/public/photo/photo-hovered.svg'
-
-import styles from '@/app/styles/components/file.selector.module.css'
-import textStyles from '@/app/styles/components/text.module.css'
+import photo from '@/public/photo/photo.svg';
+import photoHovered from '@/public/photo/photo-hovered.svg';
 
 import xMark from '@/public/x-mark/x-mark.svg';
 import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';
 
-import Span from '@/components/common/Span';
+import Text from '@/components/common/Text';
 import Input from '@/components/common/Input';
 import IconButton from '@/components/buttons/IconButton';
+import TextButton from '@/components/buttons/TextButton';
+
+import styles from '@/app/styles/components/file.selector.module.css';
 
 
 type Props = {
@@ -92,12 +92,12 @@ export default function FileSelector({ local, children, rounded, onImageSelected
                     <IconButton size={'extra-large'} rounded={'rounded'} icon={photo} hoveredIcon={photoHovered} hovered={dragActive} />
                     <div className='flex gap-1'>
                         <label>
-                            <Span text={local.clickToUpload} style='upload-button' />
+                            <TextButton style='transparent-button' padding={false} text={local.clickToUpload} />
                             <Input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
                         </label>
-                        <p className={`${textStyles['secondary-info']} ${textStyles['small']}`}>{local.orDragAndDrop}</p>
+                        <Text style='secondary-info' size='small' text={local.orDragAndDrop} />
                     </div>
-                    <p className={`${textStyles['secondary-info']} ${textStyles['extra-small']}`}>{local.fileFormatsForImageUploading}</p>
+                    <Text style='secondary-info' size='extra-small' text={local.fileFormatsForImageUploading} />
                 </div>
             </div>
         </div>
