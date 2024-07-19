@@ -3,13 +3,12 @@
 
 import { useRouter } from "next/navigation";
 
-import plus from '@/public/plus/plus-white.svg';
-
 import Logo from "@/components/common/Logo";
 import SearchBar from "@/components/common/SearchBar";
 import TextButton from "@/components/buttons/TextButton";
-import TextIconButton from "@/components/buttons/TextIconButton";
+import CreatePostButton from "@/components/buttons/CreatePostButton";
 import ProfilePreviewDropdown from "@/components/profile/ProfilePreviewDropdown";
+
 
 type Props = {
     local: any;
@@ -32,7 +31,7 @@ export default function Navbar({ local, user }: Props) {
                     {user
                         ? <>
                             <div className='md:block hidden m-auto'>
-                                <TextIconButton type={'button'} fill="content" text={'Create Post'} style={'primary-button'} icon={plus} iconSide='left' size="small" rounded="rounded-lg" />
+                                <CreatePostButton local={local} />
                             </div>
                             <ProfilePreviewDropdown user={user} />
                         </>
