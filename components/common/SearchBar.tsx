@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 
 import { ChangeEvent, FormEvent } from "react";
 
@@ -9,8 +10,9 @@ import styles from '@/app/styles/components/search.bar.module.css';
 
 
 type Props = {
-    local: any;
+    local: any,
 }
+
 
 export default function SearchBar({ local }: Props) {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -23,7 +25,7 @@ export default function SearchBar({ local }: Props) {
         <form className={`${styles['search-bar']}`} onSubmit={handleSubmit}>
             <SearchInput onChange={onSearchChanged} />
             <div className="hidden md:block">
-                <TextButton type={"submit"} style={"primary-button"} size="small" text={local.search} fill="parent" rounded="rounded-lg" />
+                <TextButton type={"submit"} style={"primary-button"} size="small" fill="content" text={local.search} rounded="rounded-lg" />
             </div>
         </form>
     )

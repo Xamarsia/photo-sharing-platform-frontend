@@ -14,7 +14,7 @@ type TextareaProps = {
 }
 
 
-export default function Textarea({ id, value, size = 'base', placeholder, rows, maxLength, onChange }: TextareaProps) {
+export default function Textarea({ id, value, size = 'small', placeholder, rows, maxLength, onChange }: TextareaProps) {
     return (
         <textarea
             id={id}

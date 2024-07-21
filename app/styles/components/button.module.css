@@ -24,30 +24,27 @@
     @apply bg-red-600 ring-gray-300 hover:bg-red-500
 }
 
-.delete-transparent-button {
-    @apply w-full justify-center ring-inset sm:mt-0 sm:w-auto bg-transparent shadow-none border-none
-}
 
 /* size */
 
 .extra-small {
-    @apply px-2 py-1 min-h-6
+    @apply px-2 py-1
 }
 
 .small {
-    @apply px-3 py-2 min-h-8
+    @apply px-3 py-2
 }
 
 .base {
-    @apply px-5 py-2.5 min-h-10
+    @apply px-5 py-2.5
 }
 
 .large {
-    @apply px-5 py-3 min-h-10
+    @apply px-5 py-3
 }
 
 .extra-large {
-    @apply px-6 py-3.5 min-h-12
+    @apply px-6 py-3.5
 }
 
 /* gap */
@@ -79,7 +76,7 @@
 }
 
 .small-icon {
-    @apply w-6 h-6
+    @apply w-5 h-5
 }
 
 .base-icon {

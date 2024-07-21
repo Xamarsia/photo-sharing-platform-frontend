@@ -1,5 +1,5 @@
 .search-input-field {
-    @apply rounded-lg appearance-none outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm shadow shadow-gray-100 focus:ring-blue-700 focus:border-blue-500 block w-full ps-10 p-2.5
+    @apply rounded-lg appearance-none outline-none bg-gray-50 border border-gray-300 shadow shadow-gray-100 focus:ring-blue-700 focus:border-blue-500 block w-full ps-10 p-2
 }
 
 .icon-size {
