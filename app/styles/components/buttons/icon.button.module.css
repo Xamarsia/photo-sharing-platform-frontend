@@ -1,0 +1,44 @@
+.icon-button {
+    @apply inline-flex justify-center items-center aspect-square cursor-pointer
+}
+
+
+/* styles */
+
+.primary {
+    @apply bg-blue-500 hover:bg-blue-600 disabled:bg-blue-500 disabled:opacity-50 dark:bg-blue-500 dark:hover:bg-blue-600 dark:disabled:bg-blue-500
+}
+
+.secondary {
+    @apply focus:outline-none focus:ring focus:ring-gray-300 bg-transparent hover:bg-gray-200 text-gray-400 hover:text-gray-800
+}
+
+
+/* padding size */
+
+.small {
+    @apply p-1
+}
+
+.base {
+    @apply p-1.5
+}
+
+.large {
+    @apply p-2
+}
+
+
+/* icon size */
+
+.small-icon {
+    @apply size-6
+}
+
+.base-icon {
+    @apply size-8
+}
+
+.large-icon {
+    @apply size-10
+}
