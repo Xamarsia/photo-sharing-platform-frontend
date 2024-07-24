@@ -1,0 +1,15 @@
+.link {
+    @apply inline-flex justify-center disabled:text-slate-500 disabled:no-underline
+}
+
+.primary {
+    @apply underline text-blue-500 font-semibold hover:text-blue-700
+}
+
+.secondary {
+    @apply hover:underline hover:text-gray-700 font-normal text-gray-500
+}
+
+.delete {
+    @apply underline text-red-500 font-semibold hover:text-red-700
+}
