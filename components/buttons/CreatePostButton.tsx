@@ -5,6 +5,7 @@ import plus from '@/public/plus/plus-white.svg';
 
 import TextIconButton from "@/components/buttons/TextIconButton";
 import IconButton from "@/components/buttons/IconButton";
+
 import { useRouter } from 'next/navigation'
 
 type Props = {
@@ -22,8 +23,8 @@ export default function CreatePostButton({ local, speedDial }: Props) {
     return (
         <>
             {speedDial
-                ? <IconButton style='primary-button' size='extra-large' rounded='rounded-full' icon={plus} hoveredIcon={plus} onClick={handleClick} />
-                : <TextIconButton type={'button'} fill="content" text={local.createPost} style={'primary-button'} icon={plus} iconSide='left' size="small" rounded="rounded-lg" onClick={handleClick} />
+                ? <IconButton style='primary' size='large' rounded='rounded-full' icon={plus} hoveredIcon={plus} onClick={handleClick} />
+                : <TextIconButton fill="content" text={local.createPost} style={'primary'} icon={plus} iconSide='left' size="small" rounded="rounded-lg" onClick={handleClick} />
             }
         </>
     );

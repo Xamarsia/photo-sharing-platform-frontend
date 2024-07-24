@@ -3,19 +3,19 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import styles from '@/app/styles/components/button.module.css';
-import textStyles from '@/app/styles/components/text.module.css';
+import styles from '@/app/styles/components/buttons/button.module.css';
+
+import textStyles from '@/app/styles/text/text.module.css';
+import buttonTextStyle from '@/app/styles/text/button.text.module.css';
 
 
-type TextIconButtonProps = {
-    text: string | undefined,
-    style: 'primary-button' | 'secondary-button',
-    type?: 'button' | 'submit',
+type Props = {
+    text: string,
+    style: 'primary' | 'secondary',
     fill?: 'content' | 'parent',
-    size?: 'extra-small' | 'small' | 'base' | 'large' | 'extra-large',
+    size?: 'small' | 'base' | 'large',
     rounded?: 'rounded' | 'rounded-md' | 'rounded-lg' | 'rounded-xl',
     disabled?: boolean,
-    hidden?: boolean,
     icon: string,
     hoveredIcon?: string,
     iconSide?: 'left' | 'right',
@@ -23,7 +23,7 @@ type TextIconButtonProps = {
 }
 
 
-export default function TextIconButton({ icon, text, style, hidden, type = 'button', size = 'base', rounded = 'rounded-md', fill = "content", disabled = false, iconSide = 'left', hoveredIcon = icon, onClick }: TextIconButtonProps) {
+export default function TextIconButton({ icon, text, style, size = 'base', rounded = 'rounded-md', fill = "content", disabled = false, iconSide = 'left', hoveredIcon = icon, onClick }: Props) {
     const [isHovering, setIsHovered] = useState(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
@@ -31,23 +31,23 @@ export default function TextIconButton({ icon, text, style, hidden, type = 'butt
     var iconSize: string = size + `-icon`;
     var iconGap: string = size + `-gap`;
     return (
-        <button type={type}
+        <button
+            type='button'
+            disabled={disabled}
+            onClick={onClick}
             className={`
                 ${styles['base-button']}
                 ${rounded} 
                 ${styles[size]}
                 ${styles[style]}
                 ${textStyles[size]} 
-                ${textStyles[style]} 
+                ${buttonTextStyle[style]}  
                 ${(text && icon) ? styles[iconGap] : ''}
                 ${fill == 'parent' ? 'w-full' : ''}
                 ${icon ? 'flex justify-between' : ''}
             `}
-            disabled={disabled}
-            onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            hidden={hidden}
         >
             <div className={`${iconSide == 'right' ? 'order-last' : 'order-first'}`}>
                 <Image src={isHovering ? hoveredIcon : icon} alt="icon" className={`${styles[iconSize]}`} />
