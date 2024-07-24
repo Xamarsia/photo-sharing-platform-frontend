@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 
 import Image from 'next/image';
 
-import textStyles from '@/app/styles/components/text.module.css';
+import textStyles from '@/app/styles/text/text.module.css';
 import styles from '@/app/styles/components/search.input.module.css';
 
 import magnifyingGlass from '@/public/magnifying-glass/magnifying-glass.svg';

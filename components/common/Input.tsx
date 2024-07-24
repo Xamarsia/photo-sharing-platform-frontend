@@ -1,7 +1,7 @@
 import { ChangeEvent, KeyboardEvent } from "react";
 
 import styles from '@/app/styles/components/input.module.css';
-import textStyles from '@/app/styles/components/text.module.css';
+import textStyles from '@/app/styles/text/text.module.css';
 
 
 type InputProps = {
@@ -23,7 +23,7 @@ type InputProps = {
 }
 
 
-export default function InputField({ name, type, required, pattern, disabled, value, accept, id, draggable, hidden, placeholder=" ", size = 'small', state = 'valid', onKeyDown, onChange }: InputProps) {
+export default function InputField({ name, type, required, pattern, disabled, value, accept, id, draggable, hidden, placeholder = " ", size = 'small', state = 'valid', onKeyDown, onChange }: InputProps) {
     return (
         <input
             id={id}

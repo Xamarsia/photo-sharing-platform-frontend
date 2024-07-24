@@ -9,22 +9,22 @@ import xMark from '@/public/x-mark/x-mark.svg';
 import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';
 
 import Text from '@/components/common/Text';
-import Input from '@/components/common/Input';
+import FileInput from '@/components/common/FileInput';
 import IconButton from '@/components/buttons/IconButton';
-import TextButton from '@/components/buttons/TextButton';
 
 import styles from '@/app/styles/components/file.selector.module.css';
+import React from 'react';
 
 
 type Props = {
-    local: any;
-    rounded?: 'rounded-full';
-    children?: ReactNode;
-    onImageSelected?: (file: SetStateAction<File | undefined>) => void;
+    local: any,
+    rounded?: 'rounded-full',
+    children?: ReactNode,
+    onImageSelected?: (file: SetStateAction<File | undefined>) => void,
 }
 
 
-export default function FileSelector({ local, children, rounded, onImageSelected }: Props) {
+export default function FileSelector({ local, rounded, children, onImageSelected }: Props) {
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [dragActive, setDragActive] = useState<boolean>(false);
 
@@ -85,18 +85,12 @@ export default function FileSelector({ local, children, rounded, onImageSelected
 
                 {selectedImage &&
                     <div className={`absolute top-0 right-0`}>
-                        <IconButton style={'transparent-button'} icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
+                        <IconButton style='secondary' size='small' icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
                     </div>
                 }
                 <div className={`flex flex-col items-center justify-center  ${selectedImage ? 'invisible' : 'visible'}`}>
-                    <IconButton size={'extra-large'} rounded={'rounded'} icon={photo} hoveredIcon={photoHovered} hovered={dragActive} />
-                    <div className='flex gap-1'>
-                        <label>
-                            <TextButton style='transparent-button' padding={false} text={local.clickToUpload} />
-                            <Input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
-                        </label>
-                        <Text style='secondary-info' size='small' text={local.orDragAndDrop} />
-                    </div>
+                    <IconButton style='no-background' size='large' icon={photo} hoveredIcon={photoHovered} hovered={dragActive} />
+                    <FileInput local={local} size='base' onChange={imageChange} />
                     <Text style='secondary-info' size='extra-small' text={local.fileFormatsForImageUploading} />
                 </div>
             </div>

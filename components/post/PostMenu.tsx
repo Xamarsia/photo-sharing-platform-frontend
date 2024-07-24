@@ -1,5 +1,6 @@
 "use client";
 
+
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -8,18 +9,17 @@ import styles from '@/app/styles/post/post.module.css';
 import { UserState } from '@/constants';
 import { getProfileImagePreview } from '@/lib/profile-controller';
 
-import TextButton from '@/components/buttons/TextButton';
-import FollowButton from '@/components/buttons/FollowButton';
-import PostDropdown from '@/components/post/PostDropdown';
 import Text from '@/components/common/Text';
+import PostDropdown from '@/components/post/PostDropdown';
+import DropdownButton from '@/components/buttons/DropdownButton';
 
 
-type PostProps = {
+type Props = {
     local: any,
-    detailedPost: DetailedPostDTO
+    detailedPost: DetailedPostDTO,
 }
 
-export default function PostMenuComponent({ local, detailedPost }: PostProps) {
+export default function PostMenuComponent({ local, detailedPost }: Props) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
     const [postAuthor] = useState<UserPreviewDTO>(detailedPost.authorDTO);
     const [isUserPostOwner] = useState<boolean>(postAuthor.state == UserState.Current);
@@ -35,13 +35,18 @@ export default function PostMenuComponent({ local, detailedPost }: PostProps) {
                 <Text style='secondary-info' size='extra-small' text={'\u2022' + post.createdDate} />
             </div>
             <PostDropdown>
-                <TextButton style='dropdown-button' text={local.goToPost} type='button' />
+                <DropdownButton style='secondary' size='base' text={local.goToPost} />
                 {isUserPostOwner
                     ? <>
-                        <TextButton style='dropdown-button' text={local.editPost} type='button' />
-                        <TextButton style='red-dropdown-button' text={local.deletePost} type='button' />
+                        <DropdownButton style='secondary' size='base' text={local.editPost} />
+                        <DropdownButton style='delete' size='base' text={local.deletePost} />
+
                     </>
-                    : <FollowButton local={local} user={postAuthor} dropdown />
+                    :
+                    <> {postAuthor.state == UserState.Unfollowed
+                        ? <DropdownButton style='primary' size='base' text={local.follow} />
+                        : <DropdownButton style='delete' size='base' text={local.unfollow} />
+                    } </>
                 }
             </PostDropdown>
         </div>

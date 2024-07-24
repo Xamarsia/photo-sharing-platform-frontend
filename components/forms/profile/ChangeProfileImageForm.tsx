@@ -50,7 +50,7 @@ export default function ChangeProfileImageForm({ local, user, onSubmit }: Props)
             <div>
                 <TextButton
                     type="submit"
-                    style="primary-button"
+                    style="primary"
                     text={local.update}
                     fill="parent"
                     size="base"

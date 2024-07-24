@@ -41,7 +41,7 @@ export default function EditPostForm({ local, detailedPost, onSubmit }: Props) {
             </div>
 
             <div>
-                <TextButton type="submit" style="primary-button" text={local.update} disabled={!isFormChanged} fill="parent" />
+                <TextButton type="submit" style="primary" text={local.update} disabled={!isFormChanged} fill="parent" />
             </div>
         </Form>
     )

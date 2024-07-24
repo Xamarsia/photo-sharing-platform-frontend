@@ -1,9 +1,10 @@
 import styles from '@/app/styles/profile/profile.module.css';
 
-import Link from '@/components/common/Link';
 import Text from '@/components/common/Text';
+
 import { getProfileImagePreview } from '@/lib/profile-controller';
 
+import Link from 'next/link';
 import { ReactNode } from 'react';
 
 type ProfilePreviewProps = {

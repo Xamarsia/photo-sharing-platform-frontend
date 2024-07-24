@@ -25,7 +25,7 @@ export default function SearchBar({ local }: Props) {
         <form className={`${styles['search-bar']}`} onSubmit={handleSubmit}>
             <SearchInput onChange={onSearchChanged} />
             <div className="hidden md:block">
-                <TextButton type={"submit"} style={"primary-button"} size="small" fill="content" text={local.search} rounded="rounded-lg" />
+                <TextButton type={"submit"} style={"primary"} size="small" fill="content" text={local.search} rounded="rounded-lg" />
             </div>
         </form>
     )

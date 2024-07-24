@@ -8,6 +8,7 @@ import SearchBar from "@/components/common/SearchBar";
 import TextButton from "@/components/buttons/TextButton";
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import ProfilePreviewDropdown from "@/components/profile/ProfilePreviewDropdown";
+import DropdownButton from "@/components/buttons/DropdownButton";
 
 
 type Props = {
@@ -33,11 +34,13 @@ export default function Navbar({ local, user }: Props) {
                             <div className='md:block hidden m-auto'>
                                 <CreatePostButton local={local} />
                             </div>
-                            <ProfilePreviewDropdown user={user} />
+                            <ProfilePreviewDropdown user={user}>
+                                <DropdownButton style='secondary' size='small' text='My profile' />
+                            </ProfilePreviewDropdown>
                         </>
                         : <>
-                            <TextButton type={'button'} text={local.signIn} onClick={e => { router.push('/auth/signin') }} style={'primary-button'} size="small" rounded="rounded-lg" />
-                            <TextButton type={'button'} text={local.signUp} onClick={e => { router.push('/auth/signup') }} style={'primary-button'} size="small" rounded="rounded-lg" />
+                            <TextButton type={'button'} text={local.signIn} onClick={e => { router.push('/auth/signin') }} style={'primary'} size="small" rounded="rounded-lg" />
+                            <TextButton type={'button'} text={local.signUp} onClick={e => { router.push('/auth/signup') }} style={'primary'} size="small" rounded="rounded-lg" />
                         </>
                     }
                 </div>

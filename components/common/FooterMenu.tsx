@@ -4,6 +4,7 @@
 import { useRouter } from "next/navigation";
 
 import TextButton from "@/components/buttons/TextButton";
+import Link from "@/components/common/Link";
 
 
 type Props = {
@@ -17,13 +18,13 @@ export default function FooterMenu({ local }: Props) {
     return (
         <ul className="flex flex-wrap items-center gap-2 sm:gap-4 md:gap-8">
             <li>
-                <TextButton style="gray-transparent-button" text={local.about} fill="parent" size="small" padding={false} />
+                <Link style="secondary" text={local.about} />
             </li>
             <li>
-                <TextButton style="gray-transparent-button" text={local.privacyPolicy} fill="parent" size="small" padding={false} />
+                <Link style="secondary" text={local.privacyPolicy} />
             </li>
             <li>
-                <TextButton style="gray-transparent-button" text={local.contact} fill="parent" size="small" padding={false} />
+                <Link style="secondary" text={local.contact} />
             </li>
         </ul>
     )

@@ -2,24 +2,25 @@
 
 
 import Text from '@/components/common/Text';
-import TextButton from "@/components/buttons/TextButton";
+import Link from '@/components/common/Link';
 
 
 type Props = {
     text: string,
     count: number,
     unclickable?: boolean,
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void,
 }
 
 
 export default function StatCounter({ text, count, unclickable, onClick }: Props) {
     return (
-        <div className="flex gap-4">
-            <TextButton text={text} type="button" padding={false} onClick={onClick} disabled={unclickable} style={"transparent-button"} size={"extra-large"} />
-            <div className='m-auto'>
-                <Text style='secondary-info' size='large' text={count.toString()} />
-            </div>
+        <div className="flex gap-1 md:gap-2">
+            {unclickable
+                ? <Text style="secondary-info" size='large' text={text} />
+                : <Link text={text} style='secondary' size='large' onClick={onClick} />
+            }
+            <Text style='secondary-info' size='large' text={count.toString()} />
         </div>
     )
 }

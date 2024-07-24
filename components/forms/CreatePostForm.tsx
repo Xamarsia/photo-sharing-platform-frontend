@@ -41,7 +41,7 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
             </div>
 
             <div>
-                <TextButton type="submit" style="primary-button" text={local.create} disabled={!selectedImage} fill="parent" />
+                <TextButton type="submit" style="primary" text={local.create} disabled={!selectedImage} fill="parent" />
             </div>
         </Form>
     )

@@ -10,7 +10,7 @@ import ellipsisHorizontal from '@/public/ellipsis-horizontal/ellipsis-horizontal
 import hoveredEllipsisHorizontal from '@/public/ellipsis-horizontal/ellipsis-horizontal-hovered.svg';
 
 type Props = {
-    children?: ReactNode;
+    children?: ReactNode,
 }
 
 
@@ -20,7 +20,8 @@ export default function PostDropdown({ children }: Props) {
     return (
         <div>
             <IconButton
-                size={'extra-large'}
+                style='no-background'
+                size={'large'}
                 icon={ellipsisHorizontal}
                 hoveredIcon={hoveredEllipsisHorizontal}
                 onClick={(e) => { setShowDropdown(!showDropdown) }}
