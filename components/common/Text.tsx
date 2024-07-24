@@ -1,22 +1,22 @@
-import styles from '@/app/styles/components/text.module.css';
+import styles from '@/app/styles/text/text.module.css';
 
 
-type TextProps = {
-    text?: string | undefined;
-    style: 'main-info' | 'secondary-info' | 'base-text' | 'placeholder';
-    size: 'extra-small' | 'small' | 'base' | 'large' | 'extra-large';
-    required?: boolean | undefined;
+type Props = {
+    text?: string | number | undefined,
+    style: 'main-info' | 'secondary-info' | 'placeholder',
+    size: 'extra-small' | 'small' | 'base' | 'large' | 'extra-large',
+    required?: boolean | undefined,
 }
 
 
-export default function Text({ text, style, size, required }: TextProps) {
+export default function Text({ text, style, size, required }: Props) {
     return (
-        <p className={`
+        <span className={`
             ${styles[style]} 
             ${styles[size]}
             ${required ? styles["required"] : ''} 
         `}>
             {text}
-        </p>
+        </span>
     )
 }
