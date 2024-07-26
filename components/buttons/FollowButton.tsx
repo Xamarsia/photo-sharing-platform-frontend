@@ -5,13 +5,14 @@ import { UserState } from '@/constants';
 
 import TextButton from '@/components/buttons/TextButton';
 
-type UserProps = {
+
+type Props = {
     local: any,
     user: UserPreviewDTO,
-    dropdown?: boolean,
 }
 
-export default function FollowButton({ user, dropdown, local }: UserProps) {
+
+export default function FollowButton({ user, local }: Props) {
     const [following, setFollowing] = useState<boolean>(user.state == UserState.Followed);
 
     async function followProfile() {
@@ -26,8 +27,8 @@ export default function FollowButton({ user, dropdown, local }: UserProps) {
         <>
             {user.state != UserState.Current &&
                 (following
-                    ? <TextButton type="submit" fill="parent" style={dropdown ? 'red-dropdown-button' : 'secondary-button'} onClick={unfollowProfile} text={local.unfollow} />
-                    : <TextButton type="submit" fill="parent" style={dropdown ? 'blue-dropdown-button' : 'primary-button'} onClick={followProfile} text={local.follow} />
+                    ? <TextButton type="submit" fill="parent" style='secondary' onClick={unfollowProfile} text={local.unfollow} />
+                    : <TextButton type="submit" fill="parent" style='primary' onClick={followProfile} text={local.follow} />
                 )
             }
         </>

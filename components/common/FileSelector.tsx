@@ -2,29 +2,29 @@
 
 import { ReactNode, SetStateAction, useEffect, useState } from 'react';
 
-import photo from '@/public/photo/photo.svg'
-import photoHovered from '@/public/photo/photo-hovered.svg'
-
-import styles from '@/app/styles/components/file.selector.module.css'
-import textStyles from '@/app/styles/components/text.module.css'
+import photo from '@/public/photo/photo.svg';
+import photoHovered from '@/public/photo/photo-hovered.svg';
 
 import xMark from '@/public/x-mark/x-mark.svg';
 import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';
 
-import Span from '@/components/common/Span';
-import Input from '@/components/common/Input';
+import Text from '@/components/common/Text';
+import FileInput from '@/components/common/FileInput';
 import IconButton from '@/components/buttons/IconButton';
+
+import styles from '@/app/styles/components/file.selector.module.css';
+import React from 'react';
 
 
 type Props = {
-    local: any;
-    rounded?: 'rounded-full';
-    children?: ReactNode;
-    onImageSelected?: (file: SetStateAction<File | undefined>) => void;
+    local: any,
+    rounded?: 'rounded-full',
+    children?: ReactNode,
+    onImageSelected?: (file: SetStateAction<File | undefined>) => void,
 }
 
 
-export default function FileSelector({ local, children, rounded, onImageSelected }: Props) {
+export default function FileSelector({ local, rounded, children, onImageSelected }: Props) {
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [dragActive, setDragActive] = useState<boolean>(false);
 
@@ -85,19 +85,13 @@ export default function FileSelector({ local, children, rounded, onImageSelected
 
                 {selectedImage &&
                     <div className={`absolute top-0 right-0`}>
-                        <IconButton style={'transparent-button'} icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
+                        <IconButton style='secondary' size='small' icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
                     </div>
                 }
                 <div className={`flex flex-col items-center justify-center  ${selectedImage ? 'invisible' : 'visible'}`}>
-                    <IconButton size={'extra-extra-large'} rounded={'rounded'} icon={photo} hoveredIcon={photoHovered} hovered={dragActive} />
-                    <div className='flex gap-1'>
-                        <label>
-                            <Span text={local.clickToUpload} style='upload-button' />
-                            <Input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
-                        </label>
-                        <p className={`${textStyles['secondary-info']} ${textStyles['small']}`}>{local.orDragAndDrop}</p>
-                    </div>
-                    <p className={`${textStyles['secondary-info']} ${textStyles['extra-small']}`}>{local.fileFormatsForImageUploading}</p>
+                    <IconButton style='no-background' size='large' icon={photo} hoveredIcon={photoHovered} hovered={dragActive} />
+                    <FileInput local={local} size='base' onChange={imageChange} />
+                    <Text style='secondary-info' size='extra-small' text={local.fileFormatsForImageUploading} />
                 </div>
             </div>
         </div>

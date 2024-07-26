@@ -119,14 +119,12 @@ export default function SignUpForm({ local, onSubmit }: Props) {
             <div>
                 <TextButton
                     type="submit"
-                    style="primary-button"
+                    style="primary"
                     text={local.submit}
                     fill="parent"
                     disabled={!formIsValid}
                 />
-                <Link href="/auth/signin" prefetch={false} style="text-link">
-                    {local.haveAccount}
-                </Link>
+                <Link href='/auth/signin' text={local.haveAccount} prefetch={false} style='primary' size='small'/>
             </div>
         </Form>
     )

@@ -1,19 +1,20 @@
 import { ReactNode } from "react";
 
 import Card from "@/components/common/Card";
+import Title from "@/components/common/Title";
+
+import styles from '@/app/styles/components/modal.module.css';
+
 import IconButton from "@/components/buttons/IconButton";
 
 import xMark from '@/public/x-mark/x-mark.svg';
 import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';
 
-import textStyles from '@/app/styles/components/text.module.css'
-import styles from '@/app/styles/components/modal.module.css'
-
 
 type Props = {
     title: string,
     children: ReactNode,
-    onClose: () => void
+    onClose: () => void,
 }
 
 export default function Modal({ title, children, onClose }: Props) {
@@ -26,8 +27,8 @@ export default function Modal({ title, children, onClose }: Props) {
         <div className={`${styles["modal"]}`}>
             <Card>
                 <div className="flex justify-between">
-                    <h2 className={`${textStyles["title"]}`}>{title}</h2>
-                    <IconButton style={'transparent-button'} icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
+                    <Title size="small" text={title} />
+                    <IconButton size='small' style={'secondary'} icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
                 </div>
                 {children}
             </Card>

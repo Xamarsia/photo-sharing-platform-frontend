@@ -1,28 +1,29 @@
-import { ChangeEvent, KeyboardEvent } from "react"
-import styles from '@/app/styles/components/input.module.css'
-import textStyles from '@/app/styles/components/text.module.css'
+import { ChangeEvent, KeyboardEvent } from "react";
+
+import styles from '@/app/styles/components/input.module.css';
+import textStyles from '@/app/styles/text/text.module.css';
 
 
 type InputProps = {
-    name?: string;
-    type: 'text' | 'number' | 'email' | 'password' | 'file';
-    size?: 'small' | 'base' | 'large';
-    placeholder?: string | undefined;
-    state?: 'invalid' | 'valid';
-    required?: boolean | undefined;
-    pattern?: string | undefined;
-    disabled?: boolean | undefined;
-    value?: string | undefined;
-    accept?: string | undefined;
-    id?: string | undefined;
-    draggable?: boolean | undefined;
-    hidden?: boolean | undefined;
-    onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void | undefined;
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void | undefined;
+    name?: string,
+    type: 'text' | 'number' | 'email' | 'password' | 'file',
+    size?: 'small' | 'base' | 'large',
+    placeholder?: string | undefined,
+    state?: 'invalid' | 'valid',
+    required?: boolean | undefined,
+    pattern?: string | undefined,
+    disabled?: boolean | undefined,
+    value?: string | undefined,
+    accept?: string | undefined,
+    id?: string | undefined,
+    draggable?: boolean | undefined,
+    hidden?: boolean | undefined,
+    onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void | undefined,
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void | undefined,
 }
 
 
-export default function InputField({ name, type, required, pattern, disabled, value, accept, id, draggable, hidden, placeholder=" ", size = 'base', state = 'valid', onKeyDown, onChange }: InputProps) {
+export default function InputField({ name, type, required, pattern, disabled, value, accept, id, draggable, hidden, placeholder = " ", size = 'small', state = 'valid', onKeyDown, onChange }: InputProps) {
     return (
         <input
             id={id}

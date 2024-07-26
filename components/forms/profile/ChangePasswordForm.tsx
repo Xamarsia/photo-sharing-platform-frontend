@@ -76,7 +76,7 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
             <div>
                 <TextButton
                     type="submit"
-                    style="primary-button"
+                    style="primary"
                     text={local.update}
                     fill="parent"
                     disabled={!formIsValid || !isFormChanged}

@@ -58,7 +58,7 @@ export default function ChangeUserInfoForm({ local, user, onSubmit }: Props) {
             <div>
                 <TextButton
                     type="submit"
-                    style="primary-button"
+                    style="primary"
                     text={local.update}
                     fill="parent"
                     disabled={!formIsValid || !isFormChanged}

@@ -27,5 +27,9 @@ export async function getDetailedPost(postId: string): Promise<DetailedPostDTO> 
 
 export async function getPosts(): Promise<Array<PostDTO>> {
     return posts;
-    
+
+}
+
+export async function getUserPosts(username: string): Promise<Array<PostDTO>> {
+    return posts;
 }

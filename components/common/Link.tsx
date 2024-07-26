@@ -1,25 +1,31 @@
 import styles from '@/app/styles/components/link.module.css';
-import textStyles from '@/app/styles/components/text.module.css';
+import textStyles from '@/app/styles/text/text.module.css';
+import linkTextStyle from '@/app/styles/text/link.text.module.css';
 
 import Link from "next/link";
-import { ReactNode } from 'react';
 
 type LinkProps = {
-    href: string;
-    prefetch?: boolean;
-    style?: 'none' | 'text-link';
-    children: ReactNode;
+    href?: string,
+    prefetch?: boolean,
+    text?: string,
+    style: 'primary' | 'secondary' | 'delete',
+    size?: 'small' | 'base' | 'large',
+    onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void,
 }
 
-
-export default function LinkButton({ href, prefetch, children, style = 'none' }: LinkProps) {
-    const textStyle: string = `${styles["link"]} ${textStyles["link"]}`
+export default function LinkButton({ prefetch, text, style, size = 'small', href = '', onClick }: LinkProps) {
 
     return (
         <Link href={href}
             prefetch={prefetch}
-            className={`${style == 'none' ? '' : textStyle}`}>
-            {children}
+            onClick={onClick}
+            className={`
+                ${styles['link']} 
+                ${textStyles[size]}
+                ${linkTextStyle[style]}
+                ${linkTextStyle['link']}
+            `}>
+            {text}
         </Link>
     )
 }

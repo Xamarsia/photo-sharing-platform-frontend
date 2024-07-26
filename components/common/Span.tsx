@@ -1,22 +1,14 @@
-import textStyles from '@/app/styles/components/text.module.css'
-import buttonStyles from '@/app/styles/components/button.module.css'
+import Text from '@/components/common/Text';
+
 
 type SpanProps = {
-    text: string;
-    required?: boolean;
-    style?: 'input' | 'upload-button'
+    text: string,
+    required?: boolean | undefined,
 }
 
 
-export default function Span({ text, required, style = 'input' }: SpanProps) {
-    const uploadButtonStyles = `${textStyles["transparent-button"]} ${textStyles["base"]} ${buttonStyles["transparent-button"]}`
-
+export default function Span({ text, required }: SpanProps) {
     return (
-        <span className={`
-            ${style == 'input' ? `${textStyles["main-info"]} ${textStyles['small']}`  : ''}
-            ${style == 'upload-button' ? uploadButtonStyles : ''}
-            ${required ? textStyles["required"] : ''}`}>
-            {text}
-        </span>
+        <Text style='main-info' size='small' text={text} required={required} />
     )
 }

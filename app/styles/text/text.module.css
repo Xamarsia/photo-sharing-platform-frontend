@@ -1,0 +1,51 @@
+/* size */
+
+.extra-small {
+    @apply text-xs leading-5
+}
+
+.small {
+    @apply text-xs sm:text-sm leading-6
+}
+
+.base {
+    @apply text-sm sm:text-base leading-6
+}
+
+.large {
+    @apply text-sm sm:text-base md:text-lg leading-6
+}
+
+.extra-large {
+    @apply text-sm sm:text-base md:text-xl leading-8
+}
+
+
+/* common */
+
+.logo {
+    @apply self-center text-2xl font-semibold whitespace-nowrap
+}
+
+.placeholder {
+    @apply text-gray-700 font-light disabled:bg-slate-50 disabled:text-slate-500
+}
+
+.required {
+    @apply after:content-['*'] after:ml-0.5 after:text-red-500
+}
+
+
+/* base styles */
+
+.main-info {
+    @apply block font-medium text-justify text-gray-900
+}
+
+.secondary-info {
+    @apply block font-normal text-justify text-gray-500
+}
+
+.base-text {
+    @apply block font-normal text-justify text-gray-800
+}

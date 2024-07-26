@@ -7,25 +7,26 @@ import postImage from '@/public/profile5.jpg'
 
 import Card from '@/components/common/Card';
 import PostMenu from '@/components/post/PostMenu';
+import TextBlock from '@/components/common/TextBlock';
 import PostImage from '@/components/post/image/PostImage';
 
-import textStyles from '@/app/styles/components/text.module.css';
 
-type PostProps = {
-    local: any
-    detailedPost: DetailedPostDTO
+type Props = {
+    local: any,
+    detailedPost: DetailedPostDTO,
 }
 
-export default function PostComponent({ local, detailedPost }: PostProps) {
+
+export default function PostComponent({ local, detailedPost }: Props) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
 
     return (
         <Card size='large'>
             <PostMenu local={local} detailedPost={detailedPost} />
-            <div className='px-4 my-3 pb-4'>
+            <div className='px-4 my-4 pb-4'>
                 <PostImage src={postImage} size={'full'} />
             </div>
-            <p className={`${textStyles['base-text']}`}>{post.description}</p>
+            <TextBlock size='base' text={post.description} />
         </Card>
     )
 }

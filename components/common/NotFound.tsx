@@ -1,12 +1,16 @@
 import blueExclamationCircle from '@/public/exclamation-circle/blue-exclamation-circle.svg';
 
 import Image from 'next/image';
-import textStyles from '@/app/styles/components/text.module.css';
+
+import Text from '@/components/common/Text';
+import Title from '@/components/common/Title';
+
 
 type Props = {
     alertTitle: string,
     alertBody?: string,
 }
+
 
 export default function NotFound({ alertTitle, alertBody }: Props) {
     return (
@@ -14,8 +18,8 @@ export default function NotFound({ alertTitle, alertBody }: Props) {
             <div className="rounded-full bg-blue-50 p-3">
                 <Image src={blueExclamationCircle} alt="icon" />
             </div>
-            <h1 className={`${textStyles["title-large"]}`}>{alertTitle}</h1>
-            <p className={`${textStyles["secondary-info"]} ${textStyles['small']}`}>{alertBody}</p>
+            <Title size="base" text={alertTitle} />
+            <Text style='secondary-info' size='base' text={alertBody} />
         </div>
     );
 };

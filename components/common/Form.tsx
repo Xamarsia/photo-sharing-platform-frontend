@@ -1,6 +1,8 @@
 import React, { FormEvent, ReactNode } from "react";
-import styles from '@/app/styles/components/form.module.css'
-import textStyles from '@/app/styles/components/text.module.css'
+
+import styles from '@/app/styles/components/form.module.css';
+
+import Title from "@/components/common/Title";
 
 type FormProps = {
     title: string,
@@ -14,7 +16,7 @@ export default function Form({ title, children, onSubmit, onChange }: FormProps)
         <form onSubmit={onSubmit}
             onChange={onChange}
             className={`${styles["form"]}`}>
-            <h2 className={`${textStyles["title"]}`}>{title}</h2>
+            <Title size="small" text={title} />
             {children}
         </form>
     )
