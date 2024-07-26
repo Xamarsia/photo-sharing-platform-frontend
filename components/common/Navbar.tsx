@@ -9,16 +9,17 @@ import TextButton from "@/components/buttons/TextButton";
 import CreatePostButton from "@/components/buttons/CreatePostButton";
 import ProfilePreviewDropdown from "@/components/profile/ProfilePreviewDropdown";
 import DropdownButton from "@/components/buttons/DropdownButton";
+import { getUser } from "@/lib/profile-controller";
 
 
 type Props = {
     local: any;
-    user?: UserDTO | UserPreviewDTO | undefined;
 }
 
 
-export default function Navbar({ local, user }: Props) {
+export default function Navbar({ local }: Props) {
     const router = useRouter();
+    const user = getUser();
 
     return (
         <nav className="bg-white fixed w-full top-0 start-0 border-b border-gray-200">
@@ -32,7 +33,7 @@ export default function Navbar({ local, user }: Props) {
                     {user
                         ? <>
                             <div className='md:block hidden m-auto'>
-                                <CreatePostButton local={local} />
+                                <CreatePostButton local={local} style="rectungle" />
                             </div>
                             <ProfilePreviewDropdown user={user}>
                                 <DropdownButton style='secondary' size='small' text='My profile' />
