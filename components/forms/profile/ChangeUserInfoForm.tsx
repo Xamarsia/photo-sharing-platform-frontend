@@ -8,16 +8,17 @@ import TextButton from '@/components/buttons/TextButton';
 import Textarea from "@/components/common/Textarea";
 
 import { FormEvent, useState } from "react";
+import { getUser } from "@/lib/profile-controller";
 
 
 type Props = {
-    local: any;
-    user: UserDTO;
-    onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
+    local: any,
+    onSubmit?: (event: FormEvent<HTMLFormElement>) => void,
 }
 
 
-export default function ChangeUserInfoForm({ local, user, onSubmit }: Props) {
+export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
+    const user: UserDTO = getUser();
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false)
     const [fullName, setfullName] = useState(user.fullName);
     const [formIsValid, setFormIsValid] = useState(false);
@@ -32,6 +33,7 @@ export default function ChangeUserInfoForm({ local, user, onSubmit }: Props) {
 
     return (
         <Form
+            align="text-left"
             title={local.changeUserInfo}
             onSubmit={handleSubmit}
             onChange={(e) => {
@@ -43,6 +45,7 @@ export default function ChangeUserInfoForm({ local, user, onSubmit }: Props) {
                 <Span text={local.fullName} required />
                 <Input
                     type="text"
+                    size="small"
                     name="fullName"
                     value={fullName}
                     pattern="^[a-zA-Z\s]{2,30}$"
@@ -52,7 +55,14 @@ export default function ChangeUserInfoForm({ local, user, onSubmit }: Props) {
             </div>
             <div>
                 <Span text={local.description} />
-                <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
+                <Textarea
+                    size="small"
+                    rows={5}
+                    value={description}
+                    id="description"
+                    placeholder={local.writeDescriptionHere}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
             </div>
 
             <div>
@@ -60,7 +70,8 @@ export default function ChangeUserInfoForm({ local, user, onSubmit }: Props) {
                     type="submit"
                     style="primary"
                     text={local.update}
-                    fill="parent"
+                    size="small"
+                    fill="content"
                     disabled={!formIsValid || !isFormChanged}
                 />
             </div>

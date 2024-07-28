@@ -1,7 +1,7 @@
 "use client";
 
 
-import DropdownButton from "../buttons/DropdownButton";
+import SidebarButton from "@/components/buttons/SidebarButton";
 
 
 type Props = {
@@ -12,10 +12,12 @@ type Props = {
 export default function Sidebar({ local }: Props) {
 
     return (
-        <nav className="flex flex-col justify-around px-4 py-4 ">
-            <DropdownButton style='secondary' size='base' text={local.goToPost} />
-            <DropdownButton style='secondary' size='base' text={local.goToPost} />
-            <DropdownButton style='secondary' size='base' text={local.goToPost} />
+        <nav className="flex flex-col p-2 md:p-4">
+            <SidebarButton size='small' text={local.userInfo} />
+            <SidebarButton size='small' text={local.profileImage} />
+            <SidebarButton size='small' text={local.password} />
+            <SidebarButton size='small' text={local.username} />
+            <SidebarButton size='small' text={local.email} />
         </nav>
     )
 }

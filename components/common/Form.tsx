@@ -1,22 +1,21 @@
 import React, { FormEvent, ReactNode } from "react";
 
-import styles from '@/app/styles/components/form.module.css';
-
 import Title from "@/components/common/Title";
 
 type FormProps = {
     title: string,
     children: ReactNode,
+    align?: 'text-left' | 'text-center' | 'text-right',
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void,
     onChange?: (event: FormEvent<HTMLFormElement>) => void,
 }
 
-export default function Form({ title, children, onSubmit, onChange }: FormProps) {
+export default function Form({ title, children, align, onSubmit, onChange }: FormProps) {
     return (
         <form onSubmit={onSubmit}
             onChange={onChange}
-            className={`${styles["form"]}`}>
-            <Title size="small" text={title} />
+            className={`flex flex-col gap-y-3 sm:gap-y-6`}>
+            <Title size="small" align={align} text={title} />
             {children}
         </form>
     )

@@ -8,15 +8,16 @@ import TextButton from '@/components/buttons/TextButton';
 
 
 import { FormEvent, useState } from "react";
+import { getUser } from "@/lib/profile-controller";
 
 
 type Props = {
     local: any;
-    user: UserDTO;
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
-export default function ChangeEmailForm({ local, user, onSubmit }: Props) {
+export default function ChangeEmailForm({ local, onSubmit }: Props) {
+    const user: UserDTO = getUser();
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [formIsValid, setFormIsValid] = useState(false);
     const [email, setEmail] = useState(user.email);
@@ -31,6 +32,7 @@ export default function ChangeEmailForm({ local, user, onSubmit }: Props) {
     return (
         <Form title={local.changeEmail}
             onSubmit={handleSubmit}
+            align="text-left"
             onChange={(e) => {
                 setFormIsValid(e.currentTarget.checkValidity())
                 setIsFormChanged(true)
@@ -46,13 +48,16 @@ export default function ChangeEmailForm({ local, user, onSubmit }: Props) {
                     required
                 />
             </div>
-            <TextButton
-                type="submit"
-                style="primary"
-                text={local.update}
-                fill="parent"
-                disabled={!formIsValid || !isFormChanged}
-            />
+            <div>
+                <TextButton
+                    type="submit"
+                    style="primary"
+                    text={local.update}
+                    size="small"
+                    fill="content"
+                    disabled={!formIsValid || !isFormChanged}
+                />
+            </div>
         </Form>
     )
 }

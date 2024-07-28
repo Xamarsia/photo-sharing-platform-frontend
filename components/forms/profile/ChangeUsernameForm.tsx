@@ -8,16 +8,17 @@ import TextButton from '@/components/buttons/TextButton';
 
 
 import { FormEvent, useState } from "react";
+import { getUser } from "@/lib/profile-controller";
 
 
 type Props = {
-    local: any;
-    user: UserDTO;
-    onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
+    local: any,
+    onSubmit?: (event: FormEvent<HTMLFormElement>) => void | undefined,
 }
 
 
-export default function ChangeUsernameForm({ local, user, onSubmit }: Props) {
+export default function ChangeUsernameForm({ local, onSubmit }: Props) {
+    const user: UserDTO = getUser();
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [formIsValid, setFormIsValid] = useState(false);
     const [username, setUsername] = useState(user.username);
@@ -30,7 +31,9 @@ export default function ChangeUsernameForm({ local, user, onSubmit }: Props) {
     }
 
     return (
-        <Form title={local.changeUsername}
+        <Form
+            align="text-left"
+            title={local.changeUsername}
             onSubmit={handleSubmit}
             onChange={(e) => {
                 setFormIsValid(e.currentTarget.checkValidity());
@@ -40,6 +43,7 @@ export default function ChangeUsernameForm({ local, user, onSubmit }: Props) {
                 <Span text={local.username} required />
                 <Input
                     type="text"
+                    size="small"
                     name="username"
                     value={username}
                     pattern='^[a-zA-Z0-9]{1,30}$'
@@ -47,13 +51,16 @@ export default function ChangeUsernameForm({ local, user, onSubmit }: Props) {
                     required
                 />
             </div>
-            <TextButton
-                type="submit"
-                style="primary"
-                text={local.update}
-                fill="parent"
-                disabled={!formIsValid || !isFormChanged}
-            />
+            <div>
+                <TextButton
+                    type="submit"
+                    style="primary"
+                    text={local.update}
+                    size="small"
+                    fill="content"
+                    disabled={!formIsValid || !isFormChanged}
+                />
+            </div>
         </Form>
     )
 }

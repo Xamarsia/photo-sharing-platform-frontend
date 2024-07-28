@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
 import '@/app/styles/globals.css';
 
 import { getDictionary } from '@/lib/localization';
@@ -21,22 +22,20 @@ export default async function RootLayout({
   const dict = await getDictionary('en');
 
   return (
-    <center>
-      <div className="flex flex-row sm:w-10/12 md:w-9/12 lg:w-4/6">
-        <section className='flex-grow-0'>
-          <div className='relative flex flex-col h-full top-0 left-0 border-r border-gray-200'>
-            <div className='sticky top-20'>
-              <Sidebar local={dict} />
-            </div>
-          </div>
-        </section>
 
-        <div className="flex-grow flex-shrink-0">
-          <div className="content-block flex flex-col gap-4">
-            {children}
+
+    <div className="flex flex-row max-w-6xl sm:w-10/12 md:w-9/12 lg:w-4/6 mx-auto px-4 sm:px-6 md:px-8">
+      <section className='flex-grow-0'>
+        <div className='relative flex flex-col h-full top-0 left-0 border-r border-gray-200'>
+          <div className='sticky top-20'>
+            <Sidebar local={dict} />
           </div>
         </div>
-      </div>
-    </center>
+      </section>
+
+      <section className="flex-grow flex-shrink-0 p-2 md:p-4">
+        {children}
+      </section>
+    </div>
   )
 }

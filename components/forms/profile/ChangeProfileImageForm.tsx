@@ -11,12 +11,11 @@ import { FormEvent, SetStateAction, useState } from "react";
 
 type Props = {
     local: any;
-    user: UserDTO;
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
 
-export default function ChangeProfileImageForm({ local, user, onSubmit }: Props) {
+export default function ChangeProfileImageForm({ local, onSubmit }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [formIsValid, setFormIsValid] = useState(false);
 
@@ -37,12 +36,13 @@ export default function ChangeProfileImageForm({ local, user, onSubmit }: Props)
         <Form
             title={local.changeProfileImage}
             onSubmit={handleSubmit}
+            align="text-left"
             onChange={(e) => {
                 setFormIsValid(e.currentTarget.checkValidity());
                 setIsFormChanged(true);
             }
             }>
-            <div className='h-80 w-80 m-auto'>
+            <div className='h-80 w-80'>
                 <FileSelector onImageSelected={onImageSelected} local={local} rounded="rounded-full"  >
                     {selectedImage && <ProfileImage src={URL.createObjectURL(selectedImage)} />}
                 </FileSelector>
@@ -52,8 +52,8 @@ export default function ChangeProfileImageForm({ local, user, onSubmit }: Props)
                     type="submit"
                     style="primary"
                     text={local.update}
-                    fill="parent"
-                    size="base"
+                    fill="content"
+                    size="small"
                     disabled={!formIsValid || !isFormChanged}
                 />
             </div>
