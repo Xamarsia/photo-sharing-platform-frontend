@@ -18,10 +18,8 @@ export default async function EditPostPage({ params }: { params: PageProps }) {
 
 
     return (
-        <main className="min-h-screen bg-blue-100 flex items-center justify-center text-gray-500">
-            <Card>
-                <EditPostForm local={dict} detailedPost={postrData} />
-            </Card>
-        </main>
+        <Card>
+            <EditPostForm local={dict} detailedPost={postrData} />
+        </Card>
     );
 }

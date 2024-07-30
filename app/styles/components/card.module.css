@@ -1,11 +1,11 @@
 .card {
-    @apply bg-white shadow-2xl shadow-slate-200 rounded-lg sm:p-12 p-8 w-11/12 h-auto
+    @apply bg-white shadow-2xl shadow-slate-200 rounded-lg w-full m-8
 }
 
 .base {
-    @apply max-w-xl
+    @apply max-w-xl p-6 sm:p-10  /* 576px */
 }
 
 .large {
-    @apply max-w-2xl
+    @apply max-w-2xl p-8 sm:p-12 /* 672px */
 }

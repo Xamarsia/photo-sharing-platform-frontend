@@ -39,10 +39,7 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
                 <Span text={local.description} />
                 <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
             </div>
-
-            <div>
-                <TextButton type="submit" style="primary" text={local.create} disabled={!selectedImage} fill="parent" />
-            </div>
+            <TextButton type="submit" style="primary" text={local.create} disabled={!selectedImage} fill="parent" />
         </Form>
     )
 }
