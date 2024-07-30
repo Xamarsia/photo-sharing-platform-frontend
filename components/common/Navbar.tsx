@@ -37,7 +37,7 @@ export default function Navbar({ local }: Props) {
     }
 
     return (
-        <nav className="bg-white fixed w-full top-0 start-0 border-y border-gray-200">
+        <nav className="bg-white w-full border-y border-gray-200">
             <div className="flex items-center justify-between py-4 px-4 md:px-8 gap-2 md:gap-4">
                 <Logo />
                 <div className={`grow max-w-[580px] ${user ? "block" : "hidden"}`}>

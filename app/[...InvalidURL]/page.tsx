@@ -13,6 +13,9 @@ type PageProps = {
 export default async function InvalidURLPage({ params }: { params: PageProps }) {
     const dict = await getDictionary('en');
     return (
-        <NotFound alertTitle={dict.pageNotFound} alertBody={dict.pageDoesNotExist} />
+
+        <div className='flex flex-grow flex-shrink justify-center items-center'>
+            <NotFound alertTitle={dict.pageNotFound} alertBody={dict.pageDoesNotExist} />
+        </div>
     );
 }

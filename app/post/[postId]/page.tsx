@@ -17,6 +17,8 @@ export default async function EditPostPage({ params }: { params: PageProps }) {
 
 
     return (
-        <Post detailedPost={postrData} local={dict} />
+        <div className='flex flex-grow flex-shrink justify-center items-center'>
+            <Post detailedPost={postrData} local={dict} />
+        </div>
     );
 }

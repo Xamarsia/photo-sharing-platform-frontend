@@ -7,6 +7,15 @@ import Navbar from '@/components/common/Navbar';
 import CreatePostButton from '@/components/buttons/CreatePostButton';
 
 import { getDictionary } from '@/lib/localization';
+import ProfilePreviewDropdown from '@/components/profile/ProfilePreviewDropdown';
+import DropdownButton from '@/components/buttons/DropdownButton';
+import SearchBar from '@/components/common/SearchBar';
+import Logo from '@/components/common/Logo';
+import { getUser } from '@/lib/profile-controller';
+import IconButton from '@/components/buttons/IconButton';
+
+import bars3 from '@/public/bars-3/bars-3.svg';
+import bars3Hovered from '@/public/bars-3/bars-3-hovered.svg';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,16 +30,17 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
+  const user = getUser();
   const dict = await getDictionary('en');
 
   return (
     <html lang="en" className='size-full'>
       <body className={`${inter.className} size-full`}>
         <div className='min-h-full flex flex-col flex-grow items-stretch'>
-          <header className='z-10 flex-shrink-0'>
+          <header className='flex flex-shrink-0 z-10 sticky top-0 left-0'>
             <Navbar local={dict} />
           </header>
-          <main className='flex flex-grow relative flex-shrink-0 bg-green-200 justify-center items-center'>
+          <main className='flex flex-grow relative flex-shrink-0 bg-slate-100'>
             {children}
             <div className='absolute flex flex-col-reverse h-full top-0 right-0'>
               <div className='sticky bottom-4 m-4 sm:bottom-8 sm:m-8 md:hidden block'>
