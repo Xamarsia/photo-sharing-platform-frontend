@@ -1,5 +1,0 @@
-/* style */
-
-.search-bar {
-    @apply flex items-center mx-auto min-w-full gap-x-1
-}

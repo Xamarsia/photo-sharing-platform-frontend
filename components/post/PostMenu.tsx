@@ -4,8 +4,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-import styles from '@/app/styles/post/post.module.css';
-
 import { UserState } from '@/constants';
 import { getProfileImagePreview } from '@/lib/profile-controller';
 
@@ -27,7 +25,7 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
     const profileImagePreview = getProfileImagePreview(detailedPost.authorDTO);
 
     return (
-        <div className={`${styles["post-menu-layout"]}`}>
+        <div className='flex justify-around items-center space-x-4'>
             <Link href={`/${post.username}`}>{profileImagePreview}</Link>
             <div className="flex-1 flex flex-row gap-4 m-auto ">
                 <Text style='main-info' size='small' text={postAuthor.fullName} />

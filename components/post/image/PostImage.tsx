@@ -1,5 +1,5 @@
 import Image, { StaticImageData } from 'next/image';
-import styles from '@/app/styles/post/post.image.module.css';
+
 
 type Props = {
     src: string | StaticImageData;
@@ -13,11 +13,11 @@ export default function PostImage({ src, size, rounded }: Props) {
         <div
             className={`
             ${rounded}
-            ${size.includes('square') ? styles['square-container'] : ''} 
+            ${size.includes('square') ? 'relative aspect-square bg-gray-100' : ''} 
         `}>
             <Image className={`
                 ${rounded}
-                ${styles['post-image']}
+                size-full max-h-full max-w-full object-center
                 ${size == 'cropped-square' ? 'object-cover' : 'object-scale-down'}
             `}
                 src={src} width="400" height="400" alt="Post image" />

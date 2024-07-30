@@ -12,7 +12,6 @@ import Text from '@/components/common/Text';
 import FileInput from '@/components/common/FileInput';
 import IconButton from '@/components/buttons/IconButton';
 
-import styles from '@/app/styles/components/file.selector.module.css';
 import React from 'react';
 
 
@@ -71,7 +70,8 @@ export default function FileSelector({ local, rounded, children, onImageSelected
     };
 
     return (
-        <div className={`${styles['file-selector-layout']} ${rounded}`}
+        <div className={`relative w-full aspect-square cursor-pointer hover:bg-gray-300 hover:bg-opacity-50 bg-gray-100
+             ${rounded}`}
             onDragEnter={handleDragEnter}
             onDrop={handleDrop}
             onDragLeave={handleDragLeave}
@@ -79,7 +79,9 @@ export default function FileSelector({ local, rounded, children, onImageSelected
         >
             {children}
             <div className={`
-            ${styles['file-selector']} ${rounded} 
+            absolute bottom-0 left-0 w-full aspect-square flex flex-col items-center justify-center border border-gray-400 border-dashed
+            
+            ${rounded} 
                     ${dragActive ? 'bg-gray-200 bg-opacity-50' : ''}
                 `}>
 
