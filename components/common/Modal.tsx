@@ -3,8 +3,6 @@ import { ReactNode } from "react";
 import Card from "@/components/common/Card";
 import Title from "@/components/common/Title";
 
-import styles from '@/app/styles/components/modal.module.css';
-
 import IconButton from "@/components/buttons/IconButton";
 
 import xMark from '@/public/x-mark/x-mark.svg';
@@ -24,7 +22,7 @@ export default function Modal({ title, children, onClose }: Props) {
     };
 
     return (
-        <div className={`${styles["modal"]}`}>
+        <div className='fixed top-0 left-0 w-full h-full bg-gray-500 flex justify-center items-center bg-opacity-75'>
             <Card>
                 <div className="flex justify-between">
                     <Title size="small" text={title} />

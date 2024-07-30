@@ -2,28 +2,32 @@
 
 import styles from '@/app/styles/components/buttons/sidebar.button.module.css';
 import textStyles from '@/app/styles/text/text.module.css';
+import Link from 'next/link';
 
 type Props = {
-    text: string | undefined,
+    text: string,
     size: 'small' | 'base' | 'large',
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    href: string,
+    value: SidebarNavItem,
+    selectedValue: SidebarNavItem,
+    onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void,
 }
 
 
-export default function SidebarButton({ text, size, onClick }: Props) {
+export default function SidebarItem({ text, size, href, value, selectedValue, onClick }: Props) {
 
     return (
-        <button
-            type={'button'}
+        <Link href={href}
             className={`
-                ${styles['sidebar']} 
+                ${styles['sidebar']}    
                 ${styles[size]}
                 ${textStyles[size]}
                 ${textStyles['base-text']}
+                ${value == selectedValue ? 'bg-gray-100' : ''}
             `}
             onClick={onClick}
         >
             {text}
-        </button>
+        </Link>
     )
 }

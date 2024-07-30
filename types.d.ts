@@ -1,4 +1,5 @@
 type UserState = 'CURRENT' | 'FOLLOWED' | 'UNFOLLOWED'
+type SidebarNavItem = 'USER_INFO' | 'PROFILE_IMAGE'| 'PASSWORD'| 'USERNAME' | 'EMAIL'
 
 type UserDTO = {
     "id": string,

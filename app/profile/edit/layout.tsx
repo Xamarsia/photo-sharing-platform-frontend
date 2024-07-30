@@ -22,13 +22,11 @@ export default async function RootLayout({
   const dict = await getDictionary('en');
 
   return (
-
-
-    <div className="flex flex-row max-w-6xl sm:w-10/12 md:w-9/12 lg:w-4/6 mx-auto px-4 sm:px-6 md:px-8">
-      <section className='flex-grow-0'>
+    <div className="flex flex-row max-w-6xl w-full sm:w-11/12 lg:w-4/6 mx-auto px-4 sm:px-6 md:px-8">
+      <section className='flex-grow-0 md:block hidden'>
         <div className='relative flex flex-col h-full top-0 left-0 border-r border-gray-200'>
           <div className='sticky top-20'>
-            <Sidebar local={dict} />
+            <Sidebar local={dict} size='small' />
           </div>
         </div>
       </section>
