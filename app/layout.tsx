@@ -2,20 +2,12 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '@/app/styles/globals.css';
 
-import Footer from '@/components/common/Footer';
-import Navbar from '@/components/common/Navbar';
-import CreatePostButton from '@/components/buttons/CreatePostButton';
-
 import { getDictionary } from '@/lib/localization';
-import ProfilePreviewDropdown from '@/components/profile/ProfilePreviewDropdown';
-import DropdownButton from '@/components/buttons/DropdownButton';
-import SearchBar from '@/components/common/SearchBar';
-import Logo from '@/components/common/Logo';
 import { getUser } from '@/lib/profile-controller';
-import IconButton from '@/components/buttons/IconButton';
 
-import bars3 from '@/public/bars-3/bars-3.svg';
-import bars3Hovered from '@/public/bars-3/bars-3-hovered.svg';
+import Footer from '@/components/common/Footer';
+import Header from '@/components/common/Header';
+import FixedRoundCreatePostButton from '@/components/buttons/FixedRoundCreatePostButton';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -36,22 +28,12 @@ export default async function RootLayout({
   return (
     <html lang="en" className='size-full'>
       <body className={`${inter.className} size-full flex flex-col items-stretch relative`}>
-        <header className=' flex-shrink-0 z-10 sticky top-0'>
-          <Navbar local={dict} />
-        </header>
-        <main className='flex flex-grow relative flex-shrink-0 bg-slate-100'>
+        <Header local={dict} />
+        <main className='flex flex-grow relative flex-shrink-0 bg-slate-600'>
           {children}
-
-          <div className='absolute flex flex-col-reverse h-full top-0 right-0 pointer-events-none '>
-            <div className='sticky bottom-4 m-4 sm:bottom-8 sm:m-8 md:hidden block focus:pointer-events-auto'>
-              <CreatePostButton local={dict} style='round' />
-            </div>
-          </div>
-
+          <FixedRoundCreatePostButton />
         </main>
-        <footer className='flex-shrink-0'>
-          <Footer local={dict} />
-        </footer>
+        <Footer local={dict} />
       </body>
     </html>
   )
