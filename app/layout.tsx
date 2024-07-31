@@ -35,23 +35,23 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className='size-full'>
-      <body className={`${inter.className} size-full`}>
-        <div className='min-h-full flex flex-col flex-grow items-stretch'>
-          <header className='flex flex-shrink-0 z-10 sticky top-0 left-0'>
-            <Navbar local={dict} />
-          </header>
-          <main className='flex flex-grow relative flex-shrink-0 bg-slate-100'>
-            {children}
-            <div className='absolute flex flex-col-reverse h-full top-0 right-0'>
-              <div className='sticky bottom-4 m-4 sm:bottom-8 sm:m-8 md:hidden block'>
-                <CreatePostButton local={dict} style='round' />
-              </div>
+      <body className={`${inter.className} size-full flex flex-col items-stretch relative`}>
+        <header className=' flex-shrink-0 z-10 sticky top-0'>
+          <Navbar local={dict} />
+        </header>
+        <main className='flex flex-grow relative flex-shrink-0 bg-slate-100'>
+          {children}
+
+          <div className='absolute flex flex-col-reverse h-full top-0 right-0 pointer-events-none '>
+            <div className='sticky bottom-4 m-4 sm:bottom-8 sm:m-8 md:hidden block focus:pointer-events-auto'>
+              <CreatePostButton local={dict} style='round' />
             </div>
-          </main>
-          <footer className='flex-shrink-0'>
-            <Footer local={dict} />
-          </footer>
-        </div>
+          </div>
+
+        </main>
+        <footer className='flex-shrink-0'>
+          <Footer local={dict} />
+        </footer>
       </body>
     </html>
   )
