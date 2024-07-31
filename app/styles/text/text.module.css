@@ -5,21 +5,16 @@
 }
 
 .small {
-    @apply text-xs sm:text-sm leading-6
+    @apply text-sm leading-5
 }
 
 .base {
-    @apply text-sm sm:text-base leading-6
+    @apply text-base leading-6
 }
 
 .large {
-    @apply text-sm sm:text-base md:text-lg leading-6
+    @apply text-lg leading-6
 }
-
-.extra-large {
-    @apply text-sm sm:text-base md:text-xl leading-8
-}
-
 
 /* common */
 
