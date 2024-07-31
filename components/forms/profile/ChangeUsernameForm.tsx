@@ -1,7 +1,6 @@
 "use client";
 
 
-import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
@@ -31,14 +30,13 @@ export default function ChangeUsernameForm({ local, onSubmit }: Props) {
     }
 
     return (
-        <Form
-            align="text-left"
-            title={local.changeUsername}
-            onSubmit={handleSubmit}
+        <form onSubmit={handleSubmit}
             onChange={(e) => {
-                setFormIsValid(e.currentTarget.checkValidity());
-                setIsFormChanged(true);
-            }}>
+                setFormIsValid(e.currentTarget.checkValidity())
+                setIsFormChanged(true)
+            }}
+            className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
+
             <div>
                 <Span text={local.username} required />
                 <Input
@@ -61,6 +59,6 @@ export default function ChangeUsernameForm({ local, onSubmit }: Props) {
                     disabled={!formIsValid || !isFormChanged}
                 />
             </div>
-        </Form>
+        </form>
     )
 }

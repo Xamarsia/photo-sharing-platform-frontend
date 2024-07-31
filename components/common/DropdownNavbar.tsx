@@ -11,7 +11,6 @@ import bars3Hovered from '@/public/bars-3/bars-3-hovered.svg';
 
 import xMark from '@/public/x-mark/x-mark.svg';
 import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';
-import Title from "./Title";
 
 
 type Props = {
@@ -32,7 +31,7 @@ export default function DropdownNavbar({ local }: Props) {
             <div className="absolute top-0 w-full bg-white flex flex-col size-full">
 
                 <div className="flex justify-between p-2 w-full bg-white">
-                    <Title size="small" text={"text"} />
+                    <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>text</h1>
                     {showDropdown
                         ? <IconButton size='base' style='no-background' icon={xMark} hoveredIcon={xMarkHovered} onClick={handleClick} />
                         : <IconButton style='no-background' size='base' icon={bars3} hoveredIcon={bars3Hovered} onClick={handleClick} />

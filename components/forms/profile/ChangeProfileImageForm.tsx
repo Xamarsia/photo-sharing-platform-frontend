@@ -1,7 +1,6 @@
 "use client";
 
 
-import Form from "@/components/common/Form";
 import TextButton from '@/components/buttons/TextButton';
 import FileSelector from "@/components/common/FileSelector";
 import ProfileImage from "@/components/profile/image/ProfileImage";
@@ -33,15 +32,13 @@ export default function ChangeProfileImageForm({ local, onSubmit }: Props) {
     };
 
     return (
-        <Form
-            title={local.changeProfileImage}
-            onSubmit={handleSubmit}
-            align="text-left"
+
+        <form onSubmit={handleSubmit}
             onChange={(e) => {
-                setFormIsValid(e.currentTarget.checkValidity());
-                setIsFormChanged(true);
-            }
-            }>
+                setFormIsValid(e.currentTarget.checkValidity())
+                setIsFormChanged(true)
+            }}
+            className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
             <div className='h-80 w-80'>
                 <FileSelector onImageSelected={onImageSelected} local={local} rounded="rounded-full"  >
                     {selectedImage && <ProfileImage src={URL.createObjectURL(selectedImage)} />}
@@ -57,6 +54,6 @@ export default function ChangeProfileImageForm({ local, onSubmit }: Props) {
                     disabled={!formIsValid || !isFormChanged}
                 />
             </div>
-        </Form>
+        </form>
     )
 }

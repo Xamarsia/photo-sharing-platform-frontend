@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { getProfileImage } from '@/lib/profile-controller';
 
 import Text from '@/components/common/Text';
-import Title from '@/components/common/Title';
 import TextBlock from '@/components/common/TextBlock';
 import StatsInfo from '@/components/common/StatsInfo';
 import TextButton from '@/components/buttons/TextButton';
@@ -24,7 +23,7 @@ export default function Profile({ local, profile }: Props) {
     return (
         <div className="flex flex-col items-center gap-4 w-11/12 max-w-lg ">
             {profileImage}
-            <Title size="base" text={user.fullName} />
+            <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{user.fullName}</h1>
 
             <Text style='secondary-info' size='large' text={user.username} />
             <TextBlock size='small' text={profile.description} />

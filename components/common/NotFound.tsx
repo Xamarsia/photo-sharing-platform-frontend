@@ -3,7 +3,6 @@ import blueExclamationCircle from '@/public/exclamation-circle/blue-exclamation-
 import Image from 'next/image';
 
 import Text from '@/components/common/Text';
-import Title from '@/components/common/Title';
 
 
 type Props = {
@@ -18,7 +17,7 @@ export default function NotFound({ alertTitle, alertBody }: Props) {
             <div className="rounded-full bg-blue-50 p-3">
                 <Image src={blueExclamationCircle} alt="icon" />
             </div>
-            <Title size="base" text={alertTitle} />
+            <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{alertTitle}</h1>
             <Text style='secondary-info' size='base' text={alertBody} />
         </div>
     );

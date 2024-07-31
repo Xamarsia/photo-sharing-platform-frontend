@@ -3,7 +3,6 @@
 
 import { FormEvent, SetStateAction, useState } from "react";
 
-import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
 import TextButton from "@/components/buttons/TextButton";
 import Textarea from "@/components/common/Textarea";
@@ -28,21 +27,20 @@ export default function EditPostForm({ local, detailedPost, onSubmit }: Props) {
 
 
     return (
-        <Form title={local.editPost} onSubmit={onSubmit} onChange={() => setIsFormChanged(true)}>
+        <form onSubmit={onSubmit} onChange={() => setIsFormChanged(true)} className={`flex flex-col gap-y-3 sm:gap-y-6`}>
+            <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{local.editPost}</h1>
             <div>
                 <FileSelector onImageSelected={onImageSelected} local={local}>
                     {selectedImage && <PostImage src={URL.createObjectURL(selectedImage)} size={"uncropped-square"} />}
                 </FileSelector>
             </div>
-
             <div>
                 <Span text={local.description} />
                 <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
             </div>
-
             <div>
                 <TextButton type="submit" style="primary" text={local.update} disabled={!isFormChanged} fill="parent" />
             </div>
-        </Form>
+        </form>
     )
 }

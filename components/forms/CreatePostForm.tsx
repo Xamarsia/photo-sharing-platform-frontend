@@ -3,7 +3,6 @@
 
 import { FormEvent, SetStateAction, useState } from "react";
 
-import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
 import TextButton from "@/components/buttons/TextButton";
 import Textarea from "@/components/common/Textarea";
@@ -28,18 +27,19 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
 
 
     return (
-        <Form title={local.createPost} onSubmit={onSubmit}>
-            <div>
-                <FileSelector onImageSelected={onImageSelected} local={local}>
-                    {selectedImage && <PostImage src={URL.createObjectURL(selectedImage)} size={"uncropped-square"} />}
-                </FileSelector>
-            </div>
+        <form onSubmit={onSubmit} className={`flex flex-col gap-y-3 sm:gap-y-6`}>
+            <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{local.createPost}</h1>
+            <FileSelector onImageSelected={onImageSelected} local={local}>
+                {selectedImage && <PostImage src={URL.createObjectURL(selectedImage)} size={"uncropped-square"} />}
+            </FileSelector>
 
             <div>
                 <Span text={local.description} />
                 <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
             </div>
-            <TextButton type="submit" style="primary" text={local.create} disabled={!selectedImage} fill="parent" />
-        </Form>
+            <div>
+                <TextButton type="submit" style="primary" text={local.create} disabled={!selectedImage} fill="content" />
+            </div>
+        </form>
     )
 }

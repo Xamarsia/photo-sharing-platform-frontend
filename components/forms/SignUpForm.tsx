@@ -1,7 +1,6 @@
 "use client";
 
 
-import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
 import Link from "@/components/common/Link";
 import Input from '@/components/common/Input';
@@ -49,10 +48,11 @@ export default function SignUpForm({ local, onSubmit }: Props) {
     };
 
     return (
-        <Form
-            title={local.signUpFormTitle}
-            onSubmit={handleSubmit}
-            onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}>
+
+        <form onSubmit={handleSubmit}
+            onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
+            className={`flex flex-col gap-y-3 sm:gap-y-6`}>
+            <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{local.signUpFormTitle}</h1>
             <div className='h-80 w-80 m-auto'>
                 <FileSelector onImageSelected={onImageSelected} local={local} rounded="rounded-full"  >
                     {selectedImage && <ProfileImage src={URL.createObjectURL(selectedImage)} />}
@@ -124,9 +124,9 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                     fill="parent"
                     disabled={!formIsValid}
                 />
-                <Link href='/auth/signin' text={local.haveAccount} prefetch={false} style='primary' size='small'/>
+                <Link href='/auth/signin' text={local.haveAccount} prefetch={false} style='primary' size='small' />
             </div>
-        </Form>
+        </form>
     )
 }
 

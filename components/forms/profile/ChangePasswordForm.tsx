@@ -1,7 +1,6 @@
 "use client";
 
 
-import Form from "@/components/common/Form";
 import Span from "@/components/common/Span";
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
@@ -31,16 +30,12 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
     }
 
     return (
-        <Form
-            title={local.changePassword}
-            onSubmit={handleSubmit}
-            align="text-left"
+        <form onSubmit={handleSubmit}
             onChange={(e) => {
                 setFormIsValid(e.currentTarget.checkValidity())
                 setIsFormChanged(true)
-            }
-            }>
-
+            }}
+            className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
             <div>
                 <Span text={local.currentPassword} required />
                 <Input
@@ -87,6 +82,6 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
                     disabled={!formIsValid || !isFormChanged}
                 />
             </div>
-        </Form>
+        </form>
     )
 }
