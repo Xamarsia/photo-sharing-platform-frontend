@@ -1,7 +1,7 @@
 "use client";
 
 
-import styles from '@/app/styles/components/buttons/button.module.css';
+import styles from '@/app/styles/components/button.module.css';
 import buttonTextStyle from '@/app/styles/text/button.text.module.css';
 
 type Props = {

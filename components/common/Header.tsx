@@ -35,17 +35,17 @@ export default function Header({ local }: Props) {
                     {user
                         ? <>
                             <div className='md:block hidden m-auto'>
-                                <TextIconButton fill="content" text={local.createPost} style={'primary'} icon={plus} iconSide='left' size="small" rounded="rounded-lg" onClick={() => { router.push('/post/create') }} />
+                                <TextIconButton fill="content" text={local.createPost} style={'primary'} icon={plus} onClick={() => { router.push('/post/create') }} />
                             </div>
                             <div className="md:block">
                                 <ProfilePreviewDropdown user={user}>
-                                    <DropdownButton style='secondary' text='My profile' />
+                                    <DropdownButton text='My profile' />
                                 </ProfilePreviewDropdown>
                             </div>
                         </>
                         : <>
-                            <TextButton type={'button'} text={local.signIn} onClick={e => { router.push('/auth/signin') }} style={'primary'} size="small" rounded="rounded-lg" />
-                            <TextButton type={'button'} text={local.signUp} onClick={e => { router.push('/auth/signup') }} style={'primary'} size="small" rounded="rounded-lg" />
+                            <TextButton type={'button'} text={local.signIn} onClick={e => { router.push('/auth/signin') }} style={'primary'} />
+                            <TextButton type={'button'} text={local.signUp} onClick={e => { router.push('/auth/signup') }} style={'primary'} />
                         </>
                     }
                 </div>

@@ -68,7 +68,7 @@ export default function SignInForm({ local, onSubmit }: Props) {
                     fill="parent"
                     disabled={!formIsValid}
                 />
-                <Link href='/auth/signup' text={local.dontHaveAccount} prefetch={false} style='primary' size='small' />
+                <Link href='/auth/signup' text={local.dontHaveAccount} prefetch={false} style='primary' />
             </div>
         </form>
     )

@@ -12,7 +12,7 @@ type Props = {
 }
 
 
-export default function IconButton({ icon, hoveredIcon, hovered, onClick }: Props) {
+export default function CircleButton({ icon, hoveredIcon, hovered, onClick }: Props) {
     const [isHovering, setIsHovered] = useState(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
@@ -22,7 +22,7 @@ export default function IconButton({ icon, hoveredIcon, hovered, onClick }: Prop
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            className={`inline-flex justify-center items-center aspect-square cursor-pointer`}>
+            className={`inline-flex justify-center items-center aspect-square cursor-pointer p-1 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-500 disabled:opacity-50 dark:bg-blue-500 dark:hover:bg-blue-600 dark:disabled:bg-blue-500 rounded-full`}>
             <Image src={(isHovering || hovered) ? hoveredIcon : icon} alt="icon" className={`size-8`} />
         </button>
     )

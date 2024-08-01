@@ -50,7 +50,6 @@ export default function ChangeProfileImageForm({ local, onSubmit }: Props) {
                     style="primary"
                     text={local.update}
                     fill="content"
-                    size="small"
                     disabled={!formIsValid || !isFormChanged}
                 />
             </div>

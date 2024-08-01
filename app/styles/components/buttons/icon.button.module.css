@@ -1,9 +1,0 @@
-/* styles */
-
-.primary {
-    @apply bg-blue-500 hover:bg-blue-600 disabled:bg-blue-500 disabled:opacity-50 dark:bg-blue-500 dark:hover:bg-blue-600 dark:disabled:bg-blue-500
-}
-
-.secondary {
-    @apply focus:outline-none focus:ring focus:ring-gray-300 bg-transparent hover:bg-gray-200 text-gray-400 hover:text-gray-800
-}

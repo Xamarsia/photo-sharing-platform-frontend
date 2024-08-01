@@ -218,7 +218,7 @@ export default function Home() {
          {openModal && <Modal title={'Open Modal'} onClose={handleModal} >
             <div>
                <p className='text-sm font-medium text-gray-700'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et quod quis eaque aliquam necessitatibus vel eligendi laboriosam optio quisquam sunt.</p>
-               <TextButton style="primary" type="button" text="Test" size="small" fill="parent" />
+               <TextButton style="primary" type="button" text="Test" fill="parent" />
             </div>
          </Modal>}
       </div>

@@ -41,7 +41,6 @@ export default function ChangeUsernameForm({ local, onSubmit }: Props) {
                 <Span text={local.username} required />
                 <Input
                     type="text"
-                    size="small"
                     name="username"
                     value={username}
                     pattern='^[a-zA-Z0-9]{1,30}$'
@@ -54,7 +53,6 @@ export default function ChangeUsernameForm({ local, onSubmit }: Props) {
                     type="submit"
                     style="primary"
                     text={local.update}
-                    size="small"
                     fill="content"
                     disabled={!formIsValid || !isFormChanged}
                 />

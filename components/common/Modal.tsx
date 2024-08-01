@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 
 import Card from "@/components/common/Card";
-
 import IconButton from "@/components/buttons/IconButton";
 
 import xMark from '@/public/x-mark/x-mark.svg';
@@ -25,7 +24,7 @@ export default function Modal({ title, children, onClose }: Props) {
             <Card>
                 <div className="flex justify-between">
                     <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{title}</h1>
-                    <IconButton size='small' style={'secondary'} icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
+                    <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
                 </div>
                 {children}
             </Card>

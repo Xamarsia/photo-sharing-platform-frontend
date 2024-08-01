@@ -42,7 +42,6 @@ export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
                 <Span text={local.fullName} required />
                 <Input
                     type="text"
-                    size="small"
                     name="fullName"
                     value={fullName}
                     pattern="^[a-zA-Z\s]{2,30}$"
@@ -53,7 +52,6 @@ export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
             <div>
                 <Span text={local.description} />
                 <Textarea
-                    size="small"
                     rows={5}
                     value={description}
                     id="description"
@@ -66,7 +64,6 @@ export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
                     type="submit"
                     style="primary"
                     text={local.update}
-                    size="small"
                     fill="content"
                     disabled={!formIsValid || !isFormChanged}
                 />

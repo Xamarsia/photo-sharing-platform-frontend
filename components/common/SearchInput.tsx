@@ -9,14 +9,12 @@ import magnifyingGlass from '@/public/magnifying-glass/magnifying-glass.svg';
 type SearchInputProps = {
     name?: string,
     value?: string | undefined,
-    size?: 'small' | 'base' | 'large',
     onChange: (e: ChangeEvent<HTMLInputElement>) => void | undefined,
 }
 
 
-export default function SearchInputField({ name, value, size = 'small', onChange }: SearchInputProps) {
+export default function SearchInputField({ name, value, onChange }: SearchInputProps) {
     return (
-
         <div className='relative w-full'>
             <div className='absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none'>
                 <div className='w-4 h-4'>
@@ -31,7 +29,7 @@ export default function SearchInputField({ name, value, size = 'small', onChange
                 placeholder="Search users..." required
                 className={`bg-gray-50 border border-gray-300 shadow shadow-gray-100 focus:ring-blue-700 focus:border-blue-500 appearance-none outline-none rounded-lg w-full ps-10 p-2
                 ${textStyles['base-text']}
-                ${textStyles[size]}
+                text-sm leading-5
                 `}
             />
         </div>

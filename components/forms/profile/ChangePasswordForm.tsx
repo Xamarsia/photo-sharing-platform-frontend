@@ -42,7 +42,6 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
                     type="password"
                     name="oldPassword"
                     value={oldPassword}
-                    size="small"
                     pattern=".{1,}"
                     onChange={(e) => setOldPassword(e.target.value)}
                     required
@@ -54,7 +53,6 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
                     type="password"
                     name="newPassword"
                     value={newPassword}
-                    size="small"
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
                 />
@@ -66,7 +64,6 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
                     type="password"
                     name="rNewPassword"
                     value={rNewPassword}
-                    size="small"
                     onChange={(e) => setRNewPassword(e.target.value)}
                     required
                 />
@@ -77,7 +74,6 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
                     type="submit"
                     style="primary"
                     text={local.update}
-                    size="small"
                     fill="content"
                     disabled={!formIsValid || !isFormChanged}
                 />

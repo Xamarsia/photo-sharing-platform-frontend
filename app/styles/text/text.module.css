@@ -1,20 +1,8 @@
 /* size */
 
-.extra-small {
-    @apply text-xs leading-5
-}
-
-.small {
+/* .size {
     @apply text-sm leading-5
-}
-
-.base {
-    @apply text-base leading-6
-}
-
-.large {
-    @apply text-lg leading-6
-}
+} */
 
 /* common */
 

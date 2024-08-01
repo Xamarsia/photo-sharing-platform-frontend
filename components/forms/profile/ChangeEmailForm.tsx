@@ -51,7 +51,6 @@ export default function ChangeEmailForm({ local, onSubmit }: Props) {
                     type="submit"
                     style="primary"
                     text={local.update}
-                    size="small"
                     fill="content"
                     disabled={!formIsValid || !isFormChanged}
                 />

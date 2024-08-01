@@ -33,17 +33,17 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
                 <Text style='secondary-info' size='extra-small' text={'\u2022' + post.createdDate} />
             </div>
             <PostDropdown>
-                <DropdownButton style='secondary' size='base' text={local.goToPost} />
+                <DropdownButton text={local.goToPost} />
                 {isUserPostOwner
                     ? <>
-                        <DropdownButton style='secondary' size='base' text={local.editPost} />
-                        <DropdownButton style='delete' size='base' text={local.deletePost} />
+                        <DropdownButton text={local.editPost} />
+                        <DropdownButton text={local.deletePost} />
 
                     </>
                     :
                     <> {postAuthor.state == UserState.Unfollowed
-                        ? <DropdownButton style='primary' size='base' text={local.follow} />
-                        : <DropdownButton style='delete' size='base' text={local.unfollow} />
+                        ? <DropdownButton text={local.follow} />
+                        : <DropdownButton text={local.unfollow} />
                     } </>
                 }
             </PostDropdown>
