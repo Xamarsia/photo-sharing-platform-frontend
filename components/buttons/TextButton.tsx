@@ -2,15 +2,11 @@
 
 
 import styles from '@/app/styles/components/buttons/button.module.css';
-
-import textStyles from '@/app/styles/text/text.module.css';
 import buttonTextStyle from '@/app/styles/text/button.text.module.css';
 
 type Props = {
     text: string,
     style: 'primary' | 'secondary' | 'delete',
-    size?: 'small' | 'base' | 'large',
-    rounded?: 'rounded' | 'rounded-md' | 'rounded-lg' | 'rounded-xl',
     type?: 'button' | 'submit',
     fill?: 'content' | 'parent',
     disabled?: boolean,
@@ -18,17 +14,15 @@ type Props = {
 }
 
 
-export default function TextButton({ text, style, type = 'button', size = 'base', rounded = 'rounded-md', fill = "content", disabled = false, onClick }: Props) {
+export default function TextButton({ text, style, type = 'button', fill = "content", disabled = false, onClick }: Props) {
 
     return (
         <button type={type}
             className={`
                 ${styles['base-button']}
-                ${rounded}
-                ${styles[size]}
                 ${styles[style]} 
-                ${textStyles[size]} 
-                ${buttonTextStyle[style]} 
+                 ${buttonTextStyle[style]} 
+                px-2 py-1 sm:px-3 sm:py-2 text-sm leading-5
                 ${fill == 'parent' ? 'w-full' : ''}
             `}
             disabled={disabled}

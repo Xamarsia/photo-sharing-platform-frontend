@@ -92,7 +92,7 @@ export default function FileSelector({ local, rounded, children, onImageSelected
                 }
                 <div className={`flex flex-col items-center justify-center  ${selectedImage ? 'invisible' : 'visible'}`}>
                     <IconButton style='no-background' size='large' icon={photo} hoveredIcon={photoHovered} hovered={dragActive} />
-                    <FileInput local={local} size='base' onChange={imageChange} />
+                    <FileInput local={local} onChange={imageChange} />
                     <Text style='secondary-info' size='extra-small' text={local.fileFormatsForImageUploading} />
                 </div>
             </div>

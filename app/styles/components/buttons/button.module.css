@@ -4,10 +4,6 @@
     @apply outline-none shadow shadow-gray-100 disabled:shadow-none cursor-pointer items-center my-auto disabled:cursor-default
 }
 
-.dropdown {
-    @apply block hover:bg-gray-100 shadow-none w-full cursor-pointer disabled:cursor-default rounded-md
-}
-
 /* styles */
 
 .primary {
@@ -20,48 +16,4 @@
 
 .delete {
     @apply bg-red-600 ring-gray-300 hover:bg-red-500
-}
-
-/* size */
-
-.small {
-    @apply px-2 py-1 sm:px-3 sm:py-2
-}
-
-.base {
-    @apply px-3 py-2 sm:px-4 md:px-5 md:py-2.5
-}
-
-.large {
-    @apply px-4 py-2.5 sm:py-3 md:px-6 md:py-3
-}
-
-
-/* gap */
-
-.small-gap {
-    @apply gap-x-1.5
-}
-
-.base-gap {
-    @apply gap-x-2.5
-}
-
-.large-gap {
-    @apply gap-x-2.5
-}
-
-
-/* icon size */
-
-.small-icon {
-    @apply w-5 h-5
-}
-
-.base-icon {
-    @apply w-6 h-6
-}
-
-.large-icon {
-    @apply w-7 h-7
 }

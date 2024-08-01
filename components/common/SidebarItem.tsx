@@ -1,12 +1,10 @@
 "use client";
 
-import styles from '@/app/styles/components/buttons/sidebar.button.module.css';
 import textStyles from '@/app/styles/text/text.module.css';
 import Link from 'next/link';
 
 type Props = {
     text: string,
-    size: 'small' | 'base' | 'large',
     href: string,
     value: SidebarNavItem,
     selectedValue: SidebarNavItem,
@@ -14,14 +12,13 @@ type Props = {
 }
 
 
-export default function SidebarItem({ text, size, href, value, selectedValue, onClick }: Props) {
+export default function SidebarItem({ text, href, value, selectedValue, onClick }: Props) {
 
     return (
         <Link href={href}
             className={`
-                ${styles['sidebar']}    
-                ${styles[size]}
-                ${textStyles[size]}
+                block hover:bg-gray-100 shadow-none cursor-pointer disabled:cursor-default rounded-md w-full min-w-[144px] sm:min-w-[192px] md:min-w-[224px] 
+                px-2 sm:px-3 py-1 sm:py-2 text-sm leading-5
                 ${textStyles['base-text']}
                 ${value == selectedValue ? 'bg-gray-100' : ''}
             `}

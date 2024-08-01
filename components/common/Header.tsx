@@ -39,7 +39,7 @@ export default function Header({ local }: Props) {
                             </div>
                             <div className="md:block">
                                 <ProfilePreviewDropdown user={user}>
-                                    <DropdownButton style='secondary' size='small' text='My profile' />
+                                    <DropdownButton style='secondary' text='My profile' />
                                 </ProfilePreviewDropdown>
                             </div>
                         </>

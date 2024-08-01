@@ -1,13 +1,11 @@
 import { ChangeEvent } from "react"
 
-import styles from '@/app/styles/components/textarea.module.css'
 import textStyles from '@/app/styles/text/text.module.css';
 
 
 type TextareaProps = {
     id?: string | undefined,
     value?: string | undefined,
-    size?: 'small' | 'base' | 'large',
     placeholder?: string | undefined,
     rows?: number | undefined,
     maxLength?: number | undefined,
@@ -15,7 +13,7 @@ type TextareaProps = {
 }
 
 
-export default function Textarea({ id, value, size = 'small', placeholder, rows, maxLength, onChange }: TextareaProps) {
+export default function Textarea({ id, value, placeholder, rows, maxLength, onChange }: TextareaProps) {
     return (
         <textarea
             id={id}
@@ -25,13 +23,10 @@ export default function Textarea({ id, value, size = 'small', placeholder, rows,
             maxLength={maxLength}
             onChange={onChange}
             className={`resize-none
-                ${styles['textarea']} 
-                ${styles[size]}
+                w-full rounded-md border border-gray-300 bg-inherit shadow shadow-gray-100 appearance-none outline-none invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 focus:border-blue-500 focus:ring-0 focus:ring-blue-500 disabled:bg-slate-50 disabled:border-slate-200 disabled:shadow-none 
+                py-1.5 px-2 min-h-8 text-sm leading-5
                 ${textStyles['placeholder']}
-                ${textStyles[size]}
             `}
         />
     )
 }
-
-

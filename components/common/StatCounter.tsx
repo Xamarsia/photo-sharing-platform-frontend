@@ -18,7 +18,7 @@ export default function StatCounter({ text, count, unclickable, onClick }: Props
         <div className="flex gap-1 md:gap-2">
             {unclickable
                 ? <Text style="secondary-info" size='large' text={text} />
-                : <Link text={text} style='secondary' size='large' onClick={onClick} />
+                : <Link text={text} style='secondary' onClick={onClick} />
             }
             <Text style='secondary-info' size='large' text={count.toString()} />
         </div>
