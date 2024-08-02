@@ -3,25 +3,21 @@ import { ChangeEvent } from "react";
 import Image from 'next/image';
 
 import textStyles from '@/app/styles/text/text.module.css';
-import styles from '@/app/styles/components/search.input.module.css';
-
 import magnifyingGlass from '@/public/magnifying-glass/magnifying-glass.svg';
 
 
 type SearchInputProps = {
     name?: string,
     value?: string | undefined,
-    size?: 'small' | 'base' | 'large',
     onChange: (e: ChangeEvent<HTMLInputElement>) => void | undefined,
 }
 
 
-export default function SearchInputField({ name, value, size = 'small', onChange }: SearchInputProps) {
+export default function SearchInputField({ name, value, onChange }: SearchInputProps) {
     return (
-
-        <div className={`${styles['main-container']}`}>
-            <div className={`${styles['icon-layout']}`}>
-                <div className={`${styles['icon-size']}`}>
+        <div className='relative w-full'>
+            <div className='absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none'>
+                <div className='w-4 h-4'>
                     <Image src={magnifyingGlass} alt="glass-icon" />
                 </div>
             </div>
@@ -30,11 +26,10 @@ export default function SearchInputField({ name, value, size = 'small', onChange
                 name={name}
                 value={value}
                 onChange={onChange}
-                placeholder="Search users..." required
-                className={`${styles['search-input-field']} 
-                ${textStyles['base-text']}
-                ${textStyles[size]}
-                `}
+                placeholder="Search users..." 
+                required
+                className={`bg-gray-50 border border-gray-300 focus:ring-blue-700 focus:border-blue-500 appearance-none outline-none w-full ps-10 p-2
+                ${textStyles['base-text']}`}
             />
         </div>
     )

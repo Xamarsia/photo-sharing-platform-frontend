@@ -1,8 +1,8 @@
 "use client";
 
 
-import Form from "@/components/common/Form";
-import Span from "@/components/common/Span";
+import styles from '@/app/styles/text/text.module.css';
+
 import Link from "@/components/common/Link";
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
@@ -34,13 +34,13 @@ export default function SignInForm({ local, onSubmit }: Props) {
     }
 
     return (
-        <Form
-            title={local.signInFormTitle}
-            onSubmit={handleSubmit}
-            onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}>
+        <form onSubmit={handleSubmit} onChange={(e) =>
+            setFormIsValid(e.currentTarget.checkValidity())}
+            className={`flex flex-col gap-y-3 sm:gap-y-6`}>
+            <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{local.signInFormTitle}</h1>
 
             <div>
-                <Span text={local.email} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.email}</span>
                 <Input
                     type="text"
                     name="email"
@@ -51,7 +51,7 @@ export default function SignInForm({ local, onSubmit }: Props) {
                 />
             </div>
             <div>
-                <Span text={local.password} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
                 <Input
                     type="password"
                     name="password"
@@ -69,9 +69,9 @@ export default function SignInForm({ local, onSubmit }: Props) {
                     fill="parent"
                     disabled={!formIsValid}
                 />
-                <Link href='/auth/signup' text={local.dontHaveAccount} prefetch={false} style='primary' size='small' />
+                <Link href='/auth/signup' text={local.dontHaveAccount} prefetch={false} />
             </div>
-        </Form>
+        </form>
     )
 }
 

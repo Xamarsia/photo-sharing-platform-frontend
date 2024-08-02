@@ -1,20 +1,14 @@
 import React, { ReactNode } from "react";
 
-import styles from '@/app/styles/components/card.module.css'
-
 
 type CardProps = {
     children: ReactNode,
-    size?: 'base' | 'large',
 }
 
 
-export default function Card({ children, size = 'base' }: CardProps) {
+export default function Card({ children }: CardProps) {
     return (
-        <div className={`
-                ${styles["card"]}
-                ${styles[size]}
-            `}>
+        <div className={"bg-white w-full m-8 max-w-xl p-6 sm:p-10"}>
             {children}
         </div>
     )

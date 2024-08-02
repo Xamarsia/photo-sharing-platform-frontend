@@ -1,22 +1,23 @@
 "use client";
 
 
-import Form from "@/components/common/Form";
-import Span from "@/components/common/Span";
+import styles from '@/app/styles/text/text.module.css';
+
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 
 
 import { FormEvent, useState } from "react";
+import { getUser } from "@/lib/profile-controller";
 
 
 type Props = {
     local: any;
-    user: UserDTO;
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
-export default function ChangeEmailForm({ local, user, onSubmit }: Props) {
+export default function ChangeEmailForm({ local, onSubmit }: Props) {
+    const user: UserDTO = getUser();
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [formIsValid, setFormIsValid] = useState(false);
     const [email, setEmail] = useState(user.email);
@@ -29,14 +30,14 @@ export default function ChangeEmailForm({ local, user, onSubmit }: Props) {
     }
 
     return (
-        <Form title={local.changeEmail}
-            onSubmit={handleSubmit}
+        <form onSubmit={handleSubmit}
             onChange={(e) => {
                 setFormIsValid(e.currentTarget.checkValidity())
                 setIsFormChanged(true)
-            }}>
+            }}
+            className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
             <div>
-                <Span text={local.email} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.email}</span>
                 <Input
                     type="text"
                     name="email"
@@ -46,13 +47,15 @@ export default function ChangeEmailForm({ local, user, onSubmit }: Props) {
                     required
                 />
             </div>
-            <TextButton
-                type="submit"
-                style="primary"
-                text={local.update}
-                fill="parent"
-                disabled={!formIsValid || !isFormChanged}
-            />
-        </Form>
+            <div>
+                <TextButton
+                    type="submit"
+                    style="primary"
+                    text={local.update}
+                    fill="content"
+                    disabled={!formIsValid || !isFormChanged}
+                />
+            </div>
+        </form>
     )
 }

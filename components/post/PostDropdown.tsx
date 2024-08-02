@@ -20,8 +20,6 @@ export default function PostDropdown({ children }: Props) {
     return (
         <div>
             <IconButton
-                style='no-background'
-                size={'large'}
                 icon={ellipsisHorizontal}
                 hoveredIcon={hoveredEllipsisHorizontal}
                 onClick={(e) => { setShowDropdown(!showDropdown) }}

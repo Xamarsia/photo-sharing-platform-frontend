@@ -1,31 +1,21 @@
 "use client";
 
-
-import styles from '@/app/styles/components/buttons/button.module.css';
-
-import textStyles from '@/app/styles/text/text.module.css';
-import dropdownTextStyle from '@/app/styles/text/dropdown.text.module.css';
-
 type Props = {
     text: string | undefined,
-    style: 'primary' | 'secondary' | 'delete'
-    size: 'small' | 'base' | 'large',
     disabled?: boolean,
     hidden?: boolean,
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
-
-export default function DropdownButton({ text, style, hidden, size, onClick }: Props) {
+export default function DropdownButton({ text, hidden, onClick }: Props) {
 
     return (
         <button
             type={'button'}
             className={`
-                ${styles['dropdown']} 
-                ${styles[size]}
-                ${textStyles[size]} 
-                ${dropdownTextStyle[style]} 
+                block hover:bg-gray-100 w-full
+                px-2 py-1 sm:px-3 sm:py-2 text-sm leading-5
+                text-left text-gray-500 font-normal hover:text-gray-700 
             `}
             onClick={onClick}
             hidden={hidden}

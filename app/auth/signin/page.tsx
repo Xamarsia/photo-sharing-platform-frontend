@@ -11,10 +11,10 @@ export default async function SigninPage() {
 
 
     return (
-        <main className="min-h-screen bg-blue-100 flex items-center justify-center text-gray-500">
+        <div className='flex flex-grow flex-shrink justify-center items-center'>
             <Card>
                 <SignInForm local={dict} />
             </Card>
-        </main>
+        </div>
     );
 }

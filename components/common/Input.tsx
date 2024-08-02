@@ -1,15 +1,12 @@
 import { ChangeEvent, KeyboardEvent } from "react";
 
-import styles from '@/app/styles/components/input.module.css';
-import textStyles from '@/app/styles/text/text.module.css';
+import styles from '@/app/styles/text/text.module.css';
 
 
 type InputProps = {
     name?: string,
-    type: 'text' | 'number' | 'email' | 'password' | 'file',
-    size?: 'small' | 'base' | 'large',
+    type: 'text' | 'email' | 'password' | 'file',
     placeholder?: string | undefined,
-    state?: 'invalid' | 'valid',
     required?: boolean | undefined,
     pattern?: string | undefined,
     disabled?: boolean | undefined,
@@ -23,7 +20,7 @@ type InputProps = {
 }
 
 
-export default function InputField({ name, type, required, pattern, disabled, value, accept, id, draggable, hidden, placeholder = " ", size = 'small', state = 'valid', onKeyDown, onChange }: InputProps) {
+export default function InputField({ name, type, required, pattern, disabled, value, accept, id, draggable, hidden, placeholder = " ", onKeyDown, onChange }: InputProps) {
     return (
         <input
             id={id}
@@ -39,12 +36,9 @@ export default function InputField({ name, type, required, pattern, disabled, va
             disabled={disabled}
             onChange={onChange}
             onKeyDown={onKeyDown}
-            className={`peer 
-                ${styles['base-input-field']} 
-                ${styles[state]}
-                ${styles[size]}
-                ${textStyles[size]}
-                ${textStyles['placeholder']}
+            className={`peer w-full border border-gray-300 bg-inherit appearance-none outline-none 
+                focus:border-blue-500 focus:ring-0 focus:ring-blue-500 py-1.5 px-2 min-h-8
+                ${styles['placeholder']}
             `}
         />
     )

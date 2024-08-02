@@ -1,23 +1,24 @@
 "use client";
 
 
-import Form from "@/components/common/Form";
-import Span from "@/components/common/Span";
+import styles from '@/app/styles/text/text.module.css';
+
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 import Textarea from "@/components/common/Textarea";
 
 import { FormEvent, useState } from "react";
+import { getUser } from "@/lib/profile-controller";
 
 
 type Props = {
-    local: any;
-    user: UserDTO;
-    onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
+    local: any,
+    onSubmit?: (event: FormEvent<HTMLFormElement>) => void,
 }
 
 
-export default function ChangeUserInfoForm({ local, user, onSubmit }: Props) {
+export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
+    const user: UserDTO = getUser();
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false)
     const [fullName, setfullName] = useState(user.fullName);
     const [formIsValid, setFormIsValid] = useState(false);
@@ -31,16 +32,15 @@ export default function ChangeUserInfoForm({ local, user, onSubmit }: Props) {
     }
 
     return (
-        <Form
-            title={local.changeUserInfo}
-            onSubmit={handleSubmit}
-            onChange={(e) => {
-                setFormIsValid(e.currentTarget.checkValidity());
-                setIsFormChanged(true);
-            }}>
 
+        <form onSubmit={handleSubmit}
+            onChange={(e) => {
+                setFormIsValid(e.currentTarget.checkValidity())
+                setIsFormChanged(true)
+            }}
+            className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
             <div>
-                <Span text={local.fullName} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.fullName}</span>
                 <Input
                     type="text"
                     name="fullName"
@@ -51,19 +51,24 @@ export default function ChangeUserInfoForm({ local, user, onSubmit }: Props) {
                 />
             </div>
             <div>
-                <Span text={local.description} />
-                <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
+                <span className={`${styles['formInputTitle']}`}>{local.description}</span>
+                <Textarea
+                    rows={5}
+                    value={description}
+                    id="description"
+                    placeholder={local.writeDescriptionHere}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
             </div>
-
             <div>
                 <TextButton
                     type="submit"
                     style="primary"
                     text={local.update}
-                    fill="parent"
+                    fill="content"
                     disabled={!formIsValid || !isFormChanged}
                 />
             </div>
-        </Form>
+        </form>
     )
 }

@@ -4,10 +4,6 @@
     @apply text-center text-white font-semibold
 }
 
-.secondary {
-    @apply text-center text-gray-900 disabled:text-slate-500 font-semibold
-}
-
 .delete {
     @apply text-white font-semibold
 }

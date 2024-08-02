@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '@/app/styles/globals.css';
 
-import Footer from '@/components/common/Footer';
-import Navbar from '@/components/common/Navbar';
-import CreatePostButton from '@/components/buttons/CreatePostButton';
-
 import { getDictionary } from '@/lib/localization';
+import { getUser } from '@/lib/profile-controller';
+
+import Footer from '@/components/common/Footer';
+import Header from '@/components/common/Header';
+import FixedRoundCreatePostButton from '@/components/buttons/FixedRoundCreatePostButton';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,27 +22,18 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
+  const user = getUser();
   const dict = await getDictionary('en');
 
   return (
     <html lang="en" className='size-full'>
-      <body className={`${inter.className} size-full`}>
-        <div className='min-h-full flex flex-col flex-grow items-stretch'>
-          <header className='z-10 flex-shrink-0 h-20'>
-            <Navbar local={dict} />
-          </header>
-          <main className='relative flex-grow flex-shrink-0'>
-            {children}
-            <div className='absolute flex flex-col-reverse h-full top-0 right-0'>
-              <div className='sticky bottom-4 m-4 sm:bottom-8 sm:m-8 md:hidden block'>
-                <CreatePostButton local={dict} style='round' />
-              </div>
-            </div>
-          </main>
-          <footer className='flex-shrink-0'>
-            <Footer local={dict} />
-          </footer>
-        </div>
+      <body className={`${inter.className} size-full flex flex-col items-stretch relative`}>
+        <Header local={dict} />
+        <main className='flex flex-grow relative flex-shrink-0 bg-slate-600'>
+          {children}
+          <FixedRoundCreatePostButton />
+        </main>
+        <Footer local={dict} />
       </body>
     </html>
   )

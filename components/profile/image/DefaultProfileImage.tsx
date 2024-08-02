@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import styles from '@/app/styles/profile/profile.image.module.css';
+import { useMemo } from "react";
+import styles from '@/app/styles/components/profile.image.module.css';
 
 type Props = {
     username?: string
@@ -35,7 +35,7 @@ export default function DefaultProfileImage({ username, preview }: Props) {
 
     return (
         <div className={`${styles['image-layout']}`}>
-            <div className={`${preview ? styles['preview-size'] : styles['regular-size']} ${styles['default-profile-image']} ${borderColours[index]} ${bgColours[index]}`} >
+            <div className={`${preview ? styles['preview-size'] : styles['regular-size']} border relative inline-flex items-center justify-center overflow-hidden rounded-full ${borderColours[index]} ${bgColours[index]}`} >
                 <span className={`font-normal ${preview ? "text-xl" : "text-9xl"} ${textColours[index]} `}>{username ? username.slice(0, 2) : "XX"}</span>
             </div>
         </div>

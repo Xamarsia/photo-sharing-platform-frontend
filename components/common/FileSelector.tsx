@@ -2,23 +2,25 @@
 
 import { ReactNode, SetStateAction, useEffect, useState } from 'react';
 
+import Image from 'next/image';
+
 import photo from '@/public/photo/photo.svg';
 import photoHovered from '@/public/photo/photo-hovered.svg';
 
 import xMark from '@/public/x-mark/x-mark.svg';
 import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';
 
-import Text from '@/components/common/Text';
+import styles from '@/app/styles/text/text.module.css';
+
 import FileInput from '@/components/common/FileInput';
 import IconButton from '@/components/buttons/IconButton';
 
-import styles from '@/app/styles/components/file.selector.module.css';
 import React from 'react';
 
 
 type Props = {
     local: any,
-    rounded?: 'rounded-full',
+    rounded?: boolean,
     children?: ReactNode,
     onImageSelected?: (file: SetStateAction<File | undefined>) => void,
 }
@@ -71,7 +73,8 @@ export default function FileSelector({ local, rounded, children, onImageSelected
     };
 
     return (
-        <div className={`${styles['file-selector-layout']} ${rounded}`}
+        <div className={`relative w-full aspect-square hover:bg-gray-300 bg-gray-100
+             ${rounded}`}
             onDragEnter={handleDragEnter}
             onDrop={handleDrop}
             onDragLeave={handleDragLeave}
@@ -79,19 +82,23 @@ export default function FileSelector({ local, rounded, children, onImageSelected
         >
             {children}
             <div className={`
-            ${styles['file-selector']} ${rounded} 
-                    ${dragActive ? 'bg-gray-200 bg-opacity-50' : ''}
+                    absolute bottom-0 left-0 w-full aspect-square flex flex-col items-center justify-center border border-gray-400 border-dashed
+                    ${rounded ? 'rounded-full' : ''} 
+                    ${dragActive ? 'bg-gray-200' : ''}
                 `}>
 
                 {selectedImage &&
                     <div className={`absolute top-0 right-0`}>
-                        <IconButton style='secondary' size='small' icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
+                        <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
                     </div>
                 }
                 <div className={`flex flex-col items-center justify-center  ${selectedImage ? 'invisible' : 'visible'}`}>
-                    <IconButton style='no-background' size='large' icon={photo} hoveredIcon={photoHovered} hovered={dragActive} />
-                    <FileInput local={local} size='base' onChange={imageChange} />
-                    <Text style='secondary-info' size='extra-small' text={local.fileFormatsForImageUploading} />
+                    <Image src={photo} alt="photo" className={`size-8 inline-flex justify-center items-center aspect-square`} />
+                    <Image src={photoHovered} alt="photo" className={`size-8 inline-flex justify-center items-center aspect-square`} />
+                    <FileInput local={local} onChange={imageChange} />
+                    <span className={`${styles['secondary-info']}`}>
+                        {local.fileFormatsForImageUploading}
+                    </span>
                 </div>
             </div>
         </div>
