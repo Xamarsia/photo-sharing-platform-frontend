@@ -13,7 +13,7 @@ export default function DropdownButton({ text, hidden, onClick }: Props) {
         <button
             type={'button'}
             className={`
-                block hover:bg-gray-100 shadow-none w-full cursor-pointer disabled:cursor-default rounded-md
+                block hover:bg-gray-100 w-full
                 px-2 py-1 sm:px-3 sm:py-2 text-sm leading-5
                 text-left text-gray-500 font-normal hover:text-gray-700 
             `}

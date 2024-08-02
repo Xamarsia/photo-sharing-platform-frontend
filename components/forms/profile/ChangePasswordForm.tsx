@@ -1,7 +1,8 @@
 "use client";
 
 
-import Span from "@/components/common/Span";
+import styles from '@/app/styles/text/text.module.css';
+
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 
@@ -37,7 +38,7 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
             }}
             className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
             <div>
-                <Span text={local.currentPassword} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.currentPassword}</span>
                 <Input
                     type="password"
                     name="oldPassword"
@@ -48,7 +49,7 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
                 />
             </div>
             <div className="my-1">
-                <Span text={local.newPassword} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.newPassword}</span>
                 <Input
                     type="password"
                     name="newPassword"
@@ -59,7 +60,7 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
             </div>
 
             <div className="my-1">
-                <Span text={local.repeatNewPassword} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.repeatNewPassword}</span>
                 <Input
                     type="password"
                     name="rNewPassword"

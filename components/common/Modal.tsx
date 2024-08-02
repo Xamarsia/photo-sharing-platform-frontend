@@ -20,7 +20,7 @@ export default function Modal({ title, children, onClose }: Props) {
     };
 
     return (
-        <div className='fixed top-0 left-0 w-full h-full bg-gray-500 flex justify-center items-center bg-opacity-75'>
+        <div className='fixed top-0 left-0 size-full bg-gray-500 flex justify-center items-center'>
             <Card>
                 <div className="flex justify-between">
                     <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{title}</h1>

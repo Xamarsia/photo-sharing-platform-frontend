@@ -7,10 +7,10 @@ import { useState } from 'react';
 import { UserState } from '@/constants';
 import { getProfileImagePreview } from '@/lib/profile-controller';
 
-import Text from '@/components/common/Text';
 import PostDropdown from '@/components/post/PostDropdown';
 import DropdownButton from '@/components/buttons/DropdownButton';
 
+import styles from '@/app/styles/text/text.module.css';
 
 type Props = {
     local: any,
@@ -28,9 +28,9 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
         <div className='flex justify-around items-center space-x-4'>
             <Link href={`/${post.username}`}>{profileImagePreview}</Link>
             <div className="flex-1 flex flex-row gap-4 m-auto ">
-                <Text style='main-info' size='small' text={postAuthor.fullName} />
-                <Text style='secondary-info' size='small' text={'@' + postAuthor.username} />
-                <Text style='secondary-info' size='extra-small' text={'\u2022' + post.createdDate} />
+                <span className={`${styles['main-info']}`}>{postAuthor.fullName}</span>
+                <span className={`${styles['secondary-info']}`}>{'@' + postAuthor.username}</span>
+                <span className={`${styles['secondary-info']}`}>{'\u2022' + post.createdDate}</span>
             </div>
             <PostDropdown>
                 <DropdownButton text={local.goToPost} />

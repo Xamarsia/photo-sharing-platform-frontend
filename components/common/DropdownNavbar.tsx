@@ -39,24 +39,10 @@ export default function DropdownNavbar({ local }: Props) {
                 </div>
                 <div className="flex flex-grow items-stretch min-h-screen">
                     <div className={`${showDropdown ? 'w-full' : 'hidden'} p-1 bg-white`}>
-                        <Sidebar local={local} size="base" onClick={handleClick} />
+                        <Sidebar local={local} onClick={handleClick} />
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-        // <div className="size-full min-h-full flex flex-col items-stretch">
-        //     <div className="bg-green-200 flex-shrink-0">
-        //         <p> Here</p>
-        //     </div>
-        //     <div className="bg-red-200 flex-shrink-0 flex-grow">
-        //         <p> Here</p>
-        //     </div>
-        //     <div className="bg-yellow-200 flex-shrink-0">
-        //         <p> Here</p>
-        //     </div>
-        // </div>
     )
 }

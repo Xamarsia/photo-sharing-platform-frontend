@@ -7,12 +7,11 @@ import { useState } from 'react';
 type Props = {
     icon: string,
     hoveredIcon: string,
-    hovered?: boolean,
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
 
-export default function IconButton({ icon, hoveredIcon, hovered, onClick }: Props) {
+export default function IconButton({ icon, hoveredIcon, onClick }: Props) {
     const [isHovering, setIsHovered] = useState(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
@@ -22,8 +21,8 @@ export default function IconButton({ icon, hoveredIcon, hovered, onClick }: Prop
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            className={`inline-flex justify-center items-center aspect-square cursor-pointer`}>
-            <Image src={(isHovering || hovered) ? hoveredIcon : icon} alt="icon" className={`size-8`} />
+            className={`inline-flex justify-center items-center aspect-square`}>
+            <Image src={isHovering ? hoveredIcon : icon} alt="icon" className={`size-8`} />
         </button>
     )
 }

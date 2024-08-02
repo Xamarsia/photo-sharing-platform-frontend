@@ -5,10 +5,7 @@ import '@/app/styles/globals.css';
 
 import { getDictionary } from '@/lib/localization';
 import Sidebar from '@/components/common/Sidebar';
-import IconButton from '@/components/buttons/IconButton';
 
-import bars3 from '@/public/bars-3/bars-3.svg';
-import bars3Hovered from '@/public/bars-3/bars-3-hovered.svg';
 import DropdownNavbar from '@/components/common/DropdownNavbar';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -36,7 +33,7 @@ export default async function RootLayout({
         <section className='flex-grow-0 md:block hidden'>
           <div className='relative flex flex-col h-full top-0 left-0 border-r border-gray-200'>
             <div className='sticky top-[84px]'>
-              <Sidebar local={dict} size='small' />
+              <Sidebar local={dict} />
             </div>
           </div>
         </section>
@@ -46,17 +43,5 @@ export default async function RootLayout({
         </section>
       </div>
     </div>
-
-    // <div className="size-full min-h-full flex flex-col items-stretch">
-    //   <div className="bg-green-200 flex-shrink-0">
-    //     <p> Here</p>
-    //   </div>
-    //   <div className="bg-red-200 flex-shrink-0 flex-grow">
-    //     <p> Here</p>
-    //   </div>
-    //   <div className="bg-yellow-200 flex-shrink-0">
-    //     <p> Here</p>
-    //   </div>
-    // </div>
   )
 }

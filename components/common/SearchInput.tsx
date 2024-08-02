@@ -26,11 +26,10 @@ export default function SearchInputField({ name, value, onChange }: SearchInputP
                 name={name}
                 value={value}
                 onChange={onChange}
-                placeholder="Search users..." required
-                className={`bg-gray-50 border border-gray-300 shadow shadow-gray-100 focus:ring-blue-700 focus:border-blue-500 appearance-none outline-none rounded-lg w-full ps-10 p-2
-                ${textStyles['base-text']}
-                text-sm leading-5
-                `}
+                placeholder="Search users..." 
+                required
+                className={`bg-gray-50 border border-gray-300 focus:ring-blue-700 focus:border-blue-500 appearance-none outline-none w-full ps-10 p-2
+                ${textStyles['base-text']}`}
             />
         </div>
     )

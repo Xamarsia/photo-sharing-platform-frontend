@@ -1,7 +1,8 @@
 "use client";
 
 
-import Span from "@/components/common/Span";
+import styles from '@/app/styles/text/text.module.css';
+
 import Link from "@/components/common/Link";
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
@@ -39,7 +40,7 @@ export default function SignInForm({ local, onSubmit }: Props) {
             <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{local.signInFormTitle}</h1>
 
             <div>
-                <Span text={local.email} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.email}</span>
                 <Input
                     type="text"
                     name="email"
@@ -50,7 +51,7 @@ export default function SignInForm({ local, onSubmit }: Props) {
                 />
             </div>
             <div>
-                <Span text={local.password} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
                 <Input
                     type="password"
                     name="password"
@@ -68,7 +69,7 @@ export default function SignInForm({ local, onSubmit }: Props) {
                     fill="parent"
                     disabled={!formIsValid}
                 />
-                <Link href='/auth/signup' text={local.dontHaveAccount} prefetch={false} style='primary' />
+                <Link href='/auth/signup' text={local.dontHaveAccount} prefetch={false} />
             </div>
         </form>
     )

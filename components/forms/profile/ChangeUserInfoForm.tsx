@@ -1,7 +1,8 @@
 "use client";
 
 
-import Span from "@/components/common/Span";
+import styles from '@/app/styles/text/text.module.css';
+
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 import Textarea from "@/components/common/Textarea";
@@ -39,7 +40,7 @@ export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
             }}
             className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
             <div>
-                <Span text={local.fullName} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.fullName}</span>
                 <Input
                     type="text"
                     name="fullName"
@@ -50,7 +51,7 @@ export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
                 />
             </div>
             <div>
-                <Span text={local.description} />
+                <span className={`${styles['formInputTitle']}`}>{local.description}</span>
                 <Textarea
                     rows={5}
                     value={description}

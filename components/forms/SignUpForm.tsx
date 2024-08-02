@@ -1,7 +1,8 @@
 "use client";
 
 
-import Span from "@/components/common/Span";
+import styles from '@/app/styles/text/text.module.css';
+
 import Link from "@/components/common/Link";
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
@@ -54,12 +55,12 @@ export default function SignUpForm({ local, onSubmit }: Props) {
             className={`flex flex-col gap-y-3 sm:gap-y-6`}>
             <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{local.signUpFormTitle}</h1>
             <div className='h-80 w-80 m-auto'>
-                <FileSelector onImageSelected={onImageSelected} local={local} rounded="rounded-full"  >
+                <FileSelector onImageSelected={onImageSelected} local={local} rounded >
                     {selectedImage && <ProfileImage src={URL.createObjectURL(selectedImage)} />}
                 </FileSelector>
             </div>
             <div>
-                <Span text={local.username} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
                 <Input
                     type="text"
                     name="username"
@@ -70,7 +71,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 />
             </div>
             <div>
-                <Span text={local.email} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
                 <Input
                     type="text"
                     name="email"
@@ -81,7 +82,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 />
             </div>
             <div>
-                <Span text={local.password} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
                 <Input
                     type="password"
                     name="password"
@@ -92,7 +93,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 />
             </div>
             <div className="my-1">
-                <Span text={local.repeatPassword} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
                 <Input
                     type="password"
                     name="rpassword"
@@ -102,7 +103,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 />
             </div>
             <div>
-                <Span text={local.fullName} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
                 <Input
                     type="text"
                     name="fullName"
@@ -113,7 +114,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 />
             </div>
             <div>
-                <Span text={local.description} />
+                <span className={`${styles['formInputTitle']}`}>{local.password}</span>
                 <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
             </div>
             <div>
@@ -124,9 +125,8 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                     fill="parent"
                     disabled={!formIsValid}
                 />
-                <Link href='/auth/signin' text={local.haveAccount} prefetch={false} style='primary'/>
+                <Link href='/auth/signin' text={local.haveAccount} prefetch={false} />
             </div>
         </form>
     )
 }
-

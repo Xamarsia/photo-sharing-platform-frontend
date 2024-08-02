@@ -40,7 +40,7 @@ export default function ChangeProfileImageForm({ local, onSubmit }: Props) {
             }}
             className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
             <div className='h-80 w-80'>
-                <FileSelector onImageSelected={onImageSelected} local={local} rounded="rounded-full"  >
+                <FileSelector onImageSelected={onImageSelected} local={local} rounded  >
                     {selectedImage && <ProfileImage src={URL.createObjectURL(selectedImage)} />}
                 </FileSelector>
             </div>

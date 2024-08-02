@@ -1,34 +1,27 @@
-/* size */
-
-/* .size {
-    @apply text-sm leading-5
-} */
-
 /* common */
 
-.logo {
-    @apply self-center text-2xl font-semibold whitespace-nowrap
-}
-
 .placeholder {
-    @apply text-gray-700 font-light disabled:bg-slate-50 disabled:text-slate-500
+    @apply text-gray-700 font-light disabled:bg-slate-50 disabled:text-slate-500 text-sm leading-5
 }
-
-.required {
-    @apply after:content-['*'] after:ml-0.5 after:text-red-500
-}
-
 
 /* base styles */
 
 .main-info {
-    @apply block font-medium text-justify text-gray-900
+    @apply block font-medium text-justify text-gray-900 text-sm leading-5
 }
 
 .secondary-info {
-    @apply block font-normal text-justify text-gray-500
+    @apply block font-normal text-justify text-gray-500 text-sm leading-5
 }
 
 .base-text {
-    @apply block font-normal text-justify text-gray-800
+    @apply block font-normal text-justify text-gray-800 text-sm leading-5
+}
+
+.formInputTitleRequired {
+    @apply text-sm leading-5 block font-medium text-justify text-gray-900 after:content-['*'] after:ml-0.5 after:text-red-500
+}
+
+.formInputTitle {
+    @apply text-sm leading-5 block font-medium text-justify text-gray-900
 }

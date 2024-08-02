@@ -9,7 +9,6 @@ import buttonTextStyle from '@/app/styles/text/button.text.module.css';
 
 type Props = {
     text: string,
-    style: 'primary' | 'secondary',
     fill?: 'content' | 'parent',
     disabled?: boolean,
     icon: string,
@@ -18,7 +17,7 @@ type Props = {
 }
 
 
-export default function TextIconButton({ icon, text, style, fill = "content", disabled = false, hoveredIcon = icon, onClick }: Props) {
+export default function TextIconButton({ icon, text, fill = "content", disabled = false, hoveredIcon = icon, onClick }: Props) {
     const [isHovering, setIsHovered] = useState(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
@@ -31,8 +30,8 @@ export default function TextIconButton({ icon, text, style, fill = "content", di
             className={`
                 flex justify-between px-2 py-1 sm:px-3 sm:py-2 text-sm leading-5 gap-x-1.5
                 ${styles['base-button']}
-                ${styles[style]}
-                ${buttonTextStyle[style]}  
+                ${styles['primary']}
+                ${buttonTextStyle['primary']}  
                 ${fill == 'parent' ? 'w-full' : ''}
             `}
             onMouseEnter={onMouseEnter}

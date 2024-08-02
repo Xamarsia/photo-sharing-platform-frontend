@@ -35,7 +35,7 @@ export default function Header({ local }: Props) {
                     {user
                         ? <>
                             <div className='md:block hidden m-auto'>
-                                <TextIconButton fill="content" text={local.createPost} style={'primary'} icon={plus} onClick={() => { router.push('/post/create') }} />
+                                <TextIconButton fill="content" text={local.createPost} icon={plus} onClick={() => { router.push('/post/create') }} />
                             </div>
                             <div className="md:block">
                                 <ProfilePreviewDropdown user={user}>

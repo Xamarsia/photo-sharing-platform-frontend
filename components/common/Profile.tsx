@@ -5,7 +5,6 @@ import { getProfileImage } from '@/lib/profile-controller';
 
 import styles from '@/app/styles/text/text.module.css';
 
-import Text from '@/components/common/Text';
 import StatsInfo from '@/components/common/StatsInfo';
 import TextButton from '@/components/buttons/TextButton';
 import FollowButton from '@/components/buttons/FollowButton';
@@ -26,9 +25,11 @@ export default function Profile({ local, profile }: Props) {
             {profileImage}
             <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{user.fullName}</h1>
 
-            <Text style='secondary-info' size='large' text={user.username} />
+            <span className={`${styles['secondary-info']}`}>
+                {user.username}
+            </span>
 
-            <p className={`${styles['base-text']} ${styles['small']}`}>
+            <p className={`${styles['base-text']}`}>
                 {profile.description}
             </p>
 

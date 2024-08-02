@@ -17,13 +17,13 @@ export default function FooterMenu({ local }: Props) {
     return (
         <ul className="flex flex-wrap items-center gap-2 sm:gap-4 md:gap-8">
             <li>
-                <Link style="secondary" text={local.about} />
+                <Link text={local.about} />
             </li>
             <li>
-                <Link style="secondary" text={local.privacyPolicy} />
+                <Link text={local.privacyPolicy} />
             </li>
             <li>
-                <Link style="secondary" text={local.contact} />
+                <Link text={local.contact} />
             </li>
         </ul>
     )

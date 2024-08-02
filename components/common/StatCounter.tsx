@@ -1,8 +1,9 @@
 "use client";
 
 
-import Text from '@/components/common/Text';
 import Link from '@/components/common/Link';
+
+import styles from '@/app/styles/text/text.module.css';
 
 
 type Props = {
@@ -17,10 +18,10 @@ export default function StatCounter({ text, count, unclickable, onClick }: Props
     return (
         <div className="flex gap-1 md:gap-2">
             {unclickable
-                ? <Text style="secondary-info" size='large' text={text} />
-                : <Link text={text} style='secondary' onClick={onClick} />
+                ? <span className={`${styles['secondary-info']}`}>{text}</span>
+                : <Link text={text} onClick={onClick} />
             }
-            <Text style='secondary-info' size='large' text={count.toString()} />
+            <span className={`${styles['secondary-info']}`}>{count}</span>
         </div>
     )
 }

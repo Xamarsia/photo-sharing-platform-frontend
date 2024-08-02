@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import styles from '@/app/styles/components/profile.image.module.css';
 
 type Props = {

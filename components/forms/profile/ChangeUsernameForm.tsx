@@ -1,7 +1,8 @@
 "use client";
 
 
-import Span from "@/components/common/Span";
+import styles from '@/app/styles/text/text.module.css';
+
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 
@@ -38,7 +39,7 @@ export default function ChangeUsernameForm({ local, onSubmit }: Props) {
             className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
 
             <div>
-                <Span text={local.username} required />
+                <span className={`${styles['formInputTitleRequired']}`}>{local.username}</span>
                 <Input
                     type="text"
                     name="username"

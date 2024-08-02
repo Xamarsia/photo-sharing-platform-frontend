@@ -3,7 +3,8 @@
 
 import { FormEvent, SetStateAction, useState } from "react";
 
-import Span from "@/components/common/Span";
+import styles from '@/app/styles/text/text.module.css';
+
 import TextButton from "@/components/buttons/TextButton";
 import Textarea from "@/components/common/Textarea";
 import PostImage from "@/components/post/image/PostImage";
@@ -34,7 +35,7 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
             </FileSelector>
 
             <div>
-                <Span text={local.description} />
+                <span className={`${styles['formInputTitle']}`}>{local.description}</span>
                 <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
             </div>
             <div>
