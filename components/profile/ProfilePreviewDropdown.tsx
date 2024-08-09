@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import Dropdown from '@/components/common/Dropdown';
 import { getProfileImagePreview } from '@/lib/profile-controller';
 
@@ -15,8 +15,19 @@ export default function ProfilePreviewDropdown({ user, children }: Props) {
     const [showDropdown, setShowDropdown] = useState(false);
     const profileImagePreview = getProfileImagePreview(user);
 
+    const dropdown = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (showDropdown && !dropdown.current?.contains(event.target as Node)) {
+                setShowDropdown(false)
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+    }, [showDropdown])
+
     return (
-        <div>
+        <div ref={dropdown}>
             <button onClick={e => { setShowDropdown(!showDropdown) }}>
                 {profileImagePreview}
             </button>
