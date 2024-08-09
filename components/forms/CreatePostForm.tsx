@@ -7,8 +7,8 @@ import styles from '@/app/styles/text/text.module.css';
 
 import TextButton from "@/components/buttons/TextButton";
 import Textarea from "@/components/common/Textarea";
-import PostImage from "@/components/post/image/PostImage";
 import FileSelector from "@/components/common/FileSelector";
+import DragAndDropFullPreview from '@/components/common/DragAndDropFullPreview';
 
 
 type Props = {
@@ -29,9 +29,9 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
 
     return (
         <form onSubmit={onSubmit} className={`flex flex-col gap-y-3 sm:gap-y-6`}>
-            <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{local.createPost}</h1>
+            <h1 className={`${styles['h1']} text-center`}>{local.createPost}</h1>
             <FileSelector onImageSelected={onImageSelected} local={local}>
-                {selectedImage && <PostImage src={URL.createObjectURL(selectedImage)} size={"uncropped-square"} />}
+                {selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />}
             </FileSelector>
 
             <div>
@@ -39,7 +39,7 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
                 <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
             </div>
             <div>
-                <TextButton type="submit" style="primary" text={local.create} disabled={!selectedImage} fill="content" />
+                <TextButton type="submit" text={local.create} disabled={!selectedImage} fill="content" />
             </div>
         </form>
     )

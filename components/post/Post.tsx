@@ -4,10 +4,10 @@
 import { useState } from 'react';
 
 import postImage from '@/public/profile5.jpg'
+import Image from 'next/image';
 
 import Card from '@/components/common/Card';
 import PostMenu from '@/components/post/PostMenu';
-import PostImage from '@/components/post/image/PostImage';
 
 import styles from '@/app/styles/text/text.module.css';
 
@@ -23,13 +23,11 @@ export default function PostComponent({ local, detailedPost }: Props) {
     return (
         <Card>
             <PostMenu local={local} detailedPost={detailedPost} />
-            <div className='px-4 my-4 pb-4'>
-                <PostImage src={postImage} size={'full'} />
+            <div className='m-3 sm:m-4'>
+                <Image className={`size-full object-cover object-center rounded-xl`}
+                    src={postImage} width="400" height="400" alt="Post image" />
             </div>
-
-            <p className={`${styles['base-text']} ${styles['base']}`}>
-                {post.description}
-            </p>
+            <p className={`${styles['base-text']}`}>{post.description}</p>
         </Card>
     )
 }

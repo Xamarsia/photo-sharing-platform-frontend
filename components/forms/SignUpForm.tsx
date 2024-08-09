@@ -3,14 +3,16 @@
 
 import styles from '@/app/styles/text/text.module.css';
 
-import Link from "@/components/common/Link";
+import Link from 'next/link';
+
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 import Textarea from "@/components/common/Textarea";
 import FileSelector from "@/components/common/FileSelector";
-import ProfileImage from "@/components/profile/image/ProfileImage";
+import DragAndDropCirclePreview from '@/components/common/DragAndDropCirclePreview';
 
 import { FormEvent, SetStateAction, useState } from "react";
+
 
 
 type Props = {
@@ -53,10 +55,10 @@ export default function SignUpForm({ local, onSubmit }: Props) {
         <form onSubmit={handleSubmit}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
             className={`flex flex-col gap-y-3 sm:gap-y-6`}>
-            <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{local.signUpFormTitle}</h1>
-            <div className='h-80 w-80 m-auto'>
+            <h1 className={`${styles['h1']} text-center`}>{local.signUpFormTitle}</h1>
+            <div className='size-72 m-auto'>
                 <FileSelector onImageSelected={onImageSelected} local={local} rounded >
-                    {selectedImage && <ProfileImage src={URL.createObjectURL(selectedImage)} />}
+                    {selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />}
                 </FileSelector>
             </div>
             <div>
@@ -120,12 +122,11 @@ export default function SignUpForm({ local, onSubmit }: Props) {
             <div>
                 <TextButton
                     type="submit"
-                    style="primary"
                     text={local.submit}
                     fill="parent"
                     disabled={!formIsValid}
                 />
-                <Link href='/auth/signin' text={local.haveAccount} prefetch={false} />
+                <Link href={"/auth/signin"} className={`${styles['primary-link']}`} prefetch={false}>{local.haveAccount}</Link>
             </div>
         </form>
     )

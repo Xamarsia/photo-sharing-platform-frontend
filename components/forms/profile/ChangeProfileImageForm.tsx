@@ -3,7 +3,7 @@
 
 import TextButton from '@/components/buttons/TextButton';
 import FileSelector from "@/components/common/FileSelector";
-import ProfileImage from "@/components/profile/image/ProfileImage";
+import DragAndDropCirclePreview from "@/components/common/DragAndDropCirclePreview";
 
 import { FormEvent, SetStateAction, useState } from "react";
 
@@ -39,15 +39,14 @@ export default function ChangeProfileImageForm({ local, onSubmit }: Props) {
                 setIsFormChanged(true)
             }}
             className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
-            <div className='h-80 w-80'>
+            <div className='size-72'>
                 <FileSelector onImageSelected={onImageSelected} local={local} rounded  >
-                    {selectedImage && <ProfileImage src={URL.createObjectURL(selectedImage)} />}
+                    {selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />}
                 </FileSelector>
             </div>
             <div>
                 <TextButton
                     type="submit"
-                    style="primary"
                     text={local.update}
                     fill="content"
                     disabled={!formIsValid || !isFormChanged}

@@ -1,7 +1,7 @@
 "use client";
 
 
-import Link from '@/components/common/Link';
+import Link from 'next/link';
 
 import styles from '@/app/styles/text/text.module.css';
 
@@ -19,7 +19,7 @@ export default function StatCounter({ text, count, unclickable, onClick }: Props
         <div className="flex gap-1 md:gap-2">
             {unclickable
                 ? <span className={`${styles['secondary-info']}`}>{text}</span>
-                : <Link text={text} onClick={onClick} />
+                : <Link href={""} className={`${styles['secondary-link']}`} onClick={onClick}>{text}</Link>
             }
             <span className={`${styles['secondary-info']}`}>{count}</span>
         </div>

@@ -1,12 +1,11 @@
 "use client";
 
 
-import styles from '@/app/styles/components/button.module.css';
-import buttonTextStyle from '@/app/styles/text/button.text.module.css';
+import style from '@/app/styles/text/text.module.css';
+
 
 type Props = {
     text: string,
-    style: 'primary' | 'secondary' | 'delete',
     type?: 'button' | 'submit',
     fill?: 'content' | 'parent',
     disabled?: boolean,
@@ -14,15 +13,12 @@ type Props = {
 }
 
 
-export default function TextButton({ text, style, type = 'button', fill = "content", disabled = false, onClick }: Props) {
+export default function TextButton({ text, type = 'button', fill = "content", disabled = false, onClick }: Props) {
 
     return (
         <button type={type}
             className={`
-                ${styles['base-button']}
-                ${styles[style]} 
-                 ${buttonTextStyle[style]} 
-                px-2 py-1 sm:px-3 sm:py-2 text-sm leading-5
+                ${style['button-text']} bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 h-10 px-4 rounded-xl text-white 
                 ${fill == 'parent' ? 'w-full' : ''}
             `}
             disabled={disabled}

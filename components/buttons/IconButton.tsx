@@ -4,6 +4,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
+
 type Props = {
     icon: string,
     hoveredIcon: string,
@@ -17,7 +18,7 @@ export default function IconButton({ icon, hoveredIcon, onClick }: Props) {
     const onMouseLeave = () => setIsHovered(false);
 
     return (
-        <button type="button"
+        <button
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
