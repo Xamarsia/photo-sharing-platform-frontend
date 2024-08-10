@@ -36,21 +36,18 @@ export default function ChangeEmailForm({ local, onSubmit }: Props) {
                 setIsFormChanged(true)
             }}
             className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
-            <div>
-                <span className={`${styles['formInputTitleRequired']}`}>{local.email}</span>
-                <Input
-                    type="text"
-                    name="email"
-                    value={email}
-                    pattern=".{1,}"
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </div>
+            <Input
+                type="text"
+                name="email"
+                value={email}
+                title={local.email}
+                pattern=".{1,}"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+            />
             <div>
                 <TextButton
                     type="submit"
-                    style="primary"
                     text={local.update}
                     fill="content"
                     disabled={!formIsValid || !isFormChanged}

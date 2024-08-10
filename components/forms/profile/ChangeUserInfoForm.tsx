@@ -39,31 +39,30 @@ export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
                 setIsFormChanged(true)
             }}
             className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
-            <div>
-                <span className={`${styles['formInputTitleRequired']}`}>{local.fullName}</span>
-                <Input
-                    type="text"
-                    name="fullName"
-                    value={fullName}
-                    pattern="^[a-zA-Z\s]{2,30}$"
-                    onChange={(e) => setfullName(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <span className={`${styles['formInputTitle']}`}>{local.description}</span>
-                <Textarea
-                    rows={5}
-                    value={description}
-                    id="description"
-                    placeholder={local.writeDescriptionHere}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-            </div>
+
+            <Input
+                type="text"
+                name="fullName"
+                value={fullName}
+                title={local.fullName}
+                pattern="^[a-zA-Z\s]{2,30}$"
+                onChange={(e) => setfullName(e.target.value)}
+                required
+            />
+
+
+
+            <Textarea
+                rows={5}
+                value={description}
+                title={local.description}
+                id="description"
+                onChange={(e) => setDescription(e.target.value)}
+            />
+
             <div>
                 <TextButton
                     type="submit"
-                    style="primary"
                     text={local.update}
                     fill="content"
                     disabled={!formIsValid || !isFormChanged}

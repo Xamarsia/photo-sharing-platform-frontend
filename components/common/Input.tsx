@@ -1,45 +1,45 @@
-import { ChangeEvent, KeyboardEvent } from "react";
-
-import styles from '@/app/styles/text/text.module.css';
+import { ChangeEvent } from "react";
 
 
 type InputProps = {
     name?: string,
-    type: 'text' | 'email' | 'password' | 'file',
+    type: 'text' | 'email' | 'password',
+    title?: string | undefined,
+    value?: string | undefined,
     placeholder?: string | undefined,
     required?: boolean | undefined,
     pattern?: string | undefined,
-    disabled?: boolean | undefined,
-    value?: string | undefined,
-    accept?: string | undefined,
     id?: string | undefined,
-    draggable?: boolean | undefined,
-    hidden?: boolean | undefined,
-    onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void | undefined,
     onChange: (e: ChangeEvent<HTMLInputElement>) => void | undefined,
 }
 
 
-export default function InputField({ name, type, required, pattern, disabled, value, accept, id, draggable, hidden, placeholder = " ", onKeyDown, onChange }: InputProps) {
+export default function InputField({ name, type, title, required, pattern, value, id, placeholder = " ", onChange }: InputProps) {
     return (
-        <input
-            id={id}
-            type={type}
-            name={name}
-            value={value}
-            placeholder={placeholder}
-            required={required}
-            pattern={pattern}
-            accept={accept}
-            hidden={hidden}
-            draggable={draggable}
-            disabled={disabled}
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-            className={`peer w-full border border-gray-300 bg-inherit appearance-none outline-none 
-                focus:border-blue-500 focus:ring-0 focus:ring-blue-500 py-1.5 px-2 min-h-8
-                ${styles['placeholder']}
-            `}
-        />
+        <div className="relative h-12">
+            <input
+                id={id}
+                type={type}
+                name={name}
+                value={value}
+                placeholder={placeholder}
+                required={required}
+                pattern={pattern}
+                onChange={onChange}
+                className={`px-3 
+                    peer transition-all outline-none size-full text-sm pb-2 pt-6
+                    bg-gray-50 focus:bg-white placeholder-shown:bg-gray-50 
+                    border border-gray-100 focus:border-blue-500 rounded-xl
+                    font-normal text-gray-800`}
+            />
+            <label className={`px-3 
+                transition-all pointer-events-none h-full text-gray-400 
+                text-xs peer-focus:text-xs peer-placeholder-shown:text-sm
+                absolute left-0 top-0 pt-2 peer-focus:pt-2 peer-placeholder-shown:pt-3
+                ${required ? "after:content-['*'] after:ml-0.5 after:text-red-500" : ''}
+            `}>
+                {title}
+            </label>
+        </div>
     )
 }

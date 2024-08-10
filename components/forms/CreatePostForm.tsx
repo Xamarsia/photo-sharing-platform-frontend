@@ -33,11 +33,7 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
             <FileSelector onImageSelected={onImageSelected} local={local}>
                 {selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />}
             </FileSelector>
-
-            <div>
-                <span className={`${styles['formInputTitle']}`}>{local.description}</span>
-                <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
-            </div>
+            <Textarea value={description} title={local.description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} />
             <div>
                 <TextButton type="submit" text={local.create} disabled={!selectedImage} fill="content" />
             </div>

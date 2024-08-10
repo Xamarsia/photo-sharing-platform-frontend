@@ -39,11 +39,11 @@ export default function ChangeUsernameForm({ local, onSubmit }: Props) {
             className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
 
             <div>
-                <span className={`${styles['formInputTitleRequired']}`}>{local.username}</span>
                 <Input
                     type="text"
                     name="username"
                     value={username}
+                    title={local.username}
                     pattern='^[a-zA-Z0-9]{1,30}$'
                     onChange={(e) => setUsername(e.target.value)}
                     required
@@ -52,7 +52,6 @@ export default function ChangeUsernameForm({ local, onSubmit }: Props) {
             <div>
                 <TextButton
                     type="submit"
-                    style="primary"
                     text={local.update}
                     fill="content"
                     disabled={!formIsValid || !isFormChanged}

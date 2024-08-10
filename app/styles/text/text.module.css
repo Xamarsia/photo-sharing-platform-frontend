@@ -15,7 +15,7 @@
 } */
 
 .base-text {
-    @apply block font-normal text-justify text-gray-800 text-sm leading-5 placeholder-gray-400
+    @apply block font-normal text-justify text-gray-800 text-sm placeholder-gray-400
 }
 
 .formInputTitleRequired {

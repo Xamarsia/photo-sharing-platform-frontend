@@ -37,43 +37,38 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
                 setIsFormChanged(true)
             }}
             className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
-            <div>
-                <span className={`${styles['formInputTitleRequired']}`}>{local.currentPassword}</span>
-                <Input
-                    type="password"
-                    name="oldPassword"
-                    value={oldPassword}
-                    pattern=".{1,}"
-                    onChange={(e) => setOldPassword(e.target.value)}
-                    required
-                />
-            </div>
-            <div className="my-1">
-                <span className={`${styles['formInputTitleRequired']}`}>{local.newPassword}</span>
-                <Input
-                    type="password"
-                    name="newPassword"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    required
-                />
-            </div>
 
-            <div className="my-1">
-                <span className={`${styles['formInputTitleRequired']}`}>{local.repeatNewPassword}</span>
-                <Input
-                    type="password"
-                    name="rNewPassword"
-                    value={rNewPassword}
-                    onChange={(e) => setRNewPassword(e.target.value)}
-                    required
-                />
-            </div>
+            <Input
+                type="password"
+                name="oldPassword"
+                value={oldPassword}
+                title={local.currentPassword}
+                pattern=".{1,}"
+                onChange={(e) => setOldPassword(e.target.value)}
+                required
+            />
+
+            <Input
+                type="password"
+                name="newPassword"
+                value={newPassword}
+                title={local.newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                required
+            />
+
+            <Input
+                type="password"
+                name="rNewPassword"
+                value={rNewPassword}
+                title={local.repeatNewPassword}
+                onChange={(e) => setRNewPassword(e.target.value)}
+                required
+            />
 
             <div>
                 <TextButton
                     type="submit"
-                    style="primary"
                     text={local.update}
                     fill="content"
                     disabled={!formIsValid || !isFormChanged}

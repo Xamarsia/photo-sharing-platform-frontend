@@ -61,69 +61,69 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                     {selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />}
                 </FileSelector>
             </div>
-            <div>
-                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
-                <Input
-                    type="text"
-                    name="username"
-                    value={username}
-                    pattern='^[a-zA-Z0-9]{1,30}$'
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
-                <Input
-                    type="text"
-                    name="email"
-                    value={email}
-                    pattern=".{1,}"
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
-                <Input
-                    type="password"
-                    name="password"
-                    value={password}
-                    pattern=".{1,}"
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </div>
-            <div className="my-1">
-                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
-                <Input
-                    type="password"
-                    name="rpassword"
-                    value={rpassword}
-                    onChange={(e) => setRPassword(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
-                <Input
-                    type="text"
-                    name="fullName"
-                    value={fullName}
-                    pattern="^[a-zA-Z\s]{2,30}$"
-                    onChange={(e) => setfullName(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <span className={`${styles['formInputTitle']}`}>{local.password}</span>
-                <Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} placeholder={local.writeDescriptionHere} />
-            </div>
+
+            <Input
+                type="text"
+                name="username"
+                value={username}
+                title={local.username}
+                pattern='^[a-zA-Z0-9]{1,30}$'
+                onChange={(e) => setUsername(e.target.value)}
+                required
+            />
+
+            <Input
+                type="text"
+                name="email"
+                value={email}
+                title={local.email}
+                pattern=".{1,}"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+            />
+
+            <Input
+                type="password"
+                name="password"
+                value={password}
+                title={local.password}
+                pattern=".{1,}"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+            />
+
+            <Input
+                type="password"
+                name="rpassword"
+                value={rpassword}
+                title={local.password}
+                onChange={(e) => setRPassword(e.target.value)}
+                required
+            />
+
+            <Input
+                type="text"
+                name="fullName"
+                value={fullName}
+                title={local.fullName}
+                pattern="^[a-zA-Z\s]{2,30}$"
+                onChange={(e) => setfullName(e.target.value)}
+                required
+            />
+
+            <Textarea
+                value={description}
+                title={local.description}
+                onChange={(e) => setDescription(e.target.value)}
+                id="description"
+                rows={5}
+            />
+
             <div>
                 <TextButton
                     type="submit"
                     text={local.submit}
-                    fill="parent"
+                    fill="content"
                     disabled={!formIsValid}
                 />
                 <Link href={"/auth/signin"} className={`${styles['primary-link']}`} prefetch={false}>{local.haveAccount}</Link>

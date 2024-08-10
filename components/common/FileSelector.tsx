@@ -11,7 +11,6 @@ import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';
 
 import styles from '@/app/styles/text/text.module.css';
 
-import Input from '@/components/common/Input';
 import IconButton from '@/components/buttons/IconButton';
 
 
@@ -95,7 +94,7 @@ export default function FileSelector({ local, rounded, children, onImageSelected
                     <div className='flex gap-1'>
                         <label>
                             <span className={`${styles['primary-link']}`}>{local.clickToUpload}</span>
-                            <Input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
+                            <input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
                         </label>
                         <span className={`${styles['secondary-info']}`}>{local.orDragAndDrop}</span>
                     </div>
