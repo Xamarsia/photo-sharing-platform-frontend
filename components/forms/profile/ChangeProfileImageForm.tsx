@@ -44,14 +44,13 @@ export default function ChangeProfileImageForm({ local, onSubmit }: Props) {
                     {selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />}
                 </FileSelector>
             </div>
-            <div>
-                <TextButton
-                    type="submit"
-                    text={local.update}
-                    fill="content"
-                    disabled={!formIsValid || !isFormChanged}
-                />
-            </div>
+
+            <TextButton
+                type="submit"
+                text={local.update}
+                fill="content"
+                disabled={!formIsValid || !isFormChanged}
+            />
         </form>
     )
 }

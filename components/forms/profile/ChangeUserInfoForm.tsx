@@ -1,8 +1,6 @@
 "use client";
 
 
-import styles from '@/app/styles/text/text.module.css';
-
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 import Textarea from "@/components/common/Textarea";
@@ -50,8 +48,6 @@ export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
                 required
             />
 
-
-
             <Textarea
                 rows={5}
                 value={description}
@@ -60,14 +56,12 @@ export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
                 onChange={(e) => setDescription(e.target.value)}
             />
 
-            <div>
-                <TextButton
-                    type="submit"
-                    text={local.update}
-                    fill="content"
-                    disabled={!formIsValid || !isFormChanged}
-                />
-            </div>
+            <TextButton
+                type="submit"
+                text={local.update}
+                fill="content"
+                disabled={!formIsValid || !isFormChanged}
+            />
         </form>
     )
 }

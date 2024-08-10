@@ -36,26 +36,28 @@ export default function SignInForm({ local, onSubmit }: Props) {
     return (
         <form onSubmit={handleSubmit} onChange={(e) =>
             setFormIsValid(e.currentTarget.checkValidity())}
-            className={`flex flex-col gap-y-3 sm:gap-y-6`}>
-            <h1 className={`${styles['h1']} text-center`}>{local.signInFormTitle}</h1>
-            <Input
-                type="text"
-                name="email"
-                title={local.email}
-                pattern=".{1,}"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-            />
-            <Input
-                type="password"
-                name="password"
-                title={local.password}
-                pattern=".{1,}"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-            />
+            className={`flex flex-col gap-y-16 sm:gap-y-20`}>
+            <div className={`flex flex-col gap-y-3 sm:gap-y-6`}>
+                <h1 className={`${styles['h1']}`}>{local.signInFormTitle}</h1>
+                <Input
+                    type="text"
+                    name="email"
+                    title={local.email}
+                    pattern=".{1,}"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <Input
+                    type="password"
+                    name="password"
+                    title={local.password}
+                    pattern=".{1,}"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+            </div>
 
             <div>
                 <TextButton

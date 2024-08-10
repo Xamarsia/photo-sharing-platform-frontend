@@ -24,7 +24,7 @@ export default function Modal({ title, children, onClose }: Props) {
         <div className='fixed top-0 left-0 size-full bg-gray-500 flex justify-center items-center'>
             <Card>
                 <div className="flex justify-between">
-                    <h1 className={`${styles['h1']} text-center`}>{title}</h1>
+                    <h1 className={`${styles['h1']}`}>{title}</h1>
                     <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
                 </div>
                 {children}

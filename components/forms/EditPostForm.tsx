@@ -29,17 +29,15 @@ export default function EditPostForm({ local, detailedPost, onSubmit }: Props) {
 
     return (
         <form onSubmit={onSubmit} onChange={() => setIsFormChanged(true)} className={`flex flex-col gap-y-3 sm:gap-y-6`}>
-            <h1 className={`${styles['h1']} text-center`}>{local.editPost}</h1>
+            <h1 className={`${styles['h1']}`}>{local.editPost}</h1>
 
             <FileSelector onImageSelected={onImageSelected} local={local}>
                 {selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />}
             </FileSelector>
 
             <Textarea value={description} title={local.description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} />
-            
-            <div>
-                <TextButton type="submit" text={local.update} disabled={!isFormChanged} fill="parent" />
-            </div>
+
+            <TextButton type="submit" text={local.update} disabled={!isFormChanged} fill="content" />
         </form>
     )
 }

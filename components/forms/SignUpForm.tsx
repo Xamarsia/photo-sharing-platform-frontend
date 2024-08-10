@@ -7,12 +7,10 @@ import Link from 'next/link';
 
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
-import Textarea from "@/components/common/Textarea";
 import FileSelector from "@/components/common/FileSelector";
 import DragAndDropCirclePreview from '@/components/common/DragAndDropCirclePreview';
 
 import { FormEvent, SetStateAction, useState } from "react";
-
 
 
 type Props = {
@@ -28,7 +26,6 @@ export default function SignUpForm({ local, onSubmit }: Props) {
     const [fullName, setfullName] = useState("Full Name");
     const [email, setEmail] = useState("localpart@domain.com");
     const [formIsValid, setFormIsValid] = useState(true);
-    const [description, setDescription] = useState("");
 
     // const [username, setUsername] = useState("");
     // const [password, setPassword] = useState("");
@@ -55,7 +52,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
         <form onSubmit={handleSubmit}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
             className={`flex flex-col gap-y-3 sm:gap-y-6`}>
-            <h1 className={`${styles['h1']} text-center`}>{local.signUpFormTitle}</h1>
+            <h1 className={`${styles['h1']}`}>{local.signUpFormTitle}</h1>
             <div className='size-72 m-auto'>
                 <FileSelector onImageSelected={onImageSelected} local={local} rounded >
                     {selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />}
@@ -109,14 +106,6 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 pattern="^[a-zA-Z\s]{2,30}$"
                 onChange={(e) => setfullName(e.target.value)}
                 required
-            />
-
-            <Textarea
-                value={description}
-                title={local.description}
-                onChange={(e) => setDescription(e.target.value)}
-                id="description"
-                rows={5}
             />
 
             <div>

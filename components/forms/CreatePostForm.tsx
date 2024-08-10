@@ -29,14 +29,14 @@ export default function CreatePostForm({ local, onSubmit }: Props) {
 
     return (
         <form onSubmit={onSubmit} className={`flex flex-col gap-y-3 sm:gap-y-6`}>
-            <h1 className={`${styles['h1']} text-center`}>{local.createPost}</h1>
+            <h1 className={`${styles['h1']}`}>{local.createPost}</h1>
             <FileSelector onImageSelected={onImageSelected} local={local}>
                 {selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />}
             </FileSelector>
+
             <Textarea value={description} title={local.description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} />
-            <div>
-                <TextButton type="submit" text={local.create} disabled={!selectedImage} fill="content" />
-            </div>
+
+            <TextButton type="submit" text={local.create} disabled={!selectedImage} fill="content" />
         </form>
     )
 }

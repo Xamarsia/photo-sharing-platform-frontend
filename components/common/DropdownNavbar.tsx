@@ -32,7 +32,7 @@ export default function DropdownNavbar({ local }: Props) {
             <div className="absolute top-0 w-full bg-white flex flex-col size-full">
 
                 <div className="flex justify-between p-2 w-full bg-white">
-                    <h1 className={`${styles['h1']} text-center`}>text</h1>
+                    <h1 className={`${styles['h1']}`}>text</h1>
                     {showDropdown
                         ? <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={handleClick} />
                         : <IconButton icon={bars3} hoveredIcon={bars3Hovered} onClick={handleClick} />

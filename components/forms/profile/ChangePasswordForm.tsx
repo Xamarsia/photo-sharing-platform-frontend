@@ -1,8 +1,6 @@
 "use client";
 
 
-import styles from '@/app/styles/text/text.module.css';
-
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 
@@ -66,14 +64,12 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
                 required
             />
 
-            <div>
-                <TextButton
-                    type="submit"
-                    text={local.update}
-                    fill="content"
-                    disabled={!formIsValid || !isFormChanged}
-                />
-            </div>
+            <TextButton
+                type="submit"
+                text={local.update}
+                fill="content"
+                disabled={!formIsValid || !isFormChanged}
+            />
         </form>
     )
 }
