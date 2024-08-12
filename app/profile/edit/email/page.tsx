@@ -11,7 +11,7 @@ export default async function ChangeEmailPage() {
     const dict = await getDictionary('en');
 
     return (
-        <SettingPage title={dict.changeEmail} >
+        <SettingPage local={dict} title={dict.changeEmail} >
             <ChangeEmailForm local={dict} />
         </SettingPage>
     );

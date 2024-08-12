@@ -11,7 +11,7 @@ export default async function ChangeUserInfoPage() {
     const dict = await getDictionary('en');
 
     return (
-        <SettingPage title={dict.changeProfileImage} >
+        <SettingPage local={dict} title={dict.changeProfileImage} >
             <ChangeProfileImageForm local={dict} />
         </SettingPage>
     );

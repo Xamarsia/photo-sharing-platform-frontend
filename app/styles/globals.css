@@ -14,6 +14,10 @@
   stroke: #491EC4;
 }
 
+:root:has(.no-doc-scroll) {
+  overflow:hidden;
+}
+
 /* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
