@@ -38,7 +38,7 @@ export default function SignInForm({ local, onSubmit }: Props) {
             setFormIsValid(e.currentTarget.checkValidity())}
             className={`flex flex-col gap-y-16 sm:gap-y-20`}>
             <div className={`flex flex-col gap-y-3 sm:gap-y-6`}>
-                <h1 className={`${styles['h1']}`}>{local.signInFormTitle}</h1>
+                <h1 className={`${styles['h1']}`}>{local.signIn}</h1>
                 <Input
                     type="text"
                     name="email"

@@ -23,14 +23,12 @@ export default function SignUpForm({ local, onSubmit }: Props) {
     const [username, setUsername] = useState("username");
     const [password, setPassword] = useState("password");
     const [rpassword, setRPassword] = useState("password");
-    const [fullName, setfullName] = useState("Full Name");
     const [email, setEmail] = useState("localpart@domain.com");
     const [formIsValid, setFormIsValid] = useState(true);
 
     // const [username, setUsername] = useState("");
     // const [password, setPassword] = useState("");
     // const [rpassword, setRPassword] = useState("");
-    // const [fullName, setfullName] = useState("");
     // const [email, setEmail] = useState("");
     // const [formIsValid, setFormIsValid] = useState(false);
 
@@ -52,8 +50,8 @@ export default function SignUpForm({ local, onSubmit }: Props) {
         <form onSubmit={handleSubmit}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
             className={`flex flex-col gap-y-3 sm:gap-y-6`}>
-            <h1 className={`${styles['h1']}`}>{local.signUpFormTitle}</h1>
-            
+            <h1 className={`${styles['h1']}`}>{local.signUp}</h1>
+
             <div className='flex items-center justify-center'>
                 <div className='size-72'>
                     <FileSelector onImageSelected={onImageSelected} local={local} rounded >
@@ -96,18 +94,8 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                 type="password"
                 name="rpassword"
                 value={rpassword}
-                title={local.password}
+                title={local.repeatPassword}
                 onChange={(e) => setRPassword(e.target.value)}
-                required
-            />
-
-            <Input
-                type="text"
-                name="fullName"
-                value={fullName}
-                title={local.fullName}
-                pattern="^[a-zA-Z\s]{2,30}$"
-                onChange={(e) => setfullName(e.target.value)}
                 required
             />
 
