@@ -16,8 +16,8 @@ export default function Footer({ local }: Props) {
     const router = useRouter();
 
     return (
-        <footer className="bg-white w-full z-5 border-t border-gray-200 flex-shrink-0">
-            <div className="flex flex-col items-center justify-between py-2 sm:py-4 sm:px-4 md:flex-row md:px-8 md:py-4 gap-2 md:gap-4">
+        <footer className="bg-white w-full z-5 border-t border-gray-100 flex-shrink-0 h-24 md:h-16">
+            <div className="flex flex-col items-center justify-center gap-2 h-full md:justify-between md:flex-row md:px-8">
                 <span className={`${styles['secondary-info']}`}>
                     {local.copyrightText}
                 </span>

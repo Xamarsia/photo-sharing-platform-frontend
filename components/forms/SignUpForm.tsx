@@ -53,10 +53,13 @@ export default function SignUpForm({ local, onSubmit }: Props) {
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
             className={`flex flex-col gap-y-3 sm:gap-y-6`}>
             <h1 className={`${styles['h1']}`}>{local.signUpFormTitle}</h1>
-            <div className='size-72 m-auto'>
-                <FileSelector onImageSelected={onImageSelected} local={local} rounded >
-                    {selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />}
-                </FileSelector>
+            
+            <div className='flex items-center justify-center'>
+                <div className='size-72'>
+                    <FileSelector onImageSelected={onImageSelected} local={local} rounded >
+                        {selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />}
+                    </FileSelector>
+                </div>
             </div>
 
             <Input

@@ -25,22 +25,24 @@ export default async function RootLayout({
 
   return (
     <div className='flex flex-grow flex-col w-full relative flex-shrink-0'>
-      <nav className="sticky top-[84px] bg-white w-full border-y border-gray-200 md:hidden block">
+      <nav className="sticky top-20 bg-white w-full border-y border-gray-100 md:hidden block">
         <DropdownNavbar local={dict} />
       </nav>
 
-      <div className="flex-grow flex flex-row max-w-6xl w-full sm:w-11/12 lg:w-4/6 mx-auto px-4 sm:px-6 md:px-8">
-        <section className='flex-grow-0 md:block hidden'>
-          <div className='relative flex flex-col h-full top-0 left-0 border-r border-gray-200'>
-            <div className='sticky top-[84px]'>
+      <div className="flex justify-center w-full">
+        <div className='flex flex-row w-full max-w-6xl bg-white m-4 p-4 rounded-2xl'>
+
+          <section className='relative hidden md:flex flex-col top-0 left-0 h-full border-r border-gray-100'>
+            <div className='sticky top-20'>
               <Sidebar local={dict} />
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="flex-grow flex-shrink-0 p-2 md:p-4">
-          {children}
-        </section>
+          <section className="flex-grow flex-shrink-0 p-2 md:p-4">
+            {children}
+          </section>
+        </div>
+
       </div>
     </div>
   )

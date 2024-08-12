@@ -9,7 +9,6 @@ type PostsProps = {
 }
 
 export default function PostsPreview({ posts }: PostsProps) {
-    
     /* Creates empty list elements to balance flexbox */
     function createEmptyListItems() {
 
@@ -30,15 +29,13 @@ export default function PostsPreview({ posts }: PostsProps) {
 
 
     return (
-        <div>
-            <ul className='flex flex-wrap justify-start gap-1 md:gap-2'>
-                {posts.map(post => (
-                    <li key={post.id} className='flex-1 basis-3/12'>
-                        <PostPreview post={post} />
-                    </li>
-                ))}
-                {createEmptyListItems()}
-            </ul>
-        </div>
+        <ul className='flex flex-wrap justify-start gap-0.5 md:gap-1'>
+            {posts.map(post => (
+                <li key={post.id} className='flex-1 basis-3/12'>
+                    <PostPreview post={post} />
+                </li>
+            ))}
+            {createEmptyListItems()}
+        </ul>
     )
 }

@@ -7,7 +7,7 @@ export default function Logo() {
     return (
         <Link href="/" className="flex flex-row gap-2 md:gap-4">
             <Image src={logo} alt="icon" className={`size-8`} />
-            <div className="hidden md:block m-auto">
+            <div className="hidden md:block">
                 <h2 className='self-center text-2xl font-semibold whitespace-nowrap'>SPSP</h2>
             </div>
         </Link>
