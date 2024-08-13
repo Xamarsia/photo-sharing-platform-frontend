@@ -17,13 +17,18 @@ export default function ProfilePreviewDropdown({ user, children }: Props) {
 
     const dropdown = useRef<HTMLDivElement>(null);
 
+    /* TODO Transfer this useEffect to dropdown component as done in modal component */
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (showDropdown && !dropdown.current?.contains(event.target as Node)) {
-                setShowDropdown(false)
+                setShowDropdown(false);
             }
         }
-        document.addEventListener('mousedown', handleClickOutside)
+        if (showDropdown) {
+            document.addEventListener('mousedown', handleClickOutside)
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
     }, [showDropdown])
 
     return (
