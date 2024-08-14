@@ -1,6 +1,4 @@
 {
-    "signInFormTitle": "Sign In to your account",
-    "signUpFormTitle": "Sign Up to your account",
     "email": "Email",
     "password": "Password",
     "submit": "Submit",
@@ -21,7 +19,6 @@
     "deletePost": "Delete post",
     "createPost": "Create Post",
     "description": "Description",
-    "writeDescriptionHere": "Write your description here...",
     "update": "Update",
     "create": "Create",
     "pageNotFound": "Page not found",
@@ -52,7 +49,7 @@
     "contact": "Contact",
     "userInfo": "User info",
     "profileImage": "Profile image",
-    "": "",
+    "searchUsers": "Search users",
     "": "",
     "": "",
     "": "",

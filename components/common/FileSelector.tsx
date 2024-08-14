@@ -3,19 +3,15 @@
 import { ReactNode, SetStateAction, useEffect, useState } from 'react';
 
 import Image from 'next/image';
+import React from 'react';
 
 import photo from '@/public/photo/photo.svg';
-import photoHovered from '@/public/photo/photo-hovered.svg';
-
 import xMark from '@/public/x-mark/x-mark.svg';
 import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';
 
 import styles from '@/app/styles/text/text.module.css';
 
-import FileInput from '@/components/common/FileInput';
 import IconButton from '@/components/buttons/IconButton';
-
-import React from 'react';
 
 
 type Props = {
@@ -73,8 +69,8 @@ export default function FileSelector({ local, rounded, children, onImageSelected
     };
 
     return (
-        <div className={`relative w-full aspect-square hover:bg-gray-300 bg-gray-100
-             ${rounded}`}
+        <div className={`relative w-full aspect-square hover:bg-gray-100 bg-gray-50 border border-gray-200 border-dashed
+            ${rounded ? 'rounded-full' : 'rounded-lg'} `}
             onDragEnter={handleDragEnter}
             onDrop={handleDrop}
             onDragLeave={handleDragLeave}
@@ -82,9 +78,9 @@ export default function FileSelector({ local, rounded, children, onImageSelected
         >
             {children}
             <div className={`
-                    absolute bottom-0 left-0 w-full aspect-square flex flex-col items-center justify-center border border-gray-400 border-dashed
-                    ${rounded ? 'rounded-full' : ''} 
-                    ${dragActive ? 'bg-gray-200' : ''}
+                    absolute bottom-0 left-0 w-full aspect-square flex flex-col items-center justify-center
+                    ${rounded ? 'rounded-full' : 'rounded-lg'}
+                    ${dragActive ? 'bg-gray-600/25' : ''}
                 `}>
 
                 {selectedImage &&
@@ -94,11 +90,16 @@ export default function FileSelector({ local, rounded, children, onImageSelected
                 }
                 <div className={`flex flex-col items-center justify-center  ${selectedImage ? 'invisible' : 'visible'}`}>
                     <Image src={photo} alt="photo" className={`size-8 inline-flex justify-center items-center aspect-square`} />
-                    <Image src={photoHovered} alt="photo" className={`size-8 inline-flex justify-center items-center aspect-square`} />
-                    <FileInput local={local} onChange={imageChange} />
-                    <span className={`${styles['secondary-info']}`}>
-                        {local.fileFormatsForImageUploading}
-                    </span>
+
+                    <div className='flex gap-1'>
+                        <label>
+                            <span className={`${styles['primary-link']}`}>{local.clickToUpload}</span>
+                            <input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
+                        </label>
+                        <span className={`${styles['secondary-info']}`}>{local.orDragAndDrop}</span>
+                    </div>
+
+                    <span className={`${styles['secondary-info']}`}>{local.fileFormatsForImageUploading}</span>
                 </div>
             </div>
         </div>

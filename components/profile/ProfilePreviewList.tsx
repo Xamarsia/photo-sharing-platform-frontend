@@ -1,17 +1,18 @@
 import ProfilePreview from "@/components/profile/ProfilePreview"
 
 
-type UsersProps = {
+type Props = {
+    local: any,
     users: Array<UserPreviewDTO>
 }
 
-export default function Profiles({ users }: UsersProps) {
+export default function ProfilePreviewList({local, users }: Props) {
 
     return (
-        <ul className="w-full">
+        <ul className="flex flex-col w-full gap-1">
             {users.map(user => (
                 <li key={user.id}>
-                    <ProfilePreview user={user} />
+                    <ProfilePreview local={local} user={user} />
                 </li>
             ))}
         </ul>

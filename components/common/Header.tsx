@@ -23,19 +23,18 @@ export default function Header({ local }: Props) {
     const user = getUser();
 
     return (
-
-        <header className="flex-shrink-0 z-10 sticky top-0 bg-white w-full border-y border-gray-200 h-20">
-            <div className="flex items-center justify-between py-4 px-4 md:px-8 gap-2 md:gap-4">
+        <header className="flex-shrink-0 z-10 fixed top-0 bg-white w-full border-y border-gray-100 h-20">
+            <div className="flex items-center justify-between h-full px-4 md:px-8 gap-2 md:gap-4">
                 <Logo />
                 <div className={`grow max-w-[580px] ${user ? "block" : "hidden"}`}>
                     <SearchBar local={local} />
                 </div>
 
-                <div className="flex flex-row gap-2 md:gap-4">
+                <div className="flex flex-row items-center gap-2 md:gap-4">
                     {user
                         ? <>
-                            <div className='md:block hidden m-auto'>
-                                <TextIconButton fill="content" text={local.createPost} icon={plus} onClick={() => { router.push('/post/create') }} />
+                            <div className='md:block hidden h-full'>
+                                <TextIconButton text={local.createPost} icon={plus} onClick={() => { router.push('/post/create') }} />
                             </div>
                             <div className="md:block">
                                 <ProfilePreviewDropdown user={user}>
@@ -44,8 +43,8 @@ export default function Header({ local }: Props) {
                             </div>
                         </>
                         : <>
-                            <TextButton type={'button'} text={local.signIn} onClick={e => { router.push('/auth/signin') }} style={'primary'} />
-                            <TextButton type={'button'} text={local.signUp} onClick={e => { router.push('/auth/signup') }} style={'primary'} />
+                            <TextButton type={'button'} text={local.signIn} onClick={e => { router.push('/auth/signin') }} />
+                            <TextButton type={'button'} text={local.signUp} onClick={e => { router.push('/auth/signup') }} />
                         </>
                     }
                 </div>

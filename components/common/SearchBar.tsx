@@ -19,8 +19,8 @@ export default function SearchBar({ local }: Props) {
     }
 
     return (
-        <form className='flex items-center mx-auto w-full gap-x-1' onSubmit={handleSubmit}>
-            <SearchInput onChange={onSearchChanged} />
+        <form onSubmit={handleSubmit}>
+            <SearchInput local={local} onChange={onSearchChanged} />
         </form>
     )
 }

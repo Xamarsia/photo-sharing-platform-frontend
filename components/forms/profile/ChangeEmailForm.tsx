@@ -1,8 +1,6 @@
 "use client";
 
 
-import styles from '@/app/styles/text/text.module.css';
-
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 
@@ -36,26 +34,21 @@ export default function ChangeEmailForm({ local, onSubmit }: Props) {
                 setIsFormChanged(true)
             }}
             className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
-            <div>
-                <span className={`${styles['formInputTitleRequired']}`}>{local.email}</span>
-                <Input
-                    type="text"
-                    name="email"
-                    value={email}
-                    pattern=".{1,}"
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <TextButton
-                    type="submit"
-                    style="primary"
-                    text={local.update}
-                    fill="content"
-                    disabled={!formIsValid || !isFormChanged}
-                />
-            </div>
+            <Input
+                type="text"
+                name="email"
+                value={email}
+                title={local.email}
+                pattern=".{1,}"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+            />
+            <TextButton
+                type="submit"
+                text={local.update}
+                fill="content"
+                disabled={!formIsValid || !isFormChanged}
+            />
         </form>
     )
 }

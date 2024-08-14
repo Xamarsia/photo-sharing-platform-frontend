@@ -19,8 +19,8 @@ export default async function ProfilePage({ params }: { params: PageProps }) {
     const posts: Array<PostDTO> = await getUserPosts(params.username);
 
     return (
-        <div className="flex flex-grow items-center flex-shrink justify-center m-4 lg:m-8">
-            <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-grow items-center flex-shrink justify-center lg:m-4">
+            <div className="flex flex-col items-center gap-4 max-w-7xl">
                 <Profile local={dict} profile={profile} />
                 <PostsPreviewGrid posts={posts} />
             </div>

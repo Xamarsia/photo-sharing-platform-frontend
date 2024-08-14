@@ -1,6 +1,7 @@
-import Link from 'next/link'
-import PostImage from '@/components/post/image/PostImage';
-import postImage from '@/public/profile5.jpg'
+import Link from 'next/link';
+
+import PostImagePreview from '@/components/post/PostImagePreview';
+import postImage from '@/public/profile5.jpg';
 
 type PostProps = {
     post: PostPreviewDTO
@@ -9,7 +10,7 @@ type PostProps = {
 export default function PostPreview({ post }: PostProps) {
     return (
         <Link href={`post/${post.id}`}>
-            <PostImage size='cropped-square' src={postImage} />
+            <PostImagePreview src={postImage} />
         </Link>
     )
 }

@@ -12,10 +12,12 @@ import DropdownButton from '@/components/buttons/DropdownButton';
 
 import styles from '@/app/styles/text/text.module.css';
 
+
 type Props = {
     local: any,
     detailedPost: DetailedPostDTO,
 }
+
 
 export default function PostMenuComponent({ local, detailedPost }: Props) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
@@ -25,12 +27,11 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
     const profileImagePreview = getProfileImagePreview(detailedPost.authorDTO);
 
     return (
-        <div className='flex justify-around items-center space-x-4'>
+        <div className='flex justify-around items-center'>
             <Link href={`/${post.username}`}>{profileImagePreview}</Link>
-            <div className="flex-1 flex flex-row gap-4 m-auto ">
-                <span className={`${styles['main-info']}`}>{postAuthor.fullName}</span>
-                <span className={`${styles['secondary-info']}`}>{'@' + postAuthor.username}</span>
-                <span className={`${styles['secondary-info']}`}>{'\u2022' + post.createdDate}</span>
+            <div className="flex-1 flex gap-2 mx-4">
+                <span className={`${styles['main-info']}`}>{postAuthor.username}</span>
+                <span className={`${styles['secondary-info']}`}>{post.createdDate}</span>
             </div>
             <PostDropdown>
                 <DropdownButton text={local.goToPost} />

@@ -11,7 +11,7 @@ export default async function ChangeUsernamePage() {
     const dict = await getDictionary('en');
 
     return (
-        <SettingPage title={dict.changeUsername} >
+        <SettingPage local={dict} title={dict.changeUsername} >
             <ChangeUsernameForm local={dict} />
         </SettingPage>
     );

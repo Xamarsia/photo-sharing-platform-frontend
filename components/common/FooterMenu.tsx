@@ -1,9 +1,10 @@
 "use client";
 
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import Link from "@/components/common/Link";
+import styles from '@/app/styles/text/text.module.css';
 
 
 type Props = {
@@ -17,13 +18,13 @@ export default function FooterMenu({ local }: Props) {
     return (
         <ul className="flex flex-wrap items-center gap-2 sm:gap-4 md:gap-8">
             <li>
-                <Link text={local.about} />
+                <Link href={""} className={`${styles['secondary-link']}`}>{local.about}</Link>
             </li>
             <li>
-                <Link text={local.privacyPolicy} />
+                <Link href={""} className={`${styles['secondary-link']}`}>{local.privacyPolicy}</Link>
             </li>
             <li>
-                <Link text={local.contact} />
+                <Link href={""} className={`${styles['secondary-link']}`}>{local.contact}</Link>
             </li>
         </ul>
     )

@@ -1,8 +1,6 @@
 "use client";
 
 
-import styles from '@/app/styles/text/text.module.css';
-
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 
@@ -39,25 +37,23 @@ export default function ChangeUsernameForm({ local, onSubmit }: Props) {
             className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
 
             <div>
-                <span className={`${styles['formInputTitleRequired']}`}>{local.username}</span>
                 <Input
                     type="text"
                     name="username"
                     value={username}
+                    title={local.username}
                     pattern='^[a-zA-Z0-9]{1,30}$'
                     onChange={(e) => setUsername(e.target.value)}
                     required
                 />
             </div>
-            <div>
-                <TextButton
-                    type="submit"
-                    style="primary"
-                    text={local.update}
-                    fill="content"
-                    disabled={!formIsValid || !isFormChanged}
-                />
-            </div>
+
+            <TextButton
+                type="submit"
+                text={local.update}
+                fill="content"
+                disabled={!formIsValid || !isFormChanged}
+            />
         </form>
     )
 }

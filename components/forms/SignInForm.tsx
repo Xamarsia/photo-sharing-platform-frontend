@@ -3,11 +3,11 @@
 
 import styles from '@/app/styles/text/text.module.css';
 
-import Link from "@/components/common/Link";
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 
 import { FormEvent, useState } from "react";
+import Link from 'next/link';
 
 
 type Props = {
@@ -36,40 +36,37 @@ export default function SignInForm({ local, onSubmit }: Props) {
     return (
         <form onSubmit={handleSubmit} onChange={(e) =>
             setFormIsValid(e.currentTarget.checkValidity())}
-            className={`flex flex-col gap-y-3 sm:gap-y-6`}>
-            <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{local.signInFormTitle}</h1>
-
-            <div>
-                <span className={`${styles['formInputTitleRequired']}`}>{local.email}</span>
+            className={`flex flex-col gap-y-16 sm:gap-y-20`}>
+            <div className={`flex flex-col gap-y-3 sm:gap-y-6`}>
+                <h1 className={`${styles['h1']}`}>{local.signIn}</h1>
                 <Input
                     type="text"
                     name="email"
+                    title={local.email}
                     pattern=".{1,}"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-            </div>
-            <div>
-                <span className={`${styles['formInputTitleRequired']}`}>{local.password}</span>
                 <Input
                     type="password"
                     name="password"
+                    title={local.password}
                     pattern=".{1,}"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
             </div>
+
             <div>
                 <TextButton
                     type="submit"
-                    style="primary"
                     text={local.submit}
-                    fill="parent"
+                    fill="content"
                     disabled={!formIsValid}
                 />
-                <Link href='/auth/signup' text={local.dontHaveAccount} prefetch={false} />
+                <Link href={"/auth/signup"} className={`${styles['primary-link']}`} prefetch={false}>{local.dontHaveAccount}</Link>
             </div>
         </form>
     )

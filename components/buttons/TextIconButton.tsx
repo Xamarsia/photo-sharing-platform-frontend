@@ -1,43 +1,29 @@
 "use client";
 
 import Image from 'next/image';
-import { useState } from 'react';
 
-import styles from '@/app/styles/components/button.module.css';
-import buttonTextStyle from '@/app/styles/text/button.text.module.css';
+import style from '@/app/styles/text/text.module.css';
 
 
 type Props = {
     text: string,
-    fill?: 'content' | 'parent',
-    disabled?: boolean,
     icon: string,
-    hoveredIcon?: string,
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
 
-export default function TextIconButton({ icon, text, fill = "content", disabled = false, hoveredIcon = icon, onClick }: Props) {
-    const [isHovering, setIsHovered] = useState(false);
-    const onMouseEnter = () => setIsHovered(true);
-    const onMouseLeave = () => setIsHovered(false);
-
+export default function TextIconButton({ icon, text, onClick }: Props) {
     return (
         <button
             type='button'
-            disabled={disabled}
             onClick={onClick}
             className={`
-                flex justify-between px-2 py-1 sm:px-3 sm:py-2 text-sm leading-5 gap-x-1.5
-                ${styles['base-button']}
-                ${styles['primary']}
-                ${buttonTextStyle['primary']}  
-                ${fill == 'parent' ? 'w-full' : ''}
-            `}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
+                ${style['button-text']} 
+                bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 h-10 px-4 
+                rounded-xl text-white flex justify-between gap-x-1.5 items-center
+             `}
         >
-            <Image src={isHovering ? hoveredIcon : icon} alt="icon" className='size-5' />
+            <Image src={icon} alt="icon" className='size-5' />
             <h1 className={`hidden md:block`}>{text}</h1>
         </button>
     )

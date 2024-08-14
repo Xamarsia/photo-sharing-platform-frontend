@@ -10,7 +10,7 @@ export default async function ChangePasswordPage() {
     const dict = await getDictionary('en');
 
     return (
-        <SettingPage title={dict.changePassword} >
+        <SettingPage title={dict.changePassword} local={dict}>
             <ChangePasswordForm local={dict} />
         </SettingPage>
     );

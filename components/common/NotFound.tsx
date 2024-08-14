@@ -13,14 +13,12 @@ type Props = {
 
 export default function NotFound({ alertTitle, alertBody }: Props) {
     return (
-        <div className="flex flex-col items-center mx-auto px-6 py-12 gap-2">
+        <div className="flex flex-col items-center gap-2">
             <div className="rounded-full bg-blue-50 p-3">
                 <Image src={blueExclamationCircle} alt="icon" />
             </div>
-            <h1 className={`text-slate-800 font-normal tracking-normal text-xl sm:text-2xl leading-9 text-center`}>{alertTitle}</h1>
-            <span className={`${styles['secondary-info']}`}>
-                {alertBody}
-            </span>
+            <h1 className={`${styles['h1']}`}>{alertTitle}</h1>
+            <span className={`${styles['secondary-info']}`}>{alertBody}</span>
         </div>
     );
 };

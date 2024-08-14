@@ -1,12 +1,11 @@
 type UserState = 'CURRENT' | 'FOLLOWED' | 'UNFOLLOWED'
-type SidebarNavItem = 'USER_INFO' | 'PROFILE_IMAGE'| 'PASSWORD'| 'USERNAME' | 'EMAIL'
 
 type UserDTO = {
     "id": string,
-    "fullName": string,
+    "fullName": string | undefined,
     "username": string,
     "email": string,
-    "description": string,
+    "description": string | undefined,
     "roles": Array<string>,
     "state": UserState,
     "isProfileImageExist": boolean
@@ -14,7 +13,7 @@ type UserDTO = {
 
 type UserPreviewDTO = {
     "id": string,
-    "fullName": string,
+    "fullName": string | undefined,
     "username": string,
     "state": UserState,
     "isProfileImageExist": boolean
@@ -27,19 +26,19 @@ type PostPreviewDTO = {
 type PostDTO = {
     "id": number,
     "createdDate": string,
-    "description": string,
+    "description": string | undefined,
     "username": string,
 }
 
 type DetailedPostDTO = {
-    "postDTO": PostDTO
-    "authorDTO": UserPreviewDTO
+    "postDTO": PostDTO,
+    "authorDTO": UserPreviewDTO,
 }
 
 type ProfileDTO = {
-    "followingsCount": number
-    "followersCount": number
-    "postsCount": number
-    "description": string
-    "userPreviewDTO": UserPreviewDTO
+    "followingsCount": number,
+    "followersCount": number,
+    "postsCount": number,
+    "description": string | undefined,
+    "userPreviewDTO": UserPreviewDTO,
 }

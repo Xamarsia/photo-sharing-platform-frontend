@@ -1,27 +1,26 @@
 "use client";
 
-import textStyles from '@/app/styles/text/text.module.css';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
 type Props = {
     text: string,
     href: string,
-    value: SidebarNavItem,
-    selectedValue: SidebarNavItem,
-    onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void,
 }
 
 
-export default function SidebarItem({ text, href, value, selectedValue, onClick }: Props) {
+export default function SidebarItem({ text, href }: Props) {
+    const pathname = usePathname()
+    const [isCurrentItemSelected] = useState<boolean>(href == pathname);
+
 
     return (
         <Link href={href}
-            className={`
-                block hover:bg-gray-100 w-full min-w-[144px] sm:min-w-[192px] md:min-w-[224px] px-2 sm:px-3 py-1 sm:py-2
-                ${textStyles['base-text']}
-                ${value == selectedValue ? 'bg-gray-100' : ''}
+            className={`flex items-center px-3 rounded-lg h-10 w-full min-w-56
+                text-sm font-normal text-gray-500 hover:text-gray-700 hover:bg-gray-100
+                ${isCurrentItemSelected ? 'bg-gray-100 text-gray-800' : 'bg-white'}
             `}
-            onClick={onClick}
         >
             {text}
         </Link>
