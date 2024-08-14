@@ -13,7 +13,7 @@ type Props = {
     user: UserPreviewDTO,
 }
 
-export default function FollowButton({ user, local }: Props) {
+export default function ToggleFollowButton({ user, local }: Props) {
     const [following, setFollowing] = useState<boolean>(user.state == UserState.Followed);
 
     async function followProfile() {
@@ -28,11 +28,11 @@ export default function FollowButton({ user, local }: Props) {
         <>
             {user.state != UserState.Current &&
                 (following
-                    ? <button className={`${style['button-text']} bg-slate-200 hover:bg-slate-300 h-10 px-4 rounded-xl text-gray-900`} onClick={unfollowProfile}>
+                    ? <button className={`${style['button-text']} bg-white hover:bg-slate-100 h-10 px-4 rounded-xl text-gray-700 border border-gray-200`} onClick={unfollowProfile}>
                         {local.unfollow}
                     </button>
 
-                    : <button className={`${style['button-text']} bg-blue-500 hover:bg-blue-600 h-10 px-4 rounded-xl text-white`} onClick={followProfile}>
+                    : <button className={`${style['button-text']} bg-blue-500 hover:bg-blue-600 h-10 px-4 rounded-xl text-white border `} onClick={followProfile}>
                         {local.follow}
                     </button>
                 )

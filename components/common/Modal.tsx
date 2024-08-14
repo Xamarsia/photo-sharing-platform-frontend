@@ -2,7 +2,6 @@
 
 import { ReactNode, useEffect, useRef } from "react";
 
-import Card from "@/components/common/Card";
 import IconButton from "@/components/buttons/IconButton";
 
 import xMark from '@/public/x-mark/x-mark.svg';
@@ -35,15 +34,15 @@ export default function Modal({ title, children, opened, onCloseClicked }: Props
     }, [opened])
 
     return (
-        <div className={`${opened ? '' : 'hidden'} fixed top-0 left-0 z-50 size-full bg-gray-800/45 flex justify-center items-center no-doc-scroll`}>
-            <div ref={modal}>
-                <Card>
-                    <div className="flex justify-between">
+        <div className={`${opened ? 'no-doc-scroll' : 'hidden'} fixed top-0 left-0 z-50 size-full bg-gray-800/45 `}>
+            <div className="flex justify-center items-center size-full">
+                <div ref={modal} className={"bg-white w-full max-w-xl m-4 p-4 sm:p-8 rounded-2xl border border-gray-100"}>
+                    <div className="flex justify-between pb-8">
                         <h1 className={`${styles['h1']}`}>{title}</h1>
                         <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={onCloseClicked} />
                     </div>
                     {children}
-                </Card>
+                </div>
             </div>
         </div>
     );

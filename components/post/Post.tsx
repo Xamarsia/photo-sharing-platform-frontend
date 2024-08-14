@@ -23,7 +23,7 @@ export default function PostComponent({ local, detailedPost }: Props) {
     return (
         <Card>
             <PostMenu local={local} detailedPost={detailedPost} />
-            <div className='m-3 sm:m-4'>
+            <div className='my-3 sm:my-4'>
                 <Image className={`size-full object-cover object-center rounded-xl`}
                     src={postImage} width="400" height="400" alt="Post image" />
             </div>

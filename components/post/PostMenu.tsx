@@ -30,7 +30,7 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
         <div className='flex justify-around items-center'>
             <Link href={`/${post.username}`}>{profileImagePreview}</Link>
             <div className="flex-1 flex gap-2 mx-4">
-                <span className={`${styles['main-info']}`}>{postAuthor.fullName}</span>
+                <span className={`${styles['main-info']}`}>{postAuthor.username}</span>
                 <span className={`${styles['secondary-info']}`}>{post.createdDate}</span>
             </div>
             <PostDropdown>

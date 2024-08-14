@@ -32,7 +32,7 @@ const userDTO: UserDTO = {
 
 const userPreviewDTO: UserPreviewDTO = {
     id: '3',
-    state: 'CURRENT',
+    state: 'UNFOLLOWED',
     username: 'username',
     fullName: 'Full Name',
     isProfileImageExist: false,
@@ -62,10 +62,10 @@ const followers: Array<UserPreviewDTO> = [userPreviewDTO, userPreviewDTO, userPr
 const followings: Array<UserPreviewDTO> = [userPreviewDTO, userPreviewDTO, userPreviewDTO, userPreviewDTO]
 
 
-export async function getFollowers(): Promise<Array<UserPreviewDTO>> {
+export function getFollowers(): Array<UserPreviewDTO> {
     return followers;
 }
 
-export async function getFollowings(): Promise<Array<UserPreviewDTO>> {
+export function getFollowings(): Array<UserPreviewDTO> {
     return followings;
 }
