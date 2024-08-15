@@ -1,0 +1,18 @@
+{
+	"name": "SPSP frontend",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"customizations": {
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"christian-kohler.npm-intellisense",
+				"redhat.vscode-yaml"
+			]
+		}
+	},
+	// need for git
+	"postCreateCommand": "git config --global --add safe.directory /workspaces/${localWorkspaceFolderBasename} && pnpm install"
+}
