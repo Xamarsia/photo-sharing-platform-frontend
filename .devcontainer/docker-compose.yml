@@ -17,3 +17,4 @@ networks:
   external_network:
     name: microservice_network
     external: true
+    
