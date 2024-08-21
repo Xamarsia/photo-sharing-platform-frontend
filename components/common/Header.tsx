@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { getUser } from "@/lib/profile-controller";
 
 import Logo from "@/components/common/Logo";
 import SearchBar from "@/components/common/SearchBar";
@@ -11,16 +10,17 @@ import TextIconButton from "@/components/buttons/TextIconButton";
 import ProfilePreviewDropdown from "@/components/profile/ProfilePreviewDropdown";
 
 import plus from '@/public/plus/plus-white.svg';
+import { signOut } from "@/lib/firebase/auth";
 
 
 type Props = {
     local: any,
+    user?: UserDTO | undefined,
 }
 
 
-export default function Header({ local }: Props) {
+export default function Header({ local, user }: Props) {
     const router = useRouter();
-    const user = getUser();
 
     return (
         <header className="flex-shrink-0 z-10 fixed top-0 bg-white w-full border-y border-gray-100 h-20">
@@ -39,6 +39,7 @@ export default function Header({ local }: Props) {
                             <div className="md:block">
                                 <ProfilePreviewDropdown user={user}>
                                     <DropdownButton text='My profile' />
+                                    <DropdownButton text={local.signOut} onClick={signOut} />
                                 </ProfilePreviewDropdown>
                             </div>
                         </>

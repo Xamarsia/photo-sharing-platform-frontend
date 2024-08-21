@@ -53,7 +53,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                     value={fullName}
                     title={local.fullName}
                     pattern="^[a-zA-Z\s]{2,30}$"
-                    onChange={(e) => setfullName(e.target.value)} a
+                    onChange={(e) => setfullName(e.target.value)} 
                 />
             </div>
             <TextButton

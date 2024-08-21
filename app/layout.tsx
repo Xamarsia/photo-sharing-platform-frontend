@@ -3,11 +3,12 @@ import { Inter } from 'next/font/google';
 import '@/app/styles/globals.css';
 
 import { getDictionary } from '@/lib/localization';
-import { getUser } from '@/lib/profile-controller';
 
 import Footer from '@/components/common/Footer';
 import Header from '@/components/common/Header';
 import FixedRoundCreatePostButton from '@/components/buttons/FixedRoundCreatePostButton';
+import Page from '@/components/common/Page';
+import { getCurrentUser } from '@/actions/actions';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,19 +23,23 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
-  const user = getUser();
   const dict = await getDictionary('en');
+  const user: UserDTO | undefined = await getCurrentUser();
 
   return (
     <html lang="en" className='size-full'>
-      <body className={`${inter.className} size-full flex flex-col items-stretch relative`}>
-        <Header local={dict} />
-        <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20'>
-          {children}
-          <FixedRoundCreatePostButton />
-        </main>
-        <Footer local={dict} />
-      </body>
+      <Page>
+        <body className={`${inter.className} size-full flex flex-col items-stretch relative`}>
+          <Header local={dict} user={user} />
+          <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20'>
+            {children}
+            {user &&
+              <FixedRoundCreatePostButton />
+            }
+          </main>
+          <Footer local={dict} />
+        </body>
+      </Page>
     </html>
   )
 }
