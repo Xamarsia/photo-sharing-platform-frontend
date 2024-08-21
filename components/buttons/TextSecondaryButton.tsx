@@ -9,23 +9,21 @@ type Props = {
     text: string,
     type?: 'button' | 'submit',
     fill?: 'content' | 'parent',
-    disabled?: boolean,
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
 
-export default function TextButton({ text, type = 'button', fill = "content", disabled = false, onClick }: Props) {
+export default function TextSecondaryButton({ text, type = 'button', fill = "content", onClick }: Props) {
 
     return (
         /* External div for anti-flex */
         <div>
             <button type={type}
                 className={`
-                ${textStyle['button-text']} 
-                ${style['primary']}
-                ${fill == 'parent' ? 'w-full' : ''}
+                ${textStyle['button-text']}
+                ${style['secondary']}
+                ${fill == 'parent' && 'w-full'}
             `}
-                disabled={disabled}
                 onClick={onClick}
             >
                 {text}

@@ -14,7 +14,7 @@ type Props = {
 }
 
 
-export default function TextIconButton({ icon, text, fill, onClick }: Props) {
+export default function TextIconSecondaryButton({ icon, text, fill, onClick }: Props) {
     return (
         /* External div for anti-flex */
         <div>
@@ -22,9 +22,9 @@ export default function TextIconButton({ icon, text, fill, onClick }: Props) {
                 type='button'
                 onClick={onClick}
                 className={`
-                ${textStyle['button-text']} 
-                ${style['primary']} flex justify-between gap-x-1.5 items-center
-                ${fill == 'parent' && 'w-full'}
+                ${textStyle['button-text']}
+                ${style['secondary']}
+                ${fill == 'parent' && 'w-full'} flex justify-between gap-x-1.5 items-center
                 `}
             >
                 <Image src={icon} alt="icon" className='size-5' />

@@ -1,0 +1,7 @@
+.primary {
+    @apply bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 h-10 px-4 rounded-xl text-white
+}
+
+.secondary {
+    @apply bg-white hover:bg-gray-50 h-10 px-4 rounded-xl text-gray-700 border border-gray-100
+}
