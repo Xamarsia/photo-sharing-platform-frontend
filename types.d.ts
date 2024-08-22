@@ -1,20 +1,10 @@
 type UserState = 'CURRENT' | 'FOLLOWED' | 'UNFOLLOWED'
 
 type UserDTO = {
-    "id": string,
-    "fullName": string | undefined,
+    "id": number,
     "username": string,
-    "email": string,
+    "fullName": string | undefined,
     "description": string | undefined,
-    "roles": Array<string>,
-    "state": UserState,
-    "isProfileImageExist": boolean
-}
-
-type UserPreviewDTO = {
-    "id": string,
-    "fullName": string | undefined,
-    "username": string,
     "state": UserState,
     "isProfileImageExist": boolean
 }
@@ -32,13 +22,12 @@ type PostDTO = {
 
 type DetailedPostDTO = {
     "postDTO": PostDTO,
-    "authorDTO": UserPreviewDTO,
+    "authorDTO": UserDTO,
 }
 
 type ProfileDTO = {
     "followingsCount": number,
     "followersCount": number,
     "postsCount": number,
-    "description": string | undefined,
-    "userPreviewDTO": UserPreviewDTO,
+    "userDTO": UserDTO,
 }
