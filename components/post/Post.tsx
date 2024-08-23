@@ -3,13 +3,12 @@
 
 import { useState } from 'react';
 
-import postImage from '@/public/profile5.jpg'
-import Image from 'next/image';
-
 import Card from '@/components/common/Card';
 import PostMenu from '@/components/post/PostMenu';
+import PostImage from '@/components/post/PostImage';
 
 import styles from '@/app/styles/text/text.module.css';
+
 
 type Props = {
     local: any,
@@ -17,16 +16,13 @@ type Props = {
 }
 
 
-export default function PostComponent({ local, detailedPost }: Props) {
+export default async function Post({ local, detailedPost }: Props) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
 
     return (
         <Card>
             <PostMenu local={local} detailedPost={detailedPost} />
-            <div className='my-3 sm:my-4'>
-                <Image className={`size-full object-cover object-center rounded-xl`}
-                    src={postImage} width="400" height="400" alt="Post image" />
-            </div>
+            <PostImage postId={post.id} />
             <p className={`${styles['base-text']}`}>{post.description}</p>
         </Card>
     )

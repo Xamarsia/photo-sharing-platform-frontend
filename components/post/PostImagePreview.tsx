@@ -1,16 +1,17 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
 
 type Props = {
-    src: string | StaticImageData;
+    postId: number
 }
 
 
-export default function PostImagePreview({ src }: Props) {
+export default function PostImagePreview({ postId }: Props) {
     return (
         <div className={`relative aspect-square`}>
             <Image className={`size-full object-center rounded-md object-cover`}
-                src={src} width="400" height="400" alt="Post image" />
+                src={`/api/post/image/${postId}`}
+                width="400" height="400" alt="Post image" />
         </div>
     );
 }

@@ -1,19 +1,19 @@
 "use client"
 
 import { ReactNode, useEffect, useRef, useState } from 'react';
+
 import Dropdown from '@/components/common/Dropdown';
-import { getProfileImagePreview } from '@/lib/profile-controller';
+import ProfileImage from '@/components/profile/image/ProfileImage';
 
 
 type Props = {
-    user: UserDTO | UserPreviewDTO;
+    user: UserDTO;
     children?: ReactNode;
 }
 
 
 export default function ProfilePreviewDropdown({ user, children }: Props) {
     const [showDropdown, setShowDropdown] = useState(false);
-    const profileImagePreview = getProfileImagePreview(user);
 
     const dropdown = useRef<HTMLDivElement>(null);
 
@@ -34,7 +34,7 @@ export default function ProfilePreviewDropdown({ user, children }: Props) {
     return (
         <div ref={dropdown}>
             <button onClick={e => { setShowDropdown(!showDropdown) }}>
-                {profileImagePreview}
+                <ProfileImage profileImageExist={user.isProfileImageExist} username={user.username} preview />
             </button>
             {showDropdown &&
                 <Dropdown>
