@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import PostImagePreview from '@/components/post/PostImagePreview';
+import PostImagePreview from '@/components/post/image/PostImagePreview';
 
 type PostProps = {
     post: PostPreviewDTO

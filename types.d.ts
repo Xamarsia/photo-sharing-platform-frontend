@@ -13,6 +13,10 @@ type PostPreviewDTO = {
     "id": number,
 }
 
+type UpdatePostRequest = {
+    "description": string | undefined,
+}
+
 type PostDTO = {
     "id": number,
     "createdDate": string,
