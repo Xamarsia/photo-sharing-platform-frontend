@@ -10,7 +10,7 @@ import TextSecondaryButton from "@/components/buttons/TextSecondaryButton";
 
 type Props = {
     local: any,
-    user: UserPreviewDTO,
+    user: UserDTO,
 }
 
 export default function ToggleFollowButton({ user, local }: Props) {

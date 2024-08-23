@@ -1,4 +1,4 @@
-import ProfilePreview from "@/components/profile/ProfilePreview"
+import ProfilePreview from "@/components/profile/ProfilePreview";
 
 
 type Props = {

@@ -13,13 +13,13 @@ import DragAndDropFullPreview from '@/components/common/DragAndDropFullPreview';
 
 type Props = {
     local: any;
-    detailedPost: DetailedPostDTO;
+    post: PostDTO;
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
-export default function EditPostForm({ local, detailedPost, onSubmit }: Props) {
+export default function EditPostForm({ local, post, onSubmit }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false)
-    const [description, setDescription] = useState(detailedPost.postDTO?.description);
+    const [description, setDescription] = useState(post?.description);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
 
     const onImageSelected = (file: SetStateAction<File | undefined>) => {
