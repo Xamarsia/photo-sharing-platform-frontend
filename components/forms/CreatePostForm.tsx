@@ -46,7 +46,8 @@ export default function CreatePostForm({ local }: Props) {
 
 
         const post: PostDTO | undefined = await createPost(formData);
-        if(post) {
+        if (post) {
+            router.prefetch(`${post.id}`)
             router.push(`${post.id}`);
         }
     }
