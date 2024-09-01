@@ -4,13 +4,14 @@
 import { useState } from "react";
 import { UserState } from '@/constants';
 
-
-import style from '@/app/styles/text/text.module.css';
+import TextButton from "@/components/buttons/TextButton";
+import TextSecondaryButton from "@/components/buttons/TextSecondaryButton";
+import { follow, unfollow } from "@/actions/user-actions";
 
 
 type Props = {
     local: any,
-    user: UserPreviewDTO,
+    user: UserDTO,
 }
 
 export default function ToggleFollowButton({ user, local }: Props) {
@@ -18,23 +19,20 @@ export default function ToggleFollowButton({ user, local }: Props) {
 
     async function followProfile() {
         setFollowing(true);
+        follow();
     }
 
     async function unfollowProfile() {
         setFollowing(false);
+        unfollow();
     }
 
     return (
         <>
             {user.state != UserState.Current &&
                 (following
-                    ? <button className={`${style['button-text']} bg-white hover:bg-slate-100 h-10 px-4 rounded-xl text-gray-700 border border-gray-200`} onClick={unfollowProfile}>
-                        {local.unfollow}
-                    </button>
-
-                    : <button className={`${style['button-text']} bg-blue-500 hover:bg-blue-600 h-10 px-4 rounded-xl text-white border `} onClick={followProfile}>
-                        {local.follow}
-                    </button>
+                    ? <TextSecondaryButton text={local.unfollow} onClick={unfollowProfile} />
+                    : <TextButton text={local.follow} onClick={followProfile} />
                 )
             }
         </>

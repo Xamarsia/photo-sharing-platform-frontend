@@ -3,11 +3,16 @@
 
 import styles from '@/app/styles/text/text.module.css';
 
-import Input from '@/components/common/Input';
-import TextButton from '@/components/buttons/TextButton';
-
 import { FormEvent, useState } from "react";
 import Link from 'next/link';
+
+import Input from '@/components/common/Input';
+import TextButton from '@/components/buttons/TextButton';
+import TextIconSecondaryButton from '@/components/buttons/TextIconSecondaryButton';
+
+import google from '@/public/google/google-icon-logo.svg';
+
+import { signInWithGoogle } from '@/lib/firebase/auth';
 
 
 type Props = {
@@ -21,11 +26,6 @@ export default function SignInForm({ local, onSubmit }: Props) {
     const [email, setEmail] = useState("localpart@domain.com")
     const [formIsValid, setFormIsValid] = useState(true);
 
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [formIsValid, setFormIsValid] = useState(false);
-
-
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         if (onSubmit) {
@@ -36,9 +36,19 @@ export default function SignInForm({ local, onSubmit }: Props) {
     return (
         <form onSubmit={handleSubmit} onChange={(e) =>
             setFormIsValid(e.currentTarget.checkValidity())}
-            className={`flex flex-col gap-y-16 sm:gap-y-20`}>
+            className={`flex flex-col justify-between h-[412px]`}>
             <div className={`flex flex-col gap-y-3 sm:gap-y-6`}>
                 <h1 className={`${styles['h1']}`}>{local.signIn}</h1>
+
+                <TextIconSecondaryButton
+                    text={local.continueWithGoogle}
+                    onClick={signInWithGoogle}
+                    icon={google}
+                    fill="parent"
+                />
+
+                <hr className="h-px bg-gray-100 border-0" />
+
                 <Input
                     type="text"
                     name="email"
@@ -71,4 +81,3 @@ export default function SignInForm({ local, onSubmit }: Props) {
         </form>
     )
 }
-

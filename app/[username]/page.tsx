@@ -1,11 +1,11 @@
 import 'server-only';
 
-import { getDictionary } from '@/lib/localization';
-import { getUserPosts } from '@/lib/post-controller';
-import { getProfile } from '@/lib/profile-controller';
 
-import Profile from '@/components/common/Profile';
-import PostsPreviewGrid from '@/components/post/PostsPreviewGrid';
+import { getDictionary } from '@/lib/localization';
+import { getUserProfile } from '@/actions/user-actions';
+
+import Profile from '@/components/profile/Profile';
+import PostsPreviewGridInfiniteLoading from '@/components/common/infinite-loading/PostsPreviewGridInfiniteLoading';
 
 
 type PageProps = {
@@ -15,14 +15,18 @@ type PageProps = {
 
 export default async function ProfilePage({ params }: { params: PageProps }) {
     const dict = await getDictionary('en');
-    const profile: ProfileDTO = await getProfile(params.username);
-    const posts: Array<PostDTO> = await getUserPosts(params.username);
+
+    const profile: ProfileDTO | undefined = await getUserProfile(params.username);
 
     return (
-        <div className="flex flex-grow items-center flex-shrink justify-center lg:m-4">
+        <div className="flex flex-grow flex-shrink justify-center lg:m-4">
             <div className="flex flex-col items-center gap-4 max-w-7xl">
-                <Profile local={dict} profile={profile} />
-                <PostsPreviewGrid posts={posts} />
+                {profile &&
+                    <>
+                        <Profile local={dict} profile={profile} />
+                        <PostsPreviewGridInfiniteLoading username={params.username} />
+                    </>
+                }
             </div>
         </div>
     );

@@ -9,7 +9,8 @@
 			"extensions": [
 				"dbaeumer.vscode-eslint",
 				"christian-kohler.npm-intellisense",
-				"redhat.vscode-yaml"
+				"redhat.vscode-yaml",
+				"bradlc.vscode-tailwindcss",
 			]
 		}
 	},

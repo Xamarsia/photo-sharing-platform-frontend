@@ -1,26 +1,31 @@
 import 'server-only';
 
-import { getDictionary } from '@/lib/localization';
-import { getDetailedPost } from '@/lib/post-controller';
 
 import Card from '@/components/common/Card';
+import NotFound from '@/components/common/NotFound';
 import EditPostForm from '@/components/forms/EditPostForm';
+
+import { getDictionary } from '@/lib/localization';
+import { getPost } from '@/actions/post-actions';
 
 
 type PageProps = {
-    postId: string,
+    postId: number,
 }
 
 
 export default async function EditPostPage({ params }: { params: PageProps }) {
     const dict = await getDictionary('en');
-    const postrData: DetailedPostDTO = await getDetailedPost(params.postId)
 
+    const post: PostDTO | undefined = await getPost(params.postId);
 
     return (
         <div className='flex flex-grow flex-shrink justify-center items-center'>
             <Card>
-                <EditPostForm local={dict} detailedPost={postrData} />
+                {post
+                    ? <EditPostForm local={dict} post={post} />
+                    : <NotFound alertTitle={dict.postNotFound} alertBody={dict.postDoesNotExist} />
+                }
             </Card>
         </div>
     );

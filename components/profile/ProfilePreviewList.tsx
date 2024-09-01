@@ -1,9 +1,9 @@
-import ProfilePreview from "@/components/profile/ProfilePreview"
+import ProfilePreview from "@/components/profile/ProfilePreview";
 
 
 type Props = {
     local: any,
-    users: Array<UserPreviewDTO>
+    users: Array<UserDTO>
 }
 
 export default function ProfilePreviewList({local, users }: Props) {

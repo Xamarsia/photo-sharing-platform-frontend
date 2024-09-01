@@ -1,7 +1,8 @@
 "use client";
 
 
-import style from '@/app/styles/text/text.module.css';
+import textStyle from '@/app/styles/text/text.module.css';
+import style from '@/app/styles/components/button.module.css';
 
 
 type Props = {
@@ -20,7 +21,8 @@ export default function TextButton({ text, type = 'button', fill = "content", di
         <div>
             <button type={type}
                 className={`
-                ${style['button-text']} bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 h-10 px-4 rounded-xl text-white 
+                ${textStyle['button-text']} 
+                ${style['primary']}
                 ${fill == 'parent' ? 'w-full' : ''}
             `}
                 disabled={disabled}

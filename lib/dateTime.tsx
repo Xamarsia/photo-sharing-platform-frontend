@@ -1,12 +1,6 @@
-export function getFormattedDate(dateString: string): string {
-    return new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(new Date(dateString))
-}
-
-export function getFormattedDateTime(dateString: string): string {
-    const locale = "en-US";
-    const timeZone = "Canada/Eastern";
+export function formatDateTime(dateString: string): string {
     return new Intl.DateTimeFormat(
-        'en-US',
+        process.env.LOCALE,
         {
             year: "numeric",
             month: 'long',
@@ -14,8 +8,7 @@ export function getFormattedDateTime(dateString: string): string {
             hour: 'numeric',
             minute: 'numeric',
             hourCycle: 'h24',
-            timeZone,
+            timeZone: process.env.TIME_ZONE,
         }
-    ).format(new Date(dateString)
-    )
+    ).format(new Date(dateString))
 }

@@ -40,8 +40,8 @@
     "posts": "Posts",
     "followers": "Followers",
     "followings": "Followings",
-    "signIn": "Sign In",
-    "signUp": "Sign Up",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
     "search": "Search",
     "copyrightText": "© 2024 Simple Photo Sharing Platform",
     "about": "About",
@@ -50,9 +50,9 @@
     "userInfo": "User info",
     "profileImage": "Profile image",
     "searchUsers": "Search users",
-    "": "",
-    "": "",
-    "": "",
+    "continueWithGoogle": "Continue with Google",
+    "finish": "Finish",
+    "signOut": "Sign Out",
     "": "",
     "": ""
 }
