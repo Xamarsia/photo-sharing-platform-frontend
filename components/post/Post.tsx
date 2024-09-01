@@ -16,7 +16,7 @@ type Props = {
 }
 
 
-export default async function Post({ local, detailedPost }: Props) {
+export default function Post({ local, detailedPost }: Props) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
 
     return (

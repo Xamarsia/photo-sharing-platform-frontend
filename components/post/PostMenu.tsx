@@ -2,6 +2,7 @@
 
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { useState } from 'react';
 import { UserState } from '@/constants';
@@ -12,8 +13,8 @@ import ProfileImage from '@/components/profile/image/ProfileImage';
 
 import styles from '@/app/styles/text/text.module.css';
 import { deletePost } from '@/actions/post-actions';
-import { useRouter } from 'next/navigation';
 import { follow, unfollow } from '@/actions/user-actions';
+import { formatDateTime } from '@/lib/dateTime';
 
 
 type Props = {
@@ -41,7 +42,7 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
             </Link>
             <div className="flex-1 flex gap-2 mx-4">
                 <span className={`${styles['main-info']}`}>{author.username}</span>
-                <span className={`${styles['secondary-info']}`}>{post.createdDate}</span>
+                <time dateTime={post.createdDate} suppressHydrationWarning className={`${styles['secondary-info']}`}>{formatDateTime(post.createdDate)}</time>
             </div>
             <PostDropdown>
                 <DropdownButton text={local.goToPost} onClick={() => { router.push(`/post/${post.id}`); }} />
