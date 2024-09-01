@@ -52,6 +52,6 @@
     "continueWithGoogle": "Continue with Google",
     "finish": "Finish",
     "signOut": "Sign Out",
-    "": "",
-    "": ""
+    "delete": "Delete",
+    "deleteThisPost": "Are you sure you want to delete this post?"
 }

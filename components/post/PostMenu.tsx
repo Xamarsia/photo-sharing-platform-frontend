@@ -7,9 +7,12 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { UserState } from '@/constants';
 
+import Modal from '@/components/common/Modal';
 import PostDropdown from '@/components/post/PostDropdown';
 import DropdownButton from '@/components/buttons/DropdownButton';
 import ProfileImage from '@/components/profile/image/ProfileImage';
+import TextRemoveButton from '@/components/buttons/TextRemoveButton';
+import DropdownRemoveButton from '@/components/buttons/DropdownRemoveButton';
 
 import styles from '@/app/styles/text/text.module.css';
 import { deletePost } from '@/actions/post-actions';
@@ -27,6 +30,7 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
     const [author] = useState<UserDTO>(detailedPost.authorDTO);
     const [isUserPostOwner] = useState<boolean>(author.state == UserState.Current);
+    const [showDeletePostModal, setShowDeletePostModal] = useState(false);
     const router = useRouter();
 
     async function onDeletePost() {
@@ -48,7 +52,7 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
                 {isUserPostOwner
                     ? <>
                         <DropdownButton text={local.editPost} onClick={() => { router.push(`/post/${post.id}/edit`); }} />
-                        <DropdownButton text={local.deletePost} onClick={onDeletePost} />
+                        <DropdownRemoveButton text={local.deletePost} onClick={() => { setShowDeletePostModal(true); }} />
                     </>
                     :
                     <> {author.state == UserState.Unfollowed
@@ -57,6 +61,13 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
                     } </>
                 }
             </PostDropdown>
+            {showDeletePostModal &&
+                <Modal onCloseClicked={() => { setShowDeletePostModal(false); }} title={local.deletePost} opened={showDeletePostModal}>
+                    <div className='flex flex-col gap-20'>
+                        <p>{local.deleteThisPost}</p>
+                        <TextRemoveButton text={local.delete} onClick={onDeletePost} />
+                    </div>
+                </Modal>}
         </div>
     )
 }
