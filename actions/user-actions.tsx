@@ -69,3 +69,15 @@ export async function updateUsername(data: UsernameUpdateRequest): Promise<UserD
     const user: UserDTO = await res.json();
     return user;
 }
+
+export async function updateUserInfo(data: UserInfoUpdateRequest): Promise<UserDTO | undefined> {
+    const req = await JSONRequest(data, { method: 'PUT' });
+    const res: Response = await authFetch(`/user/update`, req);
+
+    if (!res.ok) {
+        return undefined;
+    }
+
+    const user: UserDTO = await res.json();
+    return user;
+}

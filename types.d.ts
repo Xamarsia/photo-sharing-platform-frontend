@@ -9,6 +9,11 @@ type UserDTO = {
     "isProfileImageExist": boolean
 }
 
+type UserInfoUpdateRequest = {
+    "fullName": string | undefined,
+    "description": string | undefined,
+}
+
 type PostPreviewDTO = {
     "id": number,
 }
