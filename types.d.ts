@@ -17,6 +17,10 @@ type UpdatePostRequest = {
     "description": string | undefined,
 }
 
+type UsernameUpdateRequest = {
+    "username": string
+}
+
 type PostDTO = {
     "id": number,
     "createdDate": string,

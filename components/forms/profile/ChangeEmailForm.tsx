@@ -6,7 +6,6 @@ import TextButton from '@/components/buttons/TextButton';
 
 
 import { FormEvent, useState } from "react";
-import { getUser } from "@/lib/profile-controller";
 
 
 type Props = {
@@ -15,10 +14,9 @@ type Props = {
 }
 
 export default function ChangeEmailForm({ local, onSubmit }: Props) {
-    const user: UserDTO = getUser();
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [formIsValid, setFormIsValid] = useState(false);
-    const [email, setEmail] = useState(user.email);
+    const [email, setEmail] = useState("");
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();

@@ -1,6 +1,6 @@
 'use server'
 
-import { authFetch } from "@/lib/auth-controller";
+import { authFetch, JSONRequest } from "@/lib/auth-controller";
 
 
 export async function getUser(username: string): Promise<UserDTO | undefined> {
@@ -19,6 +19,15 @@ export async function getUserProfile(username: string): Promise<ProfileDTO | und
     }
     const profile: ProfileDTO = await res.json();
     return profile;
+}
+
+export async function getAuthenticatedUser(): Promise<UserDTO | undefined> {
+    const res: Response = await authFetch(`/user`, { method: 'GET', });
+    if (!res.ok) {
+        return undefined;
+    }
+    const user: UserDTO = await res.json();
+    return user;
 }
 
 export async function fetchPageData(size: number, page: number, url: string) {
@@ -40,3 +49,23 @@ export async function getFollowings(username: string, size: number, page: number
     return content;
 }
 
+
+export async function updateProfileImage(data: FormData): Promise<void> {
+    const res: Response = await authFetch(`/user/profile/image`, { method: 'PUT', body: data, });
+    if (!res.ok) {
+        return undefined;
+    }
+    return;
+}
+
+export async function updateUsername(data: UsernameUpdateRequest): Promise<UserDTO | undefined> {
+    const req = await JSONRequest(data, { method: 'PUT' });
+    const res: Response = await authFetch(`/user/username/update`, req);
+
+    if (!res.ok) {
+        return undefined;
+    }
+
+    const user: UserDTO = await res.json();
+    return user;
+}

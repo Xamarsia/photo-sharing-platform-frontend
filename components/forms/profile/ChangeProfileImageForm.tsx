@@ -6,34 +6,48 @@ import FileSelector from "@/components/common/FileSelector";
 import DragAndDropCirclePreview from "@/components/common/DragAndDropCirclePreview";
 
 import { FormEvent, SetStateAction, useState } from "react";
+import { updateProfileImage } from '@/actions/user-actions';
+import { useRouter } from 'next/navigation';
 
 
 type Props = {
-    local: any;
-    onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
+    local: any,
+    user: UserDTO,
 }
 
 
-export default function ChangeProfileImageForm({ local, onSubmit }: Props) {
+export default function ChangeProfileImageForm({ local, user }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [formIsValid, setFormIsValid] = useState(false);
-
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
-
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        if (onSubmit) {
-            onSubmit(event);
-        }
-    }
+    const [isDefaultImageChanged, setIsDefaultImageChanged] = useState<boolean>(false);
+    const router = useRouter();
 
     const onImageSelected = (file: SetStateAction<File | undefined>) => {
         setSelectedImage(file);
+        if (file) {
+            setIsDefaultImageChanged(true);
+        }
     };
+
+    async function onUpdate(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        //TODO Add error handling
+        if (selectedImage) {
+            if (selectedImage.type == "image/png") {
+                throw new Error("[Create post]: Incorrect post image type. Only .jpg and jpeg are acceptable!");
+            }
+            let formData = new FormData();
+            formData.append('file', selectedImage);
+            await updateProfileImage(formData);
+        }
+        router.push(`/${user.username}`);
+    }
 
     return (
 
-        <form onSubmit={handleSubmit}
+        <form onSubmit={onUpdate}
             onChange={(e) => {
                 setFormIsValid(e.currentTarget.checkValidity())
                 setIsFormChanged(true)
@@ -41,7 +55,11 @@ export default function ChangeProfileImageForm({ local, onSubmit }: Props) {
             className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
             <div className='size-72'>
                 <FileSelector onImageSelected={onImageSelected} local={local} rounded  >
-                    {selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />}
+                    {isDefaultImageChanged || !user.isProfileImageExist
+                        ? (selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />)
+                        : <DragAndDropCirclePreview src={`/api/user/avatar/${user.username}`} />
+                    }
+
                 </FileSelector>
             </div>
 

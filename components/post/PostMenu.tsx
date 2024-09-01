@@ -45,7 +45,6 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
                 <time dateTime={post.createdDate} suppressHydrationWarning className={`${styles['secondary-info']}`}>{formatDateTime(post.createdDate)}</time>
             </div>
             <PostDropdown>
-                <DropdownButton text={local.goToPost} onClick={() => { router.push(`/post/${post.id}`); }} />
                 {isUserPostOwner
                     ? <>
                         <DropdownButton text={local.editPost} onClick={() => { router.push(`/post/${post.id}/edit`); }} />

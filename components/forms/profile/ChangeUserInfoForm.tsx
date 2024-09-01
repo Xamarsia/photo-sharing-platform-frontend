@@ -6,21 +6,23 @@ import TextButton from '@/components/buttons/TextButton';
 import Textarea from "@/components/common/Textarea";
 
 import { FormEvent, useState } from "react";
-import { getUser } from "@/lib/profile-controller";
 
 
 type Props = {
     local: any,
+    user: UserDTO,
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void,
 }
 
 
-export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
-    const user: UserDTO = getUser();
-    const [isFormChanged, setIsFormChanged] = useState<boolean>(false)
-    const [fullName, setfullName] = useState(user.fullName);
+export default function ChangeUserInfoForm({ local, user, onSubmit }: Props) {
+    const defaultFullName: string | undefined = (user.fullName == null ? undefined : user.fullName);
+    const defaultDescription: string | undefined = (user.description == null ? undefined : user.description);
+
+    const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
+    const [fullName, setfullName] = useState(defaultFullName);
     const [formIsValid, setFormIsValid] = useState(false);
-    const [description, setDescription] = useState(user?.description);
+    const [description, setDescription] = useState(defaultDescription);
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -45,7 +47,6 @@ export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
                 title={local.fullName}
                 pattern="^[a-zA-Z\s]{2,30}$"
                 onChange={(e) => setfullName(e.target.value)}
-                required
             />
 
             <Textarea
