@@ -81,3 +81,11 @@ export async function updateUserInfo(data: UserInfoUpdateRequest): Promise<UserD
     const user: UserDTO = await res.json();
     return user;
 }
+
+export async function deleteProfileImage(): Promise<void> {
+    const res: Response = await authFetch(`/user/profile/image`, { method: 'DELETE' });
+    if (!res.ok) {
+        return undefined;
+    }
+    return;
+}

@@ -18,11 +18,13 @@ type Props = {
     local: any,
     rounded?: boolean,
     children?: ReactNode,
+    defaultImageExist?: boolean,
+    onDefaultImageRemoved?: () => void,
     onImageSelected?: (file: SetStateAction<File | undefined>) => void,
 }
 
 
-export default function FileSelector({ local, rounded, children, onImageSelected }: Props) {
+export default function FileSelector({ local, rounded, children, defaultImageExist, onDefaultImageRemoved, onImageSelected }: Props) {
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [dragActive, setDragActive] = useState<boolean>(false);
 
@@ -65,6 +67,11 @@ export default function FileSelector({ local, rounded, children, onImageSelected
 
     const handleCloseClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
+        
+        if (defaultImageExist && onDefaultImageRemoved) {
+            onDefaultImageRemoved();
+            return;
+        }
         setSelectedImage(undefined);
     };
 
@@ -83,12 +90,12 @@ export default function FileSelector({ local, rounded, children, onImageSelected
                     ${dragActive ? 'bg-gray-600/25' : ''}
                 `}>
 
-                {selectedImage &&
+                {(selectedImage || defaultImageExist) &&
                     <div className={`absolute top-0 right-0`}>
                         <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
                     </div>
                 }
-                <div className={`flex flex-col items-center justify-center  ${selectedImage ? 'invisible' : 'visible'}`}>
+                <div className={`flex flex-col items-center justify-center  ${(selectedImage || defaultImageExist) ? 'invisible' : 'visible'}`}>
                     <Image src={photo} alt="photo" className={`size-8 inline-flex justify-center items-center aspect-square`} />
 
                     <div className='flex gap-1'>

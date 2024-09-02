@@ -53,5 +53,8 @@
     "finish": "Finish",
     "signOut": "Sign Out",
     "delete": "Delete",
-    "deleteThisPost": "Are you sure you want to delete this post?"
+    "remove": "Remove",
+    "deleteThisPost": "Are you sure you want to delete this post?",
+    "removeProfileImage": "Remove profile image",
+    "removeProfileImageMessage": "Are you sure you want to remove profile image?"
 }

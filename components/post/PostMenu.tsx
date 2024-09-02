@@ -30,7 +30,7 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
     const [author] = useState<UserDTO>(detailedPost.authorDTO);
     const [isUserPostOwner] = useState<boolean>(author.state == UserState.Current);
-    const [showDeletePostModal, setShowDeletePostModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const router = useRouter();
 
     async function onDeletePost() {
@@ -52,22 +52,20 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
                 {isUserPostOwner
                     ? <>
                         <DropdownButton text={local.editPost} onClick={() => { router.push(`/post/${post.id}/edit`); }} />
-                        <DropdownRemoveButton text={local.deletePost} onClick={() => { setShowDeletePostModal(true); }} />
+                        <DropdownRemoveButton text={local.deletePost} onClick={() => { setShowModal(true); }} />
                     </>
-                    :
-                    <> {author.state == UserState.Unfollowed
+                    : <> {author.state == UserState.Unfollowed
                         ? <DropdownButton text={local.follow} onClick={follow} />
                         : <DropdownButton text={local.unfollow} onClick={unfollow} />
                     } </>
                 }
             </PostDropdown>
-            {showDeletePostModal &&
-                <Modal onCloseClicked={() => { setShowDeletePostModal(false); }} title={local.deletePost} opened={showDeletePostModal}>
-                    <div className='flex flex-col gap-20'>
-                        <p>{local.deleteThisPost}</p>
-                        <TextRemoveButton text={local.delete} onClick={onDeletePost} />
-                    </div>
-                </Modal>}
+            <Modal onCloseClicked={() => { setShowModal(false); }} title={local.deletePost} opened={showModal}>
+                <div className='flex flex-col gap-20'>
+                    <p>{local.deleteThisPost}</p>
+                    <TextRemoveButton text={local.delete} onClick={onDeletePost} />
+                </div>
+            </Modal>
         </div>
     )
 }
