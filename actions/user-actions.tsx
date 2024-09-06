@@ -39,17 +39,6 @@ export async function fetchPageData(size: number, page: number, url: string) {
     return await res.json();
 };
 
-export async function getFollowers(username: string, size: number, page: number): Promise<Array<UserDTO>> {
-    const { content, last } = await fetchPageData(size, page, `/user/${username}/followers`);
-    return content;
-}
-
-export async function getFollowings(username: string, size: number, page: number): Promise<Array<UserDTO>> {
-    const { content, last } = await fetchPageData(size, page, `/user/${username}/followings`);
-    return content;
-}
-
-
 export async function updateProfileImage(data: FormData): Promise<void> {
     const res: Response = await authFetch(`/user/profile/image`, { method: 'PUT', body: data, });
     if (!res.ok) {
@@ -92,6 +81,22 @@ export async function deleteProfileImage(): Promise<void> {
 
 export async function deleteAccount(): Promise<void> {
     const res: Response = await authFetch(`/user`, { method: 'DELETE' });
+    if (!res.ok) {
+        return undefined;
+    }
+    return;
+}
+
+export async function follow(username: string): Promise<void> {
+    const res: Response = await authFetch(`/user/${username}/follow`, { method: 'PUT' });
+    if (!res.ok) {
+        return undefined;
+    }
+    return;
+}
+
+export async function unfollow(username: string): Promise<void> {
+    const res: Response = await authFetch(`/user/${username}/unfollow`, { method: 'PUT' });
     if (!res.ok) {
         return undefined;
     }

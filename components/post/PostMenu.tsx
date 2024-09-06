@@ -13,10 +13,10 @@ import DropdownButton from '@/components/buttons/DropdownButton';
 import ProfileImage from '@/components/profile/image/ProfileImage';
 import TextRemoveButton from '@/components/buttons/TextRemoveButton';
 import DropdownRemoveButton from '@/components/buttons/DropdownRemoveButton';
+import ToggleDropdownFollowButton from '@/components/buttons/ToggleDropdownFollowButton';
 
 import styles from '@/app/styles/text/text.module.css';
 import { deletePost } from '@/actions/post-actions';
-import { follow, unfollow } from '@/actions/user-actions';
 import { formatDateTime } from '@/lib/dateTime';
 
 
@@ -54,10 +54,9 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
                         <DropdownButton text={local.editPost} onClick={() => { router.push(`/post/${post.id}/edit`); }} />
                         <DropdownRemoveButton text={local.deletePost} onClick={() => { setShowModal(true); }} />
                     </>
-                    : <> {author.state == UserState.Unfollowed
-                        ? <DropdownButton text={local.follow} onClick={follow} />
-                        : <DropdownButton text={local.unfollow} onClick={unfollow} />
-                    } </>
+                    : <>
+                        <ToggleDropdownFollowButton local={local} user={author} />
+                    </>
                 }
             </PostDropdown>
             <Modal onCloseClicked={() => { setShowModal(false); }} title={local.deletePost} opened={showModal}>
