@@ -23,6 +23,7 @@ export default function Sidebar({ local }: Props) {
         { href: "/profile/edit/password", title: local.password },
         { href: "/profile/edit/username", title: local.username },
         { href: "/profile/edit/email", title: local.email },
+        { href: "/profile/edit/delete", title: local.deleteAccount },
     ];
 
     return (

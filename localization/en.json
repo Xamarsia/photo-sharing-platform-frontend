@@ -56,5 +56,7 @@
     "remove": "Remove",
     "deleteThisPost": "Are you sure you want to delete this post?",
     "removeProfileImage": "Remove profile image",
-    "removeProfileImageMessage": "Are you sure you want to remove profile image?"
+    "removeProfileImageMessage": "Are you sure you want to remove profile image?",
+    "deleteAccount":"Delete account",
+    "deleteAccountMessage": "Are you sure you want to delete SPSP account?"
 }

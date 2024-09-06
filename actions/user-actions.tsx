@@ -89,3 +89,11 @@ export async function deleteProfileImage(): Promise<void> {
     }
     return;
 }
+
+export async function deleteAccount(): Promise<void> {
+    const res: Response = await authFetch(`/user`, { method: 'DELETE' });
+    if (!res.ok) {
+        return undefined;
+    }
+    return;
+}
