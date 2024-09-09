@@ -1,12 +1,15 @@
-'use client'
+'use client';
+
 
 import { auth } from "@/lib/firebase/clientApp";
 import { saveTokenToHttponlyCookies } from "@/actions/actions";
 import { ReactNode, useEffect } from "react";
 
+
 type Props = {
     children: ReactNode,
 }
+
 
 export default function Page({ children }: Props) {
 

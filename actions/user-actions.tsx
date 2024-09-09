@@ -1,4 +1,4 @@
-'use server'
+'use server';
 
 import { authFetch, JSONRequest } from "@/lib/auth-controller";
 
@@ -30,8 +30,8 @@ export async function getAuthenticatedUser(): Promise<UserDTO | undefined> {
     return user;
 }
 
-export async function fetchPageData(size: number, page: number, url: string) {
-    const res: Response = await authFetch(`${url}?size=${size}&page=${page}`, { method: 'GET' });
+export async function fetchPageData(size: number, page: number, url: string, urlParams?: string) {
+    const res: Response = await authFetch(`${url}?size=${size}&page=${page}&${urlParams}`, { method: 'GET' });
 
     if (!res.ok) {
         return undefined;
