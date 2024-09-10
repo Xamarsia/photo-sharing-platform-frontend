@@ -12,29 +12,45 @@ import TextIconSecondaryButton from '@/components/buttons/TextIconSecondaryButto
 
 import google from '@/public/google/google-icon-logo.svg';
 
-import { signInWithGoogle } from '@/lib/firebase/auth';
+import { signInWithEmailPassword, signInWithGoogle } from '@/lib/firebase/auth';
+import { useRouter } from 'next/navigation';
 
 
 type Props = {
     local: any;
-    onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
 
-export default function SignInForm({ local, onSubmit }: Props) {
+export default function SignInForm({ local }: Props) {
     const [password, setPassword] = useState("password");
     const [email, setEmail] = useState("localpart@domain.com")
     const [formIsValid, setFormIsValid] = useState(true);
+    const router = useRouter();
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleSignInWithEmailAndPassword(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if (onSubmit) {
-            onSubmit(event);
+
+        const body: LoginRequest = {
+            email: email,
+            password: password,
+        }
+
+        const isAuthorized: boolean = await signInWithEmailPassword(body);
+        if (isAuthorized) {
+            router.replace('/news');
+        }
+    }
+
+    async function handleSignInWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
+        const isAuthorized: boolean = await signInWithGoogle();
+        if (isAuthorized) {
+            router.replace('/news');
         }
     }
 
     return (
-        <form onSubmit={handleSubmit} onChange={(e) =>
+        <form onSubmit={handleSignInWithEmailAndPassword} onChange={(e) =>
             setFormIsValid(e.currentTarget.checkValidity())}
             className={`flex flex-col justify-between h-[412px]`}>
             <div className={`flex flex-col gap-y-3 sm:gap-y-6`}>
@@ -42,7 +58,7 @@ export default function SignInForm({ local, onSubmit }: Props) {
 
                 <TextIconSecondaryButton
                     text={local.continueWithGoogle}
-                    onClick={signInWithGoogle}
+                    onClick={handleSignInWithGoogle}
                     icon={google}
                     fill="parent"
                 />

@@ -19,6 +19,11 @@ type RegisterRequest = {
     "fullName": string | undefined,
 }
 
+type LoginRequest = {
+    "email": string,
+    "password": string,
+}
+
 type PostPreviewDTO = {
     "id": number,
 }

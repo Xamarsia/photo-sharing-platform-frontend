@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import { FormEvent, useState } from "react";
 
-import { signUpWithGoogle } from '@/lib/firebase/auth';
+import { signUpWithEmailPassword, signUpWithGoogle } from '@/lib/firebase/auth';
 
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
@@ -28,15 +28,21 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
     const [email, setEmail] = useState("localpart@domain.com");
     const [formIsValid, setFormIsValid] = useState(true);
 
-
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleSignUpWithEmailAndPassword(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if (onSubmit) {
+
+        const body: LoginRequest = {
+            email: email,
+            password: password,
+        }
+
+        const isAuthorized: boolean = await signUpWithEmailPassword(body);
+        if (isAuthorized && onSubmit) {
             onSubmit();
         }
     }
 
-    async function handleSignInWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {
+    async function handleSignUnWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
         const isAuthorized: boolean = await signUpWithGoogle();
         if (isAuthorized && onSubmit) {
@@ -45,7 +51,7 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
     }
 
     return (
-        <form onSubmit={handleSubmit}
+        <form onSubmit={handleSignUpWithEmailAndPassword}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
             className={`flex flex-col justify-between h-[412px]`}>
             <div className={`flex flex-col gap-y-3 sm:gap-y-6`}>
@@ -53,7 +59,7 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
 
                 <TextIconSecondaryButton
                     text={local.continueWithGoogle}
-                    onClick={handleSignInWithGoogle}
+                    onClick={handleSignUnWithGoogle}
                     icon={google}
                     fill="parent"
                 />
