@@ -1,14 +1,16 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
 import '@/app/styles/globals.css';
 
 import { getDictionary } from '@/lib/localization';
+import { getCurrentUser } from '@/actions/actions';
 
 import Footer from '@/components/common/Footer';
 import Header from '@/components/common/Header';
-import FixedRoundCreatePostButton from '@/components/buttons/FixedRoundCreatePostButton';
 import AuthProvider from '@/components/common/AuthProvider';
-import { getCurrentUser } from '@/actions/actions';
+import FixedRoundCreatePostButton from '@/components/buttons/FixedRoundCreatePostButton';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
