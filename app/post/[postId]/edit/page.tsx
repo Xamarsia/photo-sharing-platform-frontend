@@ -20,7 +20,7 @@ export default async function EditPostPage({ params }: { params: PageProps }) {
     const post: PostDTO | undefined = await getPost(params.postId);
 
     return (
-        <div className='flex flex-grow flex-shrink justify-center items-center'>
+        <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
             <Card>
                 {post
                     ? <EditPostForm local={dict} post={post} />

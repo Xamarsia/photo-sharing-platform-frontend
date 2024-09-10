@@ -1,8 +1,7 @@
 'use client';
 
-
-import InfiniteLoading from '@/components/common/infinite-loading/InfiniteLoading';
 import PostsPreviewGrid from '@/components/post/PostsPreviewGrid';
+import InfiniteLoading from '@/components/common/infinite-loading/InfiniteLoading';
 
 
 type Props = {
@@ -12,6 +11,8 @@ type Props = {
 
 export default async function PostsPreviewGridInfiniteLoading({ username }: Props) {
     return (
-        <InfiniteLoading<PostPreviewDTO> size={6} url={`/post/preview/${username}`} displayItems={(items) => (<PostsPreviewGrid posts={items} />)} />
+        <InfiniteLoading<PostPreviewDTO> size={6} displayItems={
+            (items) => (<PostsPreviewGrid posts={items} />)
+        } url={`/post/preview/${username}`} />
     );
 }
