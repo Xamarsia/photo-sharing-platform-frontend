@@ -14,6 +14,11 @@ type UserInfoUpdateRequest = {
     "description": string | undefined,
 }
 
+type RegisterRequest = {
+    "username": string,
+    "fullName": string | undefined,
+}
+
 type PostPreviewDTO = {
     "id": number,
 }

@@ -12,6 +12,23 @@ export async function getUser(username: string): Promise<UserDTO | undefined> {
     return user;
 }
 
+export async function registerUser(data: RegisterRequest): Promise<UserDTO | undefined> {
+    const req = await JSONRequest(data, { method: 'POST' });
+    const res: Response = await authFetch(`/user/register`, req);
+
+    if (!res.ok) {
+        return undefined;
+    }
+
+    const user: UserDTO = await res.json();
+    return user;
+}
+
+export async function saveAuth(): Promise<boolean> {
+    const res: Response = await authFetch('/auth', { method: 'POST', });
+    return res.ok;
+}
+
 export async function getUserProfile(username: string): Promise<ProfileDTO | undefined> {
     const res: Response = await authFetch(`/user/profile/${username}`, { method: 'GET', });
     if (!res.ok) {

@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import { FormEvent, useState } from "react";
 
-import { signInWithGoogle } from '@/lib/firebase/auth';
+import { signUpWithGoogle } from '@/lib/firebase/auth';
 
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
@@ -36,6 +36,14 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
         }
     }
 
+    async function handleSignInWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
+        const isAuthorized: boolean = await signUpWithGoogle();
+        if (isAuthorized && onSubmit) {
+            onSubmit();
+        }
+    }
+
     return (
         <form onSubmit={handleSubmit}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
@@ -45,7 +53,7 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
 
                 <TextIconSecondaryButton
                     text={local.continueWithGoogle}
-                    onClick={signInWithGoogle}
+                    onClick={handleSignInWithGoogle}
                     icon={google}
                     fill="parent"
                 />
