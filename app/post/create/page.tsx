@@ -10,7 +10,7 @@ export default async function CreatePostPage() {
     const dict = await getDictionary('en');
 
     return (
-        <div className='flex flex-grow justify-center items-center'>
+        <div className='flex flex-grow justify-center items-center m-4'>
             <Card>
                 <CreatePostForm local={dict} />
             </Card>

@@ -12,6 +12,9 @@ import FileSelector from "@/components/common/FileSelector";
 import DragAndDropFullPreview from '@/components/common/DragAndDropFullPreview';
 
 import { createPost } from "@/actions/post-actions";
+// 'use server'
+// import { redirect } from 'next/navigation'
+// import { revalidatePath } from 'next/cache'
 
 
 type Props = {
@@ -49,6 +52,10 @@ export default function CreatePostForm({ local }: Props) {
         if (post) {
             router.prefetch(`${post.id}`)
             router.push(`${post.id}`);
+
+            //TODO Add revalidation
+            // revalidatePath('/posts') // Update cached posts
+            // redirect(`/post/${id}`) // Navigate to the new post page
         }
     }
 

@@ -8,6 +8,7 @@ import ProfileImage from '@/components/profile/image/ProfileImage';
 import ToggleFollowButton from '@/components/buttons/ToggleFollowButton';
 
 import { useRouter } from 'next/navigation';
+import { UserState } from '@/constants';
 
 
 type Props = {
@@ -34,8 +35,11 @@ export default function Profile({ local, profile }: Props) {
 
             <StatsInfo local={local} profile={profile} />
             <div className="flex flex-row items-center basis-1/3 my-4">
-                <ToggleFollowButton user={profile.userDTO} local={local} />
-                <TextButton fill="parent" text={local.editProfile} onClick={(e) => { router.push('/profile/edit/info') }} />
+
+                {profile.userDTO.state == UserState.Current
+                    ? <TextButton fill="parent" text={local.editProfile} onClick={(e) => { router.push('/profile/edit/info') }} />
+                    : <ToggleFollowButton user={profile.userDTO} local={local} />
+                }
             </div>
         </div>
     )

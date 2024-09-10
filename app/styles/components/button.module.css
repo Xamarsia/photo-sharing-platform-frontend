@@ -5,3 +5,7 @@
 .secondary {
     @apply bg-white hover:bg-gray-50 h-10 px-4 rounded-xl text-gray-700 border border-gray-100
 }
+
+.remove {
+    @apply bg-red-600 hover:bg-red-500 disabled:bg-red-300 h-10 px-4 rounded-xl text-white 
+}

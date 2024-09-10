@@ -6,32 +6,51 @@ import TextButton from '@/components/buttons/TextButton';
 import Textarea from "@/components/common/Textarea";
 
 import { FormEvent, useState } from "react";
-import { getUser } from "@/lib/profile-controller";
+import { updateUserInfo } from '@/actions/user-actions';
+import { useRouter } from 'next/navigation';
 
 
 type Props = {
     local: any,
-    onSubmit?: (event: FormEvent<HTMLFormElement>) => void,
+    user: UserDTO,
 }
 
 
-export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
-    const user: UserDTO = getUser();
-    const [isFormChanged, setIsFormChanged] = useState<boolean>(false)
-    const [fullName, setfullName] = useState(user.fullName);
-    const [formIsValid, setFormIsValid] = useState(false);
-    const [description, setDescription] = useState(user?.description);
+export default function ChangeUserInfoForm({ local, user }: Props) {
+    const defaultFullName: string | undefined = (user.fullName == null ? undefined : user.fullName);
+    const defaultDescription: string | undefined = (user.description == null ? undefined : user.description);
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    const [fullName, setfullName] = useState<string | undefined>(defaultFullName);
+    const [description, setDescription] = useState<string | undefined>(defaultDescription);
+    const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
+    const [formIsValid, setFormIsValid] = useState(false);
+
+    const router = useRouter();
+
+    async function handleUserInfoUpdate(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if (onSubmit) {
-            onSubmit(event);
+
+        if (!isFormChanged) {
+            return;
         }
+
+        if (fullName == user.fullName && description == user.description) {
+            return;
+        }
+
+        const body: UserInfoUpdateRequest = {
+            description: description,
+            fullName: fullName,
+        }
+
+        const newUser: UserDTO | undefined = await updateUserInfo(body);
+        router.push(`/${user.username}`);
     }
+
 
     return (
 
-        <form onSubmit={handleSubmit}
+        <form onSubmit={handleUserInfoUpdate}
             onChange={(e) => {
                 setFormIsValid(e.currentTarget.checkValidity())
                 setIsFormChanged(true)
@@ -43,9 +62,8 @@ export default function ChangeUserInfoForm({ local, onSubmit }: Props) {
                 name="fullName"
                 value={fullName}
                 title={local.fullName}
-                pattern="^[a-zA-Z\s]{2,30}$"
+                // pattern="^[a-zA-Z\s]{2,30}$"
                 onChange={(e) => setfullName(e.target.value)}
-                required
             />
 
             <Textarea

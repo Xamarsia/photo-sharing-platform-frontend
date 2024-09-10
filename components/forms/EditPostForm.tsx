@@ -24,16 +24,12 @@ export default function EditPostForm({ local, post }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [description, setDescription] = useState(post?.description);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
-    const [isDefaultImageChanged, setIsDefaultImageChanged] = useState<boolean>(false);
+    const [defaultImageExist, setDefaultImageExist] = useState<boolean>(true);
 
     const router = useRouter();
-    router.prefetch(`/../post/${post.id}`);
 
     const onImageSelected = (file: SetStateAction<File | undefined>) => {
         setSelectedImage(file);
-        if (file) {
-            setIsDefaultImageChanged(true);
-        }
     };
 
     async function onUpdate(event: FormEvent<HTMLFormElement>) {
@@ -59,6 +55,7 @@ export default function EditPostForm({ local, post }: Props) {
             }
             const newPost: PostDTO | undefined = await updatePost(post.id, body);
         }
+        router.prefetch(`/../post/${post.id}`);
         router.push(`/../post/${post.id}`);
     }
 
@@ -66,16 +63,16 @@ export default function EditPostForm({ local, post }: Props) {
         <form onSubmit={onUpdate} onChange={() => setIsFormChanged(true)} className={`flex flex-col gap-y-3 sm:gap-y-6`}>
             <h1 className={`${styles['h1']}`}>{local.editPost}</h1>
 
-            <FileSelector onImageSelected={onImageSelected} local={local} >
-                {isDefaultImageChanged
-                    ? (selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />)
-                    : <DragAndDropFullPreview src={`/api/post/image/${post.id}`} />
+            <FileSelector onImageSelected={onImageSelected} local={local} defaultImageExist={defaultImageExist} onDefaultImageRemoved={() => { setDefaultImageExist(false); }}>
+                {defaultImageExist
+                    ? <DragAndDropFullPreview src={`/api/post/image/${post.id}`} />
+                    : (selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />)
                 }
             </FileSelector>
 
             <Textarea value={description} title={local.description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} />
 
-            <TextButton type="submit" text={local.update} disabled={!isFormChanged && (selectedImage != undefined || !isDefaultImageChanged)} fill="content" />
+            <TextButton type="submit" text={local.update} disabled={!isFormChanged || (selectedImage == undefined && !defaultImageExist)} fill="content" />
         </form>
     )
 }

@@ -14,7 +14,6 @@
     "removeImage": "Remove image",
     "unfollow": "Unfollow",
     "follow": "Follow",
-    "goToPost": "Go to post",
     "editPost": "Edit post",
     "deletePost": "Delete post",
     "createPost": "Create Post",
@@ -53,6 +52,11 @@
     "continueWithGoogle": "Continue with Google",
     "finish": "Finish",
     "signOut": "Sign Out",
-    "": "",
-    "": ""
+    "delete": "Delete",
+    "remove": "Remove",
+    "deleteThisPost": "Are you sure you want to delete this post?",
+    "removeProfileImage": "Remove profile image",
+    "removeProfileImageMessage": "Are you sure you want to remove profile image?",
+    "deleteAccount":"Delete account",
+    "deleteAccountMessage": "Are you sure you want to delete SPSP account?"
 }

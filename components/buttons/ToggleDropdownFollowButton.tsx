@@ -4,9 +4,10 @@
 import { useState } from "react";
 import { UserState } from '@/constants';
 
-import TextButton from "@/components/buttons/TextButton";
-import TextSecondaryButton from "@/components/buttons/TextSecondaryButton";
+
 import { follow, unfollow } from "@/actions/user-actions";
+import DropdownRemoveButton from "@/components/buttons/DropdownRemoveButton";
+import DropdownButton from "@/components/buttons/DropdownButton";
 
 
 type Props = {
@@ -14,7 +15,7 @@ type Props = {
     user: UserDTO,
 }
 
-export default function ToggleFollowButton({ user, local }: Props) {
+export default function ToggleDropdownFollowButton({ user, local }: Props) {
     const [following, setFollowing] = useState<boolean>(user.state == UserState.Followed);
 
     async function followProfile() {
@@ -31,8 +32,8 @@ export default function ToggleFollowButton({ user, local }: Props) {
         <>
             {user.state != UserState.Current &&
                 (following
-                    ? <TextSecondaryButton text={local.unfollow} onClick={unfollowProfile} />
-                    : <TextButton text={local.follow} onClick={followProfile} />
+                    ? <DropdownRemoveButton text={local.unfollow} onClick={unfollowProfile} />
+                    : <DropdownButton text={local.follow} onClick={followProfile} />
                 )
             }
         </>

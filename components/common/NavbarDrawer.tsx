@@ -43,7 +43,7 @@ export default function NavbarDrawer({ local }: Props) {
 
             <div className={`bg-white z-10 ${showDropdown ? 'fixed top-20 left-0 size-full no-doc-scroll' : 'hidden'} `}>
                 <div ref={dropdown}>
-                    <Sidebar local={local} onClick={handleClick} />
+                    <Sidebar local={local} />
                 </div>
             </div>
         </div>

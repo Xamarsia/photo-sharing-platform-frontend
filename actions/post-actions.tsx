@@ -49,3 +49,11 @@ export async function updatePost(postId: number, data: UpdatePostRequest): Promi
     const post: PostDTO = await res.json();
     return post;
 }
+
+export async function deletePost(postId: number): Promise<void> {
+    const res: Response = await authFetch(`/post/${postId}`, { method: 'DELETE' });
+    if (!res.ok) {
+        return;
+    }
+    return;
+}

@@ -1,6 +1,6 @@
-'use server'
+'use server';
 
-import { authFetch } from "@/lib/auth-controller";
+import { authFetch, JSONRequest } from "@/lib/auth-controller";
 
 
 export async function getUser(username: string): Promise<UserDTO | undefined> {
@@ -21,8 +21,17 @@ export async function getUserProfile(username: string): Promise<ProfileDTO | und
     return profile;
 }
 
-export async function fetchPageData(size: number, page: number, url: string) {
-    const res: Response = await authFetch(`${url}?size=${size}&page=${page}`, { method: 'GET' });
+export async function getAuthenticatedUser(): Promise<UserDTO | undefined> {
+    const res: Response = await authFetch(`/user`, { method: 'GET', });
+    if (!res.ok) {
+        return undefined;
+    }
+    const user: UserDTO = await res.json();
+    return user;
+}
+
+export async function fetchPageData(size: number, page: number, url: string, urlParams?: string) {
+    const res: Response = await authFetch(`${url}?size=${size}&page=${page}&${urlParams}`, { method: 'GET' });
 
     if (!res.ok) {
         return undefined;
@@ -30,13 +39,66 @@ export async function fetchPageData(size: number, page: number, url: string) {
     return await res.json();
 };
 
-export async function getFollowers(username: string, size: number, page: number): Promise<Array<UserDTO>> {
-    const { content, last } = await fetchPageData(size, page, `/user/${username}/followers`);
-    return content;
+export async function updateProfileImage(data: FormData): Promise<void> {
+    const res: Response = await authFetch(`/user/profile/image`, { method: 'PUT', body: data, });
+    if (!res.ok) {
+        return undefined;
+    }
+    return;
 }
 
-export async function getFollowings(username: string, size: number, page: number): Promise<Array<UserDTO>> {
-    const { content, last } = await fetchPageData(size, page, `/user/${username}/followings`);
-    return content;
+export async function updateUsername(data: UsernameUpdateRequest): Promise<UserDTO | undefined> {
+    const req = await JSONRequest(data, { method: 'PUT' });
+    const res: Response = await authFetch(`/user/username/update`, req);
+
+    if (!res.ok) {
+        return undefined;
+    }
+
+    const user: UserDTO = await res.json();
+    return user;
 }
 
+export async function updateUserInfo(data: UserInfoUpdateRequest): Promise<UserDTO | undefined> {
+    const req = await JSONRequest(data, { method: 'PUT' });
+    const res: Response = await authFetch(`/user/update`, req);
+
+    if (!res.ok) {
+        return undefined;
+    }
+
+    const user: UserDTO = await res.json();
+    return user;
+}
+
+export async function deleteProfileImage(): Promise<void> {
+    const res: Response = await authFetch(`/user/profile/image`, { method: 'DELETE' });
+    if (!res.ok) {
+        return undefined;
+    }
+    return;
+}
+
+export async function deleteAccount(): Promise<void> {
+    const res: Response = await authFetch(`/user`, { method: 'DELETE' });
+    if (!res.ok) {
+        return undefined;
+    }
+    return;
+}
+
+export async function follow(username: string): Promise<void> {
+    const res: Response = await authFetch(`/user/${username}/follow`, { method: 'PUT' });
+    if (!res.ok) {
+        return undefined;
+    }
+    return;
+}
+
+export async function unfollow(username: string): Promise<void> {
+    const res: Response = await authFetch(`/user/${username}/unfollow`, { method: 'PUT' });
+    if (!res.ok) {
+        return undefined;
+    }
+    return;
+}

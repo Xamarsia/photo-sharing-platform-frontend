@@ -6,30 +6,42 @@ import TextButton from '@/components/buttons/TextButton';
 
 
 import { FormEvent, useState } from "react";
-import { getUser } from "@/lib/profile-controller";
+import { updateUsername } from '@/actions/user-actions';
+import { useRouter } from 'next/navigation';
 
 
 type Props = {
     local: any,
-    onSubmit?: (event: FormEvent<HTMLFormElement>) => void | undefined,
+    user: UserDTO,
 }
 
 
-export default function ChangeUsernameForm({ local, onSubmit }: Props) {
-    const user: UserDTO = getUser();
+export default function ChangeUsernameForm({ local, user }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [formIsValid, setFormIsValid] = useState(false);
     const [username, setUsername] = useState(user.username);
+    const router = useRouter();
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function onUpdate(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if (onSubmit) {
-            onSubmit(event);
+
+        if (!isFormChanged) {
+            return;
         }
+        if (username == user.username) {
+            return;
+        }
+
+        const body: UsernameUpdateRequest = {
+            username: username,
+        }
+        const newUser: UserDTO | undefined = await updateUsername(body);
+        router.push(`/${newUser?.username}`);
     }
 
     return (
-        <form onSubmit={handleSubmit}
+        <form
+            onSubmit={onUpdate}
             onChange={(e) => {
                 setFormIsValid(e.currentTarget.checkValidity())
                 setIsFormChanged(true)
