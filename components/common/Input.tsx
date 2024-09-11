@@ -10,7 +10,7 @@ type InputProps = {
     required?: boolean | undefined,
     pattern?: string | undefined,
     id?: string | undefined,
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void | undefined,
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void,
 }
 
 

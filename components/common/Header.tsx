@@ -1,26 +1,20 @@
-"use client";
-
-import { useRouter } from "next/navigation";
+"use server";
 
 import Logo from "@/components/common/Logo";
 import SearchBar from "@/components/common/SearchBar";
-import TextButton from "@/components/buttons/TextButton";
-import DropdownButton from "@/components/buttons/DropdownButton";
-import TextIconButton from "@/components/buttons/TextIconButton";
-import ProfilePreviewDropdown from "@/components/profile/ProfilePreviewDropdown";
+import HeaderMenu from "@/components/common/HeaderMenu";
 
-import plus from '@/public/plus/plus-white.svg';
-import { signOut } from "@/lib/firebase/auth";
+import { getCurrentUser } from "@/actions/actions";
 
 
 type Props = {
     local: any,
-    user?: UserDTO | undefined,
 }
 
 
-export default function Header({ local, user }: Props) {
-    const router = useRouter();
+export default async function Header({ local }: Props) {
+    const user: UserDTO | undefined = await getCurrentUser();
+
 
     return (
         <header className="flex-shrink-0 z-10 fixed top-0 bg-white w-full border-y border-gray-100 h-20">
@@ -29,26 +23,7 @@ export default function Header({ local, user }: Props) {
                 <div className={`grow max-w-[580px] ${user ? "block" : "hidden"}`}>
                     <SearchBar local={local} />
                 </div>
-
-                <div className="flex flex-row items-center gap-2 md:gap-4">
-                    {user
-                        ? <>
-                            <div className='md:block hidden h-full'>
-                                <TextIconButton text={local.createPost} icon={plus} onClick={() => { router.push('/post/create') }} />
-                            </div>
-                            <div className="md:block">
-                                <ProfilePreviewDropdown user={user}>
-                                    <DropdownButton text='My profile' />
-                                    <DropdownButton text={local.signOut} onClick={signOut} />
-                                </ProfilePreviewDropdown>
-                            </div>
-                        </>
-                        : <>
-                            <TextButton type={'button'} text={local.signIn} onClick={e => { router.push('/auth/signin') }} />
-                            <TextButton type={'button'} text={local.signUp} onClick={e => { router.push('/auth/signup') }} />
-                        </>
-                    }
-                </div>
+                <HeaderMenu local={local} user={user} />
             </div>
         </header>
     )
