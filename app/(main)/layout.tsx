@@ -1,14 +1,16 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
 import '@/app/styles/globals.css';
 
 import { getDictionary } from '@/lib/localization';
+import { getCurrentUser } from '@/actions/actions';
 
 import Footer from '@/components/common/Footer';
 import Header from '@/components/common/Header';
+import AuthProvider from '@/components/common/AuthProvider';
 import FixedRoundCreatePostButton from '@/components/buttons/FixedRoundCreatePostButton';
-import Page from '@/components/common/Page';
-import { getCurrentUser } from '@/actions/actions';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,7 +30,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className='size-full'>
-      <Page>
+      <AuthProvider>
         <body className={`${inter.className} size-full flex flex-col items-stretch relative`}>
           <Header local={dict} user={user} />
           <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20'>
@@ -39,7 +41,7 @@ export default async function RootLayout({
           </main>
           <Footer local={dict} />
         </body>
-      </Page>
+      </AuthProvider>
     </html>
   )
 }

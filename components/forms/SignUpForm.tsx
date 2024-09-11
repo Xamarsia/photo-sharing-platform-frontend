@@ -8,6 +8,8 @@ import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 
 import { FormEvent, useState } from "react";
+import { registerUser } from '@/actions/user-actions';
+import { useRouter } from 'next/navigation';
 
 
 type Props = {
@@ -18,17 +20,26 @@ type Props = {
 
 export default function SignUpForm({ local, onSubmit }: Props) {
     const [username, setUsername] = useState("username");
-    const [fullName, setfullName] = useState("");
+    const [fullName, setFullName] = useState("");
     const [formIsValid, setFormIsValid] = useState(true);
-
+    const router = useRouter();
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         if (onSubmit) {
             onSubmit(event);
         }
-    }
 
+        const body: RegisterRequest = {
+            username: username,
+            fullName: fullName,
+        }
+
+        const newUser: UserDTO | undefined = await registerUser(body);
+        if (newUser) {
+            router.push(`/${newUser.username}`);
+        }
+    }
 
     return (
         <form onSubmit={handleSubmit}
@@ -53,7 +64,7 @@ export default function SignUpForm({ local, onSubmit }: Props) {
                     value={fullName}
                     title={local.fullName}
                     pattern="^[a-zA-Z\s]{2,30}$"
-                    onChange={(e) => setfullName(e.target.value)} 
+                    onChange={(e) => setFullName(e.target.value)}
                 />
             </div>
             <TextButton
