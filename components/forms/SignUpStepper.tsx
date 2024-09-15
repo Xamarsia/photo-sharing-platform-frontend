@@ -22,14 +22,10 @@ export default function SignUpStepper({ local }: Props) {
         setActiveStep(activeStep + 1)
     };
 
-    const handleRegistration = () => {
-
-    };
-
-
     const formElements = [
         <AuthenticationForm local={local} onSubmit={handleAuthenticate} />,
-        <SignUpForm local={local} onSubmit={handleRegistration} />,
+        //TODO State when authenticated but not signed up (Email not unique)
+        <SignUpForm local={local} />,
     ]
 
 

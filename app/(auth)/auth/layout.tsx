@@ -34,6 +34,10 @@ export default async function RootLayout({
             {children}
           </main>
           <Footer local={dict} />
+          {/* To prevent Firefox FOUC*/}
+          <script>
+            let FIREFOX_FOUC_FIX;
+          </script>
         </body>
       </UnauthorizedGuard>
     </html>
