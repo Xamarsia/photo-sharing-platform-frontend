@@ -1,15 +1,18 @@
 "use client";
 
-
+import Modal from '@/components/common/Modal';
 import TextButton from '@/components/buttons/TextButton';
 import FileSelector from "@/components/common/FileSelector";
+import FormFieldError from '@/components/common/FormFieldError';
+import TextRemoveButton from '@/components/buttons/TextRemoveButton';
 import DragAndDropCirclePreview from "@/components/common/DragAndDropCirclePreview";
 
 import { FormEvent, SetStateAction, useState } from "react";
-import { deleteProfileImage, updateProfileImage } from '@/actions/user-actions';
 import { useRouter } from 'next/navigation';
-import Modal from '@/components/common/Modal';
-import TextRemoveButton from '@/components/buttons/TextRemoveButton';
+
+import { deleteProfileImage, updateProfileImage } from '@/actions/user-actions';
+import { updateProfileImageSchema } from '@/lib/zod/schemas/changeProfileImage';
+import { getValidationErrors } from '@/lib/zod/validation';
 
 
 type Props = {
@@ -20,13 +23,19 @@ type Props = {
 
 export default function ChangeProfileImageForm({ local, user }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
-    const [formIsValid, setFormIsValid] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
+    const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const router = useRouter();
 
     const onImageSelected = (file: SetStateAction<File | undefined>) => {
         setSelectedImage(file);
+        const response = updateProfileImageSchema.safeParse({
+            file: file,
+        });
+
+        const errorsMap: Map<string | number, string> = getValidationErrors(response);
+        setErrors(errorsMap);
     };
 
     const onDeleteProfileImage = async () => {
@@ -37,11 +46,14 @@ export default function ChangeProfileImageForm({ local, user }: Props) {
     async function onUpdate(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        //TODO Add error handling
+        const response = updateProfileImageSchema.safeParse({
+            file: selectedImage,
+        });
+
+        const errorsMap: Map<string | number, string> = getValidationErrors(response);
+        setErrors(errorsMap);
+
         if (selectedImage) {
-            if (selectedImage.type == "image/png") {
-                throw new Error("[Create post]: Incorrect post image type. Only .jpg and jpeg are acceptable!");
-            }
             let formData = new FormData();
             formData.append('file', selectedImage);
             await updateProfileImage(formData);
@@ -52,25 +64,25 @@ export default function ChangeProfileImageForm({ local, user }: Props) {
     return (
         <>
             <form onSubmit={onUpdate}
-                onChange={(e) => {
-                    setFormIsValid(e.currentTarget.checkValidity())
-                    setIsFormChanged(true)
-                }}
+                onChange={(e) => { setIsFormChanged(true) }}
                 className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
-                <div className='size-72'>
-                    <FileSelector onDefaultImageRemoved={() => { setShowModal(true); }} onImageSelected={onImageSelected} local={local} rounded defaultImageExist={user.isProfileImageExist} >
-                        {user.isProfileImageExist
-                            ? <DragAndDropCirclePreview src={`/api/user/avatar/${user.username}`} />
-                            : (selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />)
-                        }
-                    </FileSelector>
+                <div>
+                    <div className='size-72'>
+                        <FileSelector onDefaultImageRemoved={() => { setShowModal(true); }} onImageSelected={onImageSelected} local={local} rounded defaultImageExist={user.isProfileImageExist} >
+                            {user.isProfileImageExist
+                                ? <DragAndDropCirclePreview src={`/api/user/avatar/${user.username}`} />
+                                : (selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />)
+                            }
+                        </FileSelector>
+                    </div>
+                    <FormFieldError text={errors.get("file")} />
                 </div>
 
                 <TextButton
                     type="submit"
                     text={local.update}
                     fill="content"
-                    disabled={!formIsValid || !isFormChanged}
+                    disabled={!isFormChanged || errors.size != 0}
                 />
             </form>
             <Modal onCloseClicked={() => { setShowModal(false); }} title={local.removeProfileImage} opened={showModal}>

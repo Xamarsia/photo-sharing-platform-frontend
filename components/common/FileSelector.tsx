@@ -30,25 +30,37 @@ export default function FileSelector({ local, rounded, children, defaultImageExi
 
     useEffect(() => {
         if (onImageSelected) onImageSelected(selectedImage);
-    }, [onImageSelected, selectedImage]);
+    }, [selectedImage]);
 
     function handleDragLeave(e: React.DragEvent<HTMLDivElement>) {
         e.preventDefault();
-        setDragActive(false);
+        if (!defaultImageExist) {
+            setDragActive(false);
+        }
+        
     }
 
     function handleDragOver(e: React.DragEvent<HTMLDivElement>) {
         e.preventDefault();
-        setDragActive(true);
+        if (!defaultImageExist) {
+            setDragActive(true);
+        }
     }
 
     function handleDragEnter(e: React.DragEvent<HTMLDivElement>) {
         e.preventDefault();
-        setDragActive(true);
+        if (!defaultImageExist) {
+            setDragActive(true);
+        }
     }
 
     function handleDrop(e: React.DragEvent<HTMLDivElement>) {
         e.preventDefault();
+
+        if (defaultImageExist) {
+            return;
+        }
+        
         setDragActive(false);
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
             const file = e.dataTransfer.files[0];
@@ -67,7 +79,7 @@ export default function FileSelector({ local, rounded, children, defaultImageExi
 
     const handleCloseClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        
+
         if (defaultImageExist && onDefaultImageRemoved) {
             onDefaultImageRemoved();
             return;

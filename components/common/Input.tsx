@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 
 
 type InputProps = {
-    name?: string,
+    name?: string | undefined,
     type: 'text' | 'email' | 'password',
     title?: string | undefined,
     value?: string | undefined,
