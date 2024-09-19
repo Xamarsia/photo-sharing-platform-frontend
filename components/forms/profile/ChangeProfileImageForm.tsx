@@ -11,7 +11,7 @@ import { FormEvent, SetStateAction, useState } from "react";
 import { useRouter } from 'next/navigation';
 
 import { deleteProfileImage, updateProfileImage } from '@/actions/user-actions';
-import { updateProfileImageSchema } from '@/lib/zod/schemas/changeProfileImage';
+import { updateProfileImageSchema } from '@/lib/zod/schemas/profile/changeProfileImage';
 import { getValidationErrors } from '@/lib/zod/validation';
 
 

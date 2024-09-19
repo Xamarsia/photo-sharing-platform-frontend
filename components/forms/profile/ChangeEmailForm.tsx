@@ -7,7 +7,7 @@ import FormFieldError from '@/components/common/FormFieldError';
 
 import { ChangeEvent, FormEvent, useState } from "react";
 import { getValidationErrors } from '@/lib/zod/validation';
-import { updateEmailSchema } from '@/lib/zod/schemas/changeEmail';
+import { updateEmailSchema } from '@/lib/zod/schemas/profile/changeEmail';
 
 
 type Props = {

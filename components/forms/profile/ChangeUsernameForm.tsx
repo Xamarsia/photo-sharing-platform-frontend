@@ -8,7 +8,7 @@ import FormFieldError from '@/components/common/FormFieldError';
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from 'next/navigation';
 
-import { updateUniqueUsernameSchema, updateUsernameSchema } from '@/lib/zod/schemas/changeUsername';
+import { updateUniqueUsernameSchema, updateUsernameSchema } from '@/lib/zod/schemas/profile/changeUsername';
 import { updateUsername } from '@/actions/user-actions';
 import { getValidationErrors } from '@/lib/zod/validation';
 

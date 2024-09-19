@@ -2,8 +2,8 @@
 
 
 import Stepper from "@/components/common/Stepper";
-import SignUpForm from "@/components/forms/SignUpForm";
-import AuthenticationForm from "@/components/forms/AuthenticationForm";
+import SignUpForm from "@/components/forms/auth/SignUpForm";
+import AuthenticationForm from "@/components/forms/auth/AuthenticationForm";
 
 
 import { useState } from "react";

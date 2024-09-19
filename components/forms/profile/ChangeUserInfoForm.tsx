@@ -12,7 +12,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 
 import { updateUserInfo } from '@/actions/user-actions';
 import { getValidationErrors } from '@/lib/zod/validation';
-import { fullNameValidationSchema, updateDescriptionSchema, updateUserInfoValidationSchema } from '@/lib/zod/schemas/changeUserInfo';
+import { fullNameValidationSchema, updateDescriptionSchema, updateUserInfoValidationSchema } from '@/lib/zod/schemas/profile/changeUserInfo';
 
 
 type Props = {
