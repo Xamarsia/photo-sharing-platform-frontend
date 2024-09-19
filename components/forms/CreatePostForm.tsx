@@ -1,17 +1,20 @@
 "use client";
 
 
-import { FormEvent, SetStateAction, useState } from "react";
-
-import styles from '@/app/styles/text/text.module.css';
+import { ChangeEvent, FormEvent, SetStateAction, useState } from "react";
 import { useRouter } from 'next/navigation';
 
 import TextButton from "@/components/buttons/TextButton";
 import Textarea from "@/components/common/Textarea";
 import FileSelector from "@/components/common/FileSelector";
+import FormFieldError from "@/components/common/FormFieldError";
 import DragAndDropFullPreview from '@/components/common/DragAndDropFullPreview';
 
+import styles from '@/app/styles/text/text.module.css';
+
 import { createPost } from "@/actions/post-actions";
+import { createPostValidationSchema, updateDescriptionSchema, updateRequiredFileSchema } from "@/lib/zod/schemas/createPost";
+import { getValidationErrors } from "@/lib/zod/validation";
 // 'use server'
 // import { redirect } from 'next/navigation'
 // import { revalidatePath } from 'next/cache'
@@ -24,52 +27,104 @@ type Props = {
 export default function CreatePostForm({ local }: Props) {
     const [description, setDescription] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum metus eros, ut rutrum nulla blandit eu. Curabitur ac molestie lorem. Nunc porttitor tempor justo sed tempor.');
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
+    const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const router = useRouter();
 
     const onImageSelected = (file: SetStateAction<File | undefined>) => {
         setSelectedImage(file);
+
+        const response = updateRequiredFileSchema.safeParse({
+            file: file,
+        });
+
+        const errorsMap: Map<string | number, string> = getValidationErrors(response);
+        const error = errorsMap.get("file");
+        if (error) {
+            setErrors(errors.set("file", error));
+        } else {
+            errors.delete("file");
+        }
     };
 
     async function onCreate(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        //TODO Error handling
+        const response = createPostValidationSchema.safeParse({
+            file: selectedImage,
+            description: description,
+        });
 
-        if (!selectedImage) {
-            throw new Error("[Create post]: Incorrect request. Post image is empty!");
+        const errorsMap: Map<string | number, string> = getValidationErrors(response);
+
+        if (errorsMap.size != 0) {
+            setErrors(errorsMap);
+            return;
         }
 
-        if (selectedImage.type == "image/png") {
-            throw new Error("[Create post]: Incorrect post image type. Only .jpg and jpeg are acceptable!");
-        }
-
-        let formData = new FormData();
-        formData.append('image', selectedImage);
-        formData.append('description', event.currentTarget.description.value);
+        if (selectedImage) {
+            let formData = new FormData();
+            formData.append('image', selectedImage);
+            formData.append('description', event.currentTarget.description.value);
 
 
-        const post: PostDTO | undefined = await createPost(formData);
-        if (post) {
-            router.prefetch(`${post.id}`)
-            router.push(`${post.id}`);
+            const post: PostDTO | undefined = await createPost(formData);
+            if (post) {
+                router.prefetch(`${post.id}`)
+                router.push(`${post.id}`);
 
-            //TODO Add revalidation
-            // revalidatePath('/posts') // Update cached posts
-            // redirect(`/post/${id}`) // Navigate to the new post page
+                //TODO Add revalidation
+                // revalidatePath('/posts') // Update cached posts
+                // redirect(`/post/${id}`) // Navigate to the new post page
+            }
         }
     }
 
+    function onDescriptionChangeHendler(event: ChangeEvent<HTMLTextAreaElement>): void {
+        setDescription(event.target.value);
+
+        const response = updateDescriptionSchema.safeParse({
+            description: event.target.value,
+        });
+
+        const errorsMap: Map<string | number, string> = getValidationErrors(response);
+
+        const error = errorsMap.get(event.target.name);
+        if (error) {
+            setErrors(errors.set(event.target.name, error));
+        } else {
+            errors.delete(event.target.name);
+        }
+    }
 
     return (
         <form onSubmit={onCreate} className={`flex flex-col gap-y-3 sm:gap-y-6`}>
             <h1 className={`${styles['h1']}`}>{local.createPost}</h1>
-            <FileSelector onImageSelected={onImageSelected} local={local}>
-                {selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />}
-            </FileSelector>
+            <div>
+                <FileSelector onImageSelected={onImageSelected} local={local}>
+                    {selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />}
+                </FileSelector>
+                <FormFieldError text={errors.get("file")} />
+            </div>
 
-            <Textarea value={description} title={local.description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} />
+            <div>
+                <Textarea
+                    rows={5}
+                    value={description}
+                    title={local.description}
+                    name="description"
+                    onChange={(e) => onDescriptionChangeHendler(e)}
+                    state={errors.has("description") ? 'invalid' : 'valid'}
+                />
+                <FormFieldError text={errors.get("description")} />
+            </div>
 
-            <TextButton type="submit" text={local.create} disabled={!selectedImage} fill="content" />
+            <TextButton
+                type="submit"
+                text={local.create}
+                fill="content"
+                disabled={!selectedImage || errors.size != 0
+                }
+            />
         </form>
     )
 }

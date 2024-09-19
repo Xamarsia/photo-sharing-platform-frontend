@@ -1,17 +1,20 @@
 "use client";
 
-import { FormEvent, SetStateAction, useState } from "react";
-
-import styles from '@/app/styles/text/text.module.css';
+import { useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, SetStateAction, useState } from "react";
 
 import Textarea from "@/components/common/Textarea";
 import TextButton from "@/components/buttons/TextButton";
 import FileSelector from "@/components/common/FileSelector";
+import FormFieldError from "@/components/common/FormFieldError";
 import DragAndDropFullPreview from '@/components/common/DragAndDropFullPreview';
 
 import { updatePost, updatePostImage } from "@/actions/post-actions";
 
-import { useRouter } from "next/navigation";
+import styles from '@/app/styles/text/text.module.css';
+
+import { editPostValidationSchema, updateDescriptionSchema, updateRequiredFileSchema } from "@/lib/zod/schemas/editPost";
+import { getValidationErrors } from "@/lib/zod/validation";
 
 
 type Props = {
@@ -25,21 +28,59 @@ export default function EditPostForm({ local, post }: Props) {
     const [description, setDescription] = useState(post?.description);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [defaultImageExist, setDefaultImageExist] = useState<boolean>(true);
+    const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
 
     const router = useRouter();
 
     const onImageSelected = (file: SetStateAction<File | undefined>) => {
         setSelectedImage(file);
+        const response = updateRequiredFileSchema.safeParse({
+            file: file,
+        });
+
+        const errorsMap: Map<string | number, string> = getValidationErrors(response);
+        const error = errorsMap.get("file");
+        if (error) {
+            setErrors(errors.set("file", error));
+        } else {
+            errors.delete("file");
+        }
     };
+
+    function onDescriptionChangeHendler(event: ChangeEvent<HTMLTextAreaElement>): void {
+        setDescription(event.target.value);
+
+        const response = updateDescriptionSchema.safeParse({
+            description: event.target.value,
+        });
+
+        const errorsMap: Map<string | number, string> = getValidationErrors(response);
+
+        const error = errorsMap.get(event.target.name);
+        if (error) {
+            setErrors(errors.set(event.target.name, error));
+        } else {
+            errors.delete(event.target.name);
+        }
+    }
 
     async function onUpdate(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        //TODO Add error handling
+        const response = editPostValidationSchema.safeParse({
+            file: selectedImage,
+            description: description,
+            defaultImage: defaultImageExist
+        });
+
+        const errorsMap: Map<string | number, string> = getValidationErrors(response);
+
+        if (errorsMap.size != 0) {
+            setErrors(errorsMap);
+            return;
+        }
+
         if (selectedImage) {
-            if (selectedImage.type == "image/png") {
-                throw new Error("[Create post]: Incorrect post image type. Only .jpg and jpeg are acceptable!");
-            }
             let formData = new FormData();
             formData.append('file', selectedImage);
             await updatePostImage(post.id, formData);
@@ -62,17 +103,33 @@ export default function EditPostForm({ local, post }: Props) {
     return (
         <form onSubmit={onUpdate} onChange={() => setIsFormChanged(true)} className={`flex flex-col gap-y-3 sm:gap-y-6`}>
             <h1 className={`${styles['h1']}`}>{local.editPost}</h1>
+            <div>
+                <FileSelector onImageSelected={onImageSelected} local={local} defaultImageExist={defaultImageExist} onDefaultImageRemoved={() => { setDefaultImageExist(false); }}>
+                    {defaultImageExist
+                        ? <DragAndDropFullPreview src={`/api/post/image/${post.id}`} />
+                        : (selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />)
+                    }
+                </FileSelector>
+                <FormFieldError text={errors.get("file")} />
+            </div>
 
-            <FileSelector onImageSelected={onImageSelected} local={local} defaultImageExist={defaultImageExist} onDefaultImageRemoved={() => { setDefaultImageExist(false); }}>
-                {defaultImageExist
-                    ? <DragAndDropFullPreview src={`/api/post/image/${post.id}`} />
-                    : (selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />)
-                }
-            </FileSelector>
+            <div>
+                <Textarea
+                    rows={5}
+                    value={description}
+                    title={local.description}
+                    name="description"
+                    onChange={(e) => onDescriptionChangeHendler(e)}
+                    state={errors.has("description") ? 'invalid' : 'valid'}
+                />
+                <FormFieldError text={errors.get("description")} />
+            </div>
 
-            <Textarea value={description} title={local.description} onChange={(e) => setDescription(e.target.value)} id="description" rows={5} />
-
-            <TextButton type="submit" text={local.update} disabled={!isFormChanged || (selectedImage == undefined && !defaultImageExist)} fill="content" />
+            <TextButton
+                type="submit"
+                text={local.update}
+                disabled={!isFormChanged || errors.size != 0}
+                fill="content" />
         </form>
     )
 }

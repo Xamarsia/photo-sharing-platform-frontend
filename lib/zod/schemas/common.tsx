@@ -11,6 +11,12 @@ export const fileSchema = z.optional(z.any()
     .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), "Only .jpg, .jpeg files are accepted."),
 );
 
+export const requiredFileSchema = z.any()
+    .refine((file) => file instanceof File, 'Expected a file')
+    .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), "Only .jpg, .jpeg files are accepted.")
+    .optional().refine((file) => file, "Image is required.");
+
 //TODO Unique email validation
 export const emailSchema = z.string()
     .email('Invalid email format')
@@ -21,7 +27,7 @@ export const passwordSchema = z.string()
     .min(6, { message: 'Password must be at least 6 characters' }) // minLengthErrorMessage
     .max(128, { message: "Password must contain no more than 128 characters" }) // maxLengthErrorMessage
     .refine((password) => !password.includes(' '), 'Spaces are not allowed')
-    .refine((password) => !(password === ""), { message: "Password is required" })
+    .refine((password) => !(password === ""), { message: "Password is required" });
 
 export const usernameSchema = z.string()
     .min(1, 'Username is required')
@@ -43,7 +49,8 @@ export const fullNameSchema = z.optional(z.string()
 );
 
 export const descriptionSchema = z.optional(z.string()
-    .max(3000, "Description must contain no more than 3000 characters"));
+    .max(3000, "Description must contain no more than 3000 characters")
+);
 
 export const setPasswordSchema = z.object({
     password: passwordSchema,

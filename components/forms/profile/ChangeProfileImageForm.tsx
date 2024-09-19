@@ -51,7 +51,11 @@ export default function ChangeProfileImageForm({ local, user }: Props) {
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
-        setErrors(errorsMap);
+
+        if (errorsMap.size != 0) {
+            setErrors(errorsMap);
+            return;
+        }
 
         if (selectedImage) {
             let formData = new FormData();
