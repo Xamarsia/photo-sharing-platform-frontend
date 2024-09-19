@@ -13,7 +13,7 @@ import { updatePost, updatePostImage } from "@/actions/post-actions";
 
 import styles from '@/app/styles/text/text.module.css';
 
-import { editPostValidationSchema, updateDescriptionSchema, updateRequiredFileSchema } from "@/lib/zod/schemas/editPost";
+import { editPostValidationSchema, updateDescriptionSchema, updateRequiredFileSchema } from "@/lib/zod/schemas/post/editPost";
 import { getValidationErrors } from "@/lib/zod/validation";
 
 

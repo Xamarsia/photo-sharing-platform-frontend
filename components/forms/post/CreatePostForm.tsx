@@ -13,7 +13,7 @@ import DragAndDropFullPreview from '@/components/common/DragAndDropFullPreview';
 import styles from '@/app/styles/text/text.module.css';
 
 import { createPost } from "@/actions/post-actions";
-import { createPostValidationSchema, updateDescriptionSchema, updateRequiredFileSchema } from "@/lib/zod/schemas/createPost";
+import { createPostValidationSchema, updateDescriptionSchema, updateRequiredFileSchema } from "@/lib/zod/schemas/post/createPost";
 import { getValidationErrors } from "@/lib/zod/validation";
 // 'use server'
 // import { redirect } from 'next/navigation'
