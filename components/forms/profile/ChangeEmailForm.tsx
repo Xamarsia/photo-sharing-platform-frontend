@@ -11,8 +11,8 @@ import { updateEmailSchema } from '@/lib/zod/schemas/profile/changeEmail';
 
 
 type Props = {
-    local: any;
-    onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
+    local: any,
+    onSubmit?: (event: FormEvent<HTMLFormElement>) => void,
 }
 
 export default function ChangeEmailForm({ local, onSubmit }: Props) {

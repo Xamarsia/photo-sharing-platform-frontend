@@ -14,10 +14,11 @@ import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';
 
 type Props = {
     local: any,
+    items: Array<SidebarItemInfo>
 }
 
 
-export default function NavbarDrawer({ local }: Props) {
+export default function NavbarDrawer({ local, items }: Props) {
     const [showDropdown, setShowDropdown] = useState(false);
     const dropdown = useRef<HTMLDivElement>(null);
 
@@ -43,7 +44,7 @@ export default function NavbarDrawer({ local }: Props) {
 
             <div className={`bg-white z-10 ${showDropdown ? 'fixed top-20 left-0 size-full no-doc-scroll' : 'hidden'} `}>
                 <div ref={dropdown}>
-                    <Sidebar local={local} />
+                    <Sidebar local={local} items={items} />
                 </div>
             </div>
         </div>

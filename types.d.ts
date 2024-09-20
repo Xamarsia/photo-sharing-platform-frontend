@@ -1,5 +1,7 @@
 type UserState = 'CURRENT' | 'FOLLOWED' | 'UNFOLLOWED'
 
+type ProviderID = 'password' | 'facebook.com' | 'github.com' | 'google.com' | 'phone' | 'twitter.com'
+
 type UserDTO = {
     "id": number,
     "username": string,
@@ -53,4 +55,9 @@ type ProfileDTO = {
     "followersCount": number,
     "postsCount": number,
     "userDTO": UserDTO,
+}
+
+type SidebarItemInfo = {
+    href: string,
+    title: string,
 }

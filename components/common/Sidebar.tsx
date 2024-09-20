@@ -6,25 +6,12 @@ import { usePathname } from "next/navigation";
 
 type Props = {
     local: any,
+    items: Array<SidebarItemInfo>
 }
 
 
-export default function Sidebar({ local }: Props) {
-    const pathname = usePathname()
-
-    type SidebarItemInfo = {
-        href: string,
-        title: string,
-    }
-
-    const items: Array<SidebarItemInfo> = [
-        { href: "/profile/edit/info", title: local.userInfo },
-        { href: "/profile/edit/image", title: local.profileImage },
-        { href: "/profile/edit/password", title: local.password },
-        { href: "/profile/edit/username", title: local.username },
-        { href: "/profile/edit/email", title: local.email },
-        { href: "/profile/edit/delete", title: local.deleteAccount },
-    ];
+export default function Sidebar({ local, items }: Props) {
+    const pathname = usePathname();
 
     return (
         <nav className="flex flex-col p-2 md:p-4 gap-0.5">

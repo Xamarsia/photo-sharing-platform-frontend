@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, UserCredential, } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, UserCredential } from "firebase/auth";
 
 import { auth } from "@/lib/firebase/clientApp";
 import { saveAuth } from "@/actions/user-actions";
@@ -64,7 +64,7 @@ export async function signInWithEmailPassword(loginRequest: LoginRequest): Promi
   }
 }
 
-export async function signOut() {
+export async function signOut(): Promise<void> {
   try {
     return auth.signOut();
   } catch (error) {
