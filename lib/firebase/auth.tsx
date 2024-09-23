@@ -1,4 +1,4 @@
-import { signOut as sOut, AuthCredential, createUserWithEmailAndPassword, EmailAuthProvider, GoogleAuthProvider, reauthenticateWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updateEmail, User, UserCredential, deleteUser, verifyBeforeUpdateEmail, reauthenticateWithPopup, getAuth } from "firebase/auth";
+import { signOut as sOut, AuthCredential, createUserWithEmailAndPassword, EmailAuthProvider, GoogleAuthProvider, reauthenticateWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updateEmail, User, UserCredential, deleteUser, verifyBeforeUpdateEmail, reauthenticateWithPopup, getAuth, updatePassword } from "firebase/auth";
 
 import { auth } from "@/lib/firebase/clientApp";
 import { saveAuth } from "@/actions/user-actions";
@@ -95,6 +95,17 @@ export async function resetPassword(email: string): Promise<void> {
   }
 }
 
+export async function changePassword(newPassword: string) {
+  const auth = getAuth();
+
+  if (auth.currentUser) {
+    try {
+      await updatePassword(auth.currentUser, newPassword);
+    } catch (error) {
+      console.error("Update password error", error)
+    }
+  }
+}
 
 export async function reauthenticate(password: string): Promise<UserCredential | undefined> {
   const currentUser = auth.currentUser;

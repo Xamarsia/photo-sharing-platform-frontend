@@ -69,7 +69,7 @@ export default function ChangeProfileImageForm({ local, user }: Props) {
         <>
             <form onSubmit={onUpdate}
                 onChange={(e) => { setIsFormChanged(true) }}
-                className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
+                className={`text-left flex flex-col gap-y-3`}>
                 <div>
                     <div className='size-72'>
                         <FileSelector onDefaultImageRemoved={() => { setShowModal(true); }} onImageSelected={onImageSelected} local={local} rounded defaultImageExist={user.isProfileImageExist} >

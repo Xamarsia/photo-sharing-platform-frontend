@@ -8,6 +8,7 @@ import FormFieldError from '@/components/common/FormFieldError';
 import { ChangeEvent, FormEvent, useState } from "react";
 import { getValidationErrors } from '@/lib/zod/validation';
 import { currentPasswordSchema, setPasswordSchema, updatePasswordSchema } from '@/lib/zod/schemas/profile/changePassword';
+import { reauthenticate, changePassword } from '@/lib/firebase/auth';
 
 
 type Props = {
@@ -40,6 +41,9 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
             setErrors(errorsMap);
             return;
         };
+
+        await reauthenticate(currentPassword);
+        await changePassword(currentPassword);
     }
 
     async function onCurrentPasswordChangeHendler(event: ChangeEvent<HTMLInputElement>) {
@@ -96,7 +100,7 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
 
     return (
         <form onSubmit={handleSubmit}
-            className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
+            className={`text-left flex flex-col gap-y-3`}>
             <div>
                 <Input
                     type="password"

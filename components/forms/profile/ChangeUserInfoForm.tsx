@@ -101,7 +101,7 @@ export default function ChangeUserInfoForm({ local, user }: Props) {
     return (
         <form onSubmit={handleUserInfoUpdate}
             onChange={(e) => { setIsFormChanged(true) }}
-            className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
+            className={`text-left flex flex-col gap-y-3`}>
             <div>
                 <Input
                     type="text"
