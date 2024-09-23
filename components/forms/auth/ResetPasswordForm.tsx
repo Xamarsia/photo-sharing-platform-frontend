@@ -65,6 +65,7 @@ export default function ResetPasswordForm({ local }: Props) {
         <form onSubmit={handleSignInWithEmailAndPassword}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
             className={`flex flex-col justify-between h-[464px]`}>
+
             <div className={`flex flex-col gap-y-3`}>
 
                 <div className="flex justify-between pb-8">
@@ -72,8 +73,9 @@ export default function ResetPasswordForm({ local }: Props) {
                     <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={() => { router.push("/auth/signin") }} />
                 </div>
 
-                <p className={`${styles['base-text']}`}>{local.resetPasswordMessage} </p>
-                <div>
+                <p className={`${styles['base-text']}`}>{resetPressed ? local.resetPasswordMessageSended : local.resetPasswordMessage} </p>
+
+                {!resetPressed && <div>
                     <Input
                         type="text"
                         name="email"
@@ -84,15 +86,15 @@ export default function ResetPasswordForm({ local }: Props) {
                         required
                     />
                     <FormFieldError text={errors.get("email")} />
-                </div>
+                </div>}
             </div>
 
-            <TextButton
+            {!resetPressed && <TextButton
                 type="submit"
                 text={local.reset}
                 fill="content"
                 disabled={!formIsValid || errors.size != 0 || resetPressed}
-            />
+            />}
         </form>
     )
 }

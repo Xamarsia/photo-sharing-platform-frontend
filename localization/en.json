@@ -57,14 +57,15 @@
     "deleteThisPost": "Are you sure you want to delete this post?",
     "removeProfileImage": "Remove profile image",
     "removeProfileImageMessage": "Are you sure you want to remove profile image?",
-    "deleteAccount":"Delete account",
+    "deleteAccount": "Delete account",
     "deleteAccountMessage": "Are you sure you want to delete SPSP account?",
-    "confirmWithPassword":"Confirm with password",
-    "confirm":"Confirm",
+    "confirmWithPassword": "Confirm with password",
+    "confirm": "Confirm",
     "verifyNewEmailAddress": "Verify new email address",
     "verify": "Verify",
     "reset": "Reset",
-    "forgotPassword":"Forgot password?",
+    "forgotPassword": "Forgot password?",
     "resetPassword": "Reset your password",
-    "resetPasswordMessage": "Enter your email address or username and we will send you a link to reset your password"
+    "resetPasswordMessage": "Enter your email address or username and we will send you a link to reset your password",
+    "resetPasswordMessageSended": "The link to reset your password was sent to your email. Please, open your email to continue"
 }
