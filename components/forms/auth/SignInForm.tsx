@@ -51,7 +51,7 @@ export default function SignInForm({ local }: Props) {
             password: password,
         };
 
-        const isAuthorized: boolean = await signInWithEmailPassword(body);
+        const isAuthorized = await signInWithEmailPassword(body);
         if (isAuthorized) {
             router.replace('/news');
         };
@@ -59,17 +59,11 @@ export default function SignInForm({ local }: Props) {
 
     async function handleSignInWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
-        const isAuthorized: boolean = await signInWithGoogle();
+        const isAuthorized = await signInWithGoogle();
         if (isAuthorized) {
             router.replace('/news');
         }
     }
-
-    // async function onChangeHendler(event: ChangeEvent<HTMLInputElement>) {
-    //     if (errors.has(event.target.name)) {
-    //         errors.delete(event.target.name);
-    //     }
-    // }
 
     async function onEmailChangeHendler(event: ChangeEvent<HTMLInputElement>) {
         setEmail(event.target.value);
@@ -125,12 +119,17 @@ export default function SignInForm({ local }: Props) {
                     />
                     <FormFieldError text={errors.get("password")} />
                 </div>
+
+                <div className='flex justify-between items-end '>
+                    <div/>
+                    <Link href={"/auth/password/reset"} className={`${styles['primary-link']}`} prefetch={false}>{local.forgotPassword}</Link>
+                </div>
             </div>
 
             <div>
                 <TextButton
                     type="submit"
-                    text={local.submit}
+                    text={local.signIn}
                     fill="content"
                     disabled={!formIsValid || errors.size != 0}
                 />

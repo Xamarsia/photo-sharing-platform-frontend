@@ -58,5 +58,13 @@
     "removeProfileImage": "Remove profile image",
     "removeProfileImageMessage": "Are you sure you want to remove profile image?",
     "deleteAccount":"Delete account",
-    "deleteAccountMessage": "Are you sure you want to delete SPSP account?"
+    "deleteAccountMessage": "Are you sure you want to delete SPSP account?",
+    "confirmWithPassword":"Confirm with password",
+    "confirm":"Confirm",
+    "verifyNewEmailAddress": "Verify new email address",
+    "verify": "Verify",
+    "reset": "Reset",
+    "forgotPassword":"Forgot password?",
+    "resetPassword": "Reset your password",
+    "resetPasswordMessage": "Enter your email address or username and we will send you a link to reset your password"
 }

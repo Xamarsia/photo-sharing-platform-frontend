@@ -3,9 +3,9 @@
 
 import { useState } from "react";
 import { deleteAccount } from '@/actions/user-actions';
-import { useRouter } from 'next/navigation';
 import Modal from '@/components/common/Modal';
 import TextRemoveButton from '@/components/buttons/TextRemoveButton';
+import { deleteUserAuth } from "@/lib/firebase/auth";
 
 
 type Props = {
@@ -15,12 +15,11 @@ type Props = {
 
 export default function DeleteAccountForm({ local }: Props) {
     const [showModal, setShowModal] = useState(false);
-    const router = useRouter();
 
 
     const onDeleteAccount = async () => {
         await deleteAccount();
-        router.push(`/`);
+        await deleteUserAuth();
     };
 
     return (
