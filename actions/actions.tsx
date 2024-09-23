@@ -34,7 +34,6 @@ export async function getSidebarItems(local: any): Promise<Array<SidebarItemInfo
     { href: "/profile/edit/info", title: local.userInfo },
     { href: "/profile/edit/image", title: local.profileImage },
     { href: "/profile/edit/username", title: local.username },
-    { href: "/profile/edit/delete", title: local.deleteAccount },
   ];
 
   if (provider && provider.includes(ProviderID.EmailAuthProvider)) {
@@ -42,8 +41,9 @@ export async function getSidebarItems(local: any): Promise<Array<SidebarItemInfo
   }
 
   if (email && email.get(ProviderID.EmailAuthProvider)) {
-    items.push({ href: "/profile/edit/email", title: local.email },);
+    items.push({ href: "/profile/edit/email", title: local.email });
   }
 
+  items.push({ href: "/profile/edit/delete", title: local.deleteAccount });
   return items;
 }

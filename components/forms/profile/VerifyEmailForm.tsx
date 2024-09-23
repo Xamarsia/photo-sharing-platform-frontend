@@ -22,7 +22,7 @@ export default function VerifyEmailForm({ local, newEmail }: Props) {
 
     const router = useRouter();
 
-    async function handleReAuthentication(event: FormEvent<HTMLFormElement>) {
+    async function handleEmailVerification (event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         // TODO realise email update
@@ -35,7 +35,7 @@ export default function VerifyEmailForm({ local, newEmail }: Props) {
 
 
     return (
-        <form onSubmit={handleReAuthentication}
+        <form onSubmit={handleEmailVerification}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
             className={`flex flex-col justify-between h-[464px]`}>
             <div className={`flex flex-col gap-y-3`}>
