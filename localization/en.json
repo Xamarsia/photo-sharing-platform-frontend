@@ -67,5 +67,7 @@
     "forgotPassword": "Forgot password?",
     "resetPassword": "Reset your password",
     "resetPasswordMessage": "Enter your email address or username and we will send you a link to reset your password",
-    "resetPasswordMessageSended": "The link to reset your password was sent to your email. Please, open your email to continue"
+    "resetPasswordMessageSended": "The link to reset your password was sent to your email. Please, open your email to continue",
+    "resetEmailMessage": "After confirming your password, you will receive a verification link to a new email address. After verification, the email address will be changed",
+    "resetEmailMessageSended": "A new email confirmation link has been sent. Please, open your email to continue"
 }
