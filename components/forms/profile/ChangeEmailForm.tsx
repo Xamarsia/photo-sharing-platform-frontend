@@ -8,7 +8,7 @@ import VerifyEmailForm from '@/components/forms/profile/VerifyEmailForm';
 
 import { ChangeEvent, FormEvent, useState } from "react";
 import { getValidationErrors } from '@/lib/zod/validation';
-import { updateEmailSchema } from '@/lib/zod/schemas/profile/changeEmail';
+import { updateEmailSchema, updateUniqueEmailSchema } from '@/lib/zod/schemas/profile/changeEmail';
 
 
 type Props = {
@@ -34,7 +34,7 @@ export default function ChangeEmailForm({ local, oldEmail }: Props) {
             return;
         }
 
-        const response = updateEmailSchema.safeParse({
+        const response = await updateUniqueEmailSchema.safeParseAsync({
             email: email,
         });
 

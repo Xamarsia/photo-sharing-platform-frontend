@@ -1,4 +1,4 @@
-import { signOut as sOut, AuthCredential, createUserWithEmailAndPassword, EmailAuthProvider, GoogleAuthProvider, reauthenticateWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updateEmail, User, UserCredential, deleteUser, verifyBeforeUpdateEmail, reauthenticateWithPopup, getAuth, updatePassword } from "firebase/auth";
+import { signOut as sOut, AuthCredential, createUserWithEmailAndPassword, EmailAuthProvider, GoogleAuthProvider, reauthenticateWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updateEmail, User, UserCredential, deleteUser, verifyBeforeUpdateEmail, reauthenticateWithPopup, getAuth, updatePassword, fetchSignInMethodsForEmail } from "firebase/auth";
 
 import { auth } from "@/lib/firebase/clientApp";
 import { saveAuth } from "@/actions/user-actions";
@@ -154,6 +154,22 @@ export async function verifyEmail(newEmail: string): Promise<void> {
     }
   } catch (error) {
     console.error("Verify email error", error);
+  }
+}
+
+
+export async function isEmailUsed(email: string): Promise<boolean | undefined> {
+  const auth = getAuth();
+
+  try {
+    const methods: string[] = await fetchSignInMethodsForEmail(auth, email);
+    console.log("methods: ", methods)
+    if (methods.length == 0) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error("Is email used error", error);
   }
 }
 

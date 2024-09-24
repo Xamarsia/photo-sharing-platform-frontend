@@ -36,7 +36,7 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
     async function handleSignUpWithEmailAndPassword(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        const response = authFormValidationSchema.safeParse({
+        const response = await authFormValidationSchema.safeParseAsync({
             email: email,
             password: password,
             confirmPassword: confirmPassword,

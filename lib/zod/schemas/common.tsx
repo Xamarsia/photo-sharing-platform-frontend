@@ -1,4 +1,5 @@
 import { isUsernameUsed } from "@/actions/user-actions";
+import { isEmailUsed } from "@/lib/firebase/auth";
 import { z } from "zod";
 
 const MAX_FILE_SIZE = 5000000;
@@ -17,11 +18,19 @@ export const requiredFileSchema = z.any()
     .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), "Only .jpg, .jpeg files are accepted.")
     .optional().refine((file) => file, "Image is required.");
 
-//TODO Unique email validation
 export const emailSchema = z.string()
     .email('Invalid email format')
     .min(1, 'Email is required')
     .max(50, 'Email must contain no more than 30 characters');
+
+export const uniqueEmailSchema = z.string()
+    .email('Invalid email format')
+    .min(1, 'Email is required')
+    .max(50, 'Email must contain no more than 30 characters')
+    .refine(async (val) => {
+        const isEmailAlreadyInUse: boolean | undefined = await isEmailUsed(val);
+        return !isEmailAlreadyInUse;
+    }, { message: "Email is already taken" });
 
 export const passwordSchema = z.string()
     .min(6, { message: 'Password must be at least 6 characters' }) // minLengthErrorMessage
