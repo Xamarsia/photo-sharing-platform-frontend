@@ -36,7 +36,7 @@ export async function getProvider(): Promise<string[] | undefined> {
     } else {
       throw new Error("No user is signed in");
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Get provider error", error);
   }
 }
@@ -61,7 +61,7 @@ export async function getEmail(): Promise<Map<string, string> | undefined> {
       throw new Error("No user is signed in");
     }
 
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Get email error", error);
   }
 }

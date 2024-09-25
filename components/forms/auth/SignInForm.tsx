@@ -6,6 +6,7 @@ import formStyles from '@/app/styles/components/form.module.css';
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { FirebaseError } from 'firebase/app';
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import Input from '@/components/common/Input';
@@ -18,6 +19,8 @@ import google from '@/public/google/google-icon-logo.svg';
 import { getValidationErrors } from '@/lib/zod/validation';
 import { emailChangeValidationSchema, signInFormValidationSchema } from '@/lib/zod/schemas/auth/signIn';
 import { signInWithEmailPassword, signInWithGoogle } from '@/lib/firebase/auth';
+import { useAlert } from '@/utils/useAlert';
+import { UserCredential } from 'firebase/auth';
 
 
 type Props = {
@@ -30,6 +33,7 @@ export default function SignInForm({ local }: Props) {
     const [email, setEmail] = useState("localpart@domain.com");
     const [formIsValid, setFormIsValid] = useState(true);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
+    const { showAlert } = useAlert();
     const router = useRouter();
 
     async function handleSignInWithEmailAndPassword(event: FormEvent<HTMLFormElement>) {
@@ -52,16 +56,27 @@ export default function SignInForm({ local }: Props) {
             password: password,
         };
 
-        const isAuthorized = await signInWithEmailPassword(body);
-        if (isAuthorized) {
+        const credential = await signInWithEmailPassword(body);
+        if (credential instanceof FirebaseError) {
+            var errorCode = credential.code;
+            var errorMessage = credential.message;
+            if (errorCode == 'auth/invalid-credential') {
+                showAlert('Error', 'Invalid credential');
+            } else {
+                console.error(errorMessage);
+            }
+            setFormIsValid(false)
+            return;
+        }
+        if (credential) {
             router.replace('/news');
-        };
+        }
     }
 
     async function handleSignInWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
-        const isAuthorized = await signInWithGoogle();
-        if (isAuthorized) {
+        const credential: UserCredential | undefined = await signInWithGoogle();
+        if (credential) {
             router.replace('/news');
         }
     }
@@ -122,7 +137,7 @@ export default function SignInForm({ local }: Props) {
                 </div>
 
                 <div className='flex justify-between items-end '>
-                    <div/>
+                    <div />
                     <Link href={"/auth/password/reset"} className={`${styles['primary-link']}`} prefetch={false}>{local.forgotPassword}</Link>
                 </div>
             </div>

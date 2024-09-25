@@ -1,9 +1,27 @@
-import { signOut as sOut, AuthCredential, createUserWithEmailAndPassword, EmailAuthProvider, GoogleAuthProvider, reauthenticateWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updateEmail, User, UserCredential, deleteUser, verifyBeforeUpdateEmail, reauthenticateWithPopup, getAuth, updatePassword, fetchSignInMethodsForEmail } from "firebase/auth";
+import {
+  signOut as sOut,
+  AuthCredential,
+  createUserWithEmailAndPassword,
+  EmailAuthProvider,
+  GoogleAuthProvider,
+  reauthenticateWithCredential,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  updateEmail,
+  User,
+  UserCredential,
+  deleteUser,
+  verifyBeforeUpdateEmail,
+  reauthenticateWithPopup,
+  getAuth,
+  updatePassword
+} from "firebase/auth";
 
 import { auth } from "@/lib/firebase/clientApp";
 import { saveAuth } from "@/actions/user-actions";
 import { saveTokenToHttponlyCookies } from "@/actions/actions";
-
+import { FirebaseError } from "firebase/app";
 
 export async function signInWithGoogle(): Promise<UserCredential | undefined> {
   const provider = new GoogleAuthProvider();
@@ -11,57 +29,57 @@ export async function signInWithGoogle(): Promise<UserCredential | undefined> {
   try {
     const userCredential: UserCredential = await signInWithPopup(auth, provider);
     const idToken = await userCredential.user.getIdToken();
-    saveTokenToHttponlyCookies(idToken);
+    await saveTokenToHttponlyCookies(idToken);
     return userCredential;
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error signing in with Google", error);
-    saveTokenToHttponlyCookies('');
+    await saveTokenToHttponlyCookies('');
   }
 }
 
-export async function signUpWithGoogle(): Promise<boolean> {
+export async function signUpWithGoogle(): Promise<UserCredential | undefined> {
   const provider = new GoogleAuthProvider();
 
   try {
     const userCredential: UserCredential = await signInWithPopup(auth, provider);
     const idToken = await userCredential.user.getIdToken();
-    saveTokenToHttponlyCookies(idToken);
-    return saveAuth();
-  } catch (error) {
-    saveTokenToHttponlyCookies('');
+    await saveTokenToHttponlyCookies(idToken);
+    await saveAuth();
+    return userCredential;
+  } catch (error: unknown) {
+    await saveTokenToHttponlyCookies('');
     console.error("Error signing in with Google", error);
-    return false;
   }
 }
 
-export async function signUpWithEmailPassword(loginRequest: LoginRequest): Promise<boolean> {
+export async function signUpWithEmailPassword(loginRequest: LoginRequest): Promise<UserCredential | undefined | FirebaseError> {
   try {
     const userCredential: UserCredential = await createUserWithEmailAndPassword(auth, loginRequest.email, loginRequest.password);
     const idToken = await userCredential.user.getIdToken();
-    console.log("idToken: ", idToken)
-    saveTokenToHttponlyCookies(idToken);
-    return saveAuth();
-  } catch (error) {
-    saveTokenToHttponlyCookies('');
-    console.log("idToken: empty")
-    console.error("Error signing in with Google", error);
-    // TODO Add unicue email and week password error handling
-    // https://firebase.google.com/docs/auth/flutter/password-auth
-    return false;
+    await saveTokenToHttponlyCookies(idToken);
+    await saveAuth();
+    return userCredential;
+  } catch (error: unknown) {
+    await saveTokenToHttponlyCookies('');
+    if (error instanceof FirebaseError) {
+      return error;
+    }
+    console.error("Error signing up with email and password", error);
   }
 }
 
-export async function signInWithEmailPassword(loginRequest: LoginRequest): Promise<UserCredential | undefined> {
+export async function signInWithEmailPassword(loginRequest: LoginRequest): Promise<UserCredential | undefined | FirebaseError> {
   try {
     const userCredential: UserCredential = await signInWithEmailAndPassword(auth, loginRequest.email, loginRequest.password);
     const idToken = await userCredential.user.getIdToken();
-    saveTokenToHttponlyCookies(idToken);
-
+    await saveTokenToHttponlyCookies(idToken);
     return userCredential;
-  } catch (error) {
-    saveTokenToHttponlyCookies('');
-    console.error("Error signing in with Google", error);
-
+  } catch (error: unknown) {
+    await saveTokenToHttponlyCookies('');
+    if (error instanceof FirebaseError) {
+      return error;
+    }
+    console.error("Error signing in with email and password", error);
   }
 }
 
@@ -72,7 +90,7 @@ export async function deleteUserAuth(): Promise<void> {
     if (currentUser)
       deleteUser(currentUser);
 
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error delete user auth", error);
   }
 }
@@ -80,7 +98,7 @@ export async function deleteUserAuth(): Promise<void> {
 export async function signOut(): Promise<void> {
   try {
     return auth.signOut();
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Error signing out with Google", error);
   }
 }
@@ -90,7 +108,7 @@ export async function resetPassword(email: string): Promise<void> {
 
   try {
     await sendPasswordResetEmail(auth, email);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Reset password error", error)
   }
 }
@@ -101,13 +119,13 @@ export async function changePassword(newPassword: string) {
   if (auth.currentUser) {
     try {
       await updatePassword(auth.currentUser, newPassword);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("Update password error", error)
     }
   }
 }
 
-export async function reauthenticate(password: string): Promise<UserCredential | undefined> {
+export async function reauthenticate(password: string): Promise<UserCredential | undefined | FirebaseError> {
   const auth = getAuth();
   const currentUser = auth.currentUser;
 
@@ -121,7 +139,10 @@ export async function reauthenticate(password: string): Promise<UserCredential |
       const userCredential: UserCredential = await reauthenticateWithCredential(currentUser, credential);
       return userCredential;
     }
-  } catch (error) {
+  } catch (error: unknown) {
+    if (error instanceof FirebaseError) {
+      return error;
+    }
     console.error("Reauthenticate with credential error", error);
   }
 }
@@ -136,7 +157,7 @@ export async function reauthenticateWithGoogle(): Promise<UserCredential | undef
       const userCredential: UserCredential = await reauthenticateWithPopup(currentUser, provider);
       return userCredential;
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Reauthenticate with Google error", error);
   }
 }
@@ -149,24 +170,8 @@ export async function verifyEmail(newEmail: string): Promise<void> {
       await sOut(auth);
       window.location.reload();
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Verify email error", error);
-  }
-}
-
-
-export async function isEmailUsed(email: string): Promise<boolean | undefined> {
-  const auth = getAuth();
-
-  try {
-    const methods: string[] = await fetchSignInMethodsForEmail(auth, email);
-    console.log("methods: ", methods)
-    if (methods.length == 0) {
-      return true;
-    }
-    return false;
-  } catch (error) {
-    console.error("Is email used error", error);
   }
 }
 
@@ -177,7 +182,7 @@ export async function updateUserEmail(email: string): Promise<void> {
     if (currentUser) {
       await updateEmail(currentUser, email);
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Update email error", error);
   }
 }

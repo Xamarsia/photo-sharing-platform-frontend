@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { emailSchema, passwordSchema, uniqueEmailSchema } from "@/lib/zod/schemas/common";
+import { emailSchema, passwordSchema } from "@/lib/zod/schemas/common";
 
 export const authFormValidationSchema = z.object({
-    email: uniqueEmailSchema,
+    email: emailSchema,
     password: passwordSchema,
     confirmPassword: z.string({ required_error: "Confirm password is required" }),
 })

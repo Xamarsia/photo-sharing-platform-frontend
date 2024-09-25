@@ -6,7 +6,7 @@ import { getEmail, getProvider } from '@/lib/firebase/serverApp';
 
 import { cookies } from 'next/headers';
 
-export async function saveTokenToHttponlyCookies(token: string) {
+export async function saveTokenToHttponlyCookies(token: string): Promise<void> {
   cookies().set({
     name: 'token',
     value: token,

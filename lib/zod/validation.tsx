@@ -13,7 +13,7 @@ export function getValidationErrors(response: SafeParseReturnType<any, any>): Ma
         }
 
         return errorsMap;
-    } catch (error) {
+    } catch (error: unknown) {
         console.error(error);
         throw new Error("[getValidationErrors]: Form validation failed!");
     }

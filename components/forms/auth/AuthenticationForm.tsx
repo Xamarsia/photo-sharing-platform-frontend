@@ -5,7 +5,7 @@ import styles from '@/app/styles/text/text.module.css';
 import formStyles from '@/app/styles/components/form.module.css';
 
 import Link from 'next/link';
-
+import { FirebaseError } from 'firebase/app';
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import Input from '@/components/common/Input';
@@ -18,6 +18,7 @@ import google from '@/public/google/google-icon-logo.svg';
 import { authFormValidationSchema, emailChangeValidationSchema, setPasswordSchema } from '@/lib/zod/schemas/auth/authentication';
 import { signUpWithEmailPassword, signUpWithGoogle } from '@/lib/firebase/auth';
 import { getValidationErrors } from '@/lib/zod/validation';
+import { useAlert } from '@/utils/useAlert';
 
 
 type Props = {
@@ -32,6 +33,7 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
     const [email, setEmail] = useState("localpart@domain.com");
     const [formIsValid, setFormIsValid] = useState(true);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
+    const { showAlert } = useAlert();
 
     async function handleSignUpWithEmailAndPassword(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -54,16 +56,29 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
             password: password,
         }
 
-        const isAuthorized: boolean = await signUpWithEmailPassword(body);
-        if (isAuthorized && onSubmit) {
-            onSubmit();
+        const credential = await signUpWithEmailPassword(body);
+        if (credential instanceof FirebaseError) {
+            var errorCode = credential.code;
+            var errorMessage = credential.message;
+            if (errorCode == 'auth/email-already-in-use') {
+                showAlert('Error', local.emailAlreadyUsed)
+            } else if (errorCode == 'auth/weak-password') {
+                //TODO Enable enforcement https://cloud.google.com/identity-platform/docs/password-policy
+                showAlert('Error', local.providedPasswordWeak);
+            } else {
+                console.error(errorMessage);
+            }
+            setFormIsValid(false)
+            return;
         }
+
+        if (credential && onSubmit) { onSubmit(); }
     }
 
     async function handleSignUnWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
-        const isAuthorized: boolean = await signUpWithGoogle();
-        if (isAuthorized && onSubmit) {
+        const credential = await signUpWithGoogle();
+        if (credential && onSubmit) {
             onSubmit();
         }
     }

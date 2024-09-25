@@ -2,8 +2,10 @@
 
 
 import { FormEvent, useState } from "react";
+import { FirebaseError } from "firebase/app";
 
 import { ProviderID } from "@/constants";
+import { useAlert } from "@/utils/useAlert";
 import { deleteAccount } from '@/actions/user-actions';
 import { deleteUserAuth, reauthenticate, reauthenticateWithGoogle } from "@/lib/firebase/auth";
 
@@ -24,12 +26,24 @@ export default function DeleteAccountForm({ local, provider }: Props) {
     const [showModal, setShowModal] = useState(false);
     const [password, setPassword] = useState("password");
     const [formIsValid, setFormIsValid] = useState(true);
+    const { showAlert } = useAlert();
 
     async function handlenDeleteAccount(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         if (provider.includes(ProviderID.EmailAuthProvider)) {
-            await reauthenticate(password);
+            const credential = await reauthenticate(password);
+            if (credential instanceof FirebaseError) {
+                var errorCode = credential.code;
+                var errorMessage = credential.message;
+                if (errorCode == 'auth/invalid-credential') {
+                    showAlert('Error', local.invalidCredential)
+                } else {
+                    console.error(errorMessage);
+                }
+                setPassword("")
+                return;
+            }
         }
 
         // TODO Verify authentication with Google

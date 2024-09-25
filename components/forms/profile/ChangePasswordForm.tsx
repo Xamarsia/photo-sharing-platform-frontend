@@ -12,15 +12,15 @@ import { getValidationErrors } from '@/lib/zod/validation';
 import { currentPasswordSchema, setPasswordSchema, updatePasswordSchema } from '@/lib/zod/schemas/profile/changePassword';
 import { reauthenticate, changePassword } from '@/lib/firebase/auth';
 import { useAlert } from '@/utils/useAlert';
+import { FirebaseError } from 'firebase/app';
 
 
 type Props = {
     local: any;
-    onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
 
-export default function ChangePasswordForm({ local, onSubmit }: Props) {
+export default function ChangePasswordForm({ local }: Props) {
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const [currentPassword, setCurrentPassword] = useState("");
     const [password, setPassword] = useState("");
@@ -30,9 +30,6 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if (onSubmit) {
-            onSubmit(event);
-        }
 
         const response = updatePasswordSchema.safeParse({
             currentPassword: currentPassword,
@@ -47,13 +44,18 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
             return;
         };
 
-        const auth = await reauthenticate(currentPassword);
-
-        if (!auth) {
-            showAlert('Error', 'Password confirmation invalid. Please, try again');
+        const credential = await reauthenticate(currentPassword);
+        if (credential instanceof FirebaseError) {
+            var errorCode = credential.code;
+            var errorMessage = credential.message;
+            if (errorCode == 'auth/invalid-credential') {
+                showAlert('Error', local.invalidCredential)
+            } else {
+                console.error(errorMessage);
+            }
+            setCurrentPassword("")
             return;
         }
-
         await changePassword(currentPassword);
     }
 
