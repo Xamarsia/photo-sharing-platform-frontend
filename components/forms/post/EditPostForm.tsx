@@ -12,6 +12,7 @@ import DragAndDropFullPreview from '@/components/common/DragAndDropFullPreview';
 import { updatePost, updatePostImage } from "@/actions/post-actions";
 
 import styles from '@/app/styles/text/text.module.css';
+import formStyles from '@/app/styles/components/form.module.css';
 
 import { editPostValidationSchema, updateDescriptionSchema, updateRequiredFileSchema } from "@/lib/zod/schemas/post/editPost";
 import { getValidationErrors } from "@/lib/zod/validation";
@@ -101,7 +102,7 @@ export default function EditPostForm({ local, post }: Props) {
     }
 
     return (
-        <form onSubmit={onUpdate} onChange={() => setIsFormChanged(true)} className={`flex flex-col gap-y-3 sm:gap-y-6`}>
+        <form onSubmit={onUpdate} onChange={() => setIsFormChanged(true)} className={`${formStyles['form-container']}`}>
             <h1 className={`${styles['h1']}`}>{local.editPost}</h1>
             <div>
                 <FileSelector onImageSelected={onImageSelected} local={local} defaultImageExist={defaultImageExist} onDefaultImageRemoved={() => { setDefaultImageExist(false); }}>

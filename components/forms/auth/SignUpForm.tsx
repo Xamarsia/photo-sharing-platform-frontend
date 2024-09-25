@@ -2,7 +2,7 @@
 
 
 import styles from '@/app/styles/text/text.module.css';
-
+import formStyles from '@/app/styles/components/form.module.css';
 
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
@@ -91,8 +91,8 @@ export default function SignUpForm({ local }: Props) {
     return (
         <form onSubmit={handleSubmit}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
-            className={`flex flex-col justify-between h-[412px]`}>
-            <div className={`flex flex-col gap-y-3 sm:gap-y-6`}>
+            className={`${formStyles['form-card-container']}`}>
+            <div className={`${formStyles['form-container']}`}>
                 <h1 className={`${styles['h1']}`}>{local.signUp}</h1>
                 <div>
                     <Input

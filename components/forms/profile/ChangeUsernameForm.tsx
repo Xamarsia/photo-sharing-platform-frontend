@@ -8,6 +8,8 @@ import FormFieldError from '@/components/common/FormFieldError';
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from 'next/navigation';
 
+import formStyles from '@/app/styles/components/form.module.css';
+
 import { updateUniqueUsernameSchema, updateUsernameSchema } from '@/lib/zod/schemas/profile/changeUsername';
 import { updateUsername } from '@/actions/user-actions';
 import { getValidationErrors } from '@/lib/zod/validation';
@@ -70,7 +72,7 @@ export default function ChangeUsernameForm({ local, user }: Props) {
         <form
             onSubmit={onUpdate}
             onChange={(e) => { setIsFormChanged(true); }}
-            className={`text-left flex flex-col gap-y-3`}>
+            className={`text-left ${formStyles['form-container']}`}>
 
             <div>
                 <Input

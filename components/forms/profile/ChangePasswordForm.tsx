@@ -5,10 +5,13 @@ import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
 
+import formStyles from '@/app/styles/components/form.module.css';
+
 import { ChangeEvent, FormEvent, useState } from "react";
 import { getValidationErrors } from '@/lib/zod/validation';
 import { currentPasswordSchema, setPasswordSchema, updatePasswordSchema } from '@/lib/zod/schemas/profile/changePassword';
 import { reauthenticate, changePassword } from '@/lib/firebase/auth';
+import { useAlert } from '@/utils/useAlert';
 
 
 type Props = {
@@ -16,11 +19,13 @@ type Props = {
     onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
 }
 
+
 export default function ChangePasswordForm({ local, onSubmit }: Props) {
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const [currentPassword, setCurrentPassword] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const { showAlert } = useAlert();
 
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -42,7 +47,13 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
             return;
         };
 
-        await reauthenticate(currentPassword);
+        const auth = await reauthenticate(currentPassword);
+
+        if (!auth) {
+            showAlert('Error', 'Password confirmation invalid. Please, try again');
+            return;
+        }
+
         await changePassword(currentPassword);
     }
 
@@ -100,7 +111,7 @@ export default function ChangePasswordForm({ local, onSubmit }: Props) {
 
     return (
         <form onSubmit={handleSubmit}
-            className={`text-left flex flex-col gap-y-3`}>
+            className={`text-left ${formStyles['form-container']}`}>
             <div>
                 <Input
                     type="password"

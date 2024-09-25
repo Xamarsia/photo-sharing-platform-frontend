@@ -7,6 +7,8 @@ import { ProviderID } from "@/constants";
 import { deleteAccount } from '@/actions/user-actions';
 import { deleteUserAuth, reauthenticate, reauthenticateWithGoogle } from "@/lib/firebase/auth";
 
+import formStyles from '@/app/styles/components/form.module.css';
+
 import Modal from '@/components/common/Modal';
 import Input from "@/components/common/Input";
 import TextRemoveButton from '@/components/buttons/TextRemoveButton';
@@ -50,9 +52,9 @@ export default function DeleteAccountForm({ local, provider }: Props) {
             <Modal onCloseClicked={() => { setShowModal(false); }} title={local.deleteAccount} opened={showModal}>
                 <form onSubmit={handlenDeleteAccount}
                     onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
-                    className={`flex flex-col justify-between h-[464px]`}>
+                    className={`${formStyles['form-card-container']}`}>
 
-                    <div className={`flex flex-col gap-y-3`}>
+                    <div className={`${formStyles['form-container']}`}>
                         <p>{local.deleteAccountMessage}</p>
 
                         {provider.includes(ProviderID.EmailAuthProvider) &&

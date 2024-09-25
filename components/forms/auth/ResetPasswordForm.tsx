@@ -2,6 +2,7 @@
 
 
 import styles from '@/app/styles/text/text.module.css';
+import formStyles from '@/app/styles/components/form.module.css';
 
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -64,9 +65,9 @@ export default function ResetPasswordForm({ local }: Props) {
     return (
         <form onSubmit={handleSignInWithEmailAndPassword}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
-            className={`flex flex-col justify-between h-[464px]`}>
+            className={`${formStyles['form-card-container']}`}>
 
-            <div className={`flex flex-col gap-y-3`}>
+            <div className={`${formStyles['form-container']}`}>
 
                 <div className="flex justify-between pb-8">
                     <h1 className={`${styles['h1']}`}>{local.resetPassword}</h1>

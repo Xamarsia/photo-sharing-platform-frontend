@@ -11,6 +11,7 @@ import FormFieldError from "@/components/common/FormFieldError";
 import DragAndDropFullPreview from '@/components/common/DragAndDropFullPreview';
 
 import styles from '@/app/styles/text/text.module.css';
+import formStyles from '@/app/styles/components/form.module.css';
 
 import { createPost } from "@/actions/post-actions";
 import { createPostValidationSchema, updateDescriptionSchema, updateRequiredFileSchema } from "@/lib/zod/schemas/post/createPost";
@@ -97,7 +98,7 @@ export default function CreatePostForm({ local }: Props) {
     }
 
     return (
-        <form onSubmit={onCreate} className={`flex flex-col gap-y-3 sm:gap-y-6`}>
+        <form onSubmit={onCreate} className={`${formStyles['form-container']}`}>
             <h1 className={`${styles['h1']}`}>{local.createPost}</h1>
             <div>
                 <FileSelector onImageSelected={onImageSelected} local={local}>

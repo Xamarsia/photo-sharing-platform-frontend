@@ -108,6 +108,7 @@ export async function changePassword(newPassword: string) {
 }
 
 export async function reauthenticate(password: string): Promise<UserCredential | undefined> {
+  const auth = getAuth();
   const currentUser = auth.currentUser;
 
   try {
@@ -118,29 +119,25 @@ export async function reauthenticate(password: string): Promise<UserCredential |
       );
 
       const userCredential: UserCredential = await reauthenticateWithCredential(currentUser, credential);
-      const idToken = await userCredential.user.getIdToken();
-      saveTokenToHttponlyCookies(idToken);
       return userCredential;
     }
   } catch (error) {
     console.error("Reauthenticate with credential error", error);
-    saveTokenToHttponlyCookies('');
   }
 }
 
 export async function reauthenticateWithGoogle(): Promise<UserCredential | undefined> {
+  const auth = getAuth();
   const currentUser = auth.currentUser;
   const provider = new GoogleAuthProvider();
+
   try {
     if (currentUser) {
       const userCredential: UserCredential = await reauthenticateWithPopup(currentUser, provider);
-      const idToken = await userCredential.user.getIdToken();
-      saveTokenToHttponlyCookies(idToken);
       return userCredential;
     }
   } catch (error) {
     console.error("Reauthenticate with Google error", error);
-    saveTokenToHttponlyCookies('');
   }
 }
 

@@ -2,6 +2,7 @@
 
 
 import styles from '@/app/styles/text/text.module.css';
+import formStyles from '@/app/styles/components/form.module.css';
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -82,8 +83,8 @@ export default function SignInForm({ local }: Props) {
             onChange={(e) =>
                 setFormIsValid(e.currentTarget.checkValidity())
             }
-            className={`flex flex-col justify-between h-[464px]`}>
-            <div className={`flex flex-col gap-y-3`}>
+            className={`${formStyles['form-card-container']}`}>
+            <div className={`${formStyles['form-container']}`}>
                 <h1 className={`${styles['h1']}`}>{local.signIn}</h1>
 
                 <TextIconSecondaryButton

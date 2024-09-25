@@ -9,6 +9,7 @@ import FormFieldError from '@/components/common/FormFieldError';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from "react";
 
+import formStyles from '@/app/styles/components/form.module.css';
 
 import { updateUserInfo } from '@/actions/user-actions';
 import { getValidationErrors } from '@/lib/zod/validation';
@@ -101,7 +102,7 @@ export default function ChangeUserInfoForm({ local, user }: Props) {
     return (
         <form onSubmit={handleUserInfoUpdate}
             onChange={(e) => { setIsFormChanged(true) }}
-            className={`text-left flex flex-col gap-y-3`}>
+            className={`text-left ${formStyles['form-container']}`}>
             <div>
                 <Input
                     type="text"

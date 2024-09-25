@@ -2,12 +2,11 @@
 
 
 import styles from '@/app/styles/text/text.module.css';
+import formStyles from '@/app/styles/components/form.module.css';
 
 import Link from 'next/link';
 
 import { ChangeEvent, FormEvent, useState } from "react";
-
-import { signUpWithEmailPassword, signUpWithGoogle } from '@/lib/firebase/auth';
 
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
@@ -17,6 +16,7 @@ import TextIconSecondaryButton from '@/components/buttons/TextIconSecondaryButto
 import google from '@/public/google/google-icon-logo.svg';
 
 import { authFormValidationSchema, emailChangeValidationSchema, setPasswordSchema } from '@/lib/zod/schemas/auth/authentication';
+import { signUpWithEmailPassword, signUpWithGoogle } from '@/lib/firebase/auth';
 import { getValidationErrors } from '@/lib/zod/validation';
 
 
@@ -124,8 +124,8 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
     return (
         <form onSubmit={handleSignUpWithEmailAndPassword}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
-            className={`flex flex-col justify-between h-[464px]`}>
-            <div className={`flex flex-col gap-y-3 `}>
+            className={`${formStyles['form-card-container']}`}>
+            <div className={`${formStyles['form-container']}`}>
                 <h1 className={`${styles['h1']}`}>{local.signUp}</h1>
 
                 <TextIconSecondaryButton

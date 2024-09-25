@@ -1,6 +1,7 @@
 "use client";
 
 import styles from '@/app/styles/text/text.module.css';
+import formStyles from '@/app/styles/components/form.module.css';
 
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from "react";
@@ -22,7 +23,7 @@ export default function VerifyEmailForm({ local, newEmail }: Props) {
 
     const router = useRouter();
 
-    async function handleEmailVerification (event: FormEvent<HTMLFormElement>) {
+    async function handleEmailVerification(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         // TODO realise email update
@@ -37,8 +38,8 @@ export default function VerifyEmailForm({ local, newEmail }: Props) {
     return (
         <form onSubmit={handleEmailVerification}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
-            className={`flex flex-col justify-between h-[464px]`}>
-            <div className={`flex flex-col gap-y-3`}>
+            className={`${formStyles['form-card-container']}`}>
+            <div className={`${formStyles['form-container']}`}>
                 <p className={`${styles['base-text']}`}>{confirmPressed ? local.resetEmailMessageSended : local.resetEmailMessage} </p>
 
                 {!confirmPressed && <Input

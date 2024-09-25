@@ -6,6 +6,8 @@ import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
 import VerifyEmailForm from '@/components/forms/profile/VerifyEmailForm';
 
+import formStyles from '@/app/styles/components/form.module.css';
+
 import { ChangeEvent, FormEvent, useState } from "react";
 import { getValidationErrors } from '@/lib/zod/validation';
 import { updateEmailSchema, updateUniqueEmailSchema } from '@/lib/zod/schemas/profile/changeEmail';
@@ -63,7 +65,7 @@ export default function ChangeEmailForm({ local, oldEmail }: Props) {
             <form
                 onSubmit={handleSubmit}
                 onChange={(e) => { setIsFormChanged(true) }}
-                className={`text-left flex flex-col gap-y-3`}>
+                className={`text-left ${formStyles['form-container']}`}>
                 <div>
                     <Input
                         type="text"

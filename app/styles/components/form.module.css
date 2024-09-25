@@ -1,0 +1,7 @@
+.form-container {
+    @apply flex flex-col gap-y-3
+}
+
+.form-card-container {
+    @apply flex flex-col justify-between h-[464px]
+}

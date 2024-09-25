@@ -10,6 +10,8 @@ import DragAndDropCirclePreview from "@/components/common/DragAndDropCirclePrevi
 import { FormEvent, SetStateAction, useState } from "react";
 import { useRouter } from 'next/navigation';
 
+import formStyles from '@/app/styles/components/form.module.css';
+
 import { deleteProfileImage, updateProfileImage } from '@/actions/user-actions';
 import { updateProfileImageSchema } from '@/lib/zod/schemas/profile/changeProfileImage';
 import { getValidationErrors } from '@/lib/zod/validation';
@@ -69,7 +71,7 @@ export default function ChangeProfileImageForm({ local, user }: Props) {
         <>
             <form onSubmit={onUpdate}
                 onChange={(e) => { setIsFormChanged(true) }}
-                className={`text-left flex flex-col gap-y-3`}>
+                className={`text-left ${formStyles['form-container']}`}>
                 <div>
                     <div className='size-72'>
                         <FileSelector onDefaultImageRemoved={() => { setShowModal(true); }} onImageSelected={onImageSelected} local={local} rounded defaultImageExist={user.isProfileImageExist} >
