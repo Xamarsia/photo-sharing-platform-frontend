@@ -4,6 +4,11 @@ export const UserState = {
     Unfollowed: 'UNFOLLOWED',
 } as const
 
+export const LikeState = {
+    Liked: 'LIKED',
+    Unliked: 'UNLIKED',
+} as const
+
 export const ProviderID = {
     EmailAuthProvider: 'password',
     FacebookAuthProvider: 'facebook.com',
