@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import Sidebar from "@/components/common/Sidebar";
+import Sidebar from "@/components/common/sidebar/Sidebar";
 import IconButton from "@/components/buttons/IconButton";
 
 

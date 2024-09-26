@@ -41,7 +41,7 @@ export default function PostDropdown({ children }: Props) {
                 onClick={(e) => { setShowDropdown(!showDropdown) }}
             />
             {showDropdown &&
-                <Dropdown>
+                <Dropdown onDropdownClicked={(e) => setShowDropdown(false)}>
                     {children}
                 </Dropdown>
             }
