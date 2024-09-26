@@ -75,7 +75,9 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
             return;
         }
 
-        if (credential && onSubmit) { onSubmit(); }
+        if (credential && onSubmit) {
+            onSubmit();
+        }
     }
 
     async function handleSignUnWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {

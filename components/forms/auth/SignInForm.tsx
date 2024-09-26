@@ -85,7 +85,13 @@ export default function SignInForm({ local, registerUser }: Props) {
         event.preventDefault();
         const credential: UserCredential | undefined = await signInWithGoogle();
         if (credential) {
-            router.replace('/news');
+            const isRegistered = await isUserRegistered();
+            if (isRegistered) {
+                router.replace('/news');
+                return;
+            } else if (registerUser) {
+                registerUser();
+            }
         }
     }
 

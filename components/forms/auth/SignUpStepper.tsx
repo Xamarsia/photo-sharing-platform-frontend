@@ -10,13 +10,13 @@ import { useState } from "react";
 
 
 type Props = {
-    local: any;
+    local: any,
+    isAuth: string | undefined
 }
 
 
-export default function SignUpStepper({ local }: Props) {
-
-    const [activeStep, setActiveStep] = useState(0);
+export default function SignUpStepper({ local, isAuth }: Props) {
+    const [activeStep, setActiveStep] = useState(isAuth ? 1 : 0);
 
     const handleAuthenticate = () => {
         setActiveStep(activeStep + 1)
@@ -24,7 +24,6 @@ export default function SignUpStepper({ local }: Props) {
 
     const formElements = [
         <AuthenticationForm local={local} onSubmit={handleAuthenticate} />,
-        //TODO State when authenticated but not signed up (Email not unique)
         <SignUpForm local={local} />,
     ]
 

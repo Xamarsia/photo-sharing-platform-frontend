@@ -10,13 +10,13 @@ import SignInForm from "./SignInForm";
 
 
 type Props = {
-    local: any;
+    local: any,
+    isAuth: string | undefined
 }
 
 
-export default function SignInStepper({ local }: Props) {
-
-    const [activeStep, setActiveStep] = useState(0);
+export default function SignInStepper({ local, isAuth }: Props) {
+    const [activeStep, setActiveStep] = useState(isAuth ? 1 : 0);
 
     const handleAuthenticate = () => {
         setActiveStep(activeStep + 1)

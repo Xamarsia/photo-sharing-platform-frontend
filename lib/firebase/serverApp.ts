@@ -66,6 +66,17 @@ export async function getEmail(): Promise<Map<string, string> | undefined> {
   }
 }
 
+export async function isAuthorized(): Promise<string | undefined> {
+  try {
+    const authenticatedApp = await getAuthenticatedApp();
+    const user = await authenticatedApp.currentUser;
+    if (user) {
+      return user.getIdToken()
+    }
+  } catch (error: unknown) {
+    console.error("Is authorized", error)
+  }
+}
 
 export async function refreshTokens() {
 
