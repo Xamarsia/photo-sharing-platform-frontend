@@ -74,6 +74,6 @@
     "confirmPassword": "Please, confirm your password",
     "invalidCredential":"Password confirmation invalid. Please, try again",
     "providedPasswordWeak":"The password provided is too weak",
-    "emailAlreadyUsed": "The account already exists for this email",
+    "emailAlreadyUsed": "The account already exists for this email. If you tried to register and did not finish, please sign in with this email and complete registration. ",
     "tooManyRequests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
 }

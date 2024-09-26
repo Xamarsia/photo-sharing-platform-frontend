@@ -12,6 +12,16 @@ export async function getUser(username: string): Promise<UserDTO | undefined> {
     return user;
 }
 
+export async function isUserRegistered(): Promise<boolean | undefined> {
+    const res: Response = await authFetch(`/user/isRegistered`, { method: 'GET' });
+    if (!res.ok) {
+        return undefined;
+    }
+
+    const isUserRegistered: boolean = await res.json();
+    return isUserRegistered;
+}
+
 export async function registerUser(data: RegisterRequest): Promise<UserDTO | undefined> {
     const req = await JSONRequest(data, { method: 'POST' });
     const res: Response = await authFetch(`/user/register`, req);

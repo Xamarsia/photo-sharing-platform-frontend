@@ -1,10 +1,9 @@
 import 'server-only'
 
+import { getDictionary } from '@/lib/localization';
 
 import Card from '@/components/common/Card';
-import SignInForm from '@/components/forms/auth/SignInForm';
-
-import { getDictionary } from '@/lib/localization';
+import SignInStepper from '@/components/forms/auth/SignInStepper';
 
 export default async function SigninPage() {
     const dict = await getDictionary('en');
@@ -12,7 +11,7 @@ export default async function SigninPage() {
     return (
         <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
             <Card>
-                <SignInForm local={dict} />
+                <SignInStepper local={dict} />
             </Card>
         </div>
     );
