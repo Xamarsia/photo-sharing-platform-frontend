@@ -38,6 +38,8 @@ export default function DeleteAccountForm({ local, provider }: Props) {
                 var errorMessage = credential.message;
                 if (errorCode == 'auth/invalid-credential') {
                     showAlert('Error', local.invalidCredential)
+                } else if (errorCode == 'auth/too-many-requests') {
+                    showAlert('Error', local.tooManyRequests)
                 } else {
                     console.error(errorMessage);
                 }
