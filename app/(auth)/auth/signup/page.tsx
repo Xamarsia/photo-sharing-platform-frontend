@@ -2,7 +2,7 @@ import 'server-only';
 
 
 import Card from "@/components/common/Card";
-import SignUpStepper from "@/components/forms/SignUpStepper";
+import SignUpStepper from "@/components/forms/auth/SignUpStepper";
 
 import { getDictionary } from '@/lib/localization';
 

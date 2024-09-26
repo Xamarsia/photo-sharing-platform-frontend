@@ -37,7 +37,7 @@ export default function ProfilePreviewDropdown({ user, children }: Props) {
                 <ProfileImage profileImageExist={user.isProfileImageExist} username={user.username} preview />
             </button>
             {showDropdown &&
-                <Dropdown>
+                <Dropdown onDropdownClicked={(e) => setShowDropdown(false)} >
                     {children}
                 </Dropdown>
             }

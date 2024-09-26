@@ -8,6 +8,7 @@ import { getDictionary } from '@/lib/localization';
 import Footer from '@/components/common/Footer';
 import Header from '@/components/common/Header';
 import UnauthorizedGuard from '@/components/common/guards/UnauthorizedGuard';
+import AlertProvider from '@/components/common/alert/AlertProvider';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -30,10 +31,16 @@ export default async function RootLayout({
       <UnauthorizedGuard>
         <body className={`${inter.className} size-full flex flex-col items-stretch relative`}>
           <Header local={dict} />
-          <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20'>
-            {children}
+          <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20 z-30'>
+            <AlertProvider>
+              {children}
+            </AlertProvider>
           </main>
           <Footer local={dict} />
+          {/* To prevent Firefox FOUC*/}
+          <script>
+            let FIREFOX_FOUC_FIX;
+          </script>
         </body>
       </UnauthorizedGuard>
     </html>

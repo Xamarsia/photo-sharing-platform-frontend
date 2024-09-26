@@ -2,19 +2,19 @@ import { ChangeEvent } from "react";
 
 
 type InputProps = {
-    name?: string,
+    name?: string | undefined,
     type: 'text' | 'email' | 'password',
     title?: string | undefined,
     value?: string | undefined,
+    state?: 'invalid' | 'valid'
     placeholder?: string | undefined,
     required?: boolean | undefined,
-    pattern?: string | undefined,
     id?: string | undefined,
     onChange: (e: ChangeEvent<HTMLInputElement>) => void,
 }
 
 
-export default function InputField({ name, type, title, required, pattern, value, id, placeholder = " ", onChange }: InputProps) {
+export default function InputField({ name, type, title, required, value, state, id, placeholder = " ", onChange }: InputProps) {
     return (
         <div className="relative h-12">
             <input
@@ -24,13 +24,14 @@ export default function InputField({ name, type, title, required, pattern, value
                 value={value}
                 placeholder={placeholder}
                 required={required}
-                pattern={pattern}
                 onChange={onChange}
                 className={`px-3 
                     peer transition-all outline-none size-full text-sm pb-2 pt-6
                     bg-gray-50 focus:bg-white placeholder-shown:bg-gray-50 
                     border border-gray-100 focus:border-blue-500 rounded-xl
-                    font-normal text-gray-800`}
+                    font-normal text-gray-800 
+                    ${state == 'invalid' && '[&:not(:placeholder-shown):not(:focus)]:border-red-500'}`
+                }
             />
             <label className={`px-3 
                 transition-all pointer-events-none h-full text-gray-400 

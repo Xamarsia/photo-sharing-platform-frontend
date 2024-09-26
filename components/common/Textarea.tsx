@@ -2,22 +2,25 @@ import { ChangeEvent } from "react"
 
 
 type TextareaProps = {
-    id?: string | undefined,
+    name?: string | undefined,
     value?: string | undefined,
     title?: string | undefined,
+    state?: 'invalid' | 'valid'
     placeholder?: string | undefined,
     rows?: number | undefined,
     maxLength?: number | undefined,
-    required?: boolean,
-    onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void | undefined,
+    required?: boolean | undefined,
+    id?: string | undefined,
+    onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void,
 }
 
 
-export default function Textarea({ id, value, title, rows, maxLength, required, placeholder = " ", onChange }: TextareaProps) {
+export default function Textarea({ name, value, title, rows, maxLength, required, state, id, placeholder = " ", onChange }: TextareaProps) {
     return (
         <div className="relative h-36">
             <textarea
                 id={id}
+                name={name}
                 value={value}
                 placeholder={placeholder}
                 rows={rows}
@@ -27,7 +30,9 @@ export default function Textarea({ id, value, title, rows, maxLength, required, 
                 peer transition-all outline-none size-full text-sm pb-2 pt-6
                 bg-gray-50 focus:bg-white placeholder-shown:bg-gray-50 
                 border border-gray-100 focus:border-blue-500 rounded-xl
-                font-normal text-gray-800`}
+                font-normal text-gray-800
+                ${state == 'invalid' && '[&:not(:placeholder-shown):not(:focus)]:border-red-500'}`
+            }
             />
             <label className={`px-3 
                 transition-all pointer-events-none h-full text-gray-400 

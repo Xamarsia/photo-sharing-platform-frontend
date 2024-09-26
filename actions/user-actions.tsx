@@ -119,3 +119,13 @@ export async function unfollow(username: string): Promise<void> {
     }
     return;
 }
+
+export async function isUsernameUsed(username: string): Promise<boolean | undefined> {
+    const res: Response = await fetch(`${process.env.BACKEND_URL}/user/isUsernameAlreadyInUse/${username}`, { method: 'GET' });
+    if (!res.ok) {
+        return undefined;
+    }
+
+    const isUsernameUsed: boolean = await res.json();
+    return isUsernameUsed;
+}

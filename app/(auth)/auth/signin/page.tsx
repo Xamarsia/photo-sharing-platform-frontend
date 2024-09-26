@@ -2,7 +2,7 @@ import 'server-only'
 
 
 import Card from '@/components/common/Card';
-import SignInForm from '@/components/forms/SignInForm';
+import SignInForm from '@/components/forms/auth/SignInForm';
 
 import { getDictionary } from '@/lib/localization';
 

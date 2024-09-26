@@ -3,7 +3,7 @@ import 'server-only';
 
 import Card from '@/components/common/Card';
 import NotFound from '@/components/common/NotFound';
-import EditPostForm from '@/components/forms/EditPostForm';
+import EditPostForm from '@/components/forms/post/EditPostForm';
 
 import { getDictionary } from '@/lib/localization';
 import { getPost } from '@/actions/post-actions';

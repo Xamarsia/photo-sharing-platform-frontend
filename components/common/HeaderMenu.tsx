@@ -32,7 +32,7 @@ export default async function HeaderMenu({ local, user }: Props) {
                     </div>
                     <div className="md:block">
                         <ProfilePreviewDropdown user={user}>
-                            <DropdownButton text='My profile' />
+                            <DropdownButton text='My profile' onClick={() => { router.push(`/${user.username}`) }} />
                             <DropdownButton text={local.signOut} onClick={signOut} />
                         </ProfilePreviewDropdown>
                     </div>

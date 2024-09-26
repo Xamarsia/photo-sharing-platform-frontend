@@ -3,11 +3,16 @@
 
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
+import FormFieldError from '@/components/common/FormFieldError';
 
-
-import { FormEvent, useState } from "react";
-import { updateUsername } from '@/actions/user-actions';
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from 'next/navigation';
+
+import formStyles from '@/app/styles/components/form.module.css';
+
+import { updateUniqueUsernameSchema, updateUsernameSchema } from '@/lib/zod/schemas/profile/changeUsername';
+import { updateUsername } from '@/actions/user-actions';
+import { getValidationErrors } from '@/lib/zod/validation';
 
 
 type Props = {
@@ -18,8 +23,8 @@ type Props = {
 
 export default function ChangeUsernameForm({ local, user }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
-    const [formIsValid, setFormIsValid] = useState(false);
     const [username, setUsername] = useState(user.username);
+    const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const router = useRouter();
 
     async function onUpdate(event: FormEvent<HTMLFormElement>) {
@@ -28,7 +33,20 @@ export default function ChangeUsernameForm({ local, user }: Props) {
         if (!isFormChanged) {
             return;
         }
+
         if (username == user.username) {
+            setIsFormChanged(false);
+            return;
+        }
+
+        const response = await updateUniqueUsernameSchema.safeParseAsync({
+            username: username,
+        });
+
+        const errorsMap: Map<string | number, string> = getValidationErrors(response);
+
+        if (errorsMap.size != 0) {
+            setErrors(errorsMap);
             return;
         }
 
@@ -39,14 +57,22 @@ export default function ChangeUsernameForm({ local, user }: Props) {
         router.push(`/${newUser?.username}`);
     }
 
+    async function onUsernameChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+        setUsername(event.target.value);
+
+        const response = updateUsernameSchema.safeParse({
+            username: event.target.value,
+        });
+
+        const errorsMap: Map<string | number, string> = getValidationErrors(response);
+        setErrors(errorsMap);
+    }
+
     return (
         <form
             onSubmit={onUpdate}
-            onChange={(e) => {
-                setFormIsValid(e.currentTarget.checkValidity())
-                setIsFormChanged(true)
-            }}
-            className={`text-left flex flex-col gap-y-3 sm:gap-y-6`}>
+            onChange={(e) => { setIsFormChanged(true); }}
+            className={`text-left ${formStyles['form-container']}`}>
 
             <div>
                 <Input
@@ -54,17 +80,18 @@ export default function ChangeUsernameForm({ local, user }: Props) {
                     name="username"
                     value={username}
                     title={local.username}
-                    pattern='^[a-zA-Z0-9]{1,30}$'
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => { onUsernameChangeHendler(e) }}
                     required
+                    state={errors.has("username") ? 'invalid' : 'valid'}
                 />
+                <FormFieldError text={errors.get("username")} />
             </div>
 
             <TextButton
                 type="submit"
                 text={local.update}
                 fill="content"
-                disabled={!formIsValid || !isFormChanged}
+                disabled={!isFormChanged || errors.size != 0}
             />
         </form>
     )

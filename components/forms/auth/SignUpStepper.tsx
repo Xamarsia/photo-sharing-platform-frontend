@@ -2,8 +2,8 @@
 
 
 import Stepper from "@/components/common/Stepper";
-import SignUpForm from "@/components/forms/SignUpForm";
-import AuthenticationForm from "@/components/forms/AuthenticationForm";
+import SignUpForm from "@/components/forms/auth/SignUpForm";
+import AuthenticationForm from "@/components/forms/auth/AuthenticationForm";
 
 
 import { useState } from "react";
@@ -22,14 +22,10 @@ export default function SignUpStepper({ local }: Props) {
         setActiveStep(activeStep + 1)
     };
 
-    const handleRegistration = () => {
-
-    };
-
-
     const formElements = [
         <AuthenticationForm local={local} onSubmit={handleAuthenticate} />,
-        <SignUpForm local={local} onSubmit={handleRegistration} />,
+        //TODO State when authenticated but not signed up (Email not unique)
+        <SignUpForm local={local} />,
     ]
 
 
