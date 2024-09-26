@@ -4,9 +4,9 @@ import { Inter } from 'next/font/google';
 import '@/app/styles/globals.css';
 
 import { getDictionary } from '@/lib/localization';
-import Sidebar from '@/components/common/Sidebar';
 import { getSidebarItems } from '@/actions/actions';
 
+import Sidebar from '@/components/common/sidebar/Sidebar';
 
 const inter = Inter({ subsets: ['latin'] })
 

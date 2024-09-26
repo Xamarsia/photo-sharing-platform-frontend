@@ -1,7 +1,7 @@
 "use client"
 
 
-import SidebarItem from "@/components/common/SidebarItem";
+import SidebarItem from "@/components/common/sidebar/SidebarItem";
 import { usePathname } from "next/navigation";
 
 type Props = {

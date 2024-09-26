@@ -1,7 +1,7 @@
 import { passwordSchema } from "@/lib/zod/schemas/common";
 import { z } from "zod";
 
-
+//TODO add error localization
 export const currentPasswordSchema = z.object({
     currentPassword: z.string().min(1, 'Current password is required')
 });

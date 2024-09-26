@@ -1,7 +1,7 @@
 "use server";
 
 import Logo from "@/components/common/Logo";
-import SearchBar from "@/components/common/SearchBar";
+import SearchBar from "@/components/common/search/SearchBar";
 import HeaderMenu from "@/components/common/HeaderMenu";
 
 import { getCurrentUser } from "@/actions/actions";

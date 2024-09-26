@@ -1,10 +1,10 @@
 "use client";
 
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
-import SearchInput from "@/components/common/SearchInput";
-import { useRouter } from "next/navigation";
+import SearchInput from "@/components/common/search/SearchInput";
+import { usePathname, useRouter } from "next/navigation";
 
 
 type Props = {
@@ -13,8 +13,17 @@ type Props = {
 
 
 export default function SearchBar({ local }: Props) {
-    const [query, setQuery] = useState<string>();
+    const [query, setQuery] = useState<string>('');
     const router = useRouter();
+    const pathname = usePathname();
+
+
+    // Clear search string value if not on search page
+    useEffect(() => {
+        if (query && !pathname.includes('/search')) {
+            setQuery('');
+        }
+    }, [pathname]);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -31,7 +40,7 @@ export default function SearchBar({ local }: Props) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <SearchInput local={local} onChange={onSearchChanged} />
+            <SearchInput local={local} value={query} onChange={onSearchChanged} />
         </form>
     )
 }
