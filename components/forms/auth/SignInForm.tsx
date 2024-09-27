@@ -21,14 +21,16 @@ import { emailChangeValidationSchema, signInFormValidationSchema } from '@/lib/z
 import { signInWithEmailPassword, signInWithGoogle } from '@/lib/firebase/auth';
 import { useAlert } from '@/utils/useAlert';
 import { UserCredential } from 'firebase/auth';
+import { isUserRegistered } from '@/actions/user-actions';
 
 
 type Props = {
     local: any;
+    registerUser?: () => void;
 }
 
 
-export default function SignInForm({ local }: Props) {
+export default function SignInForm({ local, registerUser }: Props) {
     const [password, setPassword] = useState("password");
     const [email, setEmail] = useState("localpart@domain.com");
     const [formIsValid, setFormIsValid] = useState(true);
@@ -69,7 +71,13 @@ export default function SignInForm({ local }: Props) {
             return;
         }
         if (credential) {
-            router.replace('/news');
+            const isRegistered = await isUserRegistered();
+            if (isRegistered) {
+                router.replace('/news');
+                return;
+            } else if (registerUser) {
+                registerUser();
+            }
         }
     }
 
@@ -77,7 +85,13 @@ export default function SignInForm({ local }: Props) {
         event.preventDefault();
         const credential: UserCredential | undefined = await signInWithGoogle();
         if (credential) {
-            router.replace('/news');
+            const isRegistered = await isUserRegistered();
+            if (isRegistered) {
+                router.replace('/news');
+                return;
+            } else if (registerUser) {
+                registerUser();
+            }
         }
     }
 

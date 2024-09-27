@@ -32,7 +32,8 @@ export default async function HeaderMenu({ local, user }: Props) {
                     </div>
                     <div className="md:block">
                         <ProfilePreviewDropdown user={user}>
-                            <DropdownButton text='My profile' onClick={() => { router.push(`/${user.username}`) }} />
+                            <DropdownButton text={local.myProfile} onClick={() => { router.push(`/${user.username}`) }} />
+                            <DropdownButton text={local.editProfile} onClick={() => { router.push('/profile/edit/info') }} />
                             <DropdownButton text={local.signOut} onClick={signOut} />
                         </ProfilePreviewDropdown>
                     </div>

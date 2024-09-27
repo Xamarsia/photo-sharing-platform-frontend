@@ -19,6 +19,7 @@ import { authFormValidationSchema, emailChangeValidationSchema, setPasswordSchem
 import { signUpWithEmailPassword, signUpWithGoogle } from '@/lib/firebase/auth';
 import { getValidationErrors } from '@/lib/zod/validation';
 import { useAlert } from '@/utils/useAlert';
+import { useRouter } from 'next/navigation';
 
 
 type Props = {
@@ -34,6 +35,7 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
     const [formIsValid, setFormIsValid] = useState(true);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const { showAlert } = useAlert();
+    const router = useRouter();
 
     async function handleSignUpWithEmailAndPassword(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -62,6 +64,7 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
             var errorMessage = credential.message;
             if (errorCode == 'auth/email-already-in-use') {
                 showAlert('Error', local.emailAlreadyUsed)
+                router.push("/auth/signin")
             } else if (errorCode == 'auth/weak-password') {
                 //TODO Enable enforcement https://cloud.google.com/identity-platform/docs/password-policy
                 showAlert('Error', local.providedPasswordWeak);
@@ -72,7 +75,9 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
             return;
         }
 
-        if (credential && onSubmit) { onSubmit(); }
+        if (credential && onSubmit) {
+            onSubmit();
+        }
     }
 
     async function handleSignUnWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {

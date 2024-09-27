@@ -1,5 +1,7 @@
 type UserState = 'CURRENT' | 'FOLLOWED' | 'UNFOLLOWED'
 
+type LikeState = "LIKED" | "UNLIKED"
+
 type ProviderID = 'password' | 'facebook.com' | 'github.com' | 'google.com' | 'phone' | 'twitter.com'
 
 type UserDTO = {
@@ -43,11 +45,13 @@ type PostDTO = {
     "createdDate": string,
     "description": string | undefined,
     "username": string,
+    "likes": number
 }
 
 type DetailedPostDTO = {
     "postDTO": PostDTO,
     "authorDTO": UserDTO,
+    "state": LikeState
 }
 
 type ProfileDTO = {
