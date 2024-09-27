@@ -4,6 +4,7 @@ import 'server-only';
 import Card from '@/components/common/Card';
 import NotFound from '@/components/common/NotFound';
 import EditPostForm from '@/components/forms/post/EditPostForm';
+import styles from '@/app/styles/components/page.module.css';
 
 import { getDictionary } from '@/lib/localization';
 import { getPost } from '@/actions/post-actions';
@@ -20,7 +21,7 @@ export default async function EditPostPage({ params }: { params: PageProps }) {
     const post: PostDTO | undefined = await getPost(params.postId);
 
     return (
-        <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
+        <div className={`${styles['simple-page-layout']}`}>
             <Card>
                 {post
                     ? <EditPostForm local={dict} post={post} />

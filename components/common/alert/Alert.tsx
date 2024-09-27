@@ -12,13 +12,6 @@ type AlertProps = {
   onClose: () => void;
 };
 
-const borderColors = {
-  Success: "bg-green-100",
-  Error: "bg-red-100",
-  Warning: "bg-orange-100",
-};
-
-
 const textColors = {
   Success: "text-green-400",
   Error: "text-red-400",
@@ -27,12 +20,14 @@ const textColors = {
 
 export default function Alert({ type, message, onClose }: AlertProps) {
   return (
-    <div className={`flex justify-between border items-center p-4 m-2 rounded-lg ${borderColors[type]}`} role="alert">
-      <span className={`ms-3 text-sm font-medium ${textColors[type]}`}>
-        {message}
-      </span>
-      <div className="size-6" >
-        <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={onClose} />
+    <div className="flex items-center justify-center w-full">
+      <div className={`flex items-center justify-between border border-gray-100 p-4 m-2 max-w-xl rounded-lg w-full bg-white`} role="alert">
+        <span className={`ms-3 text-sm font-medium ${textColors[type]}`}>
+          {message}
+        </span>
+        <div className="size-6" >
+          <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={onClose} />
+        </div>
       </div>
     </div>
   );

@@ -34,11 +34,11 @@ export default function ToggleLikeButton({ postId, state }: Props) {
     }
 
     return (
-        <div>
+        <>
             {liking
                 ? <IconButton icon={heart} hoveredIcon={heart} onClick={unlikePost} />
                 : <IconButton icon={heartOutline} hoveredIcon={heartHoveredOutline} onClick={likePost} />
             }
-        </div>
+        </>
     );
 }

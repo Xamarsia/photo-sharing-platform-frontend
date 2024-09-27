@@ -20,6 +20,7 @@ import { deletePost } from '@/actions/post-actions';
 import { formatDateTime } from '@/lib/dateTime';
 
 
+
 type Props = {
     local: any,
     detailedPost: DetailedPostDTO,
