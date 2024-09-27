@@ -1,5 +1,4 @@
 import {
-  signOut as sOut,
   AuthCredential,
   createUserWithEmailAndPassword,
   EmailAuthProvider,
@@ -8,7 +7,6 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
-  updateEmail,
   User,
   UserCredential,
   deleteUser,
@@ -114,11 +112,10 @@ export async function resetPassword(email: string): Promise<void> {
 }
 
 export async function changePassword(newPassword: string) {
-  const auth = getAuth();
-
-  if (auth.currentUser) {
+  const currentUser = getAuth().currentUser;
+  if (currentUser) {
     try {
-      await updatePassword(auth.currentUser, newPassword);
+      await updatePassword(currentUser, newPassword);
     } catch (error: unknown) {
       console.error("Update password error", error)
     }
@@ -126,9 +123,7 @@ export async function changePassword(newPassword: string) {
 }
 
 export async function reauthenticate(password: string): Promise<UserCredential | undefined | FirebaseError> {
-  const auth = getAuth();
-  const currentUser = auth.currentUser;
-
+  const currentUser = getAuth().currentUser;
   try {
     if (currentUser && currentUser.email) {
       const credential: AuthCredential = EmailAuthProvider.credential(
@@ -148,8 +143,7 @@ export async function reauthenticate(password: string): Promise<UserCredential |
 }
 
 export async function reauthenticateWithGoogle(): Promise<UserCredential | undefined> {
-  const auth = getAuth();
-  const currentUser = auth.currentUser;
+  const currentUser = getAuth().currentUser;
   const provider = new GoogleAuthProvider();
 
   try {
@@ -162,27 +156,14 @@ export async function reauthenticateWithGoogle(): Promise<UserCredential | undef
   }
 }
 
-export async function verifyEmail(newEmail: string): Promise<void> {
-  const currentUser = auth.currentUser;
+export async function updateUserEmail(newEmail: string): Promise<void> {
+  const currentUser = getAuth().currentUser;
+
   try {
     if (currentUser) {
       await verifyBeforeUpdateEmail(currentUser, newEmail);
-      await sOut(auth);
-      window.location.reload();
     }
   } catch (error: unknown) {
-    console.error("Verify email error", error);
-  }
-}
-
-export async function updateUserEmail(email: string): Promise<void> {
-  const currentUser = auth.currentUser;
-
-  try {
-    if (currentUser) {
-      await updateEmail(currentUser, email);
-    }
-  } catch (error: unknown) {
-    console.error("Update email error", error);
+    console.error("Update user email error", error);
   }
 }

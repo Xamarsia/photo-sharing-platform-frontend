@@ -8,7 +8,9 @@ import { FormEvent, useState } from "react";
 
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
-// import { reauthenticate, updateUserEmail, verifyEmail } from '@/lib/firebase/auth';
+import { reauthenticate, updateUserEmail } from '@/lib/firebase/auth';
+import { FirebaseError } from 'firebase/app';
+import { useAlert } from '@/utils/useAlert';
 
 type Props = {
     local: any,
@@ -20,17 +22,28 @@ export default function VerifyEmailForm({ local, newEmail }: Props) {
     const [password, setPassword] = useState("password");
     const [formIsValid, setFormIsValid] = useState(true);
     const [confirmPressed, setConfirmPressed] = useState(false);
-
+    const { showAlert } = useAlert();
     const router = useRouter();
 
     async function handleEmailVerification(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        // TODO realise email update
-        // const isAuthorized = await reauthenticate(password);
-        // await verifyEmail(newEmail);
-        // await updateUserEmail(newEmail);
+        const credential = await reauthenticate(password);
+        if (credential instanceof FirebaseError) {
+            var errorCode = credential.code;
+            var errorMessage = credential.message;
+            if (errorCode == 'auth/invalid-credential') {
+                showAlert('Error', local.invalidCredential)
+            } else if (errorCode == 'auth/too-many-requests') {
+                showAlert('Error', local.tooManyRequests)
+            } else {
+                console.error(errorMessage);
+            }
+            setPassword("")
+            return;
+        }
 
+        await updateUserEmail(newEmail);
         setConfirmPressed(true);
     }
 
