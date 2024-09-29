@@ -21,7 +21,7 @@ type Props = {
 }
 
 
-export default function SignUpForm({ local }: Props) {
+export default function RegistrationForm({ local }: Props) {
     const [username, setUsername] = useState("username");
     const [fullName, setFullName] = useState("");
     const [formIsValid, setFormIsValid] = useState(true);

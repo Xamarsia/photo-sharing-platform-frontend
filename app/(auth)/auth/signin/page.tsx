@@ -1,21 +1,32 @@
 import 'server-only'
 
+import { redirect } from 'next/navigation';
+
 import { getDictionary } from '@/lib/localization';
+import { isAuthorized } from '@/lib/firebase/serverApp';
+import { isAuthenticationUsed } from '@/actions/user-actions';
 
 import styles from '@/app/styles/components/page.module.css';
 
 import Card from '@/components/common/Card';
-import SignInStepper from '@/components/forms/auth/SignInStepper';
-import { isAuthorized } from '@/lib/firebase/serverApp';
+import SignInForm from '@/components/forms/auth/SignInForm';
+
 
 export default async function SigninPage() {
     const dict = await getDictionary('en');
     const isAuth = await isAuthorized();
 
+    if (isAuth) {
+        const isAuthUsed = await isAuthenticationUsed();
+        if (!isAuthUsed) {
+            redirect('/auth/registration')
+        }
+    }
+
     return (
         <div className={`${styles['simple-page-layout']}`}>
             <Card>
-                <SignInStepper local={dict} isAuth={isAuth} />
+                <SignInForm local={dict} />
             </Card>
         </div>
     );
