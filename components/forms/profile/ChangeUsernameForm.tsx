@@ -2,17 +2,17 @@
 
 
 import Input from '@/components/common/Input';
+import Modal from '@/components/common/Modal';
 import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
+import VerifyUsernameForm from '@/components/forms/profile/VerifyUsernameForm';
 
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useRouter } from 'next/navigation';
 
 import formStyles from '@/app/styles/components/form.module.css';
 
-import { updateUniqueUsernameSchema, updateUsernameSchema } from '@/lib/zod/schemas/profile/changeUsername';
-import { updateUsername } from '@/actions/user-actions';
 import { getValidationErrors } from '@/lib/zod/validation';
+import { updateUniqueUsernameSchema, updateUsernameSchema } from '@/lib/zod/schemas/profile/changeUsername';
 
 
 type Props = {
@@ -24,8 +24,8 @@ type Props = {
 export default function ChangeUsernameForm({ local, user }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [username, setUsername] = useState(user.username);
+    const [showModal, setShowModal] = useState<boolean>(false);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
-    const router = useRouter();
 
     async function onUpdate(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -44,17 +44,11 @@ export default function ChangeUsernameForm({ local, user }: Props) {
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
-
         if (errorsMap.size != 0) {
             setErrors(errorsMap);
             return;
         }
-
-        const body: UsernameUpdateRequest = {
-            username: username,
-        }
-        const newUser: UserDTO | undefined = await updateUsername(body);
-        router.push(`/${newUser?.username}`);
+        setShowModal(true);
     }
 
     async function onUsernameChangeHendler(event: ChangeEvent<HTMLInputElement>) {
@@ -69,30 +63,34 @@ export default function ChangeUsernameForm({ local, user }: Props) {
     }
 
     return (
-        <form
-            onSubmit={onUpdate}
-            onChange={(e) => { setIsFormChanged(true); }}
-            className={`text-left ${formStyles['form-container']}`}>
+        <>
+            <form onSubmit={onUpdate}
+                onChange={() => { setIsFormChanged(true); }}
+                className={`text-left ${formStyles['form-container']}`}>
 
-            <div>
-                <Input
-                    type="text"
-                    name="username"
-                    value={username}
-                    title={local.username}
-                    onChange={(e) => { onUsernameChangeHendler(e) }}
-                    required
-                    state={errors.has("username") ? 'invalid' : 'valid'}
+                <div>
+                    <Input
+                        type="text"
+                        name="username"
+                        value={username}
+                        title={local.username}
+                        onChange={(e) => { onUsernameChangeHendler(e) }}
+                        required
+                        state={errors.has("username") ? 'invalid' : 'valid'}
+                    />
+                    <FormFieldError text={errors.get("username")} />
+                </div>
+
+                <TextButton
+                    type="submit"
+                    text={local.update}
+                    fill="content"
+                    disabled={!isFormChanged || errors.size != 0}
                 />
-                <FormFieldError text={errors.get("username")} />
-            </div>
-
-            <TextButton
-                type="submit"
-                text={local.update}
-                fill="content"
-                disabled={!isFormChanged || errors.size != 0}
-            />
-        </form>
+            </form>
+            <Modal title={local.verifyNewUsername} onCloseClicked={() => { setShowModal(false); }} opened={showModal}>
+                <VerifyUsernameForm local={local} newUsername={username} onSubmit={() => { setShowModal(false); setIsFormChanged(false); }} />
+            </Modal>
+        </>
     )
 }

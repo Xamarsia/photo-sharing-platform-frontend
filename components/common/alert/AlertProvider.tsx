@@ -65,19 +65,17 @@ export default function AlertProvider({ children }: Props) {
 
     return (
         <AlertContext.Provider value={contextValue}>
-            <div className='flex flex-col flex-grow relative flex-shrink-0 justify-end'>
-                <div className='absolute w-full z-[51]'>
-                    {alerts.map((alert, index) => (
-                        <Alert
-                            message={alert.message}
-                            type={alert.type}
-                            key={index}
-                            onClose={() => hideAlert(index)}
-                        />
-                    ))}
-                </div>
-                {children}
+            <div className='absolute w-full z-[51] bottom-0'>
+                {alerts.map((alert, index) => (
+                    <Alert
+                        message={alert.message}
+                        type={alert.type}
+                        key={index}
+                        onClose={() => hideAlert(index)}
+                    />
+                ))}
             </div>
+            {children}
         </AlertContext.Provider>
     );
 };
