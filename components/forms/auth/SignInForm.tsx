@@ -72,7 +72,7 @@ export default function SignInForm({ local }: Props) {
         if (credential) {
             const isRegistered = await isUserRegistered();
             if (isRegistered) {
-                router.replace('/news');
+                router.replace('/');
                 return;
             }
         }
@@ -84,7 +84,7 @@ export default function SignInForm({ local }: Props) {
         if (credential) {
             const isRegistered = await isUserRegistered();
             if (isRegistered) {
-                router.replace('/news');
+                router.replace('/');
                 return;
             }
         }
