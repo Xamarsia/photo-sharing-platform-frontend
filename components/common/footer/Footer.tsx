@@ -1,6 +1,6 @@
 import 'server-only';
 
-import FooterMenu from '@/components/common/FooterMenu';
+import FooterMenu from '@/components/common/footer/FooterMenu';
 
 import styles from '@/app/styles/text/text.module.css';
 

@@ -17,7 +17,7 @@ export default async function SigninPage() {
 
     if (isAuth) {
         const isAuthUsed = await isAuthenticationUsed();
-        if (!isAuthUsed) {
+        if (isAuthUsed == false) {
             redirect('/auth/registration')
         }
     }

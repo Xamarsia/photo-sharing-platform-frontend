@@ -20,12 +20,12 @@ export default function ToggleDropdownFollowButton({ user, local }: Props) {
 
     async function followProfile() {
         setFollowing(true);
-        follow(user.username);
+        await follow(user.username);
     }
 
     async function unfollowProfile() {
         setFollowing(false);
-        unfollow(user.username);
+        await unfollow(user.username);
     }
 
     return (

@@ -5,8 +5,8 @@ import '@/app/styles/globals.css';
 
 import { getDictionary } from '@/lib/localization';
 
-import Footer from '@/components/common/Footer';
-import Header from '@/components/common/Header';
+import Footer from '@/components/common/footer/Footer';
+import Header from '@/components/common/header/Header';
 import UnauthorizedGuard from '@/components/common/guards/UnauthorizedGuard';
 import AlertProvider from '@/components/common/alert/AlertProvider';
 

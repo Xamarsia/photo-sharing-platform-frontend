@@ -25,19 +25,23 @@ export default function ToggleLikeButton({ postId, state }: Props) {
 
     async function likePost() {
         setLiking(true);
-        like(postId);
+        await like(postId);
     }
 
     async function unlikePost() {
         setLiking(false);
-        unlike(postId);
+        await unlike(postId);
     }
 
     return (
         <>
             {liking
-                ? <IconButton icon={heart} hoveredIcon={heart} onClick={unlikePost} />
-                : <IconButton icon={heartOutline} hoveredIcon={heartHoveredOutline} onClick={likePost} />
+                ? <IconButton icon={heart} hoveredIcon={heart}
+                onClick={unlikePost} 
+                />
+                : <IconButton icon={heartOutline} hoveredIcon={heartHoveredOutline}
+                onClick={likePost}
+                />
             }
         </>
     );

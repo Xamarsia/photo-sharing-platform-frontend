@@ -18,7 +18,7 @@ type Props = {
 }
 
 
-export default async function HeaderMenu({ local, user }: Props) {
+export default function HeaderMenu({ local, user }: Props) {
     const router = useRouter();
 
     return (

@@ -1,7 +1,9 @@
+"use client";
+
 import { useState } from "react";
 
 import Modal from "@/components/common/Modal";
-import StatCounter from "@/components/common/StatCounter";
+import StatCounter from "@/components/common/stats/StatCounter";
 
 import ProfilePreviewListInfiniteLoading from "@/components/common/infinite-loading/ProfilePreviewListInfiniteLoading";
 

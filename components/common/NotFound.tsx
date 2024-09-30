@@ -1,3 +1,5 @@
+import 'server-only';
+
 import blueExclamationCircle from '@/public/exclamation-circle/blue-exclamation-circle.svg';
 
 import Image from 'next/image';
