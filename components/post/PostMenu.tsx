@@ -2,10 +2,12 @@
 
 
 import Link from 'next/link';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { useState } from 'react';
 import { UserState } from '@/constants';
+import { formatDateTime } from '@/utils/dateTime';
+import { deletePost } from '@/actions/post-actions';
 
 import Modal from '@/components/common/Modal';
 import PostDropdown from '@/components/post/PostDropdown';
@@ -16,9 +18,6 @@ import DropdownRemoveButton from '@/components/buttons/DropdownRemoveButton';
 import ToggleDropdownFollowButton from '@/components/buttons/ToggleDropdownFollowButton';
 
 import styles from '@/app/styles/text/text.module.css';
-import { deletePost } from '@/actions/post-actions';
-import { formatDateTime } from '@/lib/dateTime';
-
 
 
 type Props = {
@@ -30,15 +29,15 @@ type Props = {
 export default function PostMenuComponent({ local, detailedPost }: Props) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
     const [author] = useState<UserDTO>(detailedPost.authorDTO);
+    const [showModal, setShowModal] = useState<boolean>(false);
     const [isUserPostOwner] = useState<boolean>(author.state == UserState.Current);
-    const [showModal, setShowModal] = useState(false);
+    const createdDate = formatDateTime(post.createdDate);
     const router = useRouter();
 
     async function onDeletePost() {
         await deletePost(post.id);
         router.push(`/${author.username}`);
     }
-
 
     return (
         <div className='flex justify-around items-center'>
@@ -47,7 +46,7 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
             </Link>
             <div className="flex-1 flex gap-2 mx-4">
                 <span className={`${styles['main-info']}`}>{author.username}</span>
-                <time dateTime={post.createdDate} suppressHydrationWarning className={`${styles['secondary-info']}`}>{formatDateTime(post.createdDate)}</time>
+                <time dateTime={createdDate} className={`${styles['secondary-info']}`}>{createdDate}</time>
             </div>
             <PostDropdown>
                 {isUserPostOwner

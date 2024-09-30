@@ -1,6 +1,3 @@
-"use client";
-
-
 import PostPreview from '@/components/post/PostPreview';
 
 

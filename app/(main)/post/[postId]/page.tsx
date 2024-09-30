@@ -13,7 +13,7 @@ type PageProps = {
 }
 
 
-export default async function EditPostPage({ params }: { params: PageProps }) {
+export default async function PostPage({ params }: { params: PageProps }) {
     const dict = await getDictionary('en');
 
     const detailedPost: DetailedPostDTO | undefined = await getDetailedPost(params.postId);
