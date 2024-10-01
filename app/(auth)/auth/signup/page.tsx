@@ -21,11 +21,11 @@ export default async function SigninPage() {
             redirect('/auth/registration')
         }
     }
-    
+
     return (
         <div className={`${styles['simple-page-layout']}`}>
             <Card>
-                <AuthenticationForm local={dict}  />
+                <AuthenticationForm local={dict} />
             </Card>
         </div>
     );

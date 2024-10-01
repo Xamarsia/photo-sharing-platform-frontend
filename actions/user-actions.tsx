@@ -141,7 +141,7 @@ export async function isUsernameUsed(username: string): Promise<boolean | undefi
 }
 
 export async function isAuthenticationUsed(): Promise<boolean | undefined> {
-    const res: Response = await fetch(`${process.env.BACKEND_URL}/auth/isUsed`, { method: 'GET' });
+    const res: Response = await authFetch(`/auth/isUsed`, { method: 'GET' });
     if (!res.ok) {
         return undefined;
     }
