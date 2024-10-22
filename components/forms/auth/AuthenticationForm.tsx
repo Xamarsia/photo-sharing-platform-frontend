@@ -75,7 +75,7 @@ export default function AuthenticationForm({ local }: Props) {
         }
 
         if (credential) {
-
+            router.push('/auth/registration')
         }
     }
 
@@ -83,7 +83,7 @@ export default function AuthenticationForm({ local }: Props) {
         event.preventDefault();
         const credential = await signUpWithGoogle();
         if (credential) {
-
+            router.push('/auth/registration')
         }
     }
 
