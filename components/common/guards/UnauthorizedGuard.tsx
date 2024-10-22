@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { getCurrentUser } from "@/actions/actions";
 import { ReactNode } from "react";
 import { redirect } from 'next/navigation';

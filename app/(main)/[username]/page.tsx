@@ -20,7 +20,7 @@ export default async function ProfilePage({ params }: { params: PageProps }) {
 
     return (
         <div className="flex flex-grow flex-shrink justify-center lg:m-4">
-            <div className="flex flex-col items-center gap-4 max-w-7xl">
+            <div className="flex flex-grow flex-col items-center justify-start gap-4 max-w-7xl">
                 {profile &&
                     <>
                         <Profile local={dict} profile={profile} />

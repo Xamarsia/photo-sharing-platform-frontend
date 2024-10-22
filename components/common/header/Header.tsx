@@ -1,8 +1,8 @@
-"use server";
+import 'server-only';
 
 import Logo from "@/components/common/Logo";
 import SearchBar from "@/components/common/search/SearchBar";
-import HeaderMenu from "@/components/common/HeaderMenu";
+import HeaderMenu from "@/components/common/header/HeaderMenu";
 
 import { getCurrentUser } from "@/actions/actions";
 

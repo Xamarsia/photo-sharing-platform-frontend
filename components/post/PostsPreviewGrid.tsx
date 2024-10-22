@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 
 import PostPreview from '@/components/post/PostPreview';
 
@@ -29,9 +28,9 @@ export default function PostsPreview({ posts }: PostsProps) {
 
 
     return (
-        <ul className='flex flex-wrap justify-start gap-0.5 md:gap-1'>
+        <ul className='flex flex-grow size-full flex-wrap content-start gap-0.5 md:gap-1'>
             {posts.map(post => (
-                <li key={post.id} className='flex-1 basis-3/12'>
+                <li key={post.id} className='flex flex-auto basis-3/12'>
                     <PostPreview post={post} />
                 </li>
             ))}

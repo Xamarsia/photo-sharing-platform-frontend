@@ -24,11 +24,10 @@ import { useRouter } from 'next/navigation';
 
 type Props = {
     local: any;
-    onSubmit?: () => void;
 }
 
 
-export default function AuthenticationForm({ local, onSubmit }: Props) {
+export default function AuthenticationForm({ local }: Props) {
     const [password, setPassword] = useState("password");
     const [confirmPassword, setConfirmPassword] = useState("password");
     const [email, setEmail] = useState("localpart@domain.com");
@@ -75,16 +74,16 @@ export default function AuthenticationForm({ local, onSubmit }: Props) {
             return;
         }
 
-        if (credential && onSubmit) {
-            onSubmit();
+        if (credential) {
+
         }
     }
 
     async function handleSignUnWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
         const credential = await signUpWithGoogle();
-        if (credential && onSubmit) {
-            onSubmit();
+        if (credential) {
+
         }
     }
 

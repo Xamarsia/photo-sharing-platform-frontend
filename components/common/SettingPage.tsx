@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { ReactNode } from "react";
 
 import styles from '@/app/styles/text/text.module.css';

@@ -1,9 +1,6 @@
-"use client";
+import 'server-only';
 
-
-import { useRouter } from "next/navigation";
-
-import FooterMenu from '@/components/common/FooterMenu';
+import FooterMenu from '@/components/common/footer/FooterMenu';
 
 import styles from '@/app/styles/text/text.module.css';
 
@@ -13,8 +10,6 @@ type Props = {
 
 
 export default function Footer({ local }: Props) {
-    const router = useRouter();
-
     return (
         <footer className="bg-white w-full z-5 border-t border-gray-100 flex-shrink-0 h-24 md:h-16">
             <div className="flex flex-col items-center justify-center gap-2 h-full md:justify-between md:flex-row md:px-8">

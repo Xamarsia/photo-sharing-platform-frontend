@@ -2,7 +2,7 @@
 
 import styles from '@/app/styles/text/text.module.css';
 
-import StatsInfo from '@/components/common/StatsInfo';
+import StatsInfo from '@/components/common/stats/StatsInfo';
 import TextButton from '@/components/buttons/TextButton';
 import ProfileImage from '@/components/profile/image/ProfileImage';
 import ToggleFollowButton from '@/components/buttons/ToggleFollowButton';

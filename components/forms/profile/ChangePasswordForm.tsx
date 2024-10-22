@@ -25,6 +25,7 @@ export default function ChangePasswordForm({ local }: Props) {
     const [currentPassword, setCurrentPassword] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [formIsValid, setFormIsValid] = useState<boolean>(false);
     const { showAlert } = useAlert();
 
 
@@ -55,7 +56,8 @@ export default function ChangePasswordForm({ local }: Props) {
             } else {
                 console.error(errorMessage);
             }
-            setCurrentPassword("")
+            setCurrentPassword("");
+            setFormIsValid(false);
             return;
         }
         await changePassword(currentPassword);
@@ -115,6 +117,8 @@ export default function ChangePasswordForm({ local }: Props) {
 
     return (
         <form onSubmit={handleSubmit}
+            onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
+
             className={`text-left ${formStyles['form-container']}`}>
             <div>
                 <Input
@@ -153,7 +157,7 @@ export default function ChangePasswordForm({ local }: Props) {
                 type="submit"
                 text={local.update}
                 fill="content"
-                disabled={errors.size != 0}
+                disabled={!formIsValid || errors.size != 0}
             />
         </form>
     )

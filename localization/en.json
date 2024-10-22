@@ -63,6 +63,7 @@
     "confirmWithPassword": "Confirm with password",
     "confirm": "Confirm",
     "verifyNewEmailAddress": "Verify new email address",
+    "verifyNewUsername": "Verify new username",
     "verify": "Verify",
     "reset": "Reset",
     "forgotPassword": "Forgot password?",
@@ -71,10 +72,11 @@
     "resetPasswordMessageSended": "The link to reset your password was sent to your email. Please, open your email to continue. You can close this window",
     "resetEmailMessage": "After confirming your password, you will receive a verification link to a new email address. After verification, the email address will be changed",
     "resetEmailMessageSended": "A new email confirmation link has been sent. Please, open your email to continue",
+    "resetUsernameMessage": "Please confirm your password. After confirmation, the username will be changed",
     "confirmPassword": "Please, confirm your password",
-    "invalidCredential":"Password confirmation invalid. Please, try again",
-    "providedPasswordWeak":"The password provided is too weak",
+    "invalidCredential": "Password confirmation invalid. Please, try again",
+    "providedPasswordWeak": "The password provided is too weak",
     "emailAlreadyUsed": "The account already exists for this email. If you tried to register and did not finish, please sign in with this email and complete registration. ",
     "tooManyRequests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
-    "myProfile":"My profile"
+    "myProfile": "My profile"
 }

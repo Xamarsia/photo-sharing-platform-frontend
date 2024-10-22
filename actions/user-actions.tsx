@@ -139,3 +139,13 @@ export async function isUsernameUsed(username: string): Promise<boolean | undefi
     const isUsernameUsed: boolean = await res.json();
     return isUsernameUsed;
 }
+
+export async function isAuthenticationUsed(): Promise<boolean | undefined> {
+    const res: Response = await authFetch(`/auth/isUsed`, { method: 'GET' });
+    if (!res.ok) {
+        return undefined;
+    }
+
+    const isAuthUsed: boolean = await res.json();
+    return isAuthUsed;
+}

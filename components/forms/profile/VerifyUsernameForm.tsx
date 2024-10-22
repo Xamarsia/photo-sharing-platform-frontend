@@ -7,20 +7,21 @@ import { FormEvent, useState } from "react";
 
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
-import { reauthenticate, updateUserEmail } from '@/lib/firebase/auth';
+import { reauthenticate } from '@/lib/firebase/auth';
 import { FirebaseError } from 'firebase/app';
 import { useAlert } from '@/utils/useAlert';
+import { updateUsername } from '@/actions/user-actions';
 
 type Props = {
     local: any,
-    newEmail: string,
+    newUsername: string,
+    onSubmit: () => void,
 }
 
 
-export default function VerifyEmailForm({ local, newEmail }: Props) {
+export default function VerifyUsernameForm({ local, newUsername, onSubmit }: Props) {
     const [password, setPassword] = useState("password");
     const [formIsValid, setFormIsValid] = useState(true);
-    const [confirmPressed, setConfirmPressed] = useState(false);
     const { showAlert } = useAlert();
 
     async function handleEmailVerification(event: FormEvent<HTMLFormElement>) {
@@ -41,8 +42,14 @@ export default function VerifyEmailForm({ local, newEmail }: Props) {
             return;
         }
 
-        await updateUserEmail(newEmail);
-        setConfirmPressed(true);
+        const body: UsernameUpdateRequest = {
+            username: newUsername,
+        }
+
+        await updateUsername(body);
+        if (onSubmit) {
+            onSubmit();
+        }
     }
 
 
@@ -51,24 +58,24 @@ export default function VerifyEmailForm({ local, newEmail }: Props) {
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
             className={`${formStyles['form-card-container']}`}>
             <div className={`${formStyles['form-container']}`}>
-                <p className={`${styles['base-text']}`}>{confirmPressed ? local.resetEmailMessageSended : local.resetEmailMessage} </p>
+                <p className={`${styles['base-text']}`}>{local.resetUsernameMessage}</p>
 
-                {!confirmPressed && <Input
+                <Input
                     type="password"
                     name="password"
                     title={local.password}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                />}
+                />
             </div>
 
-            {!confirmPressed && <TextButton
+            <TextButton
                 type="submit"
                 text={local.confirm}
                 fill="content"
                 disabled={!formIsValid}
-            />}
+            />
         </form>
     )
 }

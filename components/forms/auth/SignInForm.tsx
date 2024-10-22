@@ -26,11 +26,10 @@ import { isUserRegistered } from '@/actions/user-actions';
 
 type Props = {
     local: any;
-    registerUser?: () => void;
 }
 
 
-export default function SignInForm({ local, registerUser }: Props) {
+export default function SignInForm({ local }: Props) {
     const [password, setPassword] = useState("password");
     const [email, setEmail] = useState("localpart@domain.com");
     const [formIsValid, setFormIsValid] = useState(true);
@@ -73,10 +72,8 @@ export default function SignInForm({ local, registerUser }: Props) {
         if (credential) {
             const isRegistered = await isUserRegistered();
             if (isRegistered) {
-                router.replace('/news');
+                router.replace('/');
                 return;
-            } else if (registerUser) {
-                registerUser();
             }
         }
     }
@@ -87,10 +84,8 @@ export default function SignInForm({ local, registerUser }: Props) {
         if (credential) {
             const isRegistered = await isUserRegistered();
             if (isRegistered) {
-                router.replace('/news');
+                router.replace('/');
                 return;
-            } else if (registerUser) {
-                registerUser();
             }
         }
     }

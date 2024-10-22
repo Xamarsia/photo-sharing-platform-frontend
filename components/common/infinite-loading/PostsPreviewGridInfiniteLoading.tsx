@@ -9,7 +9,7 @@ type Props = {
 }
 
 
-export default async function PostsPreviewGridInfiniteLoading({ username }: Props) {
+export default function PostsPreviewGridInfiniteLoading({ username }: Props) {
     return (
         <InfiniteLoading<PostPreviewDTO> size={6} displayItems={
             (items) => (<PostsPreviewGrid posts={items} />)

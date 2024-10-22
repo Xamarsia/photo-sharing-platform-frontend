@@ -40,7 +40,8 @@ export const uniqueUsernameSchema = z.string()
     .refine((password) => !password.includes(' '), 'Spaces are not allowed')
     .refine(async (val) => {
         const isUsernameAlreadyInUse: boolean | undefined = await isUsernameUsed(val);
-        return !isUsernameAlreadyInUse;
+        // console.log("isUsernameAlreadyInUse: ", isUsernameAlreadyInUse)
+        return isUsernameAlreadyInUse == false;
     }, { message: "Username is already taken" });
 
 export const fullNameSchema = z.optional(z.string()

@@ -5,10 +5,11 @@ import '@/app/styles/globals.css';
 
 import { getDictionary } from '@/lib/localization';
 
-import Footer from '@/components/common/Footer';
-import Header from '@/components/common/Header';
+import Footer from '@/components/common/footer/Footer';
+import Header from '@/components/common/header/Header';
 import UnauthorizedGuard from '@/components/common/guards/UnauthorizedGuard';
 import AlertProvider from '@/components/common/alert/AlertProvider';
+import AuthProvider from '@/components/common/AuthProvider';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -28,21 +29,23 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className='size-full'>
-      <UnauthorizedGuard>
-        <body className={`${inter.className} size-full flex flex-col items-stretch relative`}>
-          <Header local={dict} />
-          <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20 z-30'>
-            <AlertProvider>
-              {children}
-            </AlertProvider>
-          </main>
-          <Footer local={dict} />
-          {/* To prevent Firefox FOUC*/}
-          <script>
-            let FIREFOX_FOUC_FIX;
-          </script>
-        </body>
-      </UnauthorizedGuard>
+      <AuthProvider>
+        <UnauthorizedGuard>
+          <body className={`${inter.className} size-full flex flex-col items-stretch relative`}>
+            <Header local={dict} />
+            <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20 z-30'>
+              <AlertProvider>
+                {children}
+              </AlertProvider>
+            </main>
+            <Footer local={dict} />
+            {/* To prevent Firefox FOUC*/}
+            <script>
+              let FIREFOX_FOUC_FIX;
+            </script>
+          </body>
+        </UnauthorizedGuard>
+      </AuthProvider>
     </html>
   )
 }
