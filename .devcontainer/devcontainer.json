@@ -1,7 +1,7 @@
 {
 	"name": "SPSP frontend",
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
+	"service": "frontend-api",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"customizations": {
 		"vscode": {

@@ -12,8 +12,8 @@ export async function saveTokenToHttponlyCookies(token: string): Promise<void> {
     value: token,
     httpOnly: true,
     path: '/',
-    sameSite: 'none',
-    secure: true
+    // sameSite: 'none', // non-HTTPS cookie can’t be set as “secure”
+    // secure: true
   })
 }
 
