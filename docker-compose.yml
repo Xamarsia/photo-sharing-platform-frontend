@@ -1,0 +1,16 @@
+services:
+  frontend-api:
+    container_name: frontend-api
+    image: xamarsia/spsp-frontend:0.0.1
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    networks:
+      - external_network
+
+networks:
+  external_network:
+    name: microservice_network
+    external: true
+    
