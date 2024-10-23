@@ -1,7 +1,6 @@
-version: '3.8'
-
 services:
-  app:
+  frontend-api:
+    container_name: frontend-api
     build:
       context: .
       dockerfile: Dockerfile
@@ -17,4 +16,3 @@ networks:
   external_network:
     name: microservice_network
     external: true
-    
