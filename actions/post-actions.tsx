@@ -59,7 +59,7 @@ export async function deletePost(postId: number): Promise<void> {
 }
 
 export async function like(postId: number): Promise<void> {
-    const res: Response = await authFetch(`/post/${postId}/like`, { method: 'PUT' });
+    const res: Response = await authFetch(`/like/${postId}`, { method: 'POST' });
     console.log("like: ", res.ok)
     if (!res.ok) {
         return undefined;
@@ -69,7 +69,7 @@ export async function like(postId: number): Promise<void> {
 }
 
 export async function unlike(postId: number): Promise<void> {
-    const res: Response = await authFetch(`/post/${postId}/unlike`, { method: 'PUT' });
+    const res: Response = await authFetch(`/like/${postId}`, { method: 'DELETE' });
     console.log("unlike: ", res.ok)
     if (!res.ok) {
         return undefined;
