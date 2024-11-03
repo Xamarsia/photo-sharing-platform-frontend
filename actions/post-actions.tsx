@@ -39,7 +39,7 @@ export async function updatePostImage(postId: number, data: FormData): Promise<v
 }
 
 export async function updatePost(postId: number, data: UpdatePostRequest): Promise<PostDTO | undefined> {
-    const req = await JSONRequest(data, { method: 'PUT' });
+    const req: RequestInit = await JSONRequest(data, { method: 'PUT' });
     const res: Response = await authFetch(`/post/${postId}/update`, req);
 
     if (!res.ok) {

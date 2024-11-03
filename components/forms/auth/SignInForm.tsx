@@ -57,10 +57,12 @@ export default function SignInForm({ local }: Props) {
             password: password,
         };
 
-        const credential = await signInWithEmailPassword(body);
+        const credential: UserCredential | undefined | FirebaseError = await signInWithEmailPassword(body);
+
         if (credential instanceof FirebaseError) {
-            var errorCode = credential.code;
-            var errorMessage = credential.message;
+            let errorCode: string = credential.code;
+            let errorMessage: string = credential.message;
+
             if (errorCode == 'auth/invalid-credential') {
                 showAlert('Error', 'Invalid credential');
             } else {
@@ -70,7 +72,7 @@ export default function SignInForm({ local }: Props) {
             return;
         }
         if (credential) {
-            const isRegistered = await isUserRegistered();
+            const isRegistered: boolean | undefined = await isUserRegistered();
             if (isRegistered) {
                 router.replace('/');
                 return;
@@ -82,7 +84,7 @@ export default function SignInForm({ local }: Props) {
         event.preventDefault();
         const credential: UserCredential | undefined = await signInWithGoogle();
         if (credential) {
-            const isRegistered = await isUserRegistered();
+            const isRegistered: boolean | undefined = await isUserRegistered();
             if (isRegistered) {
                 router.replace('/');
                 return;

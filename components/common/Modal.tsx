@@ -17,7 +17,6 @@ type Props = {
 }
 
 export default function Modal({ title, children, opened, onCloseClicked }: Props) {
-
     const modal = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -27,11 +26,11 @@ export default function Modal({ title, children, opened, onCloseClicked }: Props
             }
         }
         if (opened) {
-            document.addEventListener('mousedown', handleClickOutside)
+            document.addEventListener('mousedown', handleClickOutside);
         } else {
-            document.removeEventListener('mousedown', handleClickOutside)
+            document.removeEventListener('mousedown', handleClickOutside);
         }
-    }, [opened])
+    }, [opened]);
 
     return (
         <div className={`${opened ? 'no-doc-scroll' : 'hidden'} fixed top-0 left-0 z-50 size-full bg-gray-800/45 `}>

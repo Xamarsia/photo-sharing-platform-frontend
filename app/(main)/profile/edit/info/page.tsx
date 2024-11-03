@@ -10,8 +10,8 @@ import { getAuthenticatedUser } from '@/actions/user-actions';
 
 export default async function ChangeUserInfoPage() {
     const dict = await getDictionary('en');
-
     const user: UserDTO | undefined = await getAuthenticatedUser();
+
     return (
         <SettingPage local={dict} title={dict.changeUserInfo} >
             {user && <ChangeUserInfoForm local={dict} user={user} />}

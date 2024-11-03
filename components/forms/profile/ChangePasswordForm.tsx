@@ -13,6 +13,7 @@ import { currentPasswordSchema, setPasswordSchema, updatePasswordSchema } from '
 import { reauthenticate, changePassword } from '@/lib/firebase/auth';
 import { useAlert } from '@/utils/useAlert';
 import { FirebaseError } from 'firebase/app';
+import { UserCredential } from 'firebase/auth';
 
 
 type Props = {
@@ -45,14 +46,15 @@ export default function ChangePasswordForm({ local }: Props) {
             return;
         };
 
-        const credential = await reauthenticate(currentPassword);
+        const credential: UserCredential | undefined | FirebaseError = await reauthenticate(currentPassword);
         if (credential instanceof FirebaseError) {
-            var errorCode = credential.code;
-            var errorMessage = credential.message;
+            let errorCode: string = credential.code;
+            let errorMessage: string = credential.message;
+
             if (errorCode == 'auth/invalid-credential') {
-                showAlert('Error', local.invalidCredential)
+                showAlert('Error', local.invalidCredential);
             } else if (errorCode == 'auth/too-many-requests') {
-                showAlert('Error', local.tooManyRequests)
+                showAlert('Error', local.tooManyRequests);
             } else {
                 console.error(errorMessage);
             }
@@ -71,8 +73,8 @@ export default function ChangePasswordForm({ local }: Props) {
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
+        const error: string | undefined = errorsMap.get(event.target.name);
 
-        const error = errorsMap.get(event.target.name);
         if (error) {
             setErrors(errors.set(event.target.name, error));
         } else {
@@ -90,8 +92,8 @@ export default function ChangePasswordForm({ local }: Props) {
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
-
         const currentPasswordError = errors.get('currentPassword');
+
         if (currentPasswordError) {
             errorsMap.set('currentPassword', currentPasswordError);
         }

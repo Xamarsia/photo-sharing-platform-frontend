@@ -27,8 +27,8 @@ export async function getCurrentUser(): Promise<UserDTO | undefined> {
 }
 
 export async function getSidebarItems(local: any): Promise<Array<SidebarItemInfo>> {
-  const provider = await getProvider();
-  const email = await getEmail();
+  const provider: string[] | undefined = await getProvider();
+  const email: Map<string, string> | undefined = await getEmail();
 
   let items: Array<SidebarItemInfo> = [
     { href: "/profile/edit/info", title: local.userInfo },

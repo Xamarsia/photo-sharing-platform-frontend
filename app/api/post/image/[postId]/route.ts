@@ -5,8 +5,8 @@ export async function GET(
     request: Request,
     { params }: { params: { postId: number } }
 ) {
-    const postId = params.postId;
+    const postId: number = params.postId;
 
-    const avatarResponse = await authFetch(`/post/${postId}/image`, { method: 'GET', });
+    const avatarResponse: Response = await authFetch(`/post/${postId}/image`, { method: 'GET', });
     return avatarResponse;
 }

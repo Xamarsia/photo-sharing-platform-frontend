@@ -10,7 +10,7 @@ import SettingPage from '@/components/common/SettingPage';
 
 export default async function DeleteAccountPage() {
     const dict = await getDictionary('en');
-    const provider = await getProvider();
+    const provider: string[] | undefined = await getProvider();
 
     return (
         <SettingPage local={dict} title={dict.deleteAccount} >

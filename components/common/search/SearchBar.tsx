@@ -34,7 +34,7 @@ export default function SearchBar({ local }: Props) {
 
     const onSearchChanged = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
-        const query = e.target.value;
+        const query: string = e.target.value;
         setQuery(query);
     };
 

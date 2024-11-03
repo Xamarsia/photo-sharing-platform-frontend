@@ -20,7 +20,7 @@ export default function AuthProvider({ children }: Props) {
                 console.log("token: empty")
 
             } else {
-                const token = await user.getIdToken();
+                const token: string = await user.getIdToken();
                 saveTokenToHttponlyCookies(token);
                 console.log("token: ", token)
             }

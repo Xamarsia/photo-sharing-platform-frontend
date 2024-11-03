@@ -23,7 +23,7 @@ export async function isUserRegistered(): Promise<boolean | undefined> {
 }
 
 export async function registerUser(data: RegisterRequest): Promise<UserDTO | undefined> {
-    const req = await JSONRequest(data, { method: 'POST' });
+    const req: RequestInit = await JSONRequest(data, { method: 'POST' });
     const res: Response = await authFetch(`/user/register`, req);
 
     if (!res.ok) {
@@ -75,7 +75,7 @@ export async function updateProfileImage(data: FormData): Promise<void> {
 }
 
 export async function updateUsername(data: UsernameUpdateRequest): Promise<UserDTO | undefined> {
-    const req = await JSONRequest(data, { method: 'PUT' });
+    const req: RequestInit = await JSONRequest(data, { method: 'PUT' });
     const res: Response = await authFetch(`/user/username/update`, req);
 
     if (!res.ok) {
@@ -87,7 +87,7 @@ export async function updateUsername(data: UsernameUpdateRequest): Promise<UserD
 }
 
 export async function updateUserInfo(data: UserInfoUpdateRequest): Promise<UserDTO | undefined> {
-    const req = await JSONRequest(data, { method: 'PUT' });
+    const req: RequestInit = await JSONRequest(data, { method: 'PUT' });
     const res: Response = await authFetch(`/user/update`, req);
 
     if (!res.ok) {

@@ -11,6 +11,7 @@ import { reauthenticate } from '@/lib/firebase/auth';
 import { FirebaseError } from 'firebase/app';
 import { useAlert } from '@/utils/useAlert';
 import { updateUsername } from '@/actions/user-actions';
+import { UserCredential } from 'firebase/auth';
 
 type Props = {
     local: any,
@@ -27,18 +28,19 @@ export default function VerifyUsernameForm({ local, newUsername, onSubmit }: Pro
     async function handleEmailVerification(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        const credential = await reauthenticate(password);
+        const credential: UserCredential | undefined | FirebaseError = await reauthenticate(password);
         if (credential instanceof FirebaseError) {
-            var errorCode = credential.code;
-            var errorMessage = credential.message;
+            let errorCode: string = credential.code;
+            let errorMessage: string = credential.message;
+
             if (errorCode == 'auth/invalid-credential') {
-                showAlert('Error', local.invalidCredential)
+                showAlert('Error', local.invalidCredential);
             } else if (errorCode == 'auth/too-many-requests') {
-                showAlert('Error', local.tooManyRequests)
+                showAlert('Error', local.tooManyRequests);
             } else {
                 console.error(errorMessage);
             }
-            setPassword("")
+            setPassword("");
             return;
         }
 

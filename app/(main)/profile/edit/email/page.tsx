@@ -10,7 +10,7 @@ import { getAuthenticatedApp } from '@/lib/firebase/serverApp';
 
 export default async function ChangeEmailPage() {
     const dict = await getDictionary('en');
-    const email = (await getAuthenticatedApp()).currentUser?.email;
+    const email: string | null | undefined = (await getAuthenticatedApp()).currentUser?.email;
 
     return (
         <SettingPage local={dict} title={dict.changeEmail} >

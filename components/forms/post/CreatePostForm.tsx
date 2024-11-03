@@ -39,7 +39,7 @@ export default function CreatePostForm({ local }: Props) {
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
-        const error = errorsMap.get("file");
+        const error: string | undefined = errorsMap.get("file");
         if (error) {
             setErrors(errors.set("file", error));
         } else {
@@ -89,7 +89,7 @@ export default function CreatePostForm({ local }: Props) {
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
 
-        const error = errorsMap.get(event.target.name);
+        const error: string | undefined = errorsMap.get(event.target.name);
         if (error) {
             setErrors(errors.set(event.target.name, error));
         } else {

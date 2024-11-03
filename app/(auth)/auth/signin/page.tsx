@@ -12,10 +12,10 @@ import SignInForm from '@/components/forms/auth/SignInForm';
 
 export default async function SigninPage() {
     const dict = await getDictionary('en');
-    const isAuth = await isAuthorized();
+    const isAuth: string | undefined = await isAuthorized();
 
     if (isAuth) {
-        const isAuthUsed = await isAuthenticationUsed();
+        const isAuthUsed: boolean | undefined = await isAuthenticationUsed();
         if (isAuthUsed == false) {
             redirect('/auth/registration')
         }

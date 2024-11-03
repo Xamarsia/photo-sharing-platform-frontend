@@ -14,6 +14,7 @@ import formStyles from '@/app/styles/components/form.module.css';
 import Modal from '@/components/common/Modal';
 import Input from "@/components/common/Input";
 import TextRemoveButton from '@/components/buttons/TextRemoveButton';
+import { UserCredential } from "firebase/auth";
 
 
 type Props = {
@@ -32,10 +33,11 @@ export default function DeleteAccountForm({ local, provider }: Props) {
         event.preventDefault();
 
         if (provider.includes(ProviderID.EmailAuthProvider)) {
-            const credential = await reauthenticate(password);
+            const credential: UserCredential | undefined | FirebaseError = await reauthenticate(password);
             if (credential instanceof FirebaseError) {
-                var errorCode = credential.code;
-                var errorMessage = credential.message;
+                let errorCode: string = credential.code;
+                let errorMessage: string = credential.message;
+
                 if (errorCode == 'auth/invalid-credential') {
                     showAlert('Error', local.invalidCredential);
                 } else if (errorCode == 'auth/too-many-requests') {
@@ -43,7 +45,8 @@ export default function DeleteAccountForm({ local, provider }: Props) {
                 } else {
                     console.error(errorMessage);
                 }
-                setPassword("")
+
+                setPassword("");
                 return;
             }
         }

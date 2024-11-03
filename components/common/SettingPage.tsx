@@ -16,7 +16,7 @@ type Props = {
 }
 
 export default async function SettingPage({ local, title, children }: Props) {
-    const sidebarItems = await getSidebarItems(local);
+    const sidebarItems: Array<SidebarItemInfo> = await getSidebarItems(local);
 
     return (
         <div className={`text-left ${formStyles['form-container']}`}>

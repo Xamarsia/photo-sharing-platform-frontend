@@ -33,28 +33,28 @@ export default function FileSelector({ local, rounded, children, defaultImageExi
         onImageSelected(file);
     };
 
-    function handleDragLeave(e: React.DragEvent<HTMLDivElement>) {
+    function handleDragLeave(e: React.DragEvent<HTMLDivElement>): void {
         e.preventDefault();
         if (!defaultImageExist) {
             setDragActive(false);
         }
     };
 
-    function handleDragOver(e: React.DragEvent<HTMLDivElement>) {
+    function handleDragOver(e: React.DragEvent<HTMLDivElement>): void {
         e.preventDefault();
         if (!defaultImageExist) {
             setDragActive(true);
         }
     };
 
-    function handleDragEnter(e: React.DragEvent<HTMLDivElement>) {
+    function handleDragEnter(e: React.DragEvent<HTMLDivElement>): void {
         e.preventDefault();
         if (!defaultImageExist) {
             setDragActive(true);
         }
     };
 
-    function handleDrop(e: React.DragEvent<HTMLDivElement>) {
+    function handleDrop(e: React.DragEvent<HTMLDivElement>): void {
         e.preventDefault();
 
         if (defaultImageExist) {

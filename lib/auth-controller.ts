@@ -1,7 +1,8 @@
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
 
-export async function authFetch(path: string | URL, init?: RequestInit) {
-    const token = cookies().get('token');
+export async function authFetch(path: string | URL, init?: RequestInit): Promise<Response> {
+    const token: RequestCookie | undefined = cookies().get('token');
 
     return fetch(`${process.env.BACKEND_URL}${path}`, {
         ...init,
@@ -12,7 +13,7 @@ export async function authFetch(path: string | URL, init?: RequestInit) {
     });
 }
 
-export async function JSONRequest(data: any, init?: RequestInit) {
+export async function JSONRequest(data: any, init?: RequestInit): Promise<RequestInit> {
     return {
         ...init,
         headers: {

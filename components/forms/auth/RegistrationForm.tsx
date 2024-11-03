@@ -62,7 +62,7 @@ export default function RegistrationForm({ local }: Props) {
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
-        const error = errorsMap.get(event.target.name);
+        const error: string | undefined = errorsMap.get(event.target.name);
         if (error) {
             setErrors(errors.set(event.target.name, error));
         } else {
@@ -79,8 +79,7 @@ export default function RegistrationForm({ local }: Props) {
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
-
-        const error = errorsMap.get(event.target.name);
+        const error: string | undefined = errorsMap.get(event.target.name);
         if (error) {
             setErrors(errors.set(event.target.name, error));
         } else {

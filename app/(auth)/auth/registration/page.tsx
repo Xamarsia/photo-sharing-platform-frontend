@@ -16,7 +16,7 @@ export default async function RegistrationPage() {
         redirect('/login');
     }
 
-    const isAuthUsed = await isAuthenticationUsed();
+    const isAuthUsed: boolean | undefined = await isAuthenticationUsed();
     if (isAuthUsed) {
         redirect('/login');
     }

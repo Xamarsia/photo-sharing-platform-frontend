@@ -20,6 +20,7 @@ import { signUpWithEmailPassword, signUpWithGoogle } from '@/lib/firebase/auth';
 import { getValidationErrors } from '@/lib/zod/validation';
 import { useAlert } from '@/utils/useAlert';
 import { useRouter } from 'next/navigation';
+import { UserCredential } from 'firebase/auth';
 
 
 type Props = {
@@ -33,7 +34,7 @@ export default function AuthenticationForm({ local }: Props) {
     const [email, setEmail] = useState<string>("localpart@domain.com");
     const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
-    const { showAlert }  = useAlert();
+    const { showAlert } = useAlert();
     const router = useRouter();
 
     async function handleSignUpWithEmailAndPassword(event: FormEvent<HTMLFormElement>) {
@@ -57,13 +58,14 @@ export default function AuthenticationForm({ local }: Props) {
             password: password,
         }
 
-        const credential = await signUpWithEmailPassword(body);
+        const credential: UserCredential | undefined | FirebaseError = await signUpWithEmailPassword(body);
         if (credential instanceof FirebaseError) {
-            var errorCode: string = credential.code;
-            var errorMessage: string = credential.message;
+            let errorCode: string = credential.code;
+            let errorMessage: string = credential.message;
+
             if (errorCode == 'auth/email-already-in-use') {
-                showAlert('Error', local.emailAlreadyUsed)
-                router.push("/auth/signin")
+                showAlert('Error', local.emailAlreadyUsed);
+                router.push("/auth/signin");
             } else if (errorCode == 'auth/weak-password') {
                 //TODO Enable enforcement https://cloud.google.com/identity-platform/docs/password-policy
                 showAlert('Error', local.providedPasswordWeak);
@@ -81,7 +83,7 @@ export default function AuthenticationForm({ local }: Props) {
 
     async function handleSignUnWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
-        const credential = await signUpWithGoogle();
+        const credential: UserCredential | undefined = await signUpWithGoogle();
         if (credential) {
             router.push('/auth/registration');
         }
@@ -96,7 +98,7 @@ export default function AuthenticationForm({ local }: Props) {
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
 
-        const error = errorsMap.get(event.target.name);
+        const error: string | undefined = errorsMap.get(event.target.name);
         if (error) {
             setErrors(errors.set(event.target.name, error));
         } else {
@@ -113,8 +115,8 @@ export default function AuthenticationForm({ local }: Props) {
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
-        const emailError = errors.get('email');
-        
+        const emailError: string | undefined = errors.get('email');
+
         if (emailError) {
             errorsMap.set('email', emailError);
         }
@@ -130,7 +132,7 @@ export default function AuthenticationForm({ local }: Props) {
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
-        const emailError = errors.get('email');
+        const emailError: string | undefined = errors.get('email');
         if (emailError) {
             errorsMap.set('email', emailError);
         }
