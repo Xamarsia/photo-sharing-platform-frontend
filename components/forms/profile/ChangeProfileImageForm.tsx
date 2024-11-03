@@ -25,7 +25,7 @@ type Props = {
 
 export default function ChangeProfileImageForm({ local, user }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const router = useRouter();

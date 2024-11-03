@@ -25,9 +25,9 @@ type Props = {
 
 
 export default function ResetPasswordForm({ local }: Props) {
-    const [email, setEmail] = useState("localpart@domain.com");
-    const [formIsValid, setFormIsValid] = useState(true);
-    const [resetPressed, setResetPressed] = useState(false);
+    const [email, setEmail] = useState<string>("localpart@domain.com");
+    const [formIsValid, setFormIsValid] = useState<boolean>(true);
+    const [resetPressed, setResetPressed] = useState<boolean>(false);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const router = useRouter();
 

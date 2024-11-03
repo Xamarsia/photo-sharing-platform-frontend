@@ -22,7 +22,7 @@ export default function ChangeEmailForm({ local, oldEmail }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const [email, setEmail] = useState<string>(oldEmail);
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();

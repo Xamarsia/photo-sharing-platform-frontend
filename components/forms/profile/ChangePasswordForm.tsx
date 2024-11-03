@@ -22,9 +22,9 @@ type Props = {
 
 export default function ChangePasswordForm({ local }: Props) {
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
-    const [currentPassword, setCurrentPassword] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [currentPassword, setCurrentPassword] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [formIsValid, setFormIsValid] = useState<boolean>(false);
     const { showAlert } = useAlert();
 

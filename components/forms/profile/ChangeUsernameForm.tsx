@@ -23,7 +23,7 @@ type Props = {
 
 export default function ChangeUsernameForm({ local, user }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
-    const [username, setUsername] = useState(user.username);
+    const [username, setUsername] = useState<string>(user.username);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
 

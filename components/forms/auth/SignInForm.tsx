@@ -30,9 +30,9 @@ type Props = {
 
 
 export default function SignInForm({ local }: Props) {
-    const [password, setPassword] = useState("password");
-    const [email, setEmail] = useState("localpart@domain.com");
-    const [formIsValid, setFormIsValid] = useState(true);
+    const [password, setPassword] = useState<string>("password");
+    const [email, setEmail] = useState<string>("localpart@domain.com");
+    const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const { showAlert } = useAlert();
     const router = useRouter();
@@ -66,7 +66,7 @@ export default function SignInForm({ local }: Props) {
             } else {
                 console.error(errorMessage);
             }
-            setFormIsValid(false)
+            setFormIsValid(false);
             return;
         }
         if (credential) {

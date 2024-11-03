@@ -18,9 +18,9 @@ type Props = {
 
 
 export default function VerifyEmailForm({ local, newEmail }: Props) {
-    const [password, setPassword] = useState("password");
-    const [formIsValid, setFormIsValid] = useState(true);
-    const [confirmPressed, setConfirmPressed] = useState(false);
+    const [password, setPassword] = useState<string>("password");
+    const [formIsValid, setFormIsValid] = useState<boolean>(true);
+    const [confirmPressed, setConfirmPressed] = useState<boolean>(false);
     const { showAlert } = useAlert();
 
     async function handleEmailVerification(event: FormEvent<HTMLFormElement>) {
@@ -31,13 +31,13 @@ export default function VerifyEmailForm({ local, newEmail }: Props) {
             var errorCode = credential.code;
             var errorMessage = credential.message;
             if (errorCode == 'auth/invalid-credential') {
-                showAlert('Error', local.invalidCredential)
+                showAlert('Error', local.invalidCredential);
             } else if (errorCode == 'auth/too-many-requests') {
-                showAlert('Error', local.tooManyRequests)
+                showAlert('Error', local.tooManyRequests);
             } else {
                 console.error(errorMessage);
             }
-            setPassword("")
+            setPassword("");
             return;
         }
 

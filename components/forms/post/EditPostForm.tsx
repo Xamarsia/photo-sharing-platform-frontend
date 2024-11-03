@@ -26,7 +26,7 @@ type Props = {
 
 export default function EditPostForm({ local, post }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
-    const [description, setDescription] = useState(post?.description);
+    const [description, setDescription] = useState<string | undefined>(post?.description);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [defaultImageExist, setDefaultImageExist] = useState<boolean>(true);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());

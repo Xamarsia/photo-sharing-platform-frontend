@@ -20,8 +20,8 @@ type Props = {
 
 
 export default function VerifyUsernameForm({ local, newUsername, onSubmit }: Props) {
-    const [password, setPassword] = useState("password");
-    const [formIsValid, setFormIsValid] = useState(true);
+    const [password, setPassword] = useState<string>("password");
+    const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const { showAlert } = useAlert();
 
     async function handleEmailVerification(event: FormEvent<HTMLFormElement>) {

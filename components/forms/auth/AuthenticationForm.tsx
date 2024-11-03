@@ -28,12 +28,12 @@ type Props = {
 
 
 export default function AuthenticationForm({ local }: Props) {
-    const [password, setPassword] = useState("password");
-    const [confirmPassword, setConfirmPassword] = useState("password");
-    const [email, setEmail] = useState("localpart@domain.com");
-    const [formIsValid, setFormIsValid] = useState(true);
+    const [password, setPassword] = useState<string>("password");
+    const [confirmPassword, setConfirmPassword] = useState<string>("password");
+    const [email, setEmail] = useState<string>("localpart@domain.com");
+    const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
-    const { showAlert } = useAlert();
+    const { showAlert }  = useAlert();
     const router = useRouter();
 
     async function handleSignUpWithEmailAndPassword(event: FormEvent<HTMLFormElement>) {
@@ -59,8 +59,8 @@ export default function AuthenticationForm({ local }: Props) {
 
         const credential = await signUpWithEmailPassword(body);
         if (credential instanceof FirebaseError) {
-            var errorCode = credential.code;
-            var errorMessage = credential.message;
+            var errorCode: string = credential.code;
+            var errorMessage: string = credential.message;
             if (errorCode == 'auth/email-already-in-use') {
                 showAlert('Error', local.emailAlreadyUsed)
                 router.push("/auth/signin")
@@ -70,12 +70,12 @@ export default function AuthenticationForm({ local }: Props) {
             } else {
                 console.error(errorMessage);
             }
-            setFormIsValid(false)
+            setFormIsValid(false);
             return;
         }
 
         if (credential) {
-            router.push('/auth/registration')
+            router.push('/auth/registration');
         }
     }
 
@@ -83,7 +83,7 @@ export default function AuthenticationForm({ local }: Props) {
         event.preventDefault();
         const credential = await signUpWithGoogle();
         if (credential) {
-            router.push('/auth/registration')
+            router.push('/auth/registration');
         }
     }
 
@@ -113,12 +113,11 @@ export default function AuthenticationForm({ local }: Props) {
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
-
         const emailError = errors.get('email');
+        
         if (emailError) {
             errorsMap.set('email', emailError);
         }
-
         setErrors(errorsMap);
     }
 

@@ -23,9 +23,9 @@ type Props = {
 
 
 export default function DeleteAccountForm({ local, provider }: Props) {
-    const [showModal, setShowModal] = useState(false);
-    const [password, setPassword] = useState("password");
-    const [formIsValid, setFormIsValid] = useState(true);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [password, setPassword] = useState<string>("password");
+    const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const { showAlert } = useAlert();
 
     async function handlenDeleteAccount(event: FormEvent<HTMLFormElement>) {
@@ -37,9 +37,9 @@ export default function DeleteAccountForm({ local, provider }: Props) {
                 var errorCode = credential.code;
                 var errorMessage = credential.message;
                 if (errorCode == 'auth/invalid-credential') {
-                    showAlert('Error', local.invalidCredential)
+                    showAlert('Error', local.invalidCredential);
                 } else if (errorCode == 'auth/too-many-requests') {
-                    showAlert('Error', local.tooManyRequests)
+                    showAlert('Error', local.tooManyRequests);
                 } else {
                     console.error(errorMessage);
                 }

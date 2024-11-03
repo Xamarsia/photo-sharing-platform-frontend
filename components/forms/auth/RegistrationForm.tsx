@@ -22,9 +22,9 @@ type Props = {
 
 
 export default function RegistrationForm({ local }: Props) {
-    const [username, setUsername] = useState("username");
-    const [fullName, setFullName] = useState("");
-    const [formIsValid, setFormIsValid] = useState(true);
+    const [username, setUsername] = useState<string>("username");
+    const [fullName, setFullName] = useState<string>("");
+    const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const router = useRouter();
 

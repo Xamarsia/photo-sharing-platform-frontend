@@ -13,7 +13,7 @@ type Props = {
 
 
 export default function IconButton({ icon, hoveredIcon, onClick }: Props) {
-    const [isHovering, setIsHovered] = useState(false);
+    const [isHovering, setIsHovered] = useState<boolean>(false);
     const onMouseEnter = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
 

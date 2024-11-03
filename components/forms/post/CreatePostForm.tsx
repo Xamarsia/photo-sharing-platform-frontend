@@ -26,7 +26,7 @@ type Props = {
 }
 
 export default function CreatePostForm({ local }: Props) {
-    const [description, setDescription] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum metus eros, ut rutrum nulla blandit eu. Curabitur ac molestie lorem. Nunc porttitor tempor justo sed tempor.');
+    const [description, setDescription] = useState<string>('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum metus eros, ut rutrum nulla blandit eu. Curabitur ac molestie lorem. Nunc porttitor tempor justo sed tempor.');
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const router = useRouter();
