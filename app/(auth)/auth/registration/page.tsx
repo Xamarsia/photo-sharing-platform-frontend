@@ -2,8 +2,6 @@ import 'server-only'
 
 import { getDictionary } from '@/lib/localization';
 
-import styles from '@/app/styles/components/page.module.css';
-
 import Card from '@/components/common/Card';
 import { isAuthorized } from '@/lib/firebase/serverApp';
 import { isAuthenticationUsed } from '@/actions/user-actions';
@@ -24,10 +22,8 @@ export default async function RegistrationPage() {
     }
 
     return (
-        <div className={`${styles['simple-page-layout']}`}>
-            <Card>
-                <RegistrationForm local={dict} />,
-            </Card>
-        </div>
+        <Card>
+            <RegistrationForm local={dict} />,
+        </Card>
     );
 }

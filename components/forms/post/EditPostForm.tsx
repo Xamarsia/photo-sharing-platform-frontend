@@ -78,6 +78,7 @@ export default function EditPostForm({ local, post }: Props) {
 
         if (errorsMap.size != 0) {
             setErrors(errorsMap);
+            console.log("ERRORS: ", errorsMap)
             return;
         }
 
@@ -87,17 +88,13 @@ export default function EditPostForm({ local, post }: Props) {
             await updatePostImage(post.id, formData);
         }
 
-        if (isFormChanged) {
-            if (description == post.description) {
-                return;
-            }
-
+        if (isFormChanged && description != post.description) {
+            console.log("isFormChanged: ")
             const body: UpdatePostRequest = {
                 description: description,
             }
             const newPost: PostDTO | undefined = await updatePost(post.id, body);
         }
-        router.prefetch(`/../post/${post.id}`);
         router.push(`/../post/${post.id}`);
     }
 

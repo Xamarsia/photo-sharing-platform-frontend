@@ -3,8 +3,6 @@ import 'server-only';
 
 import Card from "@/components/common/Card";
 
-import styles from '@/app/styles/components/page.module.css';
-
 import { getDictionary } from '@/lib/localization';
 import { isAuthorized } from '@/lib/firebase/serverApp';
 import { isAuthenticationUsed } from '@/actions/user-actions';
@@ -23,10 +21,8 @@ export default async function SigninPage() {
     }
 
     return (
-        <div className={`${styles['simple-page-layout']}`}>
-            <Card>
-                <AuthenticationForm local={dict} />
-            </Card>
-        </div>
+        <Card>
+            <AuthenticationForm local={dict} />
+        </Card>
     );
 }

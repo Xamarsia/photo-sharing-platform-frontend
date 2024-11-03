@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import '@/app/styles/globals.css';
+import styles from '@/app/styles/components/page.module.css';
 
 import { getDictionary } from '@/lib/localization';
 
@@ -35,7 +36,9 @@ export default async function RootLayout({
             <Header local={dict} />
             <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20 z-30'>
               <AlertProvider>
-                {children}
+                <div className={`${styles['simple-page-layout']}`}>
+                  {children}
+                </div>
               </AlertProvider>
             </main>
             <Footer local={dict} />
