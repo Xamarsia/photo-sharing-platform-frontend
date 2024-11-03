@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import '@/app/styles/globals.css';
+import styles from '@/app/styles/components/page.module.css';
 
 import { getDictionary } from '@/lib/localization';
 
@@ -32,9 +33,9 @@ export default async function RootLayout({
     <html lang="en" className='size-full'>
       <AuthProvider>
         <AuthorizedGuard>
-          <body className={`${inter.className} size-full flex flex-col items-stretch relative`}>
+          <body className={`${inter.className} ${styles['body']}`}>
             <Header local={dict} />
-            <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20'>
+            <main className={`${styles['main']}`}>
               <AlertProvider>
                 {children}
               </AlertProvider>

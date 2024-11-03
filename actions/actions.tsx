@@ -14,7 +14,7 @@ export async function saveTokenToHttponlyCookies(token: string): Promise<void> {
     path: '/',
     // sameSite: 'none', // non-HTTPS cookie can’t be set as “secure”
     // secure: true
-  })
+  });
 }
 
 export async function getCurrentUser(): Promise<UserDTO | undefined> {

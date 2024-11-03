@@ -1,3 +1,11 @@
 .simple-page-layout {
     @apply flex flex-grow flex-shrink justify-center items-center m-4
 }
+
+.body {
+    @apply size-full flex flex-col items-stretch relative
+}
+
+.main {
+    @apply flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20
+}
