@@ -7,7 +7,7 @@ export const authFormValidationSchema = z.object({
     confirmPassword: z.string({ required_error: "Confirm password is required" }),
 })
     .refine((data) => data.password === data.confirmPassword, {
-        message: "The passwords do not match", // passwordMismatchErrorMessage
+        message: "The passwords do not match",
         path: ['confirmPassword'],
     });
 
@@ -20,6 +20,6 @@ export const setPasswordSchema = z.object({
     confirmPassword: z.string({ required_error: "Confirm password is required" }),
 })
     .refine((data) => data.password === data.confirmPassword, {
-        message: "The passwords do not match", // passwordMismatchErrorMessage
+        message: "The passwords do not match",
         path: ['confirmPassword'],
     });

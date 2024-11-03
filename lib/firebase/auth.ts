@@ -13,7 +13,8 @@ import {
   verifyBeforeUpdateEmail,
   reauthenticateWithPopup,
   getAuth,
-  updatePassword
+  updatePassword,
+  Auth
 } from "firebase/auth";
 
 import { auth } from "@/lib/firebase/clientApp";
@@ -22,11 +23,11 @@ import { saveTokenToHttponlyCookies } from "@/actions/actions";
 import { FirebaseError } from "firebase/app";
 
 export async function signInWithGoogle(): Promise<UserCredential | undefined> {
-  const provider = new GoogleAuthProvider();
+  const provider: GoogleAuthProvider = new GoogleAuthProvider();
 
   try {
     const userCredential: UserCredential = await signInWithPopup(auth, provider);
-    const idToken = await userCredential.user.getIdToken();
+    const idToken: string = await userCredential.user.getIdToken();
     await saveTokenToHttponlyCookies(idToken);
     return userCredential;
   } catch (error: unknown) {
@@ -36,11 +37,11 @@ export async function signInWithGoogle(): Promise<UserCredential | undefined> {
 }
 
 export async function signUpWithGoogle(): Promise<UserCredential | undefined> {
-  const provider = new GoogleAuthProvider();
+  const provider: GoogleAuthProvider = new GoogleAuthProvider();
 
   try {
     const userCredential: UserCredential = await signInWithPopup(auth, provider);
-    const idToken = await userCredential.user.getIdToken();
+    const idToken: string = await userCredential.user.getIdToken();
     await saveTokenToHttponlyCookies(idToken);
     await saveAuth();
     return userCredential;
@@ -53,7 +54,7 @@ export async function signUpWithGoogle(): Promise<UserCredential | undefined> {
 export async function signUpWithEmailPassword(loginRequest: LoginRequest): Promise<UserCredential | undefined | FirebaseError> {
   try {
     const userCredential: UserCredential = await createUserWithEmailAndPassword(auth, loginRequest.email, loginRequest.password);
-    const idToken = await userCredential.user.getIdToken();
+    const idToken: string = await userCredential.user.getIdToken();
     await saveTokenToHttponlyCookies(idToken);
     await saveAuth();
     return userCredential;
@@ -69,7 +70,7 @@ export async function signUpWithEmailPassword(loginRequest: LoginRequest): Promi
 export async function signInWithEmailPassword(loginRequest: LoginRequest): Promise<UserCredential | undefined | FirebaseError> {
   try {
     const userCredential: UserCredential = await signInWithEmailAndPassword(auth, loginRequest.email, loginRequest.password);
-    const idToken = await userCredential.user.getIdToken();
+    const idToken: string = await userCredential.user.getIdToken();
     await saveTokenToHttponlyCookies(idToken);
     return userCredential;
   } catch (error: unknown) {
@@ -102,7 +103,7 @@ export async function signOut(): Promise<void> {
 }
 
 export async function resetPassword(email: string): Promise<void> {
-  const auth = getAuth();
+  const auth: Auth = getAuth();
 
   try {
     await sendPasswordResetEmail(auth, email);
@@ -112,7 +113,7 @@ export async function resetPassword(email: string): Promise<void> {
 }
 
 export async function changePassword(newPassword: string) {
-  const currentUser = getAuth().currentUser;
+  const currentUser: User | null = getAuth().currentUser;
   if (currentUser) {
     try {
       await updatePassword(currentUser, newPassword);
@@ -123,7 +124,7 @@ export async function changePassword(newPassword: string) {
 }
 
 export async function reauthenticate(password: string): Promise<UserCredential | undefined | FirebaseError> {
-  const currentUser = getAuth().currentUser;
+  const currentUser: User | null = getAuth().currentUser;
   try {
     if (currentUser && currentUser.email) {
       const credential: AuthCredential = EmailAuthProvider.credential(
@@ -143,8 +144,8 @@ export async function reauthenticate(password: string): Promise<UserCredential |
 }
 
 export async function reauthenticateWithGoogle(): Promise<UserCredential | undefined> {
-  const currentUser = getAuth().currentUser;
-  const provider = new GoogleAuthProvider();
+  const currentUser: User | null = getAuth().currentUser;
+  const provider: GoogleAuthProvider = new GoogleAuthProvider();
 
   try {
     if (currentUser) {
@@ -157,7 +158,7 @@ export async function reauthenticateWithGoogle(): Promise<UserCredential | undef
 }
 
 export async function updateUserEmail(newEmail: string): Promise<void> {
-  const currentUser = getAuth().currentUser;
+  const currentUser: User | null = getAuth().currentUser;
 
   try {
     if (currentUser) {

@@ -1,9 +1,9 @@
 import { isUsernameUsed } from "@/actions/user-actions";
 import { z } from "zod";
 
+// TODO add error localization
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg"];
-
 
 export const fileSchema = z.optional(z.any()
     .refine((file) => file instanceof File, 'Expected a file')

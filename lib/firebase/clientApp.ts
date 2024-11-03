@@ -1,19 +1,19 @@
 'use client';
 
 
-import { initializeApp, getApps } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { initializeApp, getApps, FirebaseApp } from "firebase/app";
+import { Auth, getAuth } from "firebase/auth";
 
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { Firestore, getFirestore } from "firebase/firestore";
+import { FirebaseStorage, getStorage } from "firebase/storage";
 
 import { firebaseConfig } from "@/lib/firebase/config";
 
 
-export const firebaseApp =
+export const firebaseApp: FirebaseApp =
   getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
 
-export const auth = getAuth(firebaseApp);
-export const db = getFirestore(firebaseApp);
-export const storage = getStorage(firebaseApp);
+export const auth: Auth = getAuth(firebaseApp);
+export const db: Firestore = getFirestore(firebaseApp);
+export const storage: FirebaseStorage = getStorage(firebaseApp);

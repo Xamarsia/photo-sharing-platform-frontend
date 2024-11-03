@@ -3,10 +3,14 @@ import "server-only";
 import { FirebaseServerApp, initializeServerApp } from "firebase/app";
 
 import { firebaseConfig } from "@/lib/firebase/config";
-import { getAuth, UserInfo } from "firebase/auth";
+import { Auth, getAuth, User, UserInfo } from "firebase/auth";
 
 import { cookies } from 'next/headers';
 
+type AuthenticatedApp = {
+  firebaseServerApp: FirebaseServerApp;
+  currentUser: User | null;
+}
 
 export async function getAuthenticatedApp() {
   const firebaseServerApp: FirebaseServerApp = initializeServerApp(
@@ -14,17 +18,16 @@ export async function getAuthenticatedApp() {
     cookies().has('token') ? { authIdToken: cookies().get('token')?.value } : {}
   );
 
-  const auth = getAuth(firebaseServerApp);
+  const auth: Auth = getAuth(firebaseServerApp);
   await auth.authStateReady();
 
   return { firebaseServerApp, currentUser: auth.currentUser };
 }
 
-
 export async function getProvider(): Promise<string[] | undefined> {
   try {
-    const authenticatedApp = await getAuthenticatedApp();
-    const user = await authenticatedApp.currentUser;
+    const authenticatedApp: AuthenticatedApp = await getAuthenticatedApp();
+    const user: User | null = await authenticatedApp.currentUser;
 
     if (user) {
       let providersId: string[] = new Array();
@@ -42,10 +45,11 @@ export async function getProvider(): Promise<string[] | undefined> {
 }
 
 
+
 export async function getEmail(): Promise<Map<string, string> | undefined> {
   try {
-    const authenticatedApp = await getAuthenticatedApp();
-    const user = await authenticatedApp.currentUser;
+    const authenticatedApp: AuthenticatedApp = await getAuthenticatedApp();
+    const user: User | null = await authenticatedApp.currentUser;
 
     if (user) {
       let emails: Map<string, string> = new Map();
@@ -68,16 +72,12 @@ export async function getEmail(): Promise<Map<string, string> | undefined> {
 
 export async function isAuthorized(): Promise<string | undefined> {
   try {
-    const authenticatedApp = await getAuthenticatedApp();
-    const user = await authenticatedApp.currentUser;
+    const authenticatedApp: AuthenticatedApp = await getAuthenticatedApp();
+    const user: User | null = await authenticatedApp.currentUser;
     if (user) {
-      return user.getIdToken()
+      return user.getIdToken();
     }
   } catch (error: unknown) {
-    console.error("Is authorized", error)
+    console.error("Is authorized", error);
   }
-}
-
-export async function refreshTokens() {
-
 }
