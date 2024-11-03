@@ -7,7 +7,7 @@ import Textarea from "@/components/common/Textarea";
 import TextButton from "@/components/buttons/TextButton";
 import FileSelector from "@/components/common/FileSelector";
 import FormFieldError from "@/components/common/FormFieldError";
-import DragAndDropFullPreview from '@/components/common/DragAndDropFullPreview';
+import DragAndDropFullPreview from '@/components/post/image/DragAndDropFullPreview';
 
 import { updatePost, updatePostImage } from "@/actions/post-actions";
 

@@ -22,7 +22,7 @@ export default async function SettingPage({ local, title, children }: Props) {
         <div className={`text-left ${formStyles['form-container']}`}>
             <div className="flex justify-between">
                 <h1 className={`${styles['h1']}`}>{title}</h1>
-                <NavbarDrawer local={local} items={sidebarItems} />
+                <NavbarDrawer items={sidebarItems} />
             </div>
 
             {children}

@@ -8,7 +8,7 @@ import TextButton from "@/components/buttons/TextButton";
 import Textarea from "@/components/common/Textarea";
 import FileSelector from "@/components/common/FileSelector";
 import FormFieldError from "@/components/common/FormFieldError";
-import DragAndDropFullPreview from '@/components/common/DragAndDropFullPreview';
+import DragAndDropFullPreview from '@/components/post/image/DragAndDropFullPreview';
 
 import styles from '@/app/styles/text/text.module.css';
 import formStyles from '@/app/styles/components/form.module.css';

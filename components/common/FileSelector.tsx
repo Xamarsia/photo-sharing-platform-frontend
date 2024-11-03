@@ -31,29 +31,28 @@ export default function FileSelector({ local, rounded, children, defaultImageExi
     function imageChangeHendler(file: SetStateAction<File | undefined>): void {
         setSelectedImage(file);
         onImageSelected(file);
-    }
+    };
 
     function handleDragLeave(e: React.DragEvent<HTMLDivElement>) {
         e.preventDefault();
         if (!defaultImageExist) {
             setDragActive(false);
         }
-
-    }
+    };
 
     function handleDragOver(e: React.DragEvent<HTMLDivElement>) {
         e.preventDefault();
         if (!defaultImageExist) {
             setDragActive(true);
         }
-    }
+    };
 
     function handleDragEnter(e: React.DragEvent<HTMLDivElement>) {
         e.preventDefault();
         if (!defaultImageExist) {
             setDragActive(true);
         }
-    }
+    };
 
     function handleDrop(e: React.DragEvent<HTMLDivElement>) {
         e.preventDefault();
@@ -67,7 +66,7 @@ export default function FileSelector({ local, rounded, children, defaultImageExi
             const file = e.dataTransfer.files[0];
             imageChangeHendler(file);
         }
-    }
+    };
 
     const imageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         if (!event.target.files || event.target.files.length === 0) {

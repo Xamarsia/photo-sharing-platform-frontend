@@ -6,14 +6,6 @@
 
 /* base styles */
 
-/* .main-info {
-    @apply block font-medium text-justify text-gray-900 text-sm leading-5
-} */
-
-/* .secondary-info {
-    @apply block font-normal text-justify text-gray-500 text-sm leading-5
-} */
-
 .base-text {
     @apply block font-normal text-justify text-gray-800 text-sm placeholder-gray-400
 }

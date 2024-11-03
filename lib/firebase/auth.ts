@@ -108,7 +108,7 @@ export async function resetPassword(email: string): Promise<void> {
   try {
     await sendPasswordResetEmail(auth, email);
   } catch (error: unknown) {
-    console.error("Reset password error", error)
+    console.error("Reset password error", error);
   }
 }
 

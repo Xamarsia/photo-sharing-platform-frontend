@@ -53,13 +53,11 @@ export async function getEmail(): Promise<Map<string, string> | undefined> {
 
     if (user) {
       let emails: Map<string, string> = new Map();
-
       user.providerData.forEach((profile: UserInfo) => {
         if (profile.email) {
           emails.set(profile.providerId, profile.email);
         }
       });
-
       return emails;
     } else {
       throw new Error("No user is signed in");

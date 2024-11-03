@@ -12,7 +12,7 @@ type AlertProps = {
   onClose: () => void;
 };
 
-const textColors = {
+const textColors: { [key: string]: string } = {
   Success: "text-green-400",
   Error: "text-red-400",
   Warning: "text-orange-400",

@@ -15,8 +15,7 @@ type Props = {
 
 
 export default function PostDropdown({ children }: Props) {
-    const [showDropdown, setShowDropdown] = useState(false);
-
+    const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const dropdown = useRef<HTMLDivElement>(null);
 
     /* TODO Transfer this useEffect to dropdown component as done in modal component */
@@ -27,11 +26,11 @@ export default function PostDropdown({ children }: Props) {
             }
         }
         if (showDropdown) {
-            document.addEventListener('mousedown', handleClickOutside)
+            document.addEventListener('mousedown', handleClickOutside);
         } else {
-            document.removeEventListener('mousedown', handleClickOutside)
+            document.removeEventListener('mousedown', handleClickOutside);
         }
-    }, [showDropdown])
+    }, [showDropdown]);
 
     return (
         <div ref={dropdown}>

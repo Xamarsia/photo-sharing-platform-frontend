@@ -5,7 +5,7 @@ import TextButton from '@/components/buttons/TextButton';
 import FileSelector from "@/components/common/FileSelector";
 import FormFieldError from '@/components/common/FormFieldError';
 import TextRemoveButton from '@/components/buttons/TextRemoveButton';
-import DragAndDropCirclePreview from "@/components/common/DragAndDropCirclePreview";
+import DragAndDropCirclePreview from "@/components/profile/image/DragAndDropCirclePreview";
 
 import { FormEvent, SetStateAction, useState } from "react";
 import { useRouter } from 'next/navigation';

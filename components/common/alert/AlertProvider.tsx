@@ -17,27 +17,22 @@ type AlertContext = {
 };
 
 // Create a new context for the Alert
-export const AlertContext = createContext<AlertContext>({
+export const AlertContext: React.Context<AlertContext> = createContext<AlertContext>({
     showAlert: () => { },
 });
 
 
-type Props = {
-    children: ReactNode,
-};
-
-
-export default function AlertProvider({ children }: Props) {
+export default function AlertProvider({ children }: { children: ReactNode }) {
     const [alerts, setAlerts] = useState<Alert[]>([]);
 
     // Function to hide an alert based on its index
-    const hideAlert = (index: number) => {
+    const hideAlert = (index: number): void => {
         setAlerts((alert) => alert.filter((value, i) => i !== index));
     };
 
     // UseEffect hook to remove the first alert message after 8 seconds
     useEffect(() => {
-        const interval = setInterval(() => {
+        const interval: NodeJS.Timeout = setInterval(() => {
             setAlerts((alerts) => {
                 if (alerts.length > 0) {
                     return alerts.slice(1); // Return array without first alert
@@ -48,8 +43,6 @@ export default function AlertProvider({ children }: Props) {
         }, 8 * 1000); // 8 seconds
         return () => clearInterval(interval);
     }, []);
-
-    //
 
     //TODO set maximum number of alerts that can be displayed at the same time
     // Context value containing the showAlert function

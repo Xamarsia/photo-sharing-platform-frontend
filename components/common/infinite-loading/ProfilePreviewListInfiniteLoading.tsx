@@ -2,6 +2,7 @@
 
 import InfiniteLoading from '@/components/common/infinite-loading/InfiniteLoading';
 import ProfilePreviewList from '@/components/profile/ProfilePreviewList';
+import styles from '@/app/styles/text/text.module.css';
 
 
 type Props = {
@@ -16,6 +17,6 @@ export default function ProfilePreviewListInfiniteLoading({ local, url, size, ur
     return (
         <InfiniteLoading<UserDTO> size={size} url={url} displayItems={
             (items) => (<ProfilePreviewList users={items} local={local} />)
-        } urlParams={urlParams} />
+        } urlParams={urlParams} emptyResult={<span className={`${styles['secondary-info']} m-4`}>{local.listEmpty}</span>} />
     );
 }

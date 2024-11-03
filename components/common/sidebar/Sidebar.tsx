@@ -5,13 +5,12 @@ import SidebarItem from "@/components/common/sidebar/SidebarItem";
 import { usePathname } from "next/navigation";
 
 type Props = {
-    local: any,
     items: Array<SidebarItemInfo>
 }
 
 
-export default function Sidebar({ local, items }: Props) {
-    const pathname = usePathname();
+export default function Sidebar({ items }: Props) {
+    const pathname: string = usePathname();
 
     return (
         <nav className="flex flex-col p-2 md:p-4 gap-0.5">

@@ -12,17 +12,17 @@ type Props<ItemsType> = {
     size: number,
     url: string,
     urlParams?: string | undefined,
+    emptyResult?: ReactNode | undefined,
     displayItems: (items: ItemsType[]) => ReactNode,
 }
 
 
-export default function InfiniteLoadingImpl<ItemsType>({ size, url, urlParams, displayItems }: Props<ItemsType>) {
+export default function InfiniteLoadingImpl<ItemsType>({ size, url, urlParams, emptyResult, displayItems }: Props<ItemsType>) {
     const [items, setItems] = useState<Array<ItemsType>>(Array<ItemsType>);
     const [page, setPage] = useState<number>(0);
-    const [isLast, setIsLast] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const containerRef = useRef(null);
-
+    const [isLast, setIsLast] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const containerRef: React.MutableRefObject<null> = useRef(null);
 
     const fetchData = useCallback(async () => {
         if (isLoading || isLast) return;
@@ -60,6 +60,7 @@ export default function InfiniteLoadingImpl<ItemsType>({ size, url, urlParams, d
         <>
             {displayItems(items)}
             {isLoading && <Loader />}
+            {!items.length && isLast && emptyResult}
             <div ref={containerRef} />
         </>
     );

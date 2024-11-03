@@ -15,7 +15,7 @@ type Props = {
 export default function SearchBar({ local }: Props) {
     const [query, setQuery] = useState<string>('');
     const router = useRouter();
-    const pathname = usePathname();
+    const pathname: string = usePathname();
 
 
     // Clear search string value if not on search page

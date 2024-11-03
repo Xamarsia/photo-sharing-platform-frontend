@@ -17,8 +17,8 @@ export default function LikesInfo({ local, post }: Props) {
     const [showModal, setShowModal] = useState<boolean>(false);
 
     const handleModal = () => {
-        setShowModal(!showModal)
-    }
+        setShowModal(!showModal);
+    };
 
     return (
         <div>

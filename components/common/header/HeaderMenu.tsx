@@ -39,10 +39,8 @@ export default function HeaderMenu({ local, user }: Props) {
                     </div>
                 </>
                 : <>
-                    <TextButton type={'button'} text={local.signIn}
-                        onClick={e => { router.push('/auth/signin') }}
-                    />
-                    <TextButton type={'button'} text={local.signUp} onClick={e => { router.push('/auth/signup') }} />
+                    <TextButton text={local.signIn} onClick={e => { router.push('/auth/signin') }} />
+                    <TextButton text={local.signUp} onClick={e => { router.push('/auth/signup') }} />
                 </>
             }
         </div>

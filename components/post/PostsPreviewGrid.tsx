@@ -1,6 +1,7 @@
 'use client';
 
 import PostPreview from '@/components/post/PostPreview';
+import { useCallback } from 'react';
 
 
 type PostsProps = {
@@ -9,13 +10,12 @@ type PostsProps = {
 
 export default function PostsPreview({ posts }: PostsProps) {
     /* Creates empty list elements to balance flexbox */
-    function createEmptyListItems() {
-
+    const createEmptyListItems = useCallback(() => {
         if (posts.length % 3 == 0) {
             return;
         }
 
-        let val = []
+        let val = [];
         for (let i = (3 - (posts.length % 3)); i > 0; i--) {
             val.push(
                 <li className='flex-1 basis-3/12' key={'empty-post-' + i}>
@@ -24,8 +24,7 @@ export default function PostsPreview({ posts }: PostsProps) {
             )
         }
         return val;
-    }
-
+    }, [posts.length]);
 
     return (
         <ul className='flex flex-grow size-full flex-wrap content-start gap-0.5 md:gap-1'>

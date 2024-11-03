@@ -20,7 +20,7 @@ export default async function EditProfileLayout({
 
           <section className='relative hidden md:flex flex-col top-0 left-0 h-full border-r border-gray-100'>
             <div className='sticky top-20'>
-              <Sidebar local={dict} items={sidebarItems} />
+              <Sidebar items={sidebarItems} />
             </div>
           </section>
 

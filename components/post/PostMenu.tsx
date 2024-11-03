@@ -31,7 +31,7 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
     const [author] = useState<UserDTO>(detailedPost.authorDTO);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [isUserPostOwner] = useState<boolean>(author.state == UserState.Current);
-    const createdDate = formatDateTime(post.createdDate);
+    const createdDate: string = formatDateTime(post.createdDate);
     const router = useRouter();
 
     async function onDeletePost() {
@@ -54,9 +54,7 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
                         <DropdownButton text={local.editPost} onClick={() => { router.push(`/post/${post.id}/edit`); }} />
                         <DropdownRemoveButton text={local.deletePost} onClick={() => { setShowModal(true); }} />
                     </>
-                    : <>
-                        <ToggleDropdownFollowButton local={local} user={author} />
-                    </>
+                    : <ToggleDropdownFollowButton local={local} user={author} />
                 }
             </PostDropdown>
             <Modal onCloseClicked={() => { setShowModal(false); }} title={local.deletePost} opened={showModal}>
