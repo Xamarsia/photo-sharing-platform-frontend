@@ -7,10 +7,9 @@ import { getDictionary } from '@/lib/localization';
 
 import Footer from '@/components/common/footer/Footer';
 import Header from '@/components/common/header/Header';
-import AuthProvider from '@/components/common/AuthProvider';
+import UnauthorizedGuard from '@/components/common/guards/UnauthorizedGuard';
 import AlertProvider from '@/components/common/alert/AlertProvider';
-import AuthorizedGuard from '@/components/common/guards/AuthorizedGuard';
-import FixedRoundCreatePostButton from '@/components/buttons/FixedRoundCreatePostButton';
+import AuthProvider from '@/components/common/AuthProvider';
 
 
 export const metadata: Metadata = {
@@ -28,14 +27,15 @@ export default async function RootLayout({
 
   return (
     <AuthProvider>
-      <AuthorizedGuard>
+      <UnauthorizedGuard>
         <body className={`${styles['body']}`}>
           <Header local={dict} />
-          <main className={`${styles['main']}`}>
+          <main className={`${styles['main']} z-30`}>
             <AlertProvider>
-              {children}
+              <div className={`${styles['simple-page-layout']}`}>
+                {children}
+              </div>
             </AlertProvider>
-            <FixedRoundCreatePostButton />
           </main>
           <Footer local={dict} />
           {/* To prevent Firefox FOUC*/}
@@ -43,7 +43,7 @@ export default async function RootLayout({
             let FIREFOX_FOUC_FIX;
           </script>
         </body>
-      </AuthorizedGuard>
+      </UnauthorizedGuard>
     </AuthProvider>
   )
 }
