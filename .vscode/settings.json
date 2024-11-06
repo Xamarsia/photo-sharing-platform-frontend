@@ -1,7 +1,0 @@
-{
-    "css.lint.unknownAtRules": "ignore",
-    "cSpell.words": [
-        "firestore",
-        "Httponly"
-    ]
-}
