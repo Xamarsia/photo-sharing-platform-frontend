@@ -25,12 +25,14 @@ export default function InfiniteLoadingImpl<ItemsType>({ size, url, urlParams, e
     const containerRef: React.MutableRefObject<null> = useRef(null);
 
     const fetchData = useCallback(async () => {
-        if (isLoading || isLast) return;
+        if (isLoading || isLast) {
+            return;
+        }
         setIsLoading(true);
 
         const { content, last } = await fetchPageData(size, page, url, urlParams);
         if (last) {
-            setIsLast(last);
+            setIsLast(true);
         }
         setItems((prevItems) => [...prevItems, ...content]);
         setPage((prevIndex) => prevIndex + 1);
@@ -39,19 +41,20 @@ export default function InfiniteLoadingImpl<ItemsType>({ size, url, urlParams, e
     }, [page, isLoading]);
 
 
-    const intersectionObserverCallback = async (entries: IntersectionObserverEntry[]) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-            fetchData();
-        }
-    };
-
     useEffect(() => {
-        const observer = new IntersectionObserver(intersectionObserverCallback);
-        if (containerRef.current) observer.observe(containerRef.current);
+        const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+            const [entry] = entries;
+            if (entry.isIntersecting) {
+                fetchData();
+            }
+        });
 
-        return () => {
-            if (containerRef.current) observer.unobserve(containerRef.current);
+        const curr = containerRef.current;
+        if (curr) {
+            observer.observe(curr);
+            return () => {
+                if (curr) observer.unobserve(curr);
+            }
         }
     }, [fetchData]);
 
@@ -61,7 +64,7 @@ export default function InfiniteLoadingImpl<ItemsType>({ size, url, urlParams, e
             {displayItems(items)}
             {isLoading && <Loader />}
             {!items.length && isLast && emptyResult}
-            <div ref={containerRef}  className='bg-red-400 size-10'/>
+            <div ref={containerRef} />
         </>
     );
 }
