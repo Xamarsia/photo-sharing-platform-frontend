@@ -8,21 +8,22 @@ import VerifyEmailForm from '@/components/forms/profile/VerifyEmailForm';
 
 import formStyles from '@/styles/components/form.module.css';
 
+import { useTranslations } from 'next-intl';
 import { ChangeEvent, FormEvent, useState } from "react";
 import { getValidationErrors } from '@/lib/zod/validation';
 import { updateEmailSchema } from '@/lib/zod/schemas/profile/changeEmail';
 
 
 type Props = {
-    local: any,
     oldEmail: string
 }
 
-export default function ChangeEmailForm({ local, oldEmail }: Props) {
+export default function ChangeEmailForm({ oldEmail }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const [email, setEmail] = useState<string>(oldEmail);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const t = useTranslations('form');
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -71,7 +72,7 @@ export default function ChangeEmailForm({ local, oldEmail }: Props) {
                         type="text"
                         name="email"
                         value={email}
-                        title={local.email}
+                        title={t('email')}
                         onChange={(e) => onEmailChangeHendler(e)}
                         required
                     />
@@ -79,14 +80,14 @@ export default function ChangeEmailForm({ local, oldEmail }: Props) {
                 </div>
                 <TextButton
                     type="submit"
-                    text={local.update}
+                    text={t('update')}
                     fill="content"
                     disabled={!isFormChanged || errors.size != 0}
                 />
             </form>
 
-            <Modal title={local.verifyNewEmailAddress} onCloseClicked={() => { setShowModal(false); }} opened={showModal}>
-                <VerifyEmailForm local={local} newEmail={email} />
+            <Modal title={t('verifyNewEmailAddress')} onCloseClicked={() => { setShowModal(false); }} opened={showModal}>
+                <VerifyEmailForm newEmail={email} />
             </Modal>
         </div>
     )

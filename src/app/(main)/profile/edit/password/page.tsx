@@ -1,17 +1,17 @@
 import 'server-only';
 
+import { useTranslations } from 'next-intl';
 
-import { getDictionary } from '@/lib/localization';
 import ChangePasswordForm from '@/components/forms/profile/ChangePasswordForm';
 import SettingPage from '@/components/common/SettingPage';
 
 
-export default async function ChangePasswordPage() {
-    const dict = await getDictionary('en');
+export default function ChangePasswordPage() {
+    const t = useTranslations('editProfile');
 
     return (
-        <SettingPage title={dict.changePassword} local={dict}>
-            <ChangePasswordForm local={dict} />
+        <SettingPage title={t('changePassword')}>
+            <ChangePasswordForm />
         </SettingPage>
     );
 }

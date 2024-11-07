@@ -1,5 +1,88 @@
 {
-    "HomePage": {
-      "title": "Hello world!"
-    }
+  "NotFound": {
+    "pageNotFound": "Page not found",
+    "pageDoesNotExist": "The page you are looking for doesn't exist.",
+    "userNotFound": "User not found",
+    "userDoesNotExist": "The user you are looking for doesn't exist.",
+    "postNotFound": "Post not found",
+    "postDoesNotExist": "The post you are looking for doesn't exist."
+  },
+  "FileSelector": {
+    "clickToUpload": "Click to upload",
+    "orDragAndDrop": "or drag and drop",
+    "fileFormatsForImageUploading": "JPG, JPEG up to 10MB"
+  },
+  "editProfile": {
+    "changePassword": "Change password",
+    "changeUsername": "Change username",
+    "changeEmail": "Change email",
+    "changeUserInfo": "Change user info",
+    "changeProfileImage": "Change profile image"
+  },
+  "Following": {
+    "unfollow": "Unfollow",
+    "follow": "Follow"
+  },
+  "form": {
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "repeatPassword": "Repeat password",
+    "fullName": "Full Name",
+    "haveAccount": "I already have an account",
+    "dontHaveAccount": "I do not have an account",
+    "editPost": "Edit post",
+    "deletePost": "Delete post",
+    "createPost": "Create Post",
+    "description": "Description",
+    "update": "Update",
+    "create": "Create",
+    "editProfile": "Edit Profile",
+    "newPassword": "New password",
+    "repeatNewPassword": "Repeat new password",
+    "currentPassword": "Current password",
+    "posts": "Posts",
+    "followers": "Followers",
+    "followings": "Followings",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "userInfo": "User info",
+    "profileImage": "Profile image",
+    "searchUsers": "Search users",
+    "continueWithGoogle": "Continue with Google",
+    "finish": "Finish",
+    "signOut": "Sign Out",
+    "delete": "Delete",
+    "remove": "Remove",
+    "likes": "Likes",
+    "deleteThisPost": "Are you sure you want to delete this post?",
+    "removeProfileImage": "Remove profile image",
+    "removeProfileImageMessage": "Are you sure you want to remove profile image?",
+    "deleteAccount": "Delete account",
+    "deleteAccountMessage": "Are you sure you want to delete SPSP account?",
+    "confirm": "Confirm",
+    "verifyNewEmailAddress": "Verify new email address",
+    "verifyNewUsername": "Verify new username",
+    "reset": "Reset",
+    "forgotPassword": "Forgot password?",
+    "resetPassword": "Reset your password",
+    "resetPasswordMessage": "Enter your email address or username and we will send you a link to reset your password",
+    "resetPasswordMessageSended": "The link to reset your password was sent to your email. Please, open your email to continue. You can close this window",
+    "resetEmailMessage": "After confirming your password, you will receive a verification link to a new email address. After verification, the email address will be changed",
+    "resetEmailMessageSended": "A new email confirmation link has been sent. Please, open your email to continue",
+    "resetUsernameMessage": "Please confirm your password. After confirmation, the username will be changed",
+    "confirmPassword": "Please, confirm your password",
+    "myProfile": "My profile",
+    "listEmpty": "List is empty",
+    "invalidCredential": "Password confirmation invalid. Please, try again",
+    "providedPasswordWeak": "The password provided is too weak",
+    "emailAlreadyUsed": "The account already exists for this email. If you tried to register and did not finish, please sign in with this email and complete registration. ",
+    "tooManyRequests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
+  },
+  "footer": {
+    "copyrightText": "© 2024 Simple Photo Sharing Platform",
+    "about": "About",
+    "privacyPolicy": "Privacy Policy",
+    "contact": "Contact"
+  }
 }

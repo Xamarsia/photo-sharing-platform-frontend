@@ -11,21 +11,18 @@ import FormFieldError from '@/components/common/FormFieldError';
 import { ChangeEvent, FormEvent, useState } from "react";
 import { registerUser } from '@/actions/user-actions';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 import { fullNameValidationSchema, signUpFormValidationSchema, updateUsernameSchema } from '@/lib/zod/schemas/auth/signUp';
 import { getValidationErrors } from '@/lib/zod/validation';
 
 
-type Props = {
-    local: any;
-}
-
-
-export default function RegistrationForm({ local }: Props) {
+export default function RegistrationForm() {
     const [username, setUsername] = useState<string>("username");
     const [fullName, setFullName] = useState<string>("");
     const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
+    const t = useTranslations('form');
     const router = useRouter();
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -92,14 +89,14 @@ export default function RegistrationForm({ local }: Props) {
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
             className={`${formStyles['form-card-container']}`}>
             <div className={`${formStyles['form-container']}`}>
-                <h1 className={`${styles['h1']}`}>{local.signUp}</h1>
+                <h1 className={`${styles['h1']}`}>{t('signUp')}</h1>
                 <div>
                     <Input
                         required
                         type="text"
                         name="username"
                         value={username}
-                        title={local.username}
+                        title={t('username')}
                         onChange={(e) => onUsernameChangeHendler(e)}
                         state={errors.has("username") ? 'invalid' : 'valid'}
                     />
@@ -111,7 +108,7 @@ export default function RegistrationForm({ local }: Props) {
                         type="text"
                         name="fullName"
                         value={fullName}
-                        title={local.fullName}
+                        title={t('fullName')}
                         onChange={(e) => onFullNameChangeHendler(e)}
                         state={errors.has("fullName") ? 'invalid' : 'valid'}
                     />
@@ -121,7 +118,7 @@ export default function RegistrationForm({ local }: Props) {
             </div>
             <TextButton
                 type="submit"
-                text={local.finish}
+                text={t('finish')}
                 fill="content"
                 disabled={!formIsValid || errors.size != 0}
             />

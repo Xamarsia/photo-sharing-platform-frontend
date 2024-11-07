@@ -1,17 +1,16 @@
 import 'server-only';
 
-import { getDictionary } from '@/lib/localization';
-
 import NotFound from '@/components/common/NotFound';
 import styles from '@/styles/components/page.module.css';
 
+import { useTranslations } from 'next-intl';
 
-export default async function InvalidURLPage() {
-    const dict = await getDictionary('en');
+export default function InvalidURLPage() {
+    const t = useTranslations('NotFound');
+
     return (
-
         <div className={`${styles['simple-page-layout']}`}>
-            <NotFound alertTitle={dict.pageNotFound} alertBody={dict.pageDoesNotExist} />
+            <NotFound alertTitle={t('pageNotFound')} alertBody={t('pageDoesNotExist')} />
         </div>
     );
 }

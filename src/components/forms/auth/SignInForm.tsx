@@ -5,6 +5,7 @@ import styles from '@/styles/text/text.module.css';
 import formStyles from '@/styles/components/form.module.css';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { FirebaseError } from 'firebase/app';
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -24,16 +25,12 @@ import { UserCredential } from 'firebase/auth';
 import { isUserRegistered } from '@/actions/user-actions';
 
 
-type Props = {
-    local: any;
-}
-
-
-export default function SignInForm({ local }: Props) {
+export default function SignInForm() {
     const [password, setPassword] = useState<string>("password");
     const [email, setEmail] = useState<string>("localpart@domain.com");
     const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
+    const t = useTranslations('form');
     const { showAlert } = useAlert();
     const router = useRouter();
 
@@ -111,10 +108,10 @@ export default function SignInForm({ local }: Props) {
             }
             className={`${formStyles['form-card-container']}`}>
             <div className={`${formStyles['form-container']}`}>
-                <h1 className={`${styles['h1']}`}>{local.signIn}</h1>
+                <h1 className={`${styles['h1']}`}>{t('signIn')}</h1>
 
                 <TextIconSecondaryButton
-                    text={local.continueWithGoogle}
+                    text={t('continueWithGoogle')}
                     onClick={handleSignInWithGoogle}
                     icon={google}
                     fill="parent"
@@ -126,7 +123,7 @@ export default function SignInForm({ local }: Props) {
                     <Input
                         type="text"
                         name="email"
-                        title={local.email}
+                        title={t('email')}
                         state={errors.has("email") ? 'invalid' : 'valid'}
                         value={email}
                         onChange={(e) => onEmailChangeHendler(e)}
@@ -138,7 +135,7 @@ export default function SignInForm({ local }: Props) {
                     <Input
                         type="password"
                         name="password"
-                        title={local.password}
+                        title={t('password')}
                         state={errors.has("password") ? 'invalid' : 'valid'}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -149,18 +146,18 @@ export default function SignInForm({ local }: Props) {
 
                 <div className='flex justify-between items-end '>
                     <div />
-                    <Link href={"/auth/password/reset"} className={`${styles['primary-link']}`} prefetch={false}>{local.forgotPassword}</Link>
+                    <Link href={"/auth/password/reset"} className={`${styles['primary-link']}`} prefetch={false}>{t('forgotPassword')}</Link>
                 </div>
             </div>
 
             <div>
                 <TextButton
                     type="submit"
-                    text={local.signIn}
+                    text={t('signIn')}
                     fill="content"
                     disabled={!formIsValid || errors.size != 0}
                 />
-                <Link href={"/auth/signup"} className={`${styles['primary-link']}`} prefetch={false}>{local.dontHaveAccount}</Link>
+                <Link href={"/auth/signup"} className={`${styles['primary-link']}`} prefetch={false}>{t('dontHaveAccount')}</Link>
             </div>
         </form>
     )

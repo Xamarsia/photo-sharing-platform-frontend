@@ -2,7 +2,6 @@ import 'server-only'
 
 import { redirect } from 'next/navigation';
 
-import { getDictionary } from '@/lib/localization';
 import { isAuthorized } from '@/lib/firebase/serverApp';
 import { isAuthenticationUsed } from '@/actions/user-actions';
 
@@ -11,7 +10,6 @@ import SignInForm from '@/components/forms/auth/SignInForm';
 
 
 export default async function SigninPage() {
-    const dict = await getDictionary('en');
     const isAuth: string | undefined = await isAuthorized();
 
     if (isAuth) {
@@ -23,7 +21,7 @@ export default async function SigninPage() {
 
     return (
         <Card>
-            <SignInForm local={dict} />
+            <SignInForm />
         </Card>
     );
 }

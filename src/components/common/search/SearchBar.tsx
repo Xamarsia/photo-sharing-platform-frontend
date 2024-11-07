@@ -7,16 +7,10 @@ import SearchInput from "@/components/common/search/SearchInput";
 import { usePathname, useRouter } from "next/navigation";
 
 
-type Props = {
-    local: any,
-}
-
-
-export default function SearchBar({ local }: Props) {
+export default function SearchBar() {
     const [query, setQuery] = useState<string>('');
     const router = useRouter();
     const pathname: string = usePathname();
-
 
     // Clear search string value if not on search page
     useEffect(() => {
@@ -40,7 +34,7 @@ export default function SearchBar({ local }: Props) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <SearchInput local={local} value={query} onChange={onSearchChanged} />
+            <SearchInput value={query} onChange={onSearchChanged} />
         </form>
     )
 }

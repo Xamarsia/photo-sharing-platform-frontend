@@ -7,12 +7,7 @@ import HeaderMenu from "@/components/common/header/HeaderMenu";
 import { getCurrentUser } from "@/actions/actions";
 
 
-type Props = {
-    local: any,
-}
-
-
-export default async function Header({ local }: Props) {
+export default async function Header() {
     const user: UserDTO | undefined = await getCurrentUser();
 
     return (
@@ -20,9 +15,9 @@ export default async function Header({ local }: Props) {
             <div className="flex items-center justify-between h-full px-4 md:px-8 gap-2 md:gap-4">
                 <Logo />
                 <div className={`grow max-w-[580px] ${user ? "block" : "hidden"}`}>
-                    <SearchBar local={local} />
+                    <SearchBar />
                 </div>
-                <HeaderMenu local={local} user={user} />
+                <HeaderMenu user={user} />
             </div>
         </header>
     )

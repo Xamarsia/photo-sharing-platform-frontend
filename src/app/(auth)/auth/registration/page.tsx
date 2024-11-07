@@ -1,15 +1,14 @@
 import 'server-only'
 
-import { getDictionary } from '@/lib/localization';
-
-import Card from '@/components/common/Card';
-import { isAuthorized } from '@/lib/firebase/serverApp';
-import { isAuthenticationUsed } from '@/actions/user-actions';
-import RegistrationForm from '@/components/forms/auth/RegistrationForm';
 import { redirect } from 'next/navigation';
 
+import { isAuthorized } from '@/lib/firebase/serverApp';
+import { isAuthenticationUsed } from '@/actions/user-actions';
+
+import Card from '@/components/common/Card';
+import RegistrationForm from '@/components/forms/auth/RegistrationForm';
+
 export default async function RegistrationPage() {
-    const dict = await getDictionary('en');
     const isAuth = await isAuthorized();
 
     if (!isAuth) {
@@ -23,7 +22,7 @@ export default async function RegistrationPage() {
 
     return (
         <Card>
-            <RegistrationForm local={dict} />,
+            <RegistrationForm />,
         </Card>
     );
 }

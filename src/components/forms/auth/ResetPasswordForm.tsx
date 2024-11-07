@@ -5,6 +5,7 @@ import styles from '@/styles/text/text.module.css';
 import formStyles from '@/styles/components/form.module.css';
 
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import Input from '@/components/common/Input';
@@ -19,16 +20,12 @@ import { resetPassword } from '@/lib/firebase/auth';
 import IconButton from '@/components/buttons/IconButton';
 
 
-type Props = {
-    local: any;
-}
-
-
-export default function ResetPasswordForm({ local }: Props) {
+export default function ResetPasswordForm() {
     const [email, setEmail] = useState<string>("localpart@domain.com");
     const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const [resetPressed, setResetPressed] = useState<boolean>(false);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
+    const t = useTranslations('form');
     const router = useRouter();
 
     async function handleSignInWithEmailAndPassword(event: FormEvent<HTMLFormElement>) {
@@ -70,17 +67,17 @@ export default function ResetPasswordForm({ local }: Props) {
             <div className={`${formStyles['form-container']}`}>
 
                 <div className="flex justify-between pb-8">
-                    <h1 className={`${styles['h1']}`}>{local.resetPassword}</h1>
+                    <h1 className={`${styles['h1']}`}>{t('resetPassword')}</h1>
                     <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={() => { router.push("/auth/signin") }} />
                 </div>
 
-                <p className={`${styles['base-text']}`}>{resetPressed ? local.resetPasswordMessageSended : local.resetPasswordMessage} </p>
+                <p className={`${styles['base-text']}`}>{resetPressed ? t('resetPasswordMessageSended') : t('resetPasswordMessage')} </p>
 
                 {!resetPressed && <div>
                     <Input
                         type="text"
                         name="email"
-                        title={local.email}
+                        title={t('email')}
                         state={errors.has("email") ? 'invalid' : 'valid'}
                         value={email}
                         onChange={(e) => onEmailChangeHendler(e)}
@@ -92,7 +89,7 @@ export default function ResetPasswordForm({ local }: Props) {
 
             {!resetPressed && <TextButton
                 type="submit"
-                text={local.reset}
+                text={t('reset')}
                 fill="content"
                 disabled={!formIsValid || errors.size != 0 || resetPressed}
             />}

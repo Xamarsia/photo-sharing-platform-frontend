@@ -2,6 +2,7 @@
 
 import { ReactNode, SetStateAction, useState } from 'react';
 
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import React from 'react';
 
@@ -15,7 +16,6 @@ import IconButton from '@/components/buttons/IconButton';
 
 
 type Props = {
-    local: any,
     rounded?: boolean,
     children?: ReactNode,
     defaultImageExist?: boolean,
@@ -24,9 +24,10 @@ type Props = {
 }
 
 
-export default function FileSelector({ local, rounded, children, defaultImageExist, onDefaultImageRemoved, onImageSelected }: Props) {
+export default function FileSelector({ rounded, children, defaultImageExist, onDefaultImageRemoved, onImageSelected }: Props) {
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [dragActive, setDragActive] = useState<boolean>(false);
+    const t = useTranslations('FileSelector');
 
     function imageChangeHendler(file: SetStateAction<File | undefined>): void {
         setSelectedImage(file);
@@ -111,13 +112,13 @@ export default function FileSelector({ local, rounded, children, defaultImageExi
 
                     <div className='flex gap-1'>
                         <label>
-                            <span className={`${styles['primary-link']}`}>{local.clickToUpload}</span>
+                            <span className={`${styles['primary-link']}`}>{t('clickToUpload')}</span>
                             <input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
                         </label>
-                        <span className={`${styles['secondary-info']}`}>{local.orDragAndDrop}</span>
+                        <span className={`${styles['secondary-info']}`}>{t('orDragAndDrop')}</span>
                     </div>
 
-                    <span className={`${styles['secondary-info']}`}>{local.fileFormatsForImageUploading}</span>
+                    <span className={`${styles['secondary-info']}`}>{t('fileFormatsForImageUploading')}</span>
                 </div>
             </div>
         </div>

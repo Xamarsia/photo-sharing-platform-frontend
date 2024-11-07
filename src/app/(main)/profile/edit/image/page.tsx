@@ -1,7 +1,6 @@
 import 'server-only';
 
-
-import { getDictionary } from '@/lib/localization';
+import { getTranslations } from 'next-intl/server';
 
 import ChangeProfileImageForm from '@/components/forms/profile/ChangeProfileImageForm';
 import SettingPage from '@/components/common/SettingPage';
@@ -9,12 +8,12 @@ import { getAuthenticatedUser } from '@/actions/user-actions';
 
 
 export default async function ChangeUserInfoPage() {
-  const dict = await getDictionary('en');
   const user: UserDTO | undefined = await getAuthenticatedUser();
+  const t = await getTranslations('editProfile');
 
   return (
-    <SettingPage local={dict} title={dict.changeProfileImage}>
-      {user && <ChangeProfileImageForm local={dict} user={user} />}
+    <SettingPage title={t('changeProfileImage')}>
+      {user && <ChangeProfileImageForm user={user} />}
     </SettingPage>
   );
 }

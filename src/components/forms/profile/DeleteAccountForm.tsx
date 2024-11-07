@@ -2,6 +2,7 @@
 
 
 import { FormEvent, useState } from "react";
+import { useTranslations } from 'next-intl';
 import { FirebaseError } from "firebase/app";
 
 import { ProviderID } from "@/constants";
@@ -18,15 +19,15 @@ import { UserCredential } from "firebase/auth";
 
 
 type Props = {
-    local: any,
     provider: string[]
 }
 
 
-export default function DeleteAccountForm({ local, provider }: Props) {
+export default function DeleteAccountForm({ provider }: Props) {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [password, setPassword] = useState<string>("password");
     const [formIsValid, setFormIsValid] = useState<boolean>(true);
+    const t = useTranslations('form');
     const { showAlert } = useAlert();
 
     async function handlenDeleteAccount(event: FormEvent<HTMLFormElement>) {
@@ -39,9 +40,9 @@ export default function DeleteAccountForm({ local, provider }: Props) {
                 let errorMessage: string = credential.message;
 
                 if (errorCode == 'auth/invalid-credential') {
-                    showAlert('Error', local.invalidCredential);
+                    showAlert('Error', t('invalidCredential'));
                 } else if (errorCode == 'auth/too-many-requests') {
-                    showAlert('Error', local.tooManyRequests);
+                    showAlert('Error', t('tooManyRequests'));
                 } else {
                     console.error(errorMessage);
                 }
@@ -64,25 +65,25 @@ export default function DeleteAccountForm({ local, provider }: Props) {
         <>
             <TextRemoveButton
                 type="submit"
-                text={local.delete}
+                text={t('delete')}
                 fill="content"
                 onClick={() => { setShowModal(true) }}
             />
-            <Modal onCloseClicked={() => { setShowModal(false); }} title={local.deleteAccount} opened={showModal}>
+            <Modal onCloseClicked={() => { setShowModal(false); }} title={t('deleteAccount')} opened={showModal}>
                 <form onSubmit={handlenDeleteAccount}
                     onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
                     className={`${formStyles['form-card-container']}`}>
 
                     <div className={`${formStyles['form-container']}`}>
-                        <p>{local.deleteAccountMessage}</p>
+                        <p>{t('deleteAccountMessage')}</p>
 
                         {provider.includes(ProviderID.EmailAuthProvider) &&
                             <>
-                                <p>{local.confirmPassword} </p>
+                                <p> {t('confirmPassword')} </p>
                                 <Input
                                     type="password"
                                     name="password"
-                                    title={local.password}
+                                    title={t('password')}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
@@ -93,7 +94,7 @@ export default function DeleteAccountForm({ local, provider }: Props) {
 
                     <TextRemoveButton
                         type="submit"
-                        text={local.delete}
+                        text={t('delete')}
                         fill="content"
                         disabled={!formIsValid}
                     />

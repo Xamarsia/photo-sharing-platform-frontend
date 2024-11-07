@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { UserState } from '@/constants';
+import { useTranslations } from 'next-intl';
 
 import TextButton from "@/components/buttons/TextButton";
 import TextSecondaryButton from "@/components/buttons/TextSecondaryButton";
@@ -10,12 +11,12 @@ import { follow, unfollow } from "@/actions/user-actions";
 
 
 type Props = {
-    local: any,
     user: UserDTO,
 }
 
-export default function ToggleFollowButton({ user, local }: Props) {
+export default function ToggleFollowButton({ user }: Props) {
     const [following, setFollowing] = useState<boolean>(user.state == UserState.Followed);
+    const t = useTranslations('Following');
 
     async function followProfile() {
         setFollowing(true);
@@ -31,8 +32,8 @@ export default function ToggleFollowButton({ user, local }: Props) {
         <>
             {user.state != UserState.Current &&
                 (following
-                    ? <TextSecondaryButton text={local.unfollow} onClick={unfollowProfile} />
-                    : <TextButton text={local.follow} onClick={followProfile} />
+                    ? <TextSecondaryButton text={t('unfollow')} onClick={unfollowProfile} />
+                    : <TextButton text={t('follow')} onClick={followProfile} />
                 )
             }
         </>

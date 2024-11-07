@@ -7,6 +7,7 @@ import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
 
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import formStyles from '@/styles/components/form.module.css';
@@ -17,12 +18,11 @@ import { fullNameValidationSchema, updateDescriptionSchema, updateUserInfoValida
 
 
 type Props = {
-    local: any,
     user: UserDTO,
 }
 
 
-export default function ChangeUserInfoForm({ local, user }: Props) {
+export default function ChangeUserInfoForm({ user }: Props) {
     const defaultFullName: string | undefined = (user.fullName == null ? undefined : user.fullName);
     const defaultDescription: string | undefined = (user.description == null ? undefined : user.description);
 
@@ -30,7 +30,7 @@ export default function ChangeUserInfoForm({ local, user }: Props) {
     const [description, setDescription] = useState<string | undefined>(defaultDescription);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
-
+    const t = useTranslations('form');
     const router = useRouter();
 
     async function handleUserInfoUpdate(event: FormEvent<HTMLFormElement>) {
@@ -108,7 +108,7 @@ export default function ChangeUserInfoForm({ local, user }: Props) {
                     type="text"
                     name="fullName"
                     value={fullName}
-                    title={local.fullName}
+                    title={t('fullName')}
                     onChange={(e) => onFullNameChangeHendler(e)}
                     state={errors.has("fullName") ? 'invalid' : 'valid'}
                 />
@@ -118,7 +118,7 @@ export default function ChangeUserInfoForm({ local, user }: Props) {
                 <Textarea
                     rows={5}
                     value={description}
-                    title={local.description}
+                    title={t('description')}
                     name="description"
                     onChange={(e) => onDescriptionChangeHendler(e)}
                     state={errors.has("description") ? 'invalid' : 'valid'}
@@ -127,7 +127,7 @@ export default function ChangeUserInfoForm({ local, user }: Props) {
             </div>
             <TextButton
                 type="submit"
-                text={local.update}
+                text={t('update')}
                 fill="content"
                 disabled={!isFormChanged || errors.size != 0}
             />

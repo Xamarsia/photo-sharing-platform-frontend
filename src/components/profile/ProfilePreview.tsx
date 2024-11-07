@@ -7,12 +7,11 @@ import ToggleFollowButton from '@/components/buttons/ToggleFollowButton';
 
 
 type ProfilePreviewProps = {
-    local: any,
     user: UserDTO
 }
 
 
-export default function ProfilePreview({ local, user }: ProfilePreviewProps) {
+export default function ProfilePreview({ user }: ProfilePreviewProps) {
     return (
         <div className='flex justify-between items-center border border-white hover:border-gray-100 hover:bg-gray-50 rounded-xl h-16 p-2'>
             <div className='flex items-center justify-between gap-2'>
@@ -24,7 +23,7 @@ export default function ProfilePreview({ local, user }: ProfilePreviewProps) {
                     <span className={`${styles['secondary-info']} truncate`}>{user.description}</span>
                 </div>
             </div>
-            <ToggleFollowButton local={local} user={user} />
+            <ToggleFollowButton user={user} />
         </div>
     )
 }

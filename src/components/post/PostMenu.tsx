@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 import { UserState } from '@/constants';
 import { formatDateTime } from '@/utils/dateTime';
@@ -21,17 +22,17 @@ import styles from '@/styles/text/text.module.css';
 
 
 type Props = {
-    local: any,
     detailedPost: DetailedPostDTO,
 }
 
 
-export default function PostMenuComponent({ local, detailedPost }: Props) {
+export default function PostMenuComponent({ detailedPost }: Props) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
     const [author] = useState<UserDTO>(detailedPost.authorDTO);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [isUserPostOwner] = useState<boolean>(author.state == UserState.Current);
     const createdDate: string = formatDateTime(post.createdDate);
+    const t = useTranslations('form');
     const router = useRouter();
 
     async function onDeletePost() {
@@ -51,16 +52,16 @@ export default function PostMenuComponent({ local, detailedPost }: Props) {
             <PostDropdown>
                 {isUserPostOwner
                     ? <>
-                        <DropdownButton text={local.editPost} onClick={() => { router.push(`/post/${post.id}/edit`); }} />
-                        <DropdownRemoveButton text={local.deletePost} onClick={() => { setShowModal(true); }} />
+                        <DropdownButton text={t('editPost')} onClick={() => { router.push(`/post/${post.id}/edit`); }} />
+                        <DropdownRemoveButton text={t('deletePost')} onClick={() => { setShowModal(true); }} />
                     </>
-                    : <ToggleDropdownFollowButton local={local} user={author} />
+                    : <ToggleDropdownFollowButton user={author} />
                 }
             </PostDropdown>
-            <Modal onCloseClicked={() => { setShowModal(false); }} title={local.deletePost} opened={showModal}>
+            <Modal onCloseClicked={() => { setShowModal(false); }} title={t('deletePost')} opened={showModal}>
                 <div className='flex flex-col gap-20'>
-                    <p>{local.deleteThisPost}</p>
-                    <TextRemoveButton text={local.delete} onClick={onDeletePost} />
+                    <p>{t('deleteThisPost')}</p>
+                    <TextRemoveButton text={t('delete')} onClick={onDeletePost} />
                 </div>
             </Modal>
         </div>

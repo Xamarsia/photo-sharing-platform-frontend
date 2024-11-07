@@ -6,6 +6,7 @@ import { getEmail, getProvider } from '@/lib/firebase/serverApp';
 import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
 
 import { cookies } from 'next/headers';
+import { getTranslations } from 'next-intl/server';
 
 export async function saveTokenToHttponlyCookies(token: string): Promise<void> {
   const cookieStore: ReadonlyRequestCookies = await cookies();
@@ -28,24 +29,25 @@ export async function getCurrentUser(): Promise<UserDTO | undefined> {
   return user;
 }
 
-export async function getSidebarItems(local: any): Promise<Array<SidebarItemInfo>> {
+export async function getSidebarItems(): Promise<Array<SidebarItemInfo>> {
   const provider: string[] | undefined = await getProvider();
   const email: Map<string, string> | undefined = await getEmail();
+  const t = await getTranslations('form');
 
   let items: Array<SidebarItemInfo> = [
-    { href: "/profile/edit/info", title: local.userInfo },
-    { href: "/profile/edit/image", title: local.profileImage },
-    { href: "/profile/edit/username", title: local.username },
+    { href: "/profile/edit/info", title: t('userInfo') },
+    { href: "/profile/edit/image", title: t('profileImage') },
+    { href: "/profile/edit/username", title: t('username') },
   ];
 
   if (provider && provider.includes(ProviderID.EmailAuthProvider)) {
-    items.push({ href: "/profile/edit/password", title: local.password });
+    items.push({ href: "/profile/edit/password", title: t('password') });
   }
 
   if (email && email.get(ProviderID.EmailAuthProvider)) {
-    items.push({ href: "/profile/edit/email", title: local.email });
+    items.push({ href: "/profile/edit/email", title: t('email') });
   }
 
-  items.push({ href: "/profile/edit/delete", title: local.deleteAccount });
+  items.push({ href: "/profile/edit/delete", title: t('deleteAccount') });
   return items;
 }

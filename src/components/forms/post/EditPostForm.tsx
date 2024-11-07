@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useTranslations } from 'next-intl';
 import { ChangeEvent, FormEvent, SetStateAction, useState } from "react";
 
 import Textarea from "@/components/common/Textarea";
@@ -19,18 +20,17 @@ import { getValidationErrors } from "@/lib/zod/validation";
 
 
 type Props = {
-    local: any;
     post: PostDTO;
 }
 
 
-export default function EditPostForm({ local, post }: Props) {
+export default function EditPostForm({ post }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [description, setDescription] = useState<string | undefined>(post?.description);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [defaultImageExist, setDefaultImageExist] = useState<boolean>(true);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
-
+    const t = useTranslations('form');
     const router = useRouter();
 
     const onImageSelected = (file: SetStateAction<File | undefined>) => {
@@ -99,9 +99,9 @@ export default function EditPostForm({ local, post }: Props) {
 
     return (
         <form onSubmit={onUpdate} onChange={() => setIsFormChanged(true)} className={`${formStyles['form-container']}`}>
-            <h1 className={`${styles['h1']}`}>{local.editPost}</h1>
+            <h1 className={`${styles['h1']}`}>{t('editPost')}</h1>
             <div>
-                <FileSelector onImageSelected={onImageSelected} local={local} defaultImageExist={defaultImageExist} onDefaultImageRemoved={() => { setDefaultImageExist(false); }}>
+                <FileSelector onImageSelected={onImageSelected} defaultImageExist={defaultImageExist} onDefaultImageRemoved={() => { setDefaultImageExist(false); }}>
                     {defaultImageExist
                         ? <DragAndDropFullPreview src={`/api/post/image/${post.id}`} />
                         : (selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />)
@@ -114,7 +114,7 @@ export default function EditPostForm({ local, post }: Props) {
                 <Textarea
                     rows={5}
                     value={description}
-                    title={local.description}
+                    title={t('description')}
                     name="description"
                     onChange={(e) => onDescriptionChangeHendler(e)}
                     state={errors.has("description") ? 'invalid' : 'valid'}
@@ -124,7 +124,7 @@ export default function EditPostForm({ local, post }: Props) {
 
             <TextButton
                 type="submit"
-                text={local.update}
+                text={t('update')}
                 disabled={!isFormChanged || errors.size != 0}
                 fill="content" />
         </form>

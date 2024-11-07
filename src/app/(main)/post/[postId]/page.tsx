@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { getDictionary } from '@/lib/localization';
+import { getTranslations } from 'next-intl/server';
 import { getDetailedPost } from '@/actions/post-actions';
 
 import Post from '@/components/post/Post';
@@ -13,17 +13,17 @@ type Params = Promise<{
 
 
 export default async function PostPage(props: { params: Params }) {
+    const t = await getTranslations('NotFound');
     const params = await props.params;
     const postId: number = params.postId;
-    const dict = await getDictionary('en');
 
     const detailedPost: DetailedPostDTO | undefined = await getDetailedPost(postId);
 
     return (
         <>
             {detailedPost
-                ? <Post detailedPost={detailedPost} local={dict} />
-                : <NotFound alertTitle={dict.postNotFound} alertBody={dict.postDoesNotExist} />
+                ? <Post detailedPost={detailedPost} />
+                : <NotFound alertTitle={t('postNotFound')} alertBody={t('postDoesNotExist')} />
             }
         </>
     );

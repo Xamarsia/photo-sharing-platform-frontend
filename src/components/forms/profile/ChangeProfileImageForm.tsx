@@ -8,6 +8,7 @@ import TextRemoveButton from '@/components/buttons/TextRemoveButton';
 import DragAndDropCirclePreview from "@/components/profile/image/DragAndDropCirclePreview";
 
 import { FormEvent, SetStateAction, useState } from "react";
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
 import formStyles from '@/styles/components/form.module.css';
@@ -18,16 +19,16 @@ import { getValidationErrors } from '@/lib/zod/validation';
 
 
 type Props = {
-    local: any,
     user: UserDTO,
 }
 
 
-export default function ChangeProfileImageForm({ local, user }: Props) {
+export default function ChangeProfileImageForm({ user }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
+    const t = useTranslations('form');
     const router = useRouter();
 
     const onImageSelected = (file: SetStateAction<File | undefined>) => {
@@ -74,7 +75,7 @@ export default function ChangeProfileImageForm({ local, user }: Props) {
                 className={`text-left ${formStyles['form-container']}`}>
                 <div>
                     <div className='size-72'>
-                        <FileSelector onDefaultImageRemoved={() => { setShowModal(true); }} onImageSelected={onImageSelected} local={local} rounded defaultImageExist={user.isProfileImageExist} >
+                        <FileSelector onDefaultImageRemoved={() => { setShowModal(true); }} onImageSelected={onImageSelected} rounded defaultImageExist={user.isProfileImageExist} >
                             {user.isProfileImageExist
                                 ? <DragAndDropCirclePreview src={`/api/user/avatar/${user.username}`} />
                                 : (selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />)
@@ -86,15 +87,15 @@ export default function ChangeProfileImageForm({ local, user }: Props) {
 
                 <TextButton
                     type="submit"
-                    text={local.update}
+                    text={t('update')}
                     fill="content"
                     disabled={!isFormChanged || errors.size != 0}
                 />
             </form>
-            <Modal onCloseClicked={() => { setShowModal(false); }} title={local.removeProfileImage} opened={showModal}>
+            <Modal onCloseClicked={() => { setShowModal(false); }} title={t('removeProfileImage')} opened={showModal}>
                 <div className='flex flex-col gap-20'>
-                    <p>{local.removeProfileImageMessage}</p>
-                    <TextRemoveButton text={local.remove} onClick={onDeleteProfileImage} />
+                    <p>{t('removeProfileImageMessage')}</p>
+                    <TextRemoveButton text={t('remove')} onClick={onDeleteProfileImage} />
                 </div>
             </Modal>
         </>

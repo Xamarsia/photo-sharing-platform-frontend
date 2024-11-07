@@ -1,6 +1,8 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 
+import '@/styles/globals.css';
+import styles from '@/styles/components/page.module.css';
 
 export default async function LocaleLayout({
     children,
@@ -15,9 +17,15 @@ export default async function LocaleLayout({
 
     return (
         <html lang={locale} className='size-full'>
-            <NextIntlClientProvider messages={messages}>
-                {children}
-            </NextIntlClientProvider>
+            <body className={`${styles['body']}`}>
+                <NextIntlClientProvider messages={messages}>
+                    {children}
+                </NextIntlClientProvider>
+                {/* To prevent Firefox FOUC*/}
+                <script>
+                    let FIREFOX_FOUC_FIX;
+                </script>
+            </body>
         </html>
     );
 }

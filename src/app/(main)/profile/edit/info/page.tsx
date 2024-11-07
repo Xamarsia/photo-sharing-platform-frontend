@@ -1,20 +1,20 @@
 import 'server-only';
 
 
-import { getDictionary } from '@/lib/localization';
-
 import ChangeUserInfoForm from '@/components/forms/profile/ChangeUserInfoForm';
 import SettingPage from '@/components/common/SettingPage';
+
 import { getAuthenticatedUser } from '@/actions/user-actions';
+import { getTranslations } from 'next-intl/server';
 
 
 export default async function ChangeUserInfoPage() {
-    const dict = await getDictionary('en');
     const user: UserDTO | undefined = await getAuthenticatedUser();
+    const t = await getTranslations('editProfile');
 
     return (
-        <SettingPage local={dict} title={dict.changeUserInfo} >
-            {user && <ChangeUserInfoForm local={dict} user={user} />}
+        <SettingPage title={t('changeUserInfo')} >
+            {user && <ChangeUserInfoForm user={user} />}
         </SettingPage>
     );
 }

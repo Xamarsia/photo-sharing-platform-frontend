@@ -1,20 +1,20 @@
 import 'server-only';
 
 
-import { getDictionary } from '@/lib/localization';
+import { getTranslations } from 'next-intl/server';
+import { getAuthenticatedApp } from '@/lib/firebase/serverApp';
 
 import ChangeEmailForm from '@/components/forms/profile/ChangeEmailForm';
 import SettingPage from '@/components/common/SettingPage';
-import { getAuthenticatedApp } from '@/lib/firebase/serverApp';
 
 
 export default async function ChangeEmailPage() {
-    const dict = await getDictionary('en');
+    const t = await getTranslations('editProfile');
     const email: string | null | undefined = (await getAuthenticatedApp()).currentUser?.email;
 
     return (
-        <SettingPage local={dict} title={dict.changeEmail} >
-            {email && <ChangeEmailForm local={dict} oldEmail={email} />}
+        <SettingPage title={t('changeEmail')} >
+            {email && <ChangeEmailForm oldEmail={email} />}
         </SettingPage>
     );
 }

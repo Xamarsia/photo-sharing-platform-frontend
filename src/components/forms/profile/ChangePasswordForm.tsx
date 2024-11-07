@@ -7,6 +7,7 @@ import FormFieldError from '@/components/common/FormFieldError';
 
 import formStyles from '@/styles/components/form.module.css';
 
+import { useTranslations } from 'next-intl';
 import { ChangeEvent, FormEvent, useState } from "react";
 import { getValidationErrors } from '@/lib/zod/validation';
 import { currentPasswordSchema, setPasswordSchema, updatePasswordSchema } from '@/lib/zod/schemas/profile/changePassword';
@@ -16,17 +17,14 @@ import { FirebaseError } from 'firebase/app';
 import { UserCredential } from 'firebase/auth';
 
 
-type Props = {
-    local: any;
-}
-
-
-export default function ChangePasswordForm({ local }: Props) {
+export default function ChangePasswordForm() {
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const [currentPassword, setCurrentPassword] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [formIsValid, setFormIsValid] = useState<boolean>(false);
+    const t = useTranslations('form');
+
     const { showAlert } = useAlert();
 
 
@@ -52,9 +50,9 @@ export default function ChangePasswordForm({ local }: Props) {
             let errorMessage: string = credential.message;
 
             if (errorCode == 'auth/invalid-credential') {
-                showAlert('Error', local.invalidCredential);
+                showAlert('Error', t('invalidCredential'));
             } else if (errorCode == 'auth/too-many-requests') {
-                showAlert('Error', local.tooManyRequests);
+                showAlert('Error', t('tooManyRequests'));
             } else {
                 console.error(errorMessage);
             }
@@ -127,7 +125,7 @@ export default function ChangePasswordForm({ local }: Props) {
                     type="password"
                     name="currentPassword"
                     value={currentPassword}
-                    title={local.currentPassword}
+                    title={t('currentPassword')}
                     onChange={(e) => onCurrentPasswordChangeHendler(e)}
                     required
                 />
@@ -138,7 +136,7 @@ export default function ChangePasswordForm({ local }: Props) {
                     type="password"
                     name="password"
                     value={password}
-                    title={local.newPassword}
+                    title={t('newPassword')}
                     onChange={(e) => onPasswordChangeHendler(e)}
                     required
                 />
@@ -149,7 +147,7 @@ export default function ChangePasswordForm({ local }: Props) {
                     type="password"
                     name="confirmPassword"
                     value={confirmPassword}
-                    title={local.repeatNewPassword}
+                    title={t('repeatNewPassword')}
                     onChange={(e) => onConfirmPasswordChangeHendler(e)}
                     required
                 />
@@ -157,7 +155,7 @@ export default function ChangePasswordForm({ local }: Props) {
             </div>
             <TextButton
                 type="submit"
-                text={local.update}
+                text={t('update')}
                 fill="content"
                 disabled={!formIsValid || errors.size != 0}
             />

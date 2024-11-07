@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { getDictionary } from '@/lib/localization';
+import { getTranslations } from 'next-intl/server';
 import { getUserProfile } from '@/actions/user-actions';
 
 import styles from '@/styles/components/page.module.css';
@@ -17,7 +17,7 @@ type Params = Promise<{
 export default async function ProfilePage(props: { params: Params }) {
     const params = await props.params;
     const username: string = params.username;
-    const dict = await getDictionary('en');
+    const t = await getTranslations('NotFound');
 
     const profile: ProfileDTO | undefined = await getUserProfile(username);
 
@@ -26,11 +26,11 @@ export default async function ProfilePage(props: { params: Params }) {
             <div className="flex flex-grow flex-col items-center justify-start gap-4 max-w-7xl">
                 {profile
                     ? <>
-                        <Profile local={dict} profile={profile} />
+                        <Profile profile={profile} />
                         <PostsPreviewGridInfiniteLoading username={username} />
                     </>
                     : <div className={`${styles['simple-page-layout']}`}>
-                        <NotFound alertTitle={dict.userNotFound} alertBody={dict.userDoesNotExist} />
+                        <NotFound alertTitle={t('userNotFound')} alertBody={t('userDoesNotExist')} />
                     </div>
                 }
             </div>

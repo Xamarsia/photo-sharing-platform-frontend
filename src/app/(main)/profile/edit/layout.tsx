@@ -1,4 +1,3 @@
-import { getDictionary } from '@/lib/localization';
 import { getSidebarItems } from '@/actions/actions';
 
 import Sidebar from '@/components/common/sidebar/Sidebar';
@@ -9,9 +8,7 @@ export default async function EditProfileLayout({
 }: {
   children: React.ReactNode
 }) {
-
-  const dict = await getDictionary('en');
-  const sidebarItems = await getSidebarItems(dict);
+  const sidebarItems = await getSidebarItems();
 
   return (
     <div className='flex flex-grow flex-col w-full relative flex-shrink-0'>

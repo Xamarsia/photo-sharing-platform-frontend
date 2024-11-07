@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useTranslations } from 'next-intl';
 
 import TextButton from "@/components/buttons/TextButton";
 import DropdownButton from "@/components/buttons/DropdownButton";
@@ -11,14 +12,13 @@ import plus from '@/public/plus/plus-white.svg';
 import { signOut } from "@/lib/firebase/auth";
 
 
-
 type Props = {
-    local: any,
     user?: UserDTO | undefined,
 }
 
 
-export default function HeaderMenu({ local, user }: Props) {
+export default function HeaderMenu({ user }: Props) {
+    const t = useTranslations('form');
     const router = useRouter();
 
     return (
@@ -26,21 +26,21 @@ export default function HeaderMenu({ local, user }: Props) {
             {user
                 ? <>
                     <div className='md:block hidden h-full'>
-                        <TextIconButton text={local.createPost} icon={plus} onClick={() => { router.push('/post/create') }}
+                        <TextIconButton text={t('createPost')} icon={plus} onClick={() => { router.push('/post/create') }}
 
                         />
                     </div>
                     <div className="md:block">
                         <ProfilePreviewDropdown user={user}>
-                            <DropdownButton text={local.myProfile} onClick={() => { router.push(`/${user.username}`) }} />
-                            <DropdownButton text={local.editProfile} onClick={() => { router.push('/profile/edit/info') }} />
-                            <DropdownButton text={local.signOut} onClick={signOut} />
+                            <DropdownButton text={t('myProfile')} onClick={() => { router.push(`/${user.username}`) }} />
+                            <DropdownButton text={t('editProfile')} onClick={() => { router.push('/profile/edit/info') }} />
+                            <DropdownButton text={t('signOut')} onClick={signOut} />
                         </ProfilePreviewDropdown>
                     </div>
                 </>
                 : <>
-                    <TextButton text={local.signIn} onClick={e => { router.push('/auth/signin') }} />
-                    <TextButton text={local.signUp} onClick={e => { router.push('/auth/signup') }} />
+                    <TextButton text={t('signIn')} onClick={e => { router.push('/auth/signin') }} />
+                    <TextButton text={t('signUp')} onClick={e => { router.push('/auth/signup') }} />
                 </>
             }
         </div>

@@ -14,22 +14,21 @@ import formStyles from '@/styles/components/form.module.css';
 
 
 type Props = {
-    local: any,
     detailedPost: DetailedPostDTO,
 }
 
 
-export default function Post({ local, detailedPost }: Props) {
+export default function Post({ detailedPost }: Props) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
 
     return (
         <Card>
             <div className={`text-left ${formStyles['form-container']}`}>
-                <PostMenu local={local} detailedPost={detailedPost} />
+                <PostMenu detailedPost={detailedPost} />
                 <PostImage postId={post.id} />
                 <p className={`${styles['base-text']}`}>{post.description}</p>
                 <div className='flex items-center justify-end gap-4 '>
-                    <LikesInfo local={local} post={post} />
+                    <LikesInfo post={post} />
                     <ToggleLikeButton postId={post.id} state={detailedPost.state} />
                 </div>
             </div>

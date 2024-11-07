@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
 
-import '@/styles/globals.css';
 import styles from '@/styles/components/page.module.css';
-
-import { getDictionary } from '@/lib/localization';
 
 import Footer from '@/components/common/footer/Footer';
 import Header from '@/components/common/header/Header';
@@ -24,25 +21,19 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
-  const dict = await getDictionary('en');
-
   return (
     <AuthProvider>
       <AuthorizedGuard>
-        <body className={`${styles['body']}`}>
-          <Header local={dict} />
+        <>
+          <Header />
           <main className={`${styles['main']}`}>
             <AlertProvider>
               {children}
             </AlertProvider>
             <FixedRoundCreatePostButton />
           </main>
-          <Footer local={dict} />
-          {/* To prevent Firefox FOUC*/}
-          <script>
-            let FIREFOX_FOUC_FIX;
-          </script>
-        </body>
+          <Footer />
+        </>
       </AuthorizedGuard>
     </AuthProvider>
   )

@@ -9,14 +9,13 @@ import NavbarDrawer from "@/components/common/NavbarDrawer";
 import { getSidebarItems } from "@/actions/actions";
 
 type Props = {
-    local: any,
     title: string,
     children: ReactNode,
 
 }
 
-export default async function SettingPage({ local, title, children }: Props) {
-    const sidebarItems: Array<SidebarItemInfo> = await getSidebarItems(local);
+export default async function SettingPage({ title, children }: Props) {
+    const sidebarItems: Array<SidebarItemInfo> = await getSidebarItems();
 
     return (
         <div className={`text-left ${formStyles['form-container']}`}>

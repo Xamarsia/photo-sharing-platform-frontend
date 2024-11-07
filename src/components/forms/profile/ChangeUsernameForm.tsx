@@ -7,6 +7,7 @@ import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
 import VerifyUsernameForm from '@/components/forms/profile/VerifyUsernameForm';
 
+import { useTranslations } from 'next-intl';
 import { ChangeEvent, FormEvent, useState } from "react";
 
 import formStyles from '@/styles/components/form.module.css';
@@ -16,16 +17,16 @@ import { updateUniqueUsernameSchema, updateUsernameSchema } from '@/lib/zod/sche
 
 
 type Props = {
-    local: any,
     user: UserDTO,
 }
 
 
-export default function ChangeUsernameForm({ local, user }: Props) {
+export default function ChangeUsernameForm({ user }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [username, setUsername] = useState<string>(user.username);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
+    const t = useTranslations('form');
 
     async function onUpdate(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -73,7 +74,7 @@ export default function ChangeUsernameForm({ local, user }: Props) {
                         type="text"
                         name="username"
                         value={username}
-                        title={local.username}
+                        title={t('username')}
                         onChange={(e) => { onUsernameChangeHendler(e) }}
                         required
                         state={errors.has("username") ? 'invalid' : 'valid'}
@@ -83,13 +84,13 @@ export default function ChangeUsernameForm({ local, user }: Props) {
 
                 <TextButton
                     type="submit"
-                    text={local.update}
+                    text={t('update')}
                     fill="content"
                     disabled={!isFormChanged || errors.size != 0}
                 />
             </form>
-            <Modal title={local.verifyNewUsername} onCloseClicked={() => { setShowModal(false); }} opened={showModal}>
-                <VerifyUsernameForm local={local} newUsername={username} onSubmit={() => { setShowModal(false); setIsFormChanged(false); }} />
+            <Modal title={t('verifyNewUsername')} onCloseClicked={() => { setShowModal(false); }} opened={showModal}>
+                <VerifyUsernameForm newUsername={username} onSubmit={() => { setShowModal(false); setIsFormChanged(false); }} />
             </Modal>
         </>
     )

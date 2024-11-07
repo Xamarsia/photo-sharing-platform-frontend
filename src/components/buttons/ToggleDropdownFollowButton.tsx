@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from 'next-intl';
 
 import { useState } from "react";
 import { UserState } from '@/constants';
@@ -11,12 +12,12 @@ import DropdownButton from "@/components/buttons/DropdownButton";
 
 
 type Props = {
-    local: any,
     user: UserDTO,
 }
 
-export default function ToggleDropdownFollowButton({ user, local }: Props) {
+export default function ToggleDropdownFollowButton({ user }: Props) {
     const [following, setFollowing] = useState<boolean>(user.state == UserState.Followed);
+    const t = useTranslations('Following');
 
     async function followProfile() {
         setFollowing(true);
@@ -32,8 +33,8 @@ export default function ToggleDropdownFollowButton({ user, local }: Props) {
         <>
             {user.state != UserState.Current &&
                 (following
-                    ? <DropdownRemoveButton text={local.unfollow} onClick={unfollowProfile} />
-                    : <DropdownButton text={local.follow} onClick={followProfile} />
+                    ? <DropdownRemoveButton text={t('unfollow')} onClick={unfollowProfile} />
+                    : <DropdownButton text={t('follow')} onClick={followProfile} />
                 )
             }
         </>

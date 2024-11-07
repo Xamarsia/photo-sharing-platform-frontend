@@ -5,17 +5,16 @@ import InfiniteLoading from '@/components/common/infinite-loading/InfiniteLoadin
 
 
 type Props = {
-    local: any,
     url: string,
     size: number,
     urlParams?: string | undefined,
 }
 
 
-export default function PostsListInfiniteLoading({ local, url, size, urlParams }: Props) {
+export default function PostsListInfiniteLoading({ url, size, urlParams }: Props) {
     return (
         <InfiniteLoading<DetailedPostDTO> size={size} displayItems={
-            (items) => (<PostsList posts={items} local={local} />)
+            (items) => (<PostsList posts={items} />)
         } url={url} urlParams={urlParams} />
     );
 }

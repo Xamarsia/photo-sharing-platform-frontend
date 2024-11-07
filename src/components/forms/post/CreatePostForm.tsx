@@ -3,6 +3,7 @@
 
 import { ChangeEvent, FormEvent, SetStateAction, useState } from "react";
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 import TextButton from "@/components/buttons/TextButton";
 import Textarea from "@/components/common/Textarea";
@@ -18,14 +19,11 @@ import { createPostValidationSchema, updateDescriptionSchema, updateRequiredFile
 import { getValidationErrors } from "@/lib/zod/validation";
 
 
-type Props = {
-    local: any;
-}
-
-export default function CreatePostForm({ local }: Props) {
+export default function CreatePostForm() {
     const [description, setDescription] = useState<string>('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum metus eros, ut rutrum nulla blandit eu. Curabitur ac molestie lorem. Nunc porttitor tempor justo sed tempor.');
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
+    const t = useTranslations('form');
     const router = useRouter();
 
     const onImageSelected = (file: SetStateAction<File | undefined>) => {
@@ -91,9 +89,9 @@ export default function CreatePostForm({ local }: Props) {
 
     return (
         <form onSubmit={onCreate} className={`${formStyles['form-container']}`}>
-            <h1 className={`${styles['h1']}`}>{local.createPost}</h1>
+            <h1 className={`${styles['h1']}`}>{t('createPost')}</h1>
             <div>
-                <FileSelector onImageSelected={onImageSelected} local={local}>
+                <FileSelector onImageSelected={onImageSelected}>
                     {selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />}
                 </FileSelector>
                 <FormFieldError text={errors.get("file")} />
@@ -103,7 +101,7 @@ export default function CreatePostForm({ local }: Props) {
                 <Textarea
                     rows={5}
                     value={description}
-                    title={local.description}
+                    title={t('description')}
                     name="description"
                     onChange={(e) => onDescriptionChangeHendler(e)}
                     state={errors.has("description") ? 'invalid' : 'valid'}
@@ -113,7 +111,7 @@ export default function CreatePostForm({ local }: Props) {
 
             <TextButton
                 type="submit"
-                text={local.create}
+                text={t('create')}
                 fill="content"
                 disabled={!selectedImage || errors.size != 0
                 }

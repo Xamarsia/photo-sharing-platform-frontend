@@ -9,20 +9,21 @@ import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 
 import { reauthenticate, updateUserEmail } from '@/lib/firebase/auth';
+import { useTranslations } from 'next-intl';
 import { FirebaseError } from 'firebase/app';
 import { useAlert } from '@/utils/useAlert';
 import { UserCredential } from 'firebase/auth';
 
 type Props = {
-    local: any,
     newEmail: string,
 }
 
 
-export default function VerifyEmailForm({ local, newEmail }: Props) {
+export default function VerifyEmailForm({ newEmail }: Props) {
     const [password, setPassword] = useState<string>("password");
     const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const [confirmPressed, setConfirmPressed] = useState<boolean>(false);
+    const t = useTranslations('form');
     const { showAlert } = useAlert();
 
     async function handleEmailVerification(event: FormEvent<HTMLFormElement>) {
@@ -34,9 +35,9 @@ export default function VerifyEmailForm({ local, newEmail }: Props) {
             let errorMessage: string = credential.message;
 
             if (errorCode == 'auth/invalid-credential') {
-                showAlert('Error', local.invalidCredential);
+                showAlert('Error', t('invalidCredential'));
             } else if (errorCode == 'auth/too-many-requests') {
-                showAlert('Error', local.tooManyRequests);
+                showAlert('Error', t('tooManyRequests'));
             } else {
                 console.error(errorMessage);
             }
@@ -55,12 +56,12 @@ export default function VerifyEmailForm({ local, newEmail }: Props) {
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
             className={`${formStyles['form-card-container']}`}>
             <div className={`${formStyles['form-container']}`}>
-                <p className={`${styles['base-text']}`}>{confirmPressed ? local.resetEmailMessageSended : local.resetEmailMessage} </p>
+                <p className={`${styles['base-text']}`}>{confirmPressed ? t('resetEmailMessageSended') : t('resetEmailMessage')} </p>
 
                 {!confirmPressed && <Input
                     type="password"
                     name="password"
-                    title={local.password}
+                    title={t('password')}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -69,7 +70,7 @@ export default function VerifyEmailForm({ local, newEmail }: Props) {
 
             {!confirmPressed && <TextButton
                 type="submit"
-                text={local.confirm}
+                text={t('confirm')}
                 fill="content"
                 disabled={!formIsValid}
             />}

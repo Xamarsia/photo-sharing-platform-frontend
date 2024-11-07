@@ -5,6 +5,7 @@ import styles from '@/styles/text/text.module.css';
 import formStyles from '@/styles/components/form.module.css';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { FirebaseError } from 'firebase/app';
 import { ChangeEvent, FormEvent, useState } from "react";
 
@@ -23,18 +24,14 @@ import { useRouter } from 'next/navigation';
 import { UserCredential } from 'firebase/auth';
 
 
-type Props = {
-    local: any;
-}
-
-
-export default function AuthenticationForm({ local }: Props) {
+export default function AuthenticationForm() {
     const [password, setPassword] = useState<string>("password");
     const [confirmPassword, setConfirmPassword] = useState<string>("password");
     const [email, setEmail] = useState<string>("localpart@domain.com");
     const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const { showAlert } = useAlert();
+    const t = useTranslations('form');
     const router = useRouter();
 
     async function handleSignUpWithEmailAndPassword(event: FormEvent<HTMLFormElement>) {
@@ -64,11 +61,11 @@ export default function AuthenticationForm({ local }: Props) {
             let errorMessage: string = credential.message;
 
             if (errorCode == 'auth/email-already-in-use') {
-                showAlert('Error', local.emailAlreadyUsed);
+                showAlert('Error', t('emailAlreadyUsed'));
                 router.push("/auth/signin");
             } else if (errorCode == 'auth/weak-password') {
                 //TODO Enable enforcement https://cloud.google.com/identity-platform/docs/password-policy
-                showAlert('Error', local.providedPasswordWeak);
+                showAlert('Error', t('providedPasswordWeak'));
             } else {
                 console.error(errorMessage);
             }
@@ -146,10 +143,10 @@ export default function AuthenticationForm({ local }: Props) {
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
             className={`${formStyles['form-card-container']}`}>
             <div className={`${formStyles['form-container']}`}>
-                <h1 className={`${styles['h1']}`}>{local.signUp}</h1>
+                <h1 className={`${styles['h1']}`}>{t('signUp')}</h1>
 
                 <TextIconSecondaryButton
-                    text={local.continueWithGoogle}
+                    text={t('continueWithGoogle')}
                     onClick={handleSignUnWithGoogle}
                     icon={google}
                     fill="parent"
@@ -161,7 +158,7 @@ export default function AuthenticationForm({ local }: Props) {
                         type="text"
                         name="email"
                         value={email}
-                        title={local.email}
+                        title={t('email')}
                         state={errors.has("email") ? 'invalid' : 'valid'}
                         onChange={(e) => onEmailChangeHendler(e)}
                         required
@@ -173,7 +170,7 @@ export default function AuthenticationForm({ local }: Props) {
                         type="password"
                         name="password"
                         value={password}
-                        title={local.password}
+                        title={t('password')}
                         state={errors.has("password") ? 'invalid' : 'valid'}
                         onChange={(e) => { onPasswordChangeHendler(e) }}
                         required
@@ -185,7 +182,7 @@ export default function AuthenticationForm({ local }: Props) {
                         type="password"
                         name="confirmPassword"
                         value={confirmPassword}
-                        title={local.repeatPassword}
+                        title={t('repeatPassword')}
                         state={errors.has("confirmPassword") ? 'invalid' : 'valid'}
                         onChange={(e) => { onConfirmPasswordChangeHendler(e) }}
                         required
@@ -197,11 +194,11 @@ export default function AuthenticationForm({ local }: Props) {
             <div>
                 <TextButton
                     type="submit"
-                    text={local.signUp}
+                    text={t('signUp')}
                     fill="content"
                     disabled={!formIsValid || errors.size != 0}
                 />
-                <Link href={"/auth/signin"} className={`${styles['primary-link']}`} prefetch={false}>{local.haveAccount}</Link>
+                <Link href={"/auth/signin"} className={`${styles['primary-link']}`} prefetch={false}>{t('haveAccount')}</Link>
             </div>
         </form>
     )
