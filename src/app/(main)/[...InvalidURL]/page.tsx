@@ -4,6 +4,11 @@ import NotFound from '@/components/common/NotFound';
 import styles from '@/styles/components/page.module.css';
 
 import { useTranslations } from 'next-intl';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Not Found',
+}
 
 export default function InvalidURLPage() {
     const t = useTranslations('NotFound');

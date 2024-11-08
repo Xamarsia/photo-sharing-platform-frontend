@@ -6,17 +6,25 @@ import EditPostForm from '@/components/forms/post/EditPostForm';
 
 import { getTranslations } from 'next-intl/server';
 import { getPost } from '@/actions/post-actions';
+import { Metadata } from 'next';
 
 
-type Params = Promise<{
-    postId: number
-}>
 
+type Props = {
+    params: Promise<{ postId: number }>
+}
 
-export default async function EditPostPage(props: { params: Params }) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const postId: number = (await params).postId;
+
+    return {
+        title: `Edit Post ${postId}`
+    }
+}
+
+export default async function EditPostPage({ params }: Props) {
     const t = await getTranslations('NotFound');
-    const params = await props.params;
-    const postId: number = params.postId;
+    const postId: number = (await params).postId;
 
     const post: PostDTO | undefined = await getPost(postId);
 

@@ -7,9 +7,14 @@ import AuthenticationForm from '@/components/forms/auth/AuthenticationForm';
 import { isAuthorized } from '@/lib/firebase/serverApp';
 import { isAuthenticationUsed } from '@/actions/user-actions';
 import { redirect } from 'next/navigation';
+import { Metadata } from 'next';
 
 
-export default async function SigninPage() {
+export const metadata: Metadata = {
+    title: 'Sign Up - SPSP'
+}
+
+export default async function SignUpPage() {
     const isAuth: string | undefined = await isAuthorized();
 
     if (isAuth) {

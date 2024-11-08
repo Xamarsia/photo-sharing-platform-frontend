@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { getUserProfile } from '@/actions/user-actions';
 
@@ -9,17 +10,23 @@ import PostsPreviewGridInfiniteLoading from '@/components/common/infinite-loadin
 import NotFound from '@/components/common/NotFound';
 
 
-type Params = Promise<{
-    username: string
-}>
+type Props = {
+    params: Promise<{ username: string }>
+}
 
 
-export default async function ProfilePage(props: { params: Params }) {
-    const params = await props.params;
-    const username: string = params.username;
-    const t = await getTranslations('NotFound');
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const username: string = (await params).username;
 
+    return {
+        title: `${username}`
+    }
+}
+
+export default async function ProfilePage({ params }: Props) {
+    const username: string = (await params).username;
     const profile: ProfileDTO | undefined = await getUserProfile(username);
+    const t = await getTranslations('NotFound');
 
     return (
         <div className="flex flex-grow flex-shrink justify-center lg:m-4">

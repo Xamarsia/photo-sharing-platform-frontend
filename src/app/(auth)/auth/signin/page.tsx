@@ -9,7 +9,7 @@ import Card from '@/components/common/Card';
 import SignInForm from '@/components/forms/auth/SignInForm';
 
 
-export default async function SigninPage() {
+export default async function SignInPage() {
     const isAuth: string | undefined = await isAuthorized();
 
     if (isAuth) {

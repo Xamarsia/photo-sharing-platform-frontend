@@ -6,6 +6,12 @@ import SettingPage from '@/components/common/SettingPage';
 
 import { getAuthenticatedUser } from '@/actions/user-actions';
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+    title: 'Edit Profile Info'
+}
 
 
 export default async function ChangeUserInfoPage() {

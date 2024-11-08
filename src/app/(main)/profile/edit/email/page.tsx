@@ -6,6 +6,12 @@ import { getAuthenticatedApp } from '@/lib/firebase/serverApp';
 
 import ChangeEmailForm from '@/components/forms/profile/ChangeEmailForm';
 import SettingPage from '@/components/common/SettingPage';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+    title: 'Email Update'
+}
 
 
 export default async function ChangeEmailPage() {

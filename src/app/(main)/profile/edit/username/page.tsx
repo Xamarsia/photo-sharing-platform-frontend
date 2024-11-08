@@ -5,6 +5,12 @@ import { getAuthenticatedUser } from '@/actions/user-actions';
 
 import ChangeUsernameForm from '@/components/forms/profile/ChangeUsernameForm';
 import SettingPage from '@/components/common/SettingPage';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+    title: 'Username Update'
+}
 
 
 export default async function ChangeUsernamePage() {

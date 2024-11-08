@@ -1,8 +1,15 @@
+import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 
 import '@/styles/globals.css';
 import styles from '@/styles/components/page.module.css';
+
+
+export const metadata: Metadata = {
+    title: 'SPSP',
+    description: 'Simple photo sharing platform',
+}
 
 export default async function LocaleLayout({
     children,

@@ -5,6 +5,12 @@ import { getProvider } from '@/lib/firebase/serverApp';
 
 import DeleteAccountForm from '@/components/forms/profile/DeleteAccountForm';
 import SettingPage from '@/components/common/SettingPage';
+import { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+    title: 'Delete Account'
+}
 
 
 export default async function DeleteAccountPage() {
