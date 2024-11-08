@@ -1,5 +1,3 @@
-import type { Metadata } from 'next';
-
 import styles from '@/styles/components/page.module.css';
 
 import Footer from '@/components/common/footer/Footer';

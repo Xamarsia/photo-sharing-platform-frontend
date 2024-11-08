@@ -8,7 +8,7 @@ import styles from '@/styles/components/page.module.css';
 
 export const metadata: Metadata = {
     title: 'SPSP',
-    description: 'Simple photo sharing platform',
+    description: 'Simple Photo Sharing Platform',
 }
 
 export default async function LocaleLayout({
