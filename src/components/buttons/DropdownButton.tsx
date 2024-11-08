@@ -6,6 +6,7 @@ type Props = {
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
+//remove DropdownRemoveButton add style prop
 export default function DropdownButton({ text, onClick }: Props) {
 
     return (

@@ -9,7 +9,7 @@ import styles from '@/styles/text/text.module.css';
 type Props = {
     text: string,
     count: number,
-    unclickable?: boolean,
+    unclickable?: boolean, //enabled\ disabled
     onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void,
 }
 

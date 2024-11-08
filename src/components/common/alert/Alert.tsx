@@ -20,7 +20,7 @@ const textColors: { [key: string]: string } = {
 
 export default function Alert({ type, message, onClose }: AlertProps) {
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className="flex items-center justify-center w-full"> //try to combine 2 divs
       <div className={`flex items-center justify-between border border-gray-100 p-4 m-2 max-w-xl rounded-lg w-full bg-white`} role="alert">
         <span className={`ms-3 text-sm font-medium ${textColors[type]}`}>
           {message}

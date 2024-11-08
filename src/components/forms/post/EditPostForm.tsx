@@ -102,10 +102,12 @@ export default function EditPostForm({ post }: Props) {
             <h1 className={`${styles['h1']}`}>{t('editPost')}</h1>
             <div>
                 <FileSelector onImageSelected={onImageSelected} defaultImageExist={defaultImageExist} onDefaultImageRemoved={() => { setDefaultImageExist(false); }}>
+                    //REVIEW THIS
                     {defaultImageExist
                         ? <DragAndDropFullPreview src={`/api/post/image/${post.id}`} />
                         : (selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />)
                     }
+                    //
                 </FileSelector>
                 <FormFieldError text={errors.get("file")} />
             </div>

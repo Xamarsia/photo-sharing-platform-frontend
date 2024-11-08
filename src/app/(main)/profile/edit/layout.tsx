@@ -13,7 +13,7 @@ export default async function EditProfileLayout({
   return (
     <div className='flex flex-grow flex-col w-full relative flex-shrink-0'>
       <div className="flex flex-auto justify-center w-full">
-        <div className='flex flex-row w-full max-w-6xl bg-white m-4 p-4 rounded-2xl'>
+        <div className='flex flex-row w-full max-w-6xl bg-white m-4 p-4 rounded-2xl'> //3 divs???
 
           <section className='relative hidden md:flex flex-col top-0 left-0 h-full border-r border-gray-100'>
             <div className='sticky top-20'>

@@ -13,7 +13,7 @@ export default function ProfileImage({ profileImageExist, username, preview }: P
     return (
         <>
             {profileImageExist
-                ? <ImageProfileImage username={username} preview={preview} />
+                ? <ImageProfileImage username={username} preview={preview} /> // remove
                 : <TextProfileImage username={username} preview={preview} />
             }
         </>

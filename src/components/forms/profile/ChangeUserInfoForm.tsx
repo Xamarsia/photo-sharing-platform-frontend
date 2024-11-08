@@ -22,7 +22,7 @@ type Props = {
 }
 
 
-export default function ChangeUserInfoForm({ user }: Props) {
+export default function ChangeUserInfoForm({ user }: Props) { //ChangeUserInfoContent
     const defaultFullName: string | undefined = (user.fullName == null ? undefined : user.fullName);
     const defaultDescription: string | undefined = (user.description == null ? undefined : user.description);
 

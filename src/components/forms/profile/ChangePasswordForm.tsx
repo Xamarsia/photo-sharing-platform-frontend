@@ -17,7 +17,7 @@ import { FirebaseError } from 'firebase/app';
 import { UserCredential } from 'firebase/auth';
 
 
-export default function ChangePasswordForm() {
+export default function ChangePasswordForm() { //ChangePasswordContent
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const [currentPassword, setCurrentPassword] = useState<string>("");
     const [password, setPassword] = useState<string>("");

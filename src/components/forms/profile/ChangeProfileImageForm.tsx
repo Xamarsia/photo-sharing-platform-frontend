@@ -23,7 +23,7 @@ type Props = {
 }
 
 
-export default function ChangeProfileImageForm({ user }: Props) {
+export default function ChangeProfileImageForm({ user }: Props) { //ChangeProfileImageContent
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
@@ -76,10 +76,12 @@ export default function ChangeProfileImageForm({ user }: Props) {
                 <div>
                     <div className='size-72'>
                         <FileSelector onDefaultImageRemoved={() => { setShowModal(true); }} onImageSelected={onImageSelected} rounded defaultImageExist={user.isProfileImageExist} >
+                            //PLEASE REVIEW TIHS
                             {user.isProfileImageExist
                                 ? <DragAndDropCirclePreview src={`/api/user/avatar/${user.username}`} />
                                 : (selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />)
                             }
+                            //
                         </FileSelector>
                     </div>
                     <FormFieldError text={errors.get("file")} />

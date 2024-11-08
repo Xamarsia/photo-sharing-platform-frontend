@@ -9,3 +9,5 @@
 .image-layout {
     @apply flex object-center justify-center items-start
 }
+
+//remove and move to classname

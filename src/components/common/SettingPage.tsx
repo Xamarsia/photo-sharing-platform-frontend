@@ -14,7 +14,7 @@ type Props = {
 
 }
 
-export default async function SettingPage({ title, children }: Props) {
+export default async function SettingPage({ title, children }: Props) { //SettingsPage
     const sidebarItems: Array<SidebarItemInfo> = await getSidebarItems();
 
     return (

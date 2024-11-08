@@ -18,7 +18,7 @@ type Props = {
     oldEmail: string
 }
 
-export default function ChangeEmailForm({ oldEmail }: Props) {
+export default function ChangeEmailForm({ oldEmail }: Props) { //ChangeEmailContent
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const [email, setEmail] = useState<string>(oldEmail);

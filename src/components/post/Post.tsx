@@ -29,7 +29,7 @@ export default function Post({ detailedPost }: Props) {
                 <p className={`${styles['base-text']}`}>{post.description}</p>
                 <div className='flex items-center justify-end gap-4 '>
                     <LikesInfo post={post} />
-                    <ToggleLikeButton postId={post.id} state={detailedPost.state} />
+                    <ToggleLikeButton postId={post.id} state={detailedPost.state} /> //return to family
                 </div>
             </div>
         </Card>

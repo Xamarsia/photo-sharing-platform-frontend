@@ -1,6 +1,5 @@
 "use client";
-
-import Image from 'next/image';
+TextIconSecondaryButtonge';
 
 import textStyle from '@/styles/text/text.module.css';
 import style from '@/styles/components/button.module.css';
@@ -13,7 +12,7 @@ type Props = {
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
-
+//remove texticonsecondarybutton add style prop
 export default function TextIconButton({ icon, text, fill, onClick }: Props) {
     return (
         /* External div for anti-flex */

@@ -9,3 +9,5 @@
 .main {
     @apply flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20
 }
+
+// to classname

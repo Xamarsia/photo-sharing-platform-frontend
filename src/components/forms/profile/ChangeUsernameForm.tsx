@@ -21,7 +21,7 @@ type Props = {
 }
 
 
-export default function ChangeUsernameForm({ user }: Props) {
+export default function ChangeUsernameForm({ user }: Props) { //ChangeUsernameContent
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [username, setUsername] = useState<string>(user.username);
     const [showModal, setShowModal] = useState<boolean>(false);

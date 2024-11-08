@@ -30,7 +30,7 @@ export default async function ProfilePage({ params }: Props) {
 
     return (
         <div className="flex flex-grow flex-shrink justify-center lg:m-4">
-            <div className="flex flex-grow flex-col items-center justify-start gap-4 max-w-7xl">
+            <div className="flex flex-grow flex-col items-center justify-start gap-4 max-w-7xl"> //2 divs???
                 {profile
                     ? <>
                         <Profile profile={profile} />

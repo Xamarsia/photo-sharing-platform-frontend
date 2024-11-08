@@ -10,11 +10,11 @@
     @apply block font-normal text-justify text-gray-800 text-sm placeholder-gray-400
 }
 
-.formInputTitleRequired {
+.formInputTitleRequired { //snake case
     @apply text-sm leading-5 block font-medium text-justify text-gray-900 after:content-['*'] after:ml-0.5 after:text-red-500
 }
 
-.formInputTitle {
+.formInputTitle { //snake case
     @apply text-sm leading-5 block font-medium text-justify text-gray-900
 }
 

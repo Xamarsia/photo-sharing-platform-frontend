@@ -1,12 +1,12 @@
 export const UserState = {
     Current: 'CURRENT',
     Followed: 'FOLLOWED',
-    Unfollowed: 'UNFOLLOWED',
+    Unfollowed: 'UNFOLLOWED', // UNFOLLOWED -> NONE
 } as const
 
 export const LikeState = {
     Liked: 'LIKED',
-    Unliked: 'UNLIKED',
+    Unliked: 'UNLIKED',  // UNLIKED -> NONE
 } as const
 
 export const ProviderID = {

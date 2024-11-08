@@ -52,10 +52,10 @@ export default function PostMenuComponent({ detailedPost }: Props) {
             <PostDropdown>
                 {isUserPostOwner
                     ? <>
-                        <DropdownButton text={t('editPost')} onClick={() => { router.push(`/post/${post.id}/edit`); }} />
+                        <DropdownButton text={t('editPost')} onClick={() => { router.push(`/post/${post.id}/edit`); }} /> // ALL CALLBACKS MUST USE USECALLBACK
                         <DropdownRemoveButton text={t('deletePost')} onClick={() => { setShowModal(true); }} />
                     </>
-                    : <ToggleDropdownFollowButton user={author} />
+                    : <ToggleDropdownFollowButton user={author} /> //split toggle dropdown follow button
                 }
             </PostDropdown>
             <Modal onCloseClicked={() => { setShowModal(false); }} title={t('deletePost')} opened={showModal}>

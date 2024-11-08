@@ -29,7 +29,7 @@ export default function FileSelector({ rounded, children, defaultImageExist, onD
     const [dragActive, setDragActive] = useState<boolean>(false);
     const t = useTranslations('FileSelector');
 
-    function imageChangeHendler(file: SetStateAction<File | undefined>): void {
+    function imageChangeHendler(file: SetStateAction<File | undefined>): void { //imageChangeHandler, on!!
         setSelectedImage(file);
         onImageSelected(file);
     };

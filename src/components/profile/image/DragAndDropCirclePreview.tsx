@@ -11,4 +11,4 @@ export default function DragAndDropCirclePreview({ src }: Props) {
         <Image className={`${styles['regular-size']} rounded-full object-cover object-center`}
             src={src} quality={60} alt="Profile image" width={500} height={500} />
     );
-}
+} //remove it

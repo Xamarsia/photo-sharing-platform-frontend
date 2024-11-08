@@ -12,7 +12,7 @@ export default async function Header() {
 
     return (
         <header className="flex-shrink-0 z-10 fixed top-0 bg-white w-full border-y border-gray-100 h-20">
-            <div className="flex items-center justify-between h-full px-4 md:px-8 gap-2 md:gap-4">
+            <div className="flex items-center justify-between h-full px-4 md:px-8 gap-2 md:gap-4"> //Try to combine
                 <Logo />
                 <div className={`grow max-w-[580px] ${user ? "block" : "hidden"}`}>
                     <SearchBar />

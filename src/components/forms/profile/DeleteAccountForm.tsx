@@ -23,7 +23,7 @@ type Props = {
 }
 
 
-export default function DeleteAccountForm({ provider }: Props) {
+export default function DeleteAccountForm({ provider }: Props) { //DeleteAccountContent
     const [showModal, setShowModal] = useState<boolean>(false);
     const [password, setPassword] = useState<string>("password");
     const [formIsValid, setFormIsValid] = useState<boolean>(true);

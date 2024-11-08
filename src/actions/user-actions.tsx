@@ -122,7 +122,7 @@ export async function follow(username: string): Promise<void> {
     return;
 }
 
-export async function unfollow(username: string): Promise<void> {
+export async function unfollow(username: string): Promise<void> { //deleteFollowing
     const res: Response = await authFetch(`/user/${username}/unfollow`, { method: 'PUT' });
     if (!res.ok) {
         return undefined;

@@ -8,7 +8,7 @@ import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adap
 import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 
-export async function saveTokenToHttponlyCookies(token: string): Promise<void> {
+export async function saveTokenToHttponlyCookies(token: string): Promise<void> { //saveTokenToHttpOnlyCookies
   const cookieStore: ReadonlyRequestCookies = await cookies();
   cookieStore.set({
     name: 'token',

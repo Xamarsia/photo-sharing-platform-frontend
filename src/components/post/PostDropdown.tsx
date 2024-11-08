@@ -14,7 +14,7 @@ type Props = {
 }
 
 
-export default function PostDropdown({ children }: Props) {
+export default function PostDropdown({ children }: Props) { // visible, onOutsideClicked and combine 2 dropdowns into one
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const dropdown = useRef<HTMLDivElement>(null);
 
@@ -40,7 +40,7 @@ export default function PostDropdown({ children }: Props) {
                 onClick={(e) => { setShowDropdown(!showDropdown) }}
             />
             {showDropdown &&
-                <Dropdown onDropdownClicked={(e) => setShowDropdown(false)}>
+                <Dropdown onDropdownClicked={(e) => setShowDropdown(false)}> 
                     {children}
                 </Dropdown>
             }

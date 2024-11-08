@@ -18,8 +18,8 @@ const borderColours: Array<string> = ['border-gray-200, border-red-200', 'border
     'border-cyan-200', 'border-sky-200', 'border-blue-200', 'border-indigo-200', 'border-violet-200', 'border-purple-200', 'border-fuchsia-200', 'border-pink-200', 'border-rose-200'
 ];
 
-export default function TextProfileImage({ username, preview }: Props) {
-    const index = useMemo(() => getColourIndex(username), [username]);
+export default function TextProfileImage({ username, preview }: Props) { //DefaultProfileImage
+    const index = useMemo(() => getColourIndex(username), [username]); //getColorIndex
 
     function getColourIndex(name?: string): number {
         if (!name) {

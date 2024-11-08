@@ -16,7 +16,7 @@ export default async function AuthLayout({
   return (
     <AuthProvider>
       <UnauthorizedGuard>
-        <>
+        <> //remove this
           <Header />
           <main className={`${styles['main']} z-30`}>
             <AlertProvider>

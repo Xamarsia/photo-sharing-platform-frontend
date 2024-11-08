@@ -13,7 +13,7 @@ type Props = {
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
-
+// remove secondary, remove button add style prop ("primary" | "secondary" | "remove")
 export default function TextButton({ text, type = 'button', fill = "content", disabled = false, onClick }: Props) {
 
     return (

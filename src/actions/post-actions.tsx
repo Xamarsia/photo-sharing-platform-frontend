@@ -68,7 +68,7 @@ export async function like(postId: number): Promise<void> {
     return;
 }
 
-export async function unlike(postId: number): Promise<void> {
+export async function unlike(postId: number): Promise<void> { //deleteLike
     const res: Response = await authFetch(`/like/${postId}`, { method: 'DELETE' });
     console.log("unlike: ", res.ok);
     if (!res.ok) {

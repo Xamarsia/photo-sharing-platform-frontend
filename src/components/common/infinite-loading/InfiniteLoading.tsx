@@ -14,7 +14,7 @@ type Props<ItemsType> = {
     displayItems: (items: ItemsType[]) => ReactNode,
 }
 
-
+// rewrite infitine loading
 export default function InfiniteLoading<ItemsType>({ size, url, urlParams, emptyResult, displayItems }: Props<ItemsType>) {
     const [key, setKey] = useState<string>(`${url}:${urlParams}`);
 
