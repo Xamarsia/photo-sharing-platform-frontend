@@ -21,5 +21,5 @@ export default async function UnauthorizedGuard({ children }: Props) {
         <>
             {children}
         </>
-    )
+    );
 }

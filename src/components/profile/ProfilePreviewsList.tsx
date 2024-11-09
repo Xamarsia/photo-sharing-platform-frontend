@@ -5,7 +5,7 @@ type Props = {
     users: Array<UserDTO>
 }
 
-export default function ProfilePreviewList({ users }: Props) { //ProfilePreviewsList
+export default function ProfilePreviewsList({ users }: Props) { 
 
     return (
         <ul className="flex flex-col w-full gap-1">

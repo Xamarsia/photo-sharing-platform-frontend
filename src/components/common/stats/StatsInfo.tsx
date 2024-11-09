@@ -35,7 +35,7 @@ export default function StatsInfo({ profile }: StatsInfoProps) {
 
     return (
         <div className="flex flex-row w-full justify-around gap-8">
-            <StatCounter text={t('posts')} count={profile.postsCount} unclickable />
+            <StatCounter text={t('posts')} count={profile.postsCount} disabled />
             <StatCounter text={t('followers')} count={profile.followersCount} onClick={onFollowersClick} />
             <StatCounter text={t('followings')} count={profile.followingsCount} onClick={onFollowingsClick} />
 

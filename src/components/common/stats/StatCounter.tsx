@@ -9,15 +9,15 @@ import styles from '@/styles/text/text.module.css';
 type Props = {
     text: string,
     count: number,
-    unclickable?: boolean, //enabled\ disabled
+    disabled?: boolean,
     onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void,
 }
 
 
-export default function StatCounter({ text, count, unclickable, onClick }: Props) {
+export default function StatCounter({ text, count, disabled, onClick }: Props) {
     return (
         <div className="flex gap-1 md:gap-2">
-            {unclickable
+            {disabled
                 ? <span className={`${styles['secondary-info']}`}>{text}</span>
                 : <Link href={""} className={`${styles['secondary-link']}`} onClick={onClick}>{text}</Link>
             }

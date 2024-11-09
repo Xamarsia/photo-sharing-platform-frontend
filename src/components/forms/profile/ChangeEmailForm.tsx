@@ -59,10 +59,7 @@ export default function ChangeEmailForm({ oldEmail, onSubmit }: Props) {
     }
 
     return (
-        <form
-            onSubmit={handleSubmit}
-            onChange={(e) => { setIsFormChanged(true) }}
-            className='text-left flex flex-col gap-y-3'>
+        <form onSubmit={handleSubmit} onChange={(e) => { setIsFormChanged(true) }}>
             <div>
                 <Input
                     type="text"

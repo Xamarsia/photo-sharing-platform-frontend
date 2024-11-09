@@ -2,7 +2,7 @@
 
 
 import { auth } from "@/lib/firebase/clientApp";
-import { saveTokenToHttponlyCookies } from "@/actions/actions";
+import { saveTokenToHttpOnlyCookies } from "@/actions/actions";
 import { ReactNode, useEffect } from "react";
 
 
@@ -16,21 +16,17 @@ export default function AuthProvider({ children }: Props) {
     useEffect(() => {
         auth.onIdTokenChanged(async (user) => {
             if (!user) {
-                saveTokenToHttponlyCookies("");
+                saveTokenToHttpOnlyCookies("");
                 console.log("token: empty")
 
             } else {
                 const token: string = await user.getIdToken();
-                saveTokenToHttponlyCookies(token);
+                saveTokenToHttpOnlyCookies(token);
                 console.log("token: ", token)
             }
         });
     }, []);
 
 
-    return (
-        <>
-            {children}
-        </>
-    )
+    return children;
 }

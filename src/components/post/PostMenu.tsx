@@ -9,14 +9,13 @@ import { useTranslations } from 'next-intl';
 import { UserState } from '@/constants';
 import { formatDateTime } from '@/utils/dateTime';
 import { deletePost } from '@/actions/post-actions';
+import { follow, unfollow } from "@/actions/user-actions";
 
 import Modal from '@/components/common/Modal';
 import PostDropdown from '@/components/post/PostDropdown';
 import DropdownButton from '@/components/buttons/DropdownButton';
 import ProfileImage from '@/components/profile/image/ProfileImage';
-import TextRemoveButton from '@/components/buttons/TextRemoveButton';
-import DropdownRemoveButton from '@/components/buttons/DropdownRemoveButton';
-import ToggleDropdownFollowButton from '@/components/buttons/ToggleDropdownFollowButton';
+import TextButton from '@/components/buttons/TextButton';
 
 import styles from '@/styles/text/text.module.css';
 
@@ -32,12 +31,23 @@ export default function PostMenuComponent({ detailedPost }: Props) {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [isUserPostOwner] = useState<boolean>(author.state == UserState.Current);
     const createdDate: string = formatDateTime(post.createdDate);
+    const [following, setFollowing] = useState<boolean>(author.state == UserState.Follow);
     const t = useTranslations('form');
     const router = useRouter();
 
     async function onDeletePost() {
         await deletePost(post.id);
         router.push(`/${author.username}`);
+    }
+
+    async function followProfile() {
+        setFollowing(true);
+        await follow(author.username);
+    }
+
+    async function unfollowProfile() {
+        setFollowing(false);
+        await unfollow(author.username);
     }
 
     return (
@@ -47,21 +57,23 @@ export default function PostMenuComponent({ detailedPost }: Props) {
             </Link>
             <div className="flex-1 flex gap-2 mx-4">
                 <span className={`${styles['main-info']}`}>{author.username}</span>
-                <time dateTime={createdDate} className={`${styles['secondary-info']}`}>{createdDate}</time>
+                <time dateTime={createdDate} className={`${styles['secondary-info']} truncate`}>{createdDate}</time>
             </div>
             <PostDropdown>
                 {isUserPostOwner
                     ? <>
-                        <DropdownButton text={t('editPost')} onClick={() => { router.push(`/post/${post.id}/edit`); }} /> // ALL CALLBACKS MUST USE USECALLBACK
-                        <DropdownRemoveButton text={t('deletePost')} onClick={() => { setShowModal(true); }} />
+                        <DropdownButton style='primary' text={t('editPost')} onClick={() => { router.push(`/post/${post.id}/edit`); }} />
+                        <DropdownButton style='remove' text={t('deletePost')} onClick={() => { setShowModal(true); }} />
                     </>
-                    : <ToggleDropdownFollowButton user={author} /> //split toggle dropdown follow button
+                    : following
+                        ? <DropdownButton style='remove' text={t('unfollow')} onClick={unfollowProfile} />
+                        : <DropdownButton style='primary' text={t('follow')} onClick={followProfile} />
                 }
             </PostDropdown>
             <Modal onCloseClicked={() => { setShowModal(false); }} title={t('deletePost')} opened={showModal}>
                 <div className='flex flex-col gap-20'>
                     <p>{t('deleteThisPost')}</p>
-                    <TextRemoveButton text={t('delete')} onClick={onDeletePost} />
+                    <TextButton style="remove" text={t('delete')} onClick={onDeletePost} />
                 </div>
             </Modal>
         </div>

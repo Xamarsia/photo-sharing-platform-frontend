@@ -15,16 +15,14 @@ export default async function MainLayout({
   return (
     <AuthProvider>
       <AuthorizedGuard>
-        <> //remove this
-          <Header />
-          <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20'>
-            <AlertProvider>
-              {children}
-            </AlertProvider>
-            <FixedRoundCreatePostButton />
-          </main>
-          <Footer />
-        </>
+        <Header />
+        <main className='flex flex-grow justify-center relative flex-shrink-0 bg-gray-50 mt-20'>
+          <AlertProvider>
+            {children}
+          </AlertProvider>
+          <FixedRoundCreatePostButton />
+        </main>
+        <Footer />
       </AuthorizedGuard>
     </AuthProvider>
   )

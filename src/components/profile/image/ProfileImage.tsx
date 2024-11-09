@@ -1,5 +1,5 @@
-import TextProfileImage from '@/components/profile/image/TextProfileImage';
-import ImageProfileImage from '@/components/profile/image/ImageProfileImage';
+import DefaultProfileImage from '@/components/profile/image/DefaultProfileImage';
+import Image from 'next/image';
 
 
 type Props = {
@@ -11,11 +11,15 @@ type Props = {
 
 export default function ProfileImage({ profileImageExist, username, preview }: Props) {
     return (
-        <>
+        <div className='flex object-center justify-center items-start'>
             {profileImageExist
-                ? <ImageProfileImage username={username} preview={preview} /> // remove
-                : <TextProfileImage username={username} preview={preview} />
+                ?
+                <Image priority
+                    className={`${preview ? 'size-12' : 'size-72'} border border-slate-800 rounded-full object-cover object-center`}
+                    src={`/api/user/avatar/${username}`}
+                    quality={60} alt="Profile image" width={500} height={500} />
+                : <DefaultProfileImage username={username} preview={preview} />
             }
-        </>
+        </div>
     )
 }

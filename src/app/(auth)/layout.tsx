@@ -14,17 +14,15 @@ export default async function AuthLayout({
   return (
     <AuthProvider>
       <UnauthorizedGuard>
-        <> //remove this
-          <Header />
-          <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20 z-30'>
-            <AlertProvider>
-              <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
-                {children}
-              </div>
-            </AlertProvider>
-          </main>
-          <Footer />
-        </>
+        <Header />
+        <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20 z-30'>
+          <AlertProvider>
+            <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
+              {children}
+            </div>
+          </AlertProvider>
+        </main>
+        <Footer />
       </UnauthorizedGuard>
     </AuthProvider>
   )

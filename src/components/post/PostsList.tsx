@@ -1,10 +1,10 @@
 import Post from "@/components/post/Post";
 
-type PostsProps = {
+type Props = {
     posts: Array<DetailedPostDTO>,
 }
 
-export default function PostsList({ posts }: PostsProps) {
+export default function PostsList({ posts }: Props) {
     return (
         <ul className='flex flex-col gap-4'>
             {posts.map(post => (

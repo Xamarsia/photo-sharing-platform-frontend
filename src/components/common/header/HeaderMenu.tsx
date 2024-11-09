@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import TextButton from "@/components/buttons/TextButton";
 import DropdownButton from "@/components/buttons/DropdownButton";
 import TextIconButton from "@/components/buttons/TextIconButton";
-import ProfilePreviewDropdown from "@/components/profile/ProfilePreviewDropdown";
+import HeaderMenuDropdown from "@/components/common/header/HeaderMenuDropdown";
 
 import plus from '@/public/plus/plus-white.svg';
 import { signOut } from "@/lib/firebase/auth";
@@ -26,17 +26,13 @@ export default function HeaderMenu({ user }: Props) {
             {user
                 ? <>
                     <div className='md:block hidden h-full'>
-                        <TextIconButton text={t('createPost')} icon={plus} onClick={() => { router.push('/post/create') }}
-
-                        />
+                        <TextIconButton text={t('createPost')} icon={plus} onClick={() => { router.push('/post/create') }} />
                     </div>
-                    <div className="md:block">
-                        <ProfilePreviewDropdown user={user}>
-                            <DropdownButton text={t('myProfile')} onClick={() => { router.push(`/${user.username}`) }} />
-                            <DropdownButton text={t('editProfile')} onClick={() => { router.push('/profile/edit/info') }} />
-                            <DropdownButton text={t('signOut')} onClick={signOut} />
-                        </ProfilePreviewDropdown>
-                    </div>
+                    <HeaderMenuDropdown user={user}>
+                        <DropdownButton text={t('myProfile')} onClick={() => { router.push(`/${user.username}`) }} />
+                        <DropdownButton text={t('editProfile')} onClick={() => { router.push('/profile/edit/info') }} />
+                        <DropdownButton text={t('signOut')} onClick={signOut} />
+                    </HeaderMenuDropdown>
                 </>
                 : <>
                     <TextButton text={t('signIn')} onClick={e => { router.push('/auth/signin') }} />

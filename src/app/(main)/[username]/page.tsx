@@ -28,18 +28,16 @@ export default async function ProfilePage({ params }: Props) {
     const t = await getTranslations('NotFound');
 
     return (
-        <div className="flex flex-grow flex-shrink justify-center lg:m-4">
-            <div className="flex flex-grow flex-col items-center justify-start gap-4 max-w-7xl"> //2 divs???
-                {profile
-                    ? <>
-                        <Profile profile={profile} />
-                        <PostsPreviewGridInfiniteLoading username={username} />
-                    </>
-                    : <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
-                        <NotFound alertTitle={t('userNotFound')} alertBody={t('userDoesNotExist')} />
-                    </div>
-                }
-            </div>
+        <div className="flex flex-grow flex-col flex-shrink items-center justify-center mt-4 lg:m-4 gap-4 max-w-7xl">
+            {profile
+                ? <>
+                    <Profile profile={profile} />
+                    <PostsPreviewGridInfiniteLoading username={username} />
+                </>
+                : <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
+                    <NotFound alertTitle={t('userNotFound')} alertBody={t('userDoesNotExist')} />
+                </div>
+            }
         </div>
     );
 }

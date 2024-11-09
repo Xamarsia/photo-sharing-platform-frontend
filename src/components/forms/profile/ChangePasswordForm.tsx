@@ -114,10 +114,7 @@ export default function ChangePasswordForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit}
-            onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
-
-            className='text-left flex flex-col gap-y-3'>
+        <form onSubmit={handleSubmit} onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}>
             <div>
                 <Input
                     type="password"

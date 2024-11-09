@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default async function NewsPage() {
 
   return (
-    <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
+    <div className='m-4'>
       <PostsListInfiniteLoading url={`/post/newsFeed`} size={20} />
     </div>
   )

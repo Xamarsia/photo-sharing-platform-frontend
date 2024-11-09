@@ -6,6 +6,7 @@ import VerifyUsernameForm from '@/components/forms/profile/VerifyUsernameForm';
 import ChangeUsernameForm from '@/components/forms/profile/ChangeUsernameForm';
 
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useState } from "react";
 
 
@@ -17,6 +18,7 @@ type Props = {
 export default function ChangeUsernameContent({ oldUsername }: Props) {
     const [username, setUsername] = useState<string | undefined>(undefined);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const router = useRouter();
     const t = useTranslations('form');
 
     async function onSubmit(username: string) {
@@ -29,7 +31,7 @@ export default function ChangeUsernameContent({ oldUsername }: Props) {
         <>
             <ChangeUsernameForm onSubmit={onSubmit} oldUsername={oldUsername} />
             {username && <Modal title={t('verifyNewUsername')} onCloseClicked={() => { setShowModal(false); }} opened={showModal}>
-                <VerifyUsernameForm newUsername={username} onSubmit={() => { setShowModal(false); }} />  {/* TODO disable ChangeUsernameForm after verification */}
+                <VerifyUsernameForm newUsername={username} onSubmit={() => { setShowModal(false); router.push(`/${username}`); }} />
             </Modal>
             }
         </>

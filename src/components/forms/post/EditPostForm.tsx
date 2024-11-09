@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useTranslations } from 'next-intl';
-import { ChangeEvent, FormEvent, SetStateAction, useState } from "react";
+import { ChangeEvent, FormEvent, SetStateAction, useMemo, useState } from "react";
 
 import Textarea from "@/components/common/Textarea";
 import TextButton from "@/components/buttons/TextButton";
@@ -96,17 +96,21 @@ export default function EditPostForm({ post }: Props) {
         router.push(`/../post/${post.id}`);
     }
 
+    let imageSrc = useMemo((): string | undefined => {
+        if (selectedImage) {
+            return URL.createObjectURL(selectedImage);
+        } else if (defaultImageExist) {
+            return `/api/post/image/${post.id}`;
+        }
+        return undefined;
+    }, [selectedImage, defaultImageExist, post])
+
     return (
         <form onSubmit={onUpdate} onChange={() => setIsFormChanged(true)} className='flex flex-col gap-y-3'>
             <h1 className={`${styles['h1']}`}>{t('editPost')}</h1>
             <div>
                 <FileSelector onImageSelected={onImageSelected} defaultImageExist={defaultImageExist} onDefaultImageRemoved={() => { setDefaultImageExist(false); }}>
-                    //REVIEW THIS
-                    {defaultImageExist
-                        ? <DragAndDropFullPreview src={`/api/post/image/${post.id}`} />
-                        : (selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />)
-                    }
-                    //
+                    {imageSrc && <DragAndDropFullPreview src={imageSrc} />}
                 </FileSelector>
                 <FormFieldError text={errors.get("file")} />
             </div>

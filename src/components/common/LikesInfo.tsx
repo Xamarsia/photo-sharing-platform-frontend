@@ -27,7 +27,7 @@ export default function LikesInfo({ post }: Props) {
 
             <Modal title={t('likes')} onCloseClicked={handleModal} opened={showModal}>
                 <div className="flex flex-col items-center overflow-y-auto h-96">
-                    <ProfilePreviewListInfiniteLoading url={`/user/${post.id}/likers`} size={6} />
+                    <ProfilePreviewListInfiniteLoading url={`/user/${post.id}/liked`} size={6} />
                 </div>
             </Modal>
         </div>

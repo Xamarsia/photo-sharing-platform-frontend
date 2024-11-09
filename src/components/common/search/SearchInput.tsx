@@ -9,12 +9,12 @@ import textStyles from '@/styles/text/text.module.css';
 import magnifyingGlass from '@/public/magnifying-glass/magnifying-glass.svg';
 
 
-type SearchInputProps = {
+type Props = {
     value: string,
     onChange: (e: ChangeEvent<HTMLInputElement>) => void | undefined,
 }
 
-export default function SearchInput({ value, onChange }: SearchInputProps) {
+export default function SearchInput({ value, onChange }: Props) {
     const t = useTranslations('form');
     return (
         <div className='relative w-full'>
@@ -27,8 +27,8 @@ export default function SearchInput({ value, onChange }: SearchInputProps) {
                 onChange={onChange}
                 placeholder={t('searchUsers')}
                 required
-                className={`bg-gray-50 focus:bg-white border border-gray-100 focus:border-blue-500 appearance-none outline-none w-full ps-10 rounded-xl h-10
-                ${textStyles['base-text']}`}
+                className={`bg-gray-50 focus:bg-white border border-gray-100 focus:border-blue-500 
+                    appearance-none outline-none w-full ps-10 rounded-xl h-10 ${textStyles['base-text']}`}
             />
         </div>
     )

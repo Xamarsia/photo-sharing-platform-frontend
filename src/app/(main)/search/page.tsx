@@ -21,7 +21,9 @@ export async function generateMetadata({ searchParams }: Props,): Promise<Metada
 export default async function SearchPage({ searchParams }: Props) {
   const query: string | string[] | undefined = (await searchParams).query;
 
-  return <>
-    {query && <ProfilePreviewListInfiniteLoading url={`/user/search`} size={20} urlParams={`substring=${query}`} />}
-  </>
+  return (
+    <div className='flex w-full max-w-6xl bg-white m-4 p-6 md:p-8 rounded-2xl'>
+      {query && <ProfilePreviewListInfiniteLoading url={`/user/search`} size={20} urlParams={`request=${query}`} />}
+    </div>
+  )
 }

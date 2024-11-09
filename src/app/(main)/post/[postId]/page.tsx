@@ -27,12 +27,8 @@ export default async function PostPage({ params }: Props) {
 
     const detailedPost: DetailedPostDTO | undefined = await getDetailedPost(postId);
 
-    return (
-        <>
-            {detailedPost
-                ? <Post detailedPost={detailedPost} />
-                : <NotFound alertTitle={t('postNotFound')} alertBody={t('postDoesNotExist')} />
-            }
-        </>
+    return (detailedPost
+        ? <Post detailedPost={detailedPost} />
+        : <NotFound alertTitle={t('postNotFound')} alertBody={t('postDoesNotExist')} />
     );
 }

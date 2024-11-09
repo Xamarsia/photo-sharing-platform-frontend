@@ -11,8 +11,8 @@ type Props = {
     children?: ReactNode;
 }
 
-// its not profile preview dropdown. its header menu dropdown. move to another directory as well  
-export default function ProfilePreviewDropdown({ user, children }: Props) {
+
+export default function HeaderMenuDropdown({ user, children }: Props) {
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const dropdown = useRef<HTMLDivElement>(null);
 

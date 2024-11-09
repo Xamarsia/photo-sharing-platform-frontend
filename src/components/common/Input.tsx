@@ -3,7 +3,7 @@
 import { ChangeEvent } from "react";
 
 
-type InputProps = {
+type Props = {
     name?: string | undefined,
     type: 'text' | 'email' | 'password',
     title?: string | undefined,
@@ -16,7 +16,7 @@ type InputProps = {
 }
 
 
-export default function InputField({ name, type, title, required, value, state, id, placeholder = " ", onChange }: InputProps) {
+export default function InputField({ name, type, title, required, value, state, id, placeholder = " ", onChange }: Props) {
     return (
         <div className="relative h-12">
             <input

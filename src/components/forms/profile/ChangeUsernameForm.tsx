@@ -60,9 +60,7 @@ export default function ChangeUsernameForm({ oldUsername, onSubmit }: Props) {
     }
 
     return (
-        <form onSubmit={onUpdate}
-            onChange={() => { setIsFormChanged(true); }}
-            className='text-left flex flex-col gap-y-3'>
+        <form onSubmit={onUpdate} onChange={() => { setIsFormChanged(true); }}>
 
             <div>
                 <Input

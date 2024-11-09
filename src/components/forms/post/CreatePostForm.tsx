@@ -91,9 +91,7 @@ export default function CreatePostForm() {
             <h1 className={`${styles['h1']}`}>{t('createPost')}</h1>
             <div>
                 <FileSelector onImageSelected={onImageSelected}>
-                    //REVIEW THIS
                     {selectedImage && <DragAndDropFullPreview src={URL.createObjectURL(selectedImage)} />}
-                    //
                 </FileSelector>
                 <FormFieldError text={errors.get("file")} />
             </div>

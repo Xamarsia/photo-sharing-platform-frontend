@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react"
 
 
-type TextareaProps = {
+type Props = {
     name?: string | undefined,
     value?: string | undefined,
     title?: string | undefined,
@@ -15,7 +15,7 @@ type TextareaProps = {
 }
 
 
-export default function Textarea({ name, value, title, rows, maxLength, required, state, id, placeholder = " ", onChange }: TextareaProps) {
+export default function Textarea({ name, value, title, rows, maxLength, required, state, id, placeholder = " ", onChange }: Props) {
     return (
         <div className="relative h-36">
             <textarea

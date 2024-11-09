@@ -29,33 +29,33 @@ export default function FileSelector({ rounded, children, defaultImageExist, onD
     const [dragActive, setDragActive] = useState<boolean>(false);
     const t = useTranslations('FileSelector');
 
-    function imageChangeHendler(file: SetStateAction<File | undefined>): void { //imageChangeHandler, on!!
+    function imageChangeHendler(file: SetStateAction<File | undefined>): void {
         setSelectedImage(file);
         onImageSelected(file);
     };
 
-    function handleDragLeave(e: React.DragEvent<HTMLDivElement>): void {
+    function onDragLeave(e: React.DragEvent<HTMLDivElement>): void {
         e.preventDefault();
         if (!defaultImageExist) {
             setDragActive(false);
         }
     };
 
-    function handleDragOver(e: React.DragEvent<HTMLDivElement>): void {
+    function onDragOver(e: React.DragEvent<HTMLDivElement>): void {
         e.preventDefault();
         if (!defaultImageExist) {
             setDragActive(true);
         }
     };
 
-    function handleDragEnter(e: React.DragEvent<HTMLDivElement>): void {
+    function onDragEnter(e: React.DragEvent<HTMLDivElement>): void {
         e.preventDefault();
         if (!defaultImageExist) {
             setDragActive(true);
         }
     };
 
-    function handleDrop(e: React.DragEvent<HTMLDivElement>): void {
+    function onDrop(e: React.DragEvent<HTMLDivElement>): void {
         e.preventDefault();
 
         if (defaultImageExist) {
@@ -69,7 +69,7 @@ export default function FileSelector({ rounded, children, defaultImageExist, onD
         }
     };
 
-    const imageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const onImageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         if (!event.target.files || event.target.files.length === 0) {
             return;
         }
@@ -78,7 +78,7 @@ export default function FileSelector({ rounded, children, defaultImageExist, onD
         imageChangeHendler(file);
     };
 
-    const handleCloseClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const onCloseClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
 
         if (defaultImageExist && onDefaultImageRemoved) {
@@ -90,10 +90,10 @@ export default function FileSelector({ rounded, children, defaultImageExist, onD
     return (
         <div className={`relative w-full aspect-square hover:bg-gray-100 bg-gray-50 border border-gray-200 border-dashed
             ${rounded ? 'rounded-full' : 'rounded-lg'} `}
-            onDragEnter={handleDragEnter}
-            onDrop={handleDrop}
-            onDragLeave={handleDragLeave}
-            onDragOver={handleDragOver}
+            onDragEnter={onDragEnter}
+            onDrop={onDrop}
+            onDragLeave={onDragLeave}
+            onDragOver={onDragOver}
         >
             {children}
             <div className={`
@@ -104,16 +104,16 @@ export default function FileSelector({ rounded, children, defaultImageExist, onD
 
                 {(selectedImage || defaultImageExist) &&
                     <div className={`absolute top-0 right-0`}>
-                        <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={handleCloseClick} />
+                        <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={onCloseClick} />
                     </div>
                 }
-                <div className={`flex flex-col items-center justify-center  ${(selectedImage || defaultImageExist) ? 'invisible' : 'visible'}`}>
+                <div className={`flex flex-col items-center justify-center ${(selectedImage || defaultImageExist) ? 'invisible' : 'visible'}`}>
                     <Image src={photo} alt="photo" className={`size-8 inline-flex justify-center items-center aspect-square`} />
 
                     <div className='flex gap-1'>
                         <label>
                             <span className={`${styles['primary-link']}`}>{t('clickToUpload')}</span>
-                            <input accept="image/jpeg" type="file" draggable hidden onChange={imageChange} />
+                            <input accept="image/jpeg" type="file" draggable hidden onChange={onImageChange} />
                         </label>
                         <span className={`${styles['secondary-info']}`}>{t('orDragAndDrop')}</span>
                     </div>
