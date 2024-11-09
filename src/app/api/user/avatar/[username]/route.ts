@@ -12,6 +12,6 @@ export async function GET(
 ) {
     const username: string = (await params).username;
 
-    const avatarResponse: Response = await authFetch(`/user/${username}/profile/image`, { method: 'GET', });
+    const avatarResponse: Response = await authFetch(`/user/${username}/image`, { method: 'GET', });
     return avatarResponse;
 }

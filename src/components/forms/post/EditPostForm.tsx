@@ -10,10 +10,9 @@ import FileSelector from "@/components/common/FileSelector";
 import FormFieldError from "@/components/common/FormFieldError";
 import DragAndDropFullPreview from '@/components/post/image/DragAndDropFullPreview';
 
-import { updatePost, updatePostImage } from "@/actions/post-actions";
+import { updatePostInfo, updatePostImage } from "@/actions/post-actions";
 
 import styles from '@/styles/text/text.module.css';
-import formStyles from '@/styles/components/form.module.css';
 
 import { editPostValidationSchema, updateDescriptionSchema, updateRequiredFileSchema } from "@/lib/zod/schemas/post/editPost";
 import { getValidationErrors } from "@/lib/zod/validation";
@@ -92,13 +91,13 @@ export default function EditPostForm({ post }: Props) {
             const body: UpdatePostRequest = {
                 description: description,
             }
-            const newPost: PostDTO | undefined = await updatePost(post.id, body);
+            const newPost: PostDTO | undefined = await updatePostInfo(post.id, body);
         }
         router.push(`/../post/${post.id}`);
     }
 
     return (
-        <form onSubmit={onUpdate} onChange={() => setIsFormChanged(true)} className={`${formStyles['form-container']}`}>
+        <form onSubmit={onUpdate} onChange={() => setIsFormChanged(true)} className='flex flex-col gap-y-3'>
             <h1 className={`${styles['h1']}`}>{t('editPost')}</h1>
             <div>
                 <FileSelector onImageSelected={onImageSelected} defaultImageExist={defaultImageExist} onDefaultImageRemoved={() => { setDefaultImageExist(false); }}>

@@ -2,7 +2,7 @@ import 'server-only';
 
 
 import ChangeUserInfoForm from '@/components/forms/profile/ChangeUserInfoForm';
-import SettingPage from '@/components/common/SettingPage';
+import SettingsPage from '@/components/common/SettingsPage';
 
 import { getAuthenticatedUser } from '@/actions/user-actions';
 import { getTranslations } from 'next-intl/server';
@@ -19,8 +19,8 @@ export default async function ChangeUserInfoPage() {
     const t = await getTranslations('editProfile');
 
     return (
-        <SettingPage title={t('changeUserInfo')} >
+        <SettingsPage title={t('changeUserInfo')} >
             {user && <ChangeUserInfoForm user={user} />}
-        </SettingPage>
+        </SettingsPage>
     );
 }

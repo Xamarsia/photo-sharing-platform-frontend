@@ -4,7 +4,6 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { getUserProfile } from '@/actions/user-actions';
 
-import styles from '@/styles/components/page.module.css';
 import Profile from '@/components/profile/Profile';
 import PostsPreviewGridInfiniteLoading from '@/components/common/infinite-loading/PostsPreviewGridInfiniteLoading';
 import NotFound from '@/components/common/NotFound';
@@ -36,7 +35,7 @@ export default async function ProfilePage({ params }: Props) {
                         <Profile profile={profile} />
                         <PostsPreviewGridInfiniteLoading username={username} />
                     </>
-                    : <div className={`${styles['simple-page-layout']}`}>
+                    : <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
                         <NotFound alertTitle={t('userNotFound')} alertBody={t('userDoesNotExist')} />
                     </div>
                 }

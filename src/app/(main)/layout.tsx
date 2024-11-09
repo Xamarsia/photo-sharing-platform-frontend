@@ -1,5 +1,3 @@
-import styles from '@/styles/components/page.module.css';
-
 import Footer from '@/components/common/footer/Footer';
 import Header from '@/components/common/header/Header';
 import AuthProvider from '@/components/common/AuthProvider';
@@ -19,7 +17,7 @@ export default async function MainLayout({
       <AuthorizedGuard>
         <> //remove this
           <Header />
-          <main className={`${styles['main']}`}>
+          <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20'>
             <AlertProvider>
               {children}
             </AlertProvider>

@@ -1,12 +1,11 @@
 import 'server-only';
 
-
+import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { getAuthenticatedApp } from '@/lib/firebase/serverApp';
 
-import ChangeEmailForm from '@/components/forms/profile/ChangeEmailForm';
-import SettingPage from '@/components/common/SettingPage';
-import { Metadata } from 'next';
+import ChangeEmailContent from '@/components/page-contents/ChangeEmailContent';
+import SettingsPage from '@/components/common/SettingsPage';
 
 
 export const metadata: Metadata = {
@@ -19,8 +18,8 @@ export default async function ChangeEmailPage() {
     const email: string | null | undefined = (await getAuthenticatedApp()).currentUser?.email;
 
     return (
-        <SettingPage title={t('changeEmail')} >
-            {email && <ChangeEmailForm oldEmail={email} />}
-        </SettingPage>
+        <SettingsPage title={t('changeEmail')} >
+            {email && <ChangeEmailContent oldEmail={email} />}
+        </SettingsPage>
     );
 }

@@ -12,7 +12,6 @@ import FormFieldError from "@/components/common/FormFieldError";
 import DragAndDropFullPreview from '@/components/post/image/DragAndDropFullPreview';
 
 import styles from '@/styles/text/text.module.css';
-import formStyles from '@/styles/components/form.module.css';
 
 import { createPost } from "@/actions/post-actions";
 import { createPostValidationSchema, updateDescriptionSchema, updateRequiredFileSchema } from "@/lib/zod/schemas/post/createPost";
@@ -88,7 +87,7 @@ export default function CreatePostForm() {
     }
 
     return (
-        <form onSubmit={onCreate} className={`${formStyles['form-container']}`}>
+        <form onSubmit={onCreate} className='flex flex-col gap-y-3'>
             <h1 className={`${styles['h1']}`}>{t('createPost')}</h1>
             <div>
                 <FileSelector onImageSelected={onImageSelected}>

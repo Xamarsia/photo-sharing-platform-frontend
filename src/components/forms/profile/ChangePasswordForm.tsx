@@ -5,8 +5,6 @@ import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
 
-import formStyles from '@/styles/components/form.module.css';
-
 import { useTranslations } from 'next-intl';
 import { ChangeEvent, FormEvent, useState } from "react";
 import { getValidationErrors } from '@/lib/zod/validation';
@@ -17,7 +15,7 @@ import { FirebaseError } from 'firebase/app';
 import { UserCredential } from 'firebase/auth';
 
 
-export default function ChangePasswordForm() { //ChangePasswordContent
+export default function ChangePasswordForm() {
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const [currentPassword, setCurrentPassword] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -119,7 +117,7 @@ export default function ChangePasswordForm() { //ChangePasswordContent
         <form onSubmit={handleSubmit}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
 
-            className={`text-left ${formStyles['form-container']}`}>
+            className='text-left flex flex-col gap-y-3'>
             <div>
                 <Input
                     type="password"

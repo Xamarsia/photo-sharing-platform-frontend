@@ -10,8 +10,6 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import formStyles from '@/styles/components/form.module.css';
-
 import { updateUserInfo } from '@/actions/user-actions';
 import { getValidationErrors } from '@/lib/zod/validation';
 import { fullNameValidationSchema, updateDescriptionSchema, updateUserInfoValidationSchema } from '@/lib/zod/schemas/profile/changeUserInfo';
@@ -22,7 +20,7 @@ type Props = {
 }
 
 
-export default function ChangeUserInfoForm({ user }: Props) { //ChangeUserInfoContent
+export default function ChangeUserInfoForm({ user }: Props) {
     const defaultFullName: string | undefined = (user.fullName == null ? undefined : user.fullName);
     const defaultDescription: string | undefined = (user.description == null ? undefined : user.description);
 
@@ -102,7 +100,7 @@ export default function ChangeUserInfoForm({ user }: Props) { //ChangeUserInfoCo
     return (
         <form onSubmit={handleUserInfoUpdate}
             onChange={(e) => { setIsFormChanged(true) }}
-            className={`text-left ${formStyles['form-container']}`}>
+            className='text-left flex flex-col gap-y-3'>
             <div>
                 <Input
                     type="text"

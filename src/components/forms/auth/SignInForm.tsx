@@ -2,7 +2,6 @@
 
 
 import styles from '@/styles/text/text.module.css';
-import formStyles from '@/styles/components/form.module.css';
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -13,7 +12,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
-import TextIconSecondaryButton from '@/components/buttons/TextIconSecondaryButton';
+import TextIconButton from '@/components/buttons/TextIconButton';
 
 import google from '@/public/google/google-icon-logo.svg';
 
@@ -106,11 +105,12 @@ export default function SignInForm() {
             onChange={(e) =>
                 setFormIsValid(e.currentTarget.checkValidity())
             }
-            className={`${formStyles['form-card-container']}`}>
-            <div className={`${formStyles['form-container']}`}>
+            className='flex flex-col justify-between h-[464px]'>
+            <div className='flex flex-col gap-y-3'>
                 <h1 className={`${styles['h1']}`}>{t('signIn')}</h1>
 
-                <TextIconSecondaryButton
+                <TextIconButton
+                    style='secondary'
                     text={t('continueWithGoogle')}
                     onClick={handleSignInWithGoogle}
                     icon={google}

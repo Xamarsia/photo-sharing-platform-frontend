@@ -3,7 +3,7 @@ import 'server-only';
 import { useTranslations } from 'next-intl';
 
 import ChangePasswordForm from '@/components/forms/profile/ChangePasswordForm';
-import SettingPage from '@/components/common/SettingPage';
+import SettingsPage from '@/components/common/SettingsPage';
 import { Metadata } from 'next';
 
 
@@ -16,8 +16,8 @@ export default function ChangePasswordPage() {
     const t = useTranslations('editProfile');
 
     return (
-        <SettingPage title={t('changePassword')}>
+        <SettingsPage title={t('changePassword')}>
             <ChangePasswordForm />
-        </SettingPage>
+        </SettingsPage>
     );
 }

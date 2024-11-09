@@ -1,7 +1,6 @@
 import 'server-only';
 
 import NotFound from '@/components/common/NotFound';
-import styles from '@/styles/components/page.module.css';
 
 import { useTranslations } from 'next-intl';
 import { Metadata } from 'next';
@@ -14,7 +13,7 @@ export default function InvalidURLPage() {
     const t = useTranslations('NotFound');
 
     return (
-        <div className={`${styles['simple-page-layout']}`}>
+        <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
             <NotFound alertTitle={t('pageNotFound')} alertBody={t('pageDoesNotExist')} />
         </div>
     );

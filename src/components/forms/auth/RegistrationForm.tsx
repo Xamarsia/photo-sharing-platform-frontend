@@ -2,7 +2,6 @@
 
 
 import styles from '@/styles/text/text.module.css';
-import formStyles from '@/styles/components/form.module.css';
 
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
@@ -87,8 +86,8 @@ export default function RegistrationForm() {
     return (
         <form onSubmit={handleSubmit}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
-            className={`${formStyles['form-card-container']}`}>
-            <div className={`${formStyles['form-container']}`}>
+            className='flex flex-col justify-between h-[464px]'>
+            <div className='flex flex-col gap-y-3'>
                 <h1 className={`${styles['h1']}`}>{t('signUp')}</h1>
                 <div>
                     <Input

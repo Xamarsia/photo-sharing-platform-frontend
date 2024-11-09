@@ -2,7 +2,6 @@
 
 
 import styles from '@/styles/text/text.module.css';
-import formStyles from '@/styles/components/form.module.css';
 
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -62,9 +61,9 @@ export default function ResetPasswordForm() {
     return (
         <form onSubmit={handleSignInWithEmailAndPassword}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
-            className={`${formStyles['form-card-container']}`}>
+            className='flex flex-col justify-between h-[464px]'>
 
-            <div className={`${formStyles['form-container']}`}>
+            <div className='flex flex-col gap-y-3'>
 
                 <div className="flex justify-between pb-8">
                     <h1 className={`${styles['h1']}`}>{t('resetPassword')}</h1>

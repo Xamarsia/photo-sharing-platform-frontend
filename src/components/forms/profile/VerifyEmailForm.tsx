@@ -1,7 +1,6 @@
 "use client";
 
 import styles from '@/styles/text/text.module.css';
-import formStyles from '@/styles/components/form.module.css';
 
 import { FormEvent, useState } from "react";
 
@@ -54,8 +53,8 @@ export default function VerifyEmailForm({ newEmail }: Props) {
     return (
         <form onSubmit={handleEmailVerification}
             onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
-            className={`${formStyles['form-card-container']}`}>
-            <div className={`${formStyles['form-container']}`}>
+            className='flex flex-col justify-between h-[464px]'>
+            <div className='flex flex-col gap-y-3'>
                 <p className={`${styles['base-text']}`}>{confirmPressed ? t('resetEmailMessageSended') : t('resetEmailMessage')} </p>
 
                 {!confirmPressed && <Input

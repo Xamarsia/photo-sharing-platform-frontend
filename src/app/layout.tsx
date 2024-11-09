@@ -3,7 +3,6 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 
 import '@/styles/globals.css';
-import styles from '@/styles/components/page.module.css';
 
 
 export const metadata: Metadata = {
@@ -24,7 +23,7 @@ export default async function LocaleLayout({
 
     return (
         <html lang={locale} className='size-full'>
-            <body className={`${styles['body']}`}>
+            <body className='size-full flex flex-col items-stretch relative'>
                 <NextIntlClientProvider messages={messages}>
                     {children}
                 </NextIntlClientProvider>

@@ -2,29 +2,25 @@
 
 
 import Input from '@/components/common/Input';
-import Modal from '@/components/common/Modal';
 import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
-import VerifyUsernameForm from '@/components/forms/profile/VerifyUsernameForm';
 
 import { useTranslations } from 'next-intl';
 import { ChangeEvent, FormEvent, useState } from "react";
-
-import formStyles from '@/styles/components/form.module.css';
 
 import { getValidationErrors } from '@/lib/zod/validation';
 import { updateUniqueUsernameSchema, updateUsernameSchema } from '@/lib/zod/schemas/profile/changeUsername';
 
 
 type Props = {
-    user: UserDTO,
+    oldUsername: string,
+    onSubmit: (username: string) => void,
 }
 
 
-export default function ChangeUsernameForm({ user }: Props) { //ChangeUsernameContent
+export default function ChangeUsernameForm({ oldUsername, onSubmit }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
-    const [username, setUsername] = useState<string>(user.username);
-    const [showModal, setShowModal] = useState<boolean>(false);
+    const [username, setUsername] = useState<string>(oldUsername);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const t = useTranslations('form');
 
@@ -35,7 +31,7 @@ export default function ChangeUsernameForm({ user }: Props) { //ChangeUsernameCo
             return;
         }
 
-        if (username == user.username) {
+        if (username == oldUsername) {
             setIsFormChanged(false);
             return;
         }
@@ -49,7 +45,7 @@ export default function ChangeUsernameForm({ user }: Props) { //ChangeUsernameCo
             setErrors(errorsMap);
             return;
         }
-        setShowModal(true);
+        onSubmit(username);
     }
 
     async function onUsernameChangeHendler(event: ChangeEvent<HTMLInputElement>) {
@@ -64,34 +60,29 @@ export default function ChangeUsernameForm({ user }: Props) { //ChangeUsernameCo
     }
 
     return (
-        <>
-            <form onSubmit={onUpdate}
-                onChange={() => { setIsFormChanged(true); }}
-                className={`text-left ${formStyles['form-container']}`}>
+        <form onSubmit={onUpdate}
+            onChange={() => { setIsFormChanged(true); }}
+            className='text-left flex flex-col gap-y-3'>
 
-                <div>
-                    <Input
-                        type="text"
-                        name="username"
-                        value={username}
-                        title={t('username')}
-                        onChange={(e) => { onUsernameChangeHendler(e) }}
-                        required
-                        state={errors.has("username") ? 'invalid' : 'valid'}
-                    />
-                    <FormFieldError text={errors.get("username")} />
-                </div>
-
-                <TextButton
-                    type="submit"
-                    text={t('update')}
-                    fill="content"
-                    disabled={!isFormChanged || errors.size != 0}
+            <div>
+                <Input
+                    type="text"
+                    name="username"
+                    value={username}
+                    title={t('username')}
+                    onChange={(e) => { onUsernameChangeHendler(e) }}
+                    required
+                    state={errors.has("username") ? 'invalid' : 'valid'}
                 />
-            </form>
-            <Modal title={t('verifyNewUsername')} onCloseClicked={() => { setShowModal(false); }} opened={showModal}>
-                <VerifyUsernameForm newUsername={username} onSubmit={() => { setShowModal(false); setIsFormChanged(false); }} />
-            </Modal>
-        </>
+                <FormFieldError text={errors.get("username")} />
+            </div>
+
+            <TextButton
+                type="submit"
+                text={t('update')}
+                fill="content"
+                disabled={!isFormChanged || errors.size != 0}
+            />
+        </form>
     )
 }

@@ -1,5 +1,3 @@
-import styles from '@/styles/components/page.module.css';
-
 export default async function PostLayout({
   children,
 }: {
@@ -7,7 +5,7 @@ export default async function PostLayout({
 }) {
 
   return (
-    <div className={`${styles['simple-page-layout']}`}>
+    <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
       {children}
     </div>
   )

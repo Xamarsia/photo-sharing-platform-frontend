@@ -1,11 +1,11 @@
 import 'server-only';
 
+import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { getAuthenticatedUser } from '@/actions/user-actions';
 
-import ChangeUsernameForm from '@/components/forms/profile/ChangeUsernameForm';
-import SettingPage from '@/components/common/SettingPage';
-import { Metadata } from 'next';
+import ChangeUsernameContent from '@/components/page-contents/ChangeUsernameContent';
+import SettingsPage from '@/components/common/SettingsPage';
 
 
 export const metadata: Metadata = {
@@ -18,8 +18,8 @@ export default async function ChangeUsernamePage() {
     const t = await getTranslations('editProfile');
 
     return (
-        <SettingPage title={t('changeUsername')} >
-            {user && <ChangeUsernameForm user={user} />}
-        </SettingPage>
+        <SettingsPage title={t('changeUsername')} >
+            {user && <ChangeUsernameContent oldUsername={user.username} />}
+        </SettingsPage>
     );
 }

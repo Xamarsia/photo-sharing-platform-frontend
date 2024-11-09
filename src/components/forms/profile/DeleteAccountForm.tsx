@@ -4,18 +4,15 @@
 import { FormEvent, useState } from "react";
 import { useTranslations } from 'next-intl';
 import { FirebaseError } from "firebase/app";
+import { UserCredential } from "firebase/auth";
 
 import { ProviderID } from "@/constants";
 import { useAlert } from "@/utils/useAlert";
 import { deleteAccount } from '@/actions/user-actions';
 import { deleteUserAuth, reauthenticate, reauthenticateWithGoogle } from "@/lib/firebase/auth";
 
-import formStyles from '@/styles/components/form.module.css';
-
-import Modal from '@/components/common/Modal';
 import Input from "@/components/common/Input";
-import TextRemoveButton from '@/components/buttons/TextRemoveButton';
-import { UserCredential } from "firebase/auth";
+import TextButton from "@/components/buttons/TextButton";
 
 
 type Props = {
@@ -23,8 +20,7 @@ type Props = {
 }
 
 
-export default function DeleteAccountForm({ provider }: Props) { //DeleteAccountContent
-    const [showModal, setShowModal] = useState<boolean>(false);
+export default function DeleteAccountForm({ provider }: Props) {
     const [password, setPassword] = useState<string>("password");
     const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const t = useTranslations('form');
@@ -62,44 +58,35 @@ export default function DeleteAccountForm({ provider }: Props) { //DeleteAccount
     }
 
     return (
-        <>
-            <TextRemoveButton
+        <form onSubmit={handlenDeleteAccount}
+            onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
+            className='flex flex-col justify-between h-[464px]'>
+
+            <div className='flex flex-col gap-y-3'>
+                <p>{t('deleteAccountMessage')}</p>
+
+                {provider.includes(ProviderID.EmailAuthProvider) &&
+                    <>
+                        <p> {t('confirmPassword')} </p>
+                        <Input
+                            type="password"
+                            name="password"
+                            title={t('password')}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </>
+                }
+            </div>
+
+            <TextButton
+                style="remove"
                 type="submit"
                 text={t('delete')}
                 fill="content"
-                onClick={() => { setShowModal(true) }}
+                disabled={!formIsValid}
             />
-            <Modal onCloseClicked={() => { setShowModal(false); }} title={t('deleteAccount')} opened={showModal}>
-                <form onSubmit={handlenDeleteAccount}
-                    onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
-                    className={`${formStyles['form-card-container']}`}>
-
-                    <div className={`${formStyles['form-container']}`}>
-                        <p>{t('deleteAccountMessage')}</p>
-
-                        {provider.includes(ProviderID.EmailAuthProvider) &&
-                            <>
-                                <p> {t('confirmPassword')} </p>
-                                <Input
-                                    type="password"
-                                    name="password"
-                                    title={t('password')}
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                />
-                            </>
-                        }
-                    </div>
-
-                    <TextRemoveButton
-                        type="submit"
-                        text={t('delete')}
-                        fill="content"
-                        disabled={!formIsValid}
-                    />
-                </form>
-            </Modal>
-        </>
+        </form>
     )
 }

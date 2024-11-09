@@ -1,31 +1,27 @@
 "use client";
 
-import Modal from '@/components/common/Modal';
 import TextButton from '@/components/buttons/TextButton';
 import FileSelector from "@/components/common/FileSelector";
 import FormFieldError from '@/components/common/FormFieldError';
-import TextRemoveButton from '@/components/buttons/TextRemoveButton';
 import DragAndDropCirclePreview from "@/components/profile/image/DragAndDropCirclePreview";
 
 import { FormEvent, SetStateAction, useState } from "react";
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
-import formStyles from '@/styles/components/form.module.css';
-
-import { deleteProfileImage, updateProfileImage } from '@/actions/user-actions';
+import { updateProfileImage } from '@/actions/user-actions';
 import { updateProfileImageSchema } from '@/lib/zod/schemas/profile/changeProfileImage';
 import { getValidationErrors } from '@/lib/zod/validation';
 
 
 type Props = {
     user: UserDTO,
+    onDeleteProfileImage: () => void,
 }
 
 
-export default function ChangeProfileImageForm({ user }: Props) { //ChangeProfileImageContent
+export default function ChangeProfileImageForm({ user, onDeleteProfileImage }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
-    const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const t = useTranslations('form');
@@ -39,11 +35,6 @@ export default function ChangeProfileImageForm({ user }: Props) { //ChangeProfil
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
         setErrors(errorsMap);
-    };
-
-    const onDeleteProfileImage = async () => {
-        await deleteProfileImage();
-        router.push(`/${user.username}`);
     };
 
     async function onUpdate(event: FormEvent<HTMLFormElement>) {
@@ -69,37 +60,32 @@ export default function ChangeProfileImageForm({ user }: Props) { //ChangeProfil
     }
 
     return (
-        <>
-            <form onSubmit={onUpdate}
-                onChange={(e) => { setIsFormChanged(true) }}
-                className={`text-left ${formStyles['form-container']}`}>
-                <div>
-                    <div className='size-72'>
-                        <FileSelector onDefaultImageRemoved={() => { setShowModal(true); }} onImageSelected={onImageSelected} rounded defaultImageExist={user.isProfileImageExist} >
-                            //PLEASE REVIEW TIHS
-                            {user.isProfileImageExist
-                                ? <DragAndDropCirclePreview src={`/api/user/avatar/${user.username}`} />
-                                : (selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />)
-                            }
-                            //
-                        </FileSelector>
-                    </div>
-                    <FormFieldError text={errors.get("file")} />
-                </div>
+        <form onSubmit={onUpdate}
+            onChange={(e) => { setIsFormChanged(true) }}
+            className='text-left flex flex-col gap-y-3'>
+            <div>
+                <div className='size-72'>
+                    <FileSelector onDefaultImageRemoved={onDeleteProfileImage} onImageSelected={onImageSelected} rounded defaultImageExist={user.isProfileImageExist} >
+                        {/* <DragAndDropCirclePreview src={user.isProfileImageExist ? `/api/user/avatar/${user.username}` : URL.createObjectURL(selectedImage)} /> */}
 
-                <TextButton
-                    type="submit"
-                    text={t('update')}
-                    fill="content"
-                    disabled={!isFormChanged || errors.size != 0}
-                />
-            </form>
-            <Modal onCloseClicked={() => { setShowModal(false); }} title={t('removeProfileImage')} opened={showModal}>
-                <div className='flex flex-col gap-20'>
-                    <p>{t('removeProfileImageMessage')}</p>
-                    <TextRemoveButton text={t('remove')} onClick={onDeleteProfileImage} />
+                        {/* //PLEASE REVIEW TIHS */}
+                        {user.isProfileImageExist
+                            ? <DragAndDropCirclePreview src={`/api/user/avatar/${user.username}`} />
+                            : (selectedImage && <DragAndDropCirclePreview src={URL.createObjectURL(selectedImage)} />)
+                        }
+                        {/* // */}
+
+                    </FileSelector>
                 </div>
-            </Modal>
-        </>
+                <FormFieldError text={errors.get("file")} />
+            </div>
+
+            <TextButton
+                type="submit"
+                text={t('update')}
+                fill="content"
+                disabled={!isFormChanged || errors.size != 0}
+            />
+        </form>
     )
 }

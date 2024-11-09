@@ -5,7 +5,7 @@ import Card from "@/components/common/Card";
 import AuthenticationForm from '@/components/forms/auth/AuthenticationForm';
 
 import { isAuthorized } from '@/lib/firebase/serverApp';
-import { isAuthenticationUsed } from '@/actions/user-actions';
+import { isAuthUsed } from '@/actions/user-actions';
 import { redirect } from 'next/navigation';
 import { Metadata } from 'next';
 
@@ -18,8 +18,8 @@ export default async function SignUpPage() {
     const isAuth: string | undefined = await isAuthorized();
 
     if (isAuth) {
-        const isAuthUsed: boolean | undefined = await isAuthenticationUsed();
-        if (isAuthUsed == false) {
+        const isUsed: boolean | undefined = await isAuthUsed();
+        if (isUsed == false) {
             redirect('/auth/registration')
         }
     }

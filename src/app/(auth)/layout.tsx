@@ -1,5 +1,3 @@
-import styles from '@/styles/components/page.module.css';
-
 import Footer from '@/components/common/footer/Footer';
 import Header from '@/components/common/header/Header';
 import UnauthorizedGuard from '@/components/common/guards/UnauthorizedGuard';
@@ -18,9 +16,9 @@ export default async function AuthLayout({
       <UnauthorizedGuard>
         <> //remove this
           <Header />
-          <main className={`${styles['main']} z-30`}>
+          <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20 z-30'>
             <AlertProvider>
-              <div className={`${styles['simple-page-layout']}`}>
+              <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
                 {children}
               </div>
             </AlertProvider>

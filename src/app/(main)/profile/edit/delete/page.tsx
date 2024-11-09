@@ -3,8 +3,8 @@ import 'server-only';
 import { getTranslations } from 'next-intl/server';
 import { getProvider } from '@/lib/firebase/serverApp';
 
-import DeleteAccountForm from '@/components/forms/profile/DeleteAccountForm';
-import SettingPage from '@/components/common/SettingPage';
+import DeleteAccountContent from '@/components/page-contents/DeleteAccountContent';
+import SettingsPage from '@/components/common/SettingsPage';
 import { Metadata } from 'next';
 
 
@@ -18,8 +18,8 @@ export default async function DeleteAccountPage() {
     const t = await getTranslations('form');
 
     return (
-        <SettingPage title={t('deleteAccount')} >
-            {provider && <DeleteAccountForm provider={provider} />}
-        </SettingPage>
+        <SettingsPage title={t('deleteAccount')} >
+            {provider && <DeleteAccountContent provider={provider} />}
+        </SettingsPage>
     );
 }
