@@ -18,8 +18,8 @@ import {
 } from "firebase/auth";
 
 import { auth } from "@/lib/firebase/clientApp";
-import { saveAuth } from "@/actions/user-actions";
-import { saveTokenToHttponlyCookies } from "@/actions/actions";
+import { createAuth } from "@/actions/user-actions";
+import { saveTokenToHttpOnlyCookies } from "@/actions/actions";
 import { FirebaseError } from "firebase/app";
 
 export async function signInWithGoogle(): Promise<UserCredential | undefined> {
@@ -28,11 +28,11 @@ export async function signInWithGoogle(): Promise<UserCredential | undefined> {
   try {
     const userCredential: UserCredential = await signInWithPopup(auth, provider);
     const idToken: string = await userCredential.user.getIdToken();
-    await saveTokenToHttponlyCookies(idToken);
+    await saveTokenToHttpOnlyCookies(idToken);
     return userCredential;
   } catch (error: unknown) {
     console.error("Error signing in with Google", error);
-    await saveTokenToHttponlyCookies('');
+    await saveTokenToHttpOnlyCookies('');
   }
 }
 
@@ -42,11 +42,11 @@ export async function signUpWithGoogle(): Promise<UserCredential | undefined> {
   try {
     const userCredential: UserCredential = await signInWithPopup(auth, provider);
     const idToken: string = await userCredential.user.getIdToken();
-    await saveTokenToHttponlyCookies(idToken);
-    await saveAuth();
+    await saveTokenToHttpOnlyCookies(idToken);
+    await createAuth();
     return userCredential;
   } catch (error: unknown) {
-    await saveTokenToHttponlyCookies('');
+    await saveTokenToHttpOnlyCookies('');
     console.error("Error signing in with Google", error);
   }
 }
@@ -55,11 +55,11 @@ export async function signUpWithEmailPassword(loginRequest: LoginRequest): Promi
   try {
     const userCredential: UserCredential = await createUserWithEmailAndPassword(auth, loginRequest.email, loginRequest.password);
     const idToken: string = await userCredential.user.getIdToken();
-    await saveTokenToHttponlyCookies(idToken);
-    await saveAuth();
+    await saveTokenToHttpOnlyCookies(idToken);
+    await createAuth();
     return userCredential;
   } catch (error: unknown) {
-    await saveTokenToHttponlyCookies('');
+    await saveTokenToHttpOnlyCookies('');
     if (error instanceof FirebaseError) {
       return error;
     }
@@ -71,10 +71,10 @@ export async function signInWithEmailPassword(loginRequest: LoginRequest): Promi
   try {
     const userCredential: UserCredential = await signInWithEmailAndPassword(auth, loginRequest.email, loginRequest.password);
     const idToken: string = await userCredential.user.getIdToken();
-    await saveTokenToHttponlyCookies(idToken);
+    await saveTokenToHttpOnlyCookies(idToken);
     return userCredential;
   } catch (error: unknown) {
-    await saveTokenToHttponlyCookies('');
+    await saveTokenToHttpOnlyCookies('');
     if (error instanceof FirebaseError) {
       return error;
     }

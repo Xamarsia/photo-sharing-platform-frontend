@@ -19,10 +19,6 @@
     "changeUserInfo": "Change user info",
     "changeProfileImage": "Change profile image"
   },
-  "Following": {
-    "unfollow": "Unfollow",
-    "follow": "Follow"
-  },
   "form": {
     "email": "Email",
     "password": "Password",
@@ -74,6 +70,8 @@
     "confirmPassword": "Please, confirm your password",
     "myProfile": "My profile",
     "listEmpty": "List is empty",
+    "unfollow": "Unfollow",
+    "follow": "Follow",
     "invalidCredential": "Password confirmation invalid. Please, try again",
     "providedPasswordWeak": "The password provided is too weak",
     "emailAlreadyUsed": "The account already exists for this email. If you tried to register and did not finish, please sign in with this email and complete registration. ",

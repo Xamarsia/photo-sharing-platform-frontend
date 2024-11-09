@@ -39,9 +39,8 @@ export const uniqueUsernameSchema = z.string()
     .max(30, 'Username must contain no more than 30 characters')
     .refine((password) => !password.includes(' '), 'Spaces are not allowed')
     .refine(async (val) => {
-        const isUsernameAlreadyInUse: boolean | undefined = await isUsernameUsed(val);
-        console.log("isUsernameAlreadyInUse: ", isUsernameAlreadyInUse)
-        return isUsernameAlreadyInUse == false;
+        const isUsed: boolean | undefined = await isUsernameUsed(val);
+        return isUsed == false;
     }, { message: "Username is already taken" });
 
 export const fullNameSchema = z.optional(z.string()

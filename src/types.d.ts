@@ -1,6 +1,6 @@
-type UserState = 'CURRENT' | 'FOLLOWED' | 'UNFOLLOWED' // UNFOLLOWED -> NONE
+type UserState = 'CURRENT' | 'FOLLOW' | 'NONE'
 
-type LikeState = "LIKED" | "UNLIKED" // UNLIKED -> NONE
+type LikeState = "LIKE" | "NONE"
 
 type ProviderID = 'password' | 'facebook.com' | 'github.com' | 'google.com' | 'phone' | 'twitter.com'
 

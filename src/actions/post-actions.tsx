@@ -31,16 +31,16 @@ export async function getPost(postId: number): Promise<PostDTO | undefined> {
 }
 
 export async function updatePostImage(postId: number, data: FormData): Promise<void> {
-    const res: Response = await authFetch(`/post/${postId}/update/image`, { method: 'PUT', body: data, });
+    const res: Response = await authFetch(`/post/${postId}/updateImage`, { method: 'PUT', body: data, });
     if (!res.ok) {
         return undefined;
     }
     return;
 }
 
-export async function updatePost(postId: number, data: UpdatePostRequest): Promise<PostDTO | undefined> {
+export async function updatePostInfo(postId: number, data: UpdatePostRequest): Promise<PostDTO | undefined> {
     const req: RequestInit = await JSONRequest(data, { method: 'PUT' });
-    const res: Response = await authFetch(`/post/${postId}/update`, req);
+    const res: Response = await authFetch(`/post/${postId}/updatePostInfo`, req);
 
     if (!res.ok) {
         return undefined;
@@ -68,9 +68,8 @@ export async function like(postId: number): Promise<void> {
     return;
 }
 
-export async function unlike(postId: number): Promise<void> { //deleteLike
+export async function deleteLike(postId: number): Promise<void> {
     const res: Response = await authFetch(`/like/${postId}`, { method: 'DELETE' });
-    console.log("unlike: ", res.ok);
     if (!res.ok) {
         return undefined;
     }
