@@ -57,11 +57,74 @@ export async function getAuthenticatedUser(): Promise<UserDTO | undefined> {
     return user;
 }
 
-export async function fetchPageData(size: number, page: number, url: string, urlParams?: string) {
-    const res: Response = await authFetch(`${url}?size=${size}&page=${page}&${urlParams}`, { method: 'GET' });
+export async function getNewsPostsPage(page: number): Promise<Page<DetailedPostDTO>> {
+    const res: Response = await authFetch(`/post/newsFeed?size=20&page=${page}`, { method: 'GET' });
 
     if (!res.ok) {
-        return undefined;
+        return {
+            content: [],
+            last: true,
+        };
+    }
+    return await res.json();
+};
+
+export async function getUserPostPreviewsPage(username: string, page: number,): Promise<Page<PostPreviewDTO>> {
+    const res: Response = await authFetch(`/post/preview/${username}?size=6&page=${page}`, { method: 'GET' });
+
+    if (!res.ok) {
+        return {
+            content: [],
+            last: true,
+        };
+    }
+    return await res.json();
+};
+
+export async function getFollowingsPage(username: string, page: number): Promise<Page<UserDTO>> {
+    const res: Response = await authFetch(`/user/${username}/followings?size=6&page=${page}`, { method: 'GET' });
+
+    if (!res.ok) {
+        return {
+            content: [],
+            last: true,
+        };
+    }
+    return await res.json();
+};
+
+export async function getFollowersPage(username: string, page: number): Promise<Page<UserDTO>> {
+    const res: Response = await authFetch(`/user/${username}/followers?size=6&page=${page}`, { method: 'GET' });
+
+    if (!res.ok) {
+        return {
+            content: [],
+            last: true,
+        };
+    }
+    return await res.json();
+};
+
+export async function getUsersLikedPostPage(postId: number, page: number): Promise<Page<UserDTO>> {
+    const res: Response = await authFetch(`/user/${postId}/liked?size=6&page=${page}`, { method: 'GET' });
+
+    if (!res.ok) {
+        return {
+            content: [],
+            last: true,
+        };
+    }
+    return await res.json();
+};
+
+export async function getSearchUsersPage(query: string | string[], page: number): Promise<Page<UserDTO>> {
+    const res: Response = await authFetch(`/user/search?size=20&page=${page}&request=${query}`, { method: 'GET' });
+
+    if (!res.ok) {
+        return {
+            content: [],
+            last: true,
+        };
     }
     return await res.json();
 };

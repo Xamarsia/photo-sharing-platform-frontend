@@ -6,10 +6,12 @@ import { useTranslations } from 'next-intl';
 import TextButton from "@/components/buttons/TextButton";
 import DropdownButton from "@/components/buttons/DropdownButton";
 import TextIconButton from "@/components/buttons/TextIconButton";
-import HeaderMenuDropdown from "@/components/common/header/HeaderMenuDropdown";
+import Dropdown from "@/components/common/Dropdown";
 
 import plus from '@/public/plus/plus-white.svg';
 import { signOut } from "@/lib/firebase/auth";
+import ProfileImage from "@/components/profile/image/ProfileImage";
+import { useState } from "react";
 
 
 type Props = {
@@ -18,6 +20,7 @@ type Props = {
 
 
 export default function HeaderMenu({ user }: Props) {
+    const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const t = useTranslations('form');
     const router = useRouter();
 
@@ -28,11 +31,18 @@ export default function HeaderMenu({ user }: Props) {
                     <div className='md:block hidden h-full'>
                         <TextIconButton text={t('createPost')} icon={plus} onClick={() => { router.push('/post/create') }} />
                     </div>
-                    <HeaderMenuDropdown user={user}>
+
+                    <button onClick={e => { setShowDropdown(!showDropdown) }}
+                        className={showDropdown ? "pointer-events-none" : ""}
+                    >
+                        <ProfileImage profileImageExist={user.isProfileImageExist} username={user.username} preview />
+                    </button>
+
+                    <Dropdown isVisible={showDropdown} onOutsideClicked={() => setShowDropdown(false)}>
                         <DropdownButton text={t('myProfile')} onClick={() => { router.push(`/${user.username}`) }} />
                         <DropdownButton text={t('editProfile')} onClick={() => { router.push('/profile/edit/info') }} />
                         <DropdownButton text={t('signOut')} onClick={signOut} />
-                    </HeaderMenuDropdown>
+                    </Dropdown>
                 </>
                 : <>
                     <TextButton text={t('signIn')} onClick={e => { router.push('/auth/signin') }} />

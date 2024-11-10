@@ -1,7 +1,6 @@
 'server-only';
 
-
-import PostsListInfiniteLoading from '@/components/common/infinite-loading/PostsListInfiniteLoading';
+import NewsPageContent from '@/components/page-contents/NewsPageContent';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -9,10 +8,9 @@ export const metadata: Metadata = {
 }
 
 export default async function NewsPage() {
-
   return (
     <div className='m-4'>
-      <PostsListInfiniteLoading url={`/post/newsFeed`} size={20} />
+      <NewsPageContent />
     </div>
   )
 }

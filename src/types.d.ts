@@ -1,67 +1,72 @@
 type UserState = 'CURRENT' | 'FOLLOW' | 'NONE'
 
-type LikeState = "LIKE" | "NONE"
+type LikeState = 'LIKE' | 'NONE'
 
 type ProviderID = 'password' | 'facebook.com' | 'github.com' | 'google.com' | 'phone' | 'twitter.com'
 
 type UserDTO = {
-    "id": number,
-    "username": string,
-    "fullName": string | undefined,
-    "description": string | undefined,
-    "state": UserState,
-    "isProfileImageExist": boolean
+    id: number,
+    username: string,
+    fullName: string | undefined,
+    description: string | undefined,
+    state: UserState,
+    isProfileImageExist: boolean
 }
 
 type UserInfoUpdateRequest = {
-    "fullName": string | undefined,
-    "description": string | undefined,
+    fullName: string | undefined,
+    description: string | undefined,
 }
 
 type RegisterRequest = {
-    "username": string,
-    "fullName": string | undefined,
+    username: string,
+    fullName: string | undefined,
 }
 
 type LoginRequest = {
-    "email": string,
-    "password": string,
+    email: string,
+    password: string,
 }
 
 type PostPreviewDTO = {
-    "id": number,
+    id: number,
 }
 
 type UpdatePostRequest = {
-    "description": string | undefined,
+    description: string | undefined,
 }
 
 type UsernameUpdateRequest = {
-    "username": string
+    username: string
 }
 
 type PostDTO = {
-    "id": number,
-    "createdDate": string,
-    "description": string | undefined,
-    "username": string,
-    "likes": number
+    id: number,
+    createdDate: string,
+    description: string | undefined,
+    username: string,
+    likes: number
 }
 
 type DetailedPostDTO = {
-    "postDTO": PostDTO,
-    "authorDTO": UserDTO,
-    "state": LikeState
+    postDTO: PostDTO,
+    authorDTO: UserDTO,
+    state: LikeState
 }
 
 type ProfileDTO = {
-    "followingsCount": number,
-    "followersCount": number,
-    "postsCount": number,
-    "userDTO": UserDTO,
+    followingsCount: number,
+    followersCount: number,
+    postsCount: number,
+    userDTO: UserDTO,
 }
 
 type SidebarItemInfo = {
     href: string,
     title: string,
+}
+
+type Page<T> = {
+    content: T[],
+    last: boolean,
 }

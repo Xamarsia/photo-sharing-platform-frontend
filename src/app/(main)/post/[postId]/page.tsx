@@ -1,12 +1,10 @@
 import 'server-only';
 
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 import { getDetailedPost } from '@/actions/post-actions';
 
 import Post from '@/components/post/Post';
-import NotFound from '@/components/common/NotFound';
-
 
 type Props = {
     params: Promise<{ postId: number }>
@@ -22,13 +20,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 
 export default async function PostPage({ params }: Props) {
-    const t = await getTranslations('NotFound');
     const postId: number = (await params).postId;
 
     const detailedPost: DetailedPostDTO | undefined = await getDetailedPost(postId);
 
-    return (detailedPost
-        ? <Post detailedPost={detailedPost} />
-        : <NotFound alertTitle={t('postNotFound')} alertBody={t('postDoesNotExist')} />
+    if (!detailedPost) {
+        notFound();
+    }
+
+    return (
+        <Post detailedPost={detailedPost} />
     );
 }

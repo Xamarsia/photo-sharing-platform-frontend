@@ -12,12 +12,16 @@ import { deletePost } from '@/actions/post-actions';
 import { follow, unfollow } from "@/actions/user-actions";
 
 import Modal from '@/components/common/Modal';
-import PostDropdown from '@/components/post/PostDropdown';
+import Dropdown from '@/components/common/Dropdown';
+import IconButton from '@/components/buttons/IconButton';
 import DropdownButton from '@/components/buttons/DropdownButton';
 import ProfileImage from '@/components/profile/image/ProfileImage';
 import TextButton from '@/components/buttons/TextButton';
 
 import styles from '@/styles/text/text.module.css';
+
+import ellipsisHorizontal from '@/public/ellipsis-horizontal/ellipsis-horizontal.svg';
+import hoveredEllipsisHorizontal from '@/public/ellipsis-horizontal/ellipsis-horizontal-hovered.svg';
 
 
 type Props = {
@@ -32,6 +36,7 @@ export default function PostMenuComponent({ detailedPost }: Props) {
     const [isUserPostOwner] = useState<boolean>(author.state == UserState.Current);
     const createdDate: string = formatDateTime(post.createdDate);
     const [following, setFollowing] = useState<boolean>(author.state == UserState.Follow);
+    const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const t = useTranslations('form');
     const router = useRouter();
 
@@ -59,7 +64,13 @@ export default function PostMenuComponent({ detailedPost }: Props) {
                 <span className={`${styles['main-info']}`}>{author.username}</span>
                 <time dateTime={createdDate} className={`${styles['secondary-info']} truncate`}>{createdDate}</time>
             </div>
-            <PostDropdown>
+            <IconButton
+                icon={ellipsisHorizontal}
+                hoveredIcon={hoveredEllipsisHorizontal}
+                onClick={(e) => { setShowDropdown(!showDropdown) }}
+                className={showDropdown ? "pointer-events-none" : ""}
+            />
+            <Dropdown isVisible={showDropdown} onOutsideClicked={() => setShowDropdown(false)}>
                 {isUserPostOwner
                     ? <>
                         <DropdownButton style='primary' text={t('editPost')} onClick={() => { router.push(`/post/${post.id}/edit`); }} />
@@ -69,7 +80,7 @@ export default function PostMenuComponent({ detailedPost }: Props) {
                         ? <DropdownButton style='remove' text={t('unfollow')} onClick={unfollowProfile} />
                         : <DropdownButton style='primary' text={t('follow')} onClick={followProfile} />
                 }
-            </PostDropdown>
+            </Dropdown>
             <Modal onCloseClicked={() => { setShowModal(false); }} title={t('deletePost')} opened={showModal}>
                 <div className='flex flex-col gap-20'>
                     <p>{t('deleteThisPost')}</p>

@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslations } from 'next-intl';
 
 import Modal from "@/components/common/Modal";
 import StatCounter from "@/components/common/stats/StatCounter";
-import ProfilePreviewListInfiniteLoading from "@/components/common/infinite-loading/ProfilePreviewListInfiniteLoading";
+import InfiniteLoading from "../infinite-loading/InfiniteLoading";
+import ProfilePreviewsList from "@/components/profile/ProfilePreviewsList";
 
+import styles from '@/styles/text/text.module.css';
+import { getFollowersPage, getFollowingsPage } from "@/actions/user-actions";
 
 type StatsInfoProps = {
     profile: ProfileDTO,
@@ -33,6 +36,15 @@ export default function StatsInfo({ profile }: StatsInfoProps) {
         setModalContent("FOLLOWINGS");
     };
 
+    const getFollowings = useCallback((page: number) => {
+        return getFollowingsPage(profile.userDTO.username, page)
+    }, [profile]);
+
+    const getFollowers = useCallback((page: number) => {
+        return getFollowersPage(profile.userDTO.username, page)
+    }, [profile]);
+
+
     return (
         <div className="flex flex-row w-full justify-around gap-8">
             <StatCounter text={t('posts')} count={profile.postsCount} disabled />
@@ -41,13 +53,19 @@ export default function StatsInfo({ profile }: StatsInfoProps) {
 
             <Modal title={t('followers')} onCloseClicked={handleModal} opened={showModal && modalContent == "FOLLOWERS"}>
                 <div className="flex flex-col items-center overflow-y-auto h-96">
-                    <ProfilePreviewListInfiniteLoading url={`/user/${profile.userDTO.username}/followers`} size={6} />
+                    <InfiniteLoading<UserDTO>
+                        fetchPage={getFollowers}
+                        displayItems={(items) => (<ProfilePreviewsList users={items} />)}
+                        emptyResult={<span className={`${styles['secondary-info']} m-4`}>{t('listEmpty')}</span>} />
                 </div>
             </Modal>
 
             <Modal title={t('followings')} onCloseClicked={handleModal} opened={showModal && modalContent == "FOLLOWINGS"}>
                 <div className="flex flex-col items-center overflow-y-auto h-96">
-                    <ProfilePreviewListInfiniteLoading url={`/user/${profile.userDTO.username}/followings`} size={6} />
+                    <InfiniteLoading<UserDTO>
+                        fetchPage={getFollowings}
+                        displayItems={(items) => (<ProfilePreviewsList users={items} />)}
+                        emptyResult={<span className={`${styles['secondary-info']} m-4`}>{t('listEmpty')}</span>} />
                 </div>
             </Modal>
         </div>
