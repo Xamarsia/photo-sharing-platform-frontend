@@ -9,7 +9,7 @@ type Props = {
     icon: string,
     hoveredIcon: string,
     className?: string
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
 

@@ -26,12 +26,12 @@ export default function StatsInfo({ profile }: StatsInfoProps) {
         setShowModal(!showModal);
     }, [showModal]);
 
-    const onFollowersClick = useCallback((event: React.MouseEvent<HTMLAnchorElement>): void => {
+    const onFollowersClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>): void => {
         onCloseModalClick();
         setModalContent("FOLLOWERS");
     }, [modalContent, onCloseModalClick]);
 
-    const onFollowingsClick = useCallback((event: React.MouseEvent<HTMLAnchorElement>): void => {
+    const onFollowingsClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>): void => {
         onCloseModalClick();
         setModalContent("FOLLOWINGS");
     }, [modalContent, onCloseModalClick]);

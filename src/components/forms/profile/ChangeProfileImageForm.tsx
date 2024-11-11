@@ -39,8 +39,8 @@ export default function ChangeProfileImageForm({ user, onDeleteProfileImage }: P
     }, [selectedImage, errors]);
 
 
-    const onUpdate = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-        event.preventDefault();
+    const onUpdate = useCallback(async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
 
         const response = updateProfileImageSchema.safeParse({
             file: selectedImage,

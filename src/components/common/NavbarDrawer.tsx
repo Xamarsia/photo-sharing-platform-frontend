@@ -27,8 +27,8 @@ export default function NavbarDrawer({ items }: Props) {
 
 
     useEffect(() => {
-        const onClickOutside = (event: MouseEvent) => {
-            if (showDropdown && !dropdown.current?.contains(event.target as Node)) {
+        const onClickOutside = (e: MouseEvent) => {
+            if (showDropdown && !dropdown.current?.contains(e.target as Node)) {
                 setShowDropdown(false);
             }
         }

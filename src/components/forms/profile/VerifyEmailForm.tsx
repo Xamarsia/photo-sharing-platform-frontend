@@ -25,8 +25,8 @@ export default function VerifyEmailForm({ newEmail }: Props) {
     const t = useTranslations('form');
     const { showAlert } = useAlert();
 
-    const onEmailVerificationFormSubmit = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-        event.preventDefault();
+    const onEmailVerificationFormSubmit = useCallback(async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
 
         const credential: UserCredential | undefined | FirebaseError = await reauthenticate(password);
         if (credential instanceof FirebaseError) {
@@ -49,8 +49,8 @@ export default function VerifyEmailForm({ newEmail }: Props) {
         setConfirmPressed(true);
     }, [password, confirmPressed, showAlert]);
 
-    const onFormChange = useCallback((event: FormEvent<HTMLFormElement>): void => {
-        setFormIsValid(event.currentTarget.checkValidity());
+    const onFormChange = useCallback((e: FormEvent<HTMLFormElement>): void => {
+        setFormIsValid(e.currentTarget.checkValidity());
     }, [formIsValid]);
 
     const onPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>): void => {

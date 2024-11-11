@@ -9,7 +9,7 @@ type Props = {
     icon: string,
     fill?: 'content' | 'parent',
     style?: 'primary' | 'secondary' | undefined,
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
 

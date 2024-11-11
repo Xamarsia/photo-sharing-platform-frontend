@@ -31,8 +31,8 @@ export default function ChangeUserInfoForm({ user }: Props) {
     const t = useTranslations('form');
     const router = useRouter();
 
-    const onUserInfoUpdateFormSubmit = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-        event.preventDefault();
+    const onUserInfoUpdateFormSubmit = useCallback(async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
 
         if (!isFormChanged) {
             return;
@@ -63,37 +63,37 @@ export default function ChangeUserInfoForm({ user }: Props) {
         router.push(`/${user.username}`);
     }, [fullName, description, isFormChanged, user, errors]);
 
-    const onFullNameChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
-        setFullName(event.target.value);
+    const onFullNameChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+        setFullName(e.target.value);
 
         const response = fullNameValidationSchema.safeParse({
-            fullName: event.target.value,
+            fullName: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
 
-        const error: string | undefined = errorsMap.get(event.target.name);
+        const error: string | undefined = errorsMap.get(e.target.name);
         if (error) {
-            setErrors(errors.set(event.target.name, error));
+            setErrors(errors.set(e.target.name, error));
         } else {
-            errors.delete(event.target.name);
+            errors.delete(e.target.name);
         }
     }, [fullName, errors]);
 
-    const onDescriptionChangeHendler = useCallback((event: ChangeEvent<HTMLTextAreaElement>): void => {
-        setDescription(event.target.value);
+    const onDescriptionChangeHendler = useCallback((e: ChangeEvent<HTMLTextAreaElement>): void => {
+        setDescription(e.target.value);
 
         const response = updateDescriptionSchema.safeParse({
-            description: event.target.value,
+            description: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
 
-        const error: string | undefined = errorsMap.get(event.target.name);
+        const error: string | undefined = errorsMap.get(e.target.name);
         if (error) {
-            setErrors(errors.set(event.target.name, error));
+            setErrors(errors.set(e.target.name, error));
         } else {
-            errors.delete(event.target.name);
+            errors.delete(e.target.name);
         }
     }, [description, errors]);
 

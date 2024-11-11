@@ -72,18 +72,18 @@ export default function FileSelector({ rounded, children, defaultImageExist, onD
     }, [defaultImageExist, dragActive]);
 
 
-    const onImageChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
-        if (!event.target.files || event.target.files.length === 0) {
+    const onImageChange = useCallback((e: React.ChangeEvent<HTMLInputElement>): void => {
+        if (!e.target.files || e.target.files.length === 0) {
             return;
         }
 
-        const file = event.target.files[0];
+        const file = e.target.files[0];
         imageChangeHendler(file);
     }, []);
 
 
-    const onCloseClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
+    const onCloseClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
 
         if (defaultImageExist && onDefaultImageRemoved) {
             onDefaultImageRemoved();

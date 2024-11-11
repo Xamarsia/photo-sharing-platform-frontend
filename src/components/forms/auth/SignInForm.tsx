@@ -34,8 +34,8 @@ export default function SignInForm() {
     const { showAlert } = useAlert();
     const router = useRouter();
 
-    const onSignInWithEmailAndPassword = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-        event.preventDefault();
+    const onSignInWithEmailAndPassword = useCallback(async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
 
         const response = signInFormValidationSchema.safeParse({
             email: email,
@@ -77,8 +77,8 @@ export default function SignInForm() {
         }
     }, [email, password, formIsValid, errors]);
 
-    const onSignInWithGoogle = useCallback(async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
-        event.preventDefault();
+    const onSignInWithGoogle = useCallback(async (e: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
+        e.preventDefault();
         const credential: UserCredential | undefined = await signInWithGoogle();
         if (credential) {
             const isRegistered: boolean | undefined = await isUserRegistered();
@@ -89,19 +89,19 @@ export default function SignInForm() {
         }
     }, []);
 
-    const onEmailChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
-        setEmail(event.target.value);
+    const onEmailChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+        setEmail(e.target.value);
 
         const response = emailChangeValidationSchema.safeParse({
-            email: event.target.value,
+            email: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
         setErrors(errorsMap);
     }, []);
 
-    const onFormChange = useCallback((event: FormEvent<HTMLFormElement>): void => {
-        setFormIsValid(event.currentTarget.checkValidity());
+    const onFormChange = useCallback((e: FormEvent<HTMLFormElement>): void => {
+        setFormIsValid(e.currentTarget.checkValidity());
     }, []);
 
     const onPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>): void => {

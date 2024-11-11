@@ -10,7 +10,7 @@ type Props = {
     text: string,
     count: number,
     disabled?: boolean,
-    onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void,
+    onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void,
 }
 
 

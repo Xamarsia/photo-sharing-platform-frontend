@@ -24,8 +24,8 @@ export default function RegistrationForm() {
     const t = useTranslations('form');
     const router = useRouter();
 
-    const onFormSubmit = useCallback(async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const onFormSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
         const response = await signUpFormValidationSchema.safeParseAsync({
             username: username,
@@ -51,41 +51,41 @@ export default function RegistrationForm() {
     }, [username, fullName, errors]);
 
 
-    const onUsernameChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        setUsername(event.target.value);
+    const onUsernameChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setUsername(e.target.value);
 
         const response = updateUsernameSchema.safeParse({
-            username: event.target.value,
+            username: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
-        const error: string | undefined = errorsMap.get(event.target.name);
+        const error: string | undefined = errorsMap.get(e.target.name);
         if (error) {
-            setErrors(errors.set(event.target.name, error));
+            setErrors(errors.set(e.target.name, error));
         } else {
-            errors.delete(event.target.name);
+            errors.delete(e.target.name);
         }
     }, [username, errors]);
 
 
-    const onFullNameChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        setFullName(event.target.value);
+    const onFullNameChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setFullName(e.target.value);
 
         const response = fullNameValidationSchema.safeParse({
-            fullName: event.target.value,
+            fullName: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
-        const error: string | undefined = errorsMap.get(event.target.name);
+        const error: string | undefined = errorsMap.get(e.target.name);
         if (error) {
-            setErrors(errors.set(event.target.name, error));
+            setErrors(errors.set(e.target.name, error));
         } else {
-            errors.delete(event.target.name);
+            errors.delete(e.target.name);
         }
     }, [fullName, errors]);
 
-    const onFormChange = useCallback((event: FormEvent<HTMLFormElement>) => {
-        setFormIsValid(event.currentTarget.checkValidity());
+    const onFormChange = useCallback((e: FormEvent<HTMLFormElement>) => {
+        setFormIsValid(e.currentTarget.checkValidity());
     }, [formIsValid]);
 
     return (

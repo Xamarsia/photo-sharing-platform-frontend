@@ -14,8 +14,8 @@ export default function Dropdown({ children, isVisible, onOutsideClicked }: Prop
     const dropdown = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const onClickOutside = (event: MouseEvent) => {
-            if (isVisible && !dropdown.current?.contains(event.target as Node)) {
+        const onClickOutside = (e: MouseEvent) => {
+            if (isVisible && !dropdown.current?.contains(e.target as Node)) {
                 onOutsideClicked();
             }
         }

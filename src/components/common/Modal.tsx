@@ -20,8 +20,8 @@ export default function Modal({ title, children, opened, onCloseClicked }: Props
     const modal = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const onClickOutside = (event: MouseEvent) => {
-            if (opened && !modal.current?.contains(event.target as Node)) {
+        const onClickOutside = (e: MouseEvent) => {
+            if (opened && !modal.current?.contains(e.target as Node)) {
                 onCloseClicked();
             }
         }

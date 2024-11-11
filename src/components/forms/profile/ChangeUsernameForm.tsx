@@ -24,8 +24,8 @@ export default function ChangeUsernameForm({ oldUsername, onSubmit }: Props) {
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const t = useTranslations('form');
 
-    const onUpdate = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-        event.preventDefault();
+    const onUpdate = useCallback(async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
 
         if (!isFormChanged) {
             return;
@@ -48,11 +48,11 @@ export default function ChangeUsernameForm({ oldUsername, onSubmit }: Props) {
         onSubmit(username);
     }, [isFormChanged, username, errors, onSubmit]);
 
-    const onUsernameChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
-        setUsername(event.target.value);
+    const onUsernameChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+        setUsername(e.target.value);
 
         const response = updateUsernameSchema.safeParse({
-            username: event.target.value,
+            username: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);

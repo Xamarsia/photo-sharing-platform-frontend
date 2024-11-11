@@ -3,7 +3,7 @@
 type Props = {
     text: string | undefined,
     style?: 'primary' | 'remove' | undefined,
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
 

@@ -33,8 +33,8 @@ export default function AuthenticationForm() {
     const t = useTranslations('form');
     const router = useRouter();
 
-    const onSignUpWithEmailAndPassword = useCallback(async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const onSignUpWithEmailAndPassword = useCallback(async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
         const response = await authFormValidationSchema.safeParseAsync({
             email: email,
@@ -77,36 +77,36 @@ export default function AuthenticationForm() {
         }
     }, [email, password, confirmPassword, errors, showAlert]);
 
-    const onSignUnWithGoogle = useCallback(async (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
+    const onSignUnWithGoogle = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         const credential: UserCredential | undefined = await signUpWithGoogle();
         if (credential) {
             router.push('/auth/registration');
         }
     }, []);
 
-    const onEmailChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        setEmail(event.target.value);
+    const onEmailChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
 
         const response = emailChangeValidationSchema.safeParse({
-            email: event.target.value,
+            email: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
 
-        const error: string | undefined = errorsMap.get(event.target.name);
+        const error: string | undefined = errorsMap.get(e.target.name);
         if (error) {
-            setErrors(errors.set(event.target.name, error));
+            setErrors(errors.set(e.target.name, error));
         } else {
-            errors.delete(event.target.name);
+            errors.delete(e.target.name);
         }
     }, [email, errors]);
 
-    const onPasswordChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
+    const onPasswordChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value);
 
         const response = setPasswordSchema.safeParse({
-            password: event.target.value,
+            password: e.target.value,
             confirmPassword: confirmPassword,
         });
 
@@ -119,12 +119,12 @@ export default function AuthenticationForm() {
         setErrors(errorsMap);
     }, [password, confirmPassword, errors]);
 
-    const onConfirmPasswordChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        setConfirmPassword(event.target.value);
+    const onConfirmPasswordChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setConfirmPassword(e.target.value);
 
         const response = setPasswordSchema.safeParse({
             password: password,
-            confirmPassword: event.target.value,
+            confirmPassword: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
@@ -136,8 +136,8 @@ export default function AuthenticationForm() {
         setErrors(errorsMap);
     }, [password, confirmPassword, errors]);
 
-    const onFormChange = useCallback((event: FormEvent<HTMLFormElement>) => {
-        setFormIsValid(event.currentTarget.checkValidity());
+    const onFormChange = useCallback((e: FormEvent<HTMLFormElement>) => {
+        setFormIsValid(e.currentTarget.checkValidity());
     }, [formIsValid]);
 
 

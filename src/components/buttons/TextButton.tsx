@@ -10,7 +10,7 @@ type Props = {
     fill?: 'content' | 'parent',
     disabled?: boolean,
     style?: 'primary' | 'secondary' | 'remove' | undefined,
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
 

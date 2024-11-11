@@ -47,25 +47,25 @@ export default function EditPostForm({ post }: Props) {
         }
     }, [selectedImage, errors]);
 
-    const onDescriptionChangeHendler = useCallback((event: ChangeEvent<HTMLTextAreaElement>): void => {
-        setDescription(event.target.value);
+    const onDescriptionChangeHendler = useCallback((e: ChangeEvent<HTMLTextAreaElement>): void => {
+        setDescription(e.target.value);
 
         const response = updateDescriptionSchema.safeParse({
-            description: event.target.value,
+            description: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
 
-        const error: string | undefined = errorsMap.get(event.target.name);
+        const error: string | undefined = errorsMap.get(e.target.name);
         if (error) {
-            setErrors(errors.set(event.target.name, error));
+            setErrors(errors.set(e.target.name, error));
         } else {
-            errors.delete(event.target.name);
+            errors.delete(e.target.name);
         }
     }, [description, errors]);
 
-    const onUpdate = useCallback(async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const onUpdate = useCallback(async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
         const response = editPostValidationSchema.safeParse({
             file: selectedImage,

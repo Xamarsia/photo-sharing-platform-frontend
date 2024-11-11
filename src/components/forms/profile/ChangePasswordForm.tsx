@@ -26,8 +26,8 @@ export default function ChangePasswordForm() {
     const { showAlert } = useAlert();
 
 
-    const onChangePasswordFormSubmit = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-        event.preventDefault();
+    const onChangePasswordFormSubmit = useCallback(async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
 
         const response = updatePasswordSchema.safeParse({
             currentPassword: currentPassword,
@@ -62,29 +62,29 @@ export default function ChangePasswordForm() {
     }, [currentPassword, password, confirmPassword, errors, formIsValid]);
 
 
-    const onCurrentPasswordChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
-        setCurrentPassword(event.target.value);
+    const onCurrentPasswordChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+        setCurrentPassword(e.target.value);
 
         const response = currentPasswordSchema.safeParse({
-            currentPassword: event.target.value,
+            currentPassword: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
-        const error: string | undefined = errorsMap.get(event.target.name);
+        const error: string | undefined = errorsMap.get(e.target.name);
 
         if (error) {
-            setErrors(errors.set(event.target.name, error));
+            setErrors(errors.set(e.target.name, error));
         } else {
-            errors.delete(event.target.name);
+            errors.delete(e.target.name);
         }
     }, [currentPassword, errors]);
 
 
-    const onPasswordChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
-        setPassword(event.target.value);
+    const onPasswordChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+        setPassword(e.target.value);
 
         const response = setPasswordSchema.safeParse({
-            password: event.target.value,
+            password: e.target.value,
             confirmPassword: confirmPassword,
         });
 
@@ -99,12 +99,12 @@ export default function ChangePasswordForm() {
 
 
 
-    const onConfirmPasswordChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
-        setConfirmPassword(event.target.value);
+    const onConfirmPasswordChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+        setConfirmPassword(e.target.value);
 
         const response = setPasswordSchema.safeParse({
             password: password,
-            confirmPassword: event.target.value,
+            confirmPassword: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
@@ -116,8 +116,8 @@ export default function ChangePasswordForm() {
         setErrors(errorsMap);
     }, [password, confirmPassword, errors]);
 
-    const onFormChange = useCallback((event: FormEvent<HTMLFormElement>) => {
-        setFormIsValid(event.currentTarget.checkValidity());
+    const onFormChange = useCallback((e: FormEvent<HTMLFormElement>) => {
+        setFormIsValid(e.currentTarget.checkValidity());
     }, [formIsValid]);
 
     return (

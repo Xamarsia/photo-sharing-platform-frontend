@@ -27,8 +27,8 @@ export default function ResetPasswordForm() {
     const t = useTranslations('form');
     const router = useRouter();
 
-    const onResetPasswordSubmit = useCallback(async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const onResetPasswordSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
         const response = emailChangeValidationSchema.safeParse({
             email: email,
@@ -45,19 +45,19 @@ export default function ResetPasswordForm() {
         setResetPressed(true);
     }, [email, errors]);
 
-    const onEmailChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-        setEmail(event.target.value);
+    const onEmailChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
 
         const response = emailChangeValidationSchema.safeParse({
-            email: event.target.value,
+            email: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
         setErrors(errorsMap);
     }, [email, errors]);
 
-    const onFormChange = useCallback(async (event: FormEvent<HTMLFormElement>) => {
-        setFormIsValid(event.currentTarget.checkValidity());
+    const onFormChange = useCallback(async (e: FormEvent<HTMLFormElement>) => {
+        setFormIsValid(e.currentTarget.checkValidity());
     }, [formIsValid]);
 
     const onSignInClick = useCallback(() => {

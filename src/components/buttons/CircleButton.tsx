@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 type Props = {
     icon: string,
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
 

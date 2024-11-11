@@ -26,8 +26,8 @@ export default function DeleteAccountForm({ provider }: Props) {
     const t = useTranslations('form');
     const { showAlert } = useAlert();
 
-    const onDeleteAccount = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-        event.preventDefault();
+    const onDeleteAccount = useCallback(async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
 
         if (provider.includes(ProviderID.EmailAuthProvider)) {
             const credential: UserCredential | undefined | FirebaseError = await reauthenticate(password);
@@ -56,8 +56,8 @@ export default function DeleteAccountForm({ provider }: Props) {
         await deleteUserAuth();
     }, [password, showAlert]);
 
-    const onFormChange = useCallback((event: FormEvent<HTMLFormElement>): void => {
-        setFormIsValid(event.currentTarget.checkValidity());
+    const onFormChange = useCallback((e: FormEvent<HTMLFormElement>): void => {
+        setFormIsValid(e.currentTarget.checkValidity());
     }, [formIsValid]);
 
     const onPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>): void => {

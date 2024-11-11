@@ -21,8 +21,8 @@ export default function ChangeEmailForm({ oldEmail, onSubmit }: Props) {
     const [email, setEmail] = useState<string>(oldEmail);
     const t = useTranslations('form');
 
-    const onChangeEmailFormSubmit = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
-        event.preventDefault();
+    const onChangeEmailFormSubmit = useCallback(async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+        e.preventDefault();
 
         if (!isFormChanged || !email) {
             return;
@@ -46,12 +46,12 @@ export default function ChangeEmailForm({ oldEmail, onSubmit }: Props) {
         onSubmit(email);
     }, [email, isFormChanged, errors]);
 
-    const onEmailChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
-        event.preventDefault();
-        setEmail(event.target.value);
+    const onEmailChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+        e.preventDefault();
+        setEmail(e.target.value);
 
         const response = updateEmailSchema.safeParse({
-            email: event.target.value,
+            email: e.target.value,
         });
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
