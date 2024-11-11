@@ -6,7 +6,7 @@ import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
 
 import { useTranslations } from 'next-intl';
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { getValidationErrors } from '@/lib/zod/validation';
 import { currentPasswordSchema, setPasswordSchema, updatePasswordSchema } from '@/lib/zod/schemas/profile/changePassword';
 import { reauthenticate, changePassword } from '@/lib/firebase/auth';
@@ -26,7 +26,7 @@ export default function ChangePasswordForm() {
     const { showAlert } = useAlert();
 
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    const onChangePasswordFormSubmit = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
 
         const response = updatePasswordSchema.safeParse({
@@ -58,10 +58,11 @@ export default function ChangePasswordForm() {
             setFormIsValid(false);
             return;
         }
-        await changePassword(currentPassword);
-    }
+        await changePassword(password);
+    }, [currentPassword, password, confirmPassword, errors, formIsValid]);
 
-    async function onCurrentPasswordChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+
+    const onCurrentPasswordChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
         setCurrentPassword(event.target.value);
 
         const response = currentPasswordSchema.safeParse({
@@ -76,10 +77,10 @@ export default function ChangePasswordForm() {
         } else {
             errors.delete(event.target.name);
         }
-    }
+    }, [currentPassword, errors]);
 
 
-    async function onPasswordChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+    const onPasswordChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
         setPassword(event.target.value);
 
         const response = setPasswordSchema.safeParse({
@@ -94,9 +95,11 @@ export default function ChangePasswordForm() {
             errorsMap.set('currentPassword', currentPasswordError);
         }
         setErrors(errorsMap);
-    }
+    }, [password, confirmPassword, currentPassword, errors]);
 
-    async function onConfirmPasswordChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+
+
+    const onConfirmPasswordChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
         setConfirmPassword(event.target.value);
 
         const response = setPasswordSchema.safeParse({
@@ -111,17 +114,21 @@ export default function ChangePasswordForm() {
         }
 
         setErrors(errorsMap);
-    }
+    }, [password, confirmPassword, errors]);
+
+    const onFormChange = useCallback((event: FormEvent<HTMLFormElement>) => {
+        setFormIsValid(event.currentTarget.checkValidity());
+    }, [formIsValid]);
 
     return (
-        <form onSubmit={handleSubmit} onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}>
+        <form onSubmit={onChangePasswordFormSubmit} onChange={onFormChange}>
             <div>
                 <Input
                     type="password"
                     name="currentPassword"
                     value={currentPassword}
                     title={t('currentPassword')}
-                    onChange={(e) => onCurrentPasswordChangeHendler(e)}
+                    onChange={onCurrentPasswordChangeHendler}
                     required
                 />
                 <FormFieldError text={errors.get("currentPassword")} />
@@ -132,7 +139,7 @@ export default function ChangePasswordForm() {
                     name="password"
                     value={password}
                     title={t('newPassword')}
-                    onChange={(e) => onPasswordChangeHendler(e)}
+                    onChange={onPasswordChangeHendler}
                     required
                 />
                 <FormFieldError text={errors.get("password")} />
@@ -143,7 +150,7 @@ export default function ChangePasswordForm() {
                     name="confirmPassword"
                     value={confirmPassword}
                     title={t('repeatNewPassword')}
-                    onChange={(e) => onConfirmPasswordChangeHendler(e)}
+                    onChange={onConfirmPasswordChangeHendler}
                     required
                 />
                 <FormFieldError text={errors.get("confirmPassword")} />

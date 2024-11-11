@@ -1,7 +1,7 @@
 "use client";
 
 
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { useTranslations } from 'next-intl';
 import { FirebaseError } from "firebase/app";
 import { UserCredential } from "firebase/auth";
@@ -26,7 +26,7 @@ export default function DeleteAccountForm({ provider }: Props) {
     const t = useTranslations('form');
     const { showAlert } = useAlert();
 
-    async function handlenDeleteAccount(event: FormEvent<HTMLFormElement>) {
+    const onDeleteAccount = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
 
         if (provider.includes(ProviderID.EmailAuthProvider)) {
@@ -42,7 +42,6 @@ export default function DeleteAccountForm({ provider }: Props) {
                 } else {
                     console.error(errorMessage);
                 }
-
                 setPassword("");
                 return;
             }
@@ -55,11 +54,19 @@ export default function DeleteAccountForm({ provider }: Props) {
 
         await deleteAccount();
         await deleteUserAuth();
-    }
+    }, [password, showAlert]);
+
+    const onFormChange = useCallback((event: FormEvent<HTMLFormElement>): void => {
+        setFormIsValid(event.currentTarget.checkValidity());
+    }, [formIsValid]);
+
+    const onPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+        setPassword(e.target.value);
+    }, [password]);
 
     return (
-        <form onSubmit={handlenDeleteAccount}
-            onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
+        <form onSubmit={onDeleteAccount}
+            onChange={onFormChange}
             className='flex flex-col justify-between h-[464px]'>
 
             <div className='flex flex-col gap-y-3'>
@@ -73,7 +80,7 @@ export default function DeleteAccountForm({ provider }: Props) {
                             name="password"
                             title={t('password')}
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={onPasswordChange}
                             required
                         />
                     </>

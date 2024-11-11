@@ -1,6 +1,6 @@
 "use client";
 
-import { RefObject, useEffect, useRef, useState } from "react";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 
 import Sidebar from "@/components/common/sidebar/Sidebar";
 import IconButton from "@/components/buttons/IconButton";
@@ -21,24 +21,25 @@ export default function NavbarDrawer({ items }: Props) {
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const dropdown: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
-    const handleClick = (): void => {
+    const onClick = useCallback(() : void => {
         setShowDropdown(!showDropdown);
-    };
+    }, [showDropdown]);
+
 
     useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
+        const onClickOutside = (event: MouseEvent) => {
             if (showDropdown && !dropdown.current?.contains(event.target as Node)) {
                 setShowDropdown(false);
             }
         }
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('mousedown', onClickOutside);
     }, [showDropdown]);
 
     return (
         <div className="md:hidden">
             {showDropdown
-                ? <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={handleClick} />
-                : <IconButton icon={bars3} hoveredIcon={bars3Hovered} onClick={handleClick} />
+                ? <IconButton icon={xMark} hoveredIcon={xMarkHovered} onClick={onClick} />
+                : <IconButton icon={bars3} hoveredIcon={bars3Hovered} onClick={onClick} />
             }
 
             <div className={`bg-white z-10 ${showDropdown ? 'fixed top-20 left-0 size-full no-doc-scroll' : 'hidden'} `}>

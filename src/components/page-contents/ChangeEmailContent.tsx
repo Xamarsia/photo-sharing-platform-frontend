@@ -6,7 +6,7 @@ import ChangeEmailForm from '@/components/forms/profile/ChangeEmailForm';
 
 
 import { useTranslations } from 'next-intl';
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 
 type Props = {
@@ -18,18 +18,20 @@ export default function ChangeEmailContent({ oldEmail }: Props) {
     const [showModal, setShowModal] = useState<boolean>(false);
     const t = useTranslations('form');
 
-
-    async function onSubmit(newEmail: string) {
+    const onSubmit = useCallback((newEmail: string) => {
         setEmail(newEmail);
         setShowModal(true);
-    }
+    }, [email, showModal]);
 
+    const onCloseClicked = useCallback(() => {
+        setShowModal(false);
+    }, [showModal]);
 
     return (
         <>
             <ChangeEmailForm oldEmail={oldEmail} onSubmit={onSubmit} />
             {email &&
-                <Modal title={t('verifyNewEmailAddress')} onCloseClicked={() => { setShowModal(false); }} opened={showModal}>
+                <Modal title={t('verifyNewEmailAddress')} onCloseClicked={onCloseClicked} opened={showModal}>
                     <VerifyEmailForm newEmail={email} />
                 </Modal>
             }

@@ -1,7 +1,7 @@
 "use client";
 
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslations } from 'next-intl';
 
 
@@ -19,6 +19,13 @@ export default function DeleteAccountContent({ provider }: Props) {
     const [showModal, setShowModal] = useState<boolean>(false);
     const t = useTranslations('form');
 
+    const onCloseClick = useCallback(() => {
+        setShowModal(false);
+    }, [showModal]);
+
+    const onShowModalClick = useCallback(() => {
+        setShowModal(true);
+    }, [showModal]);
 
     return (
         <>
@@ -27,9 +34,9 @@ export default function DeleteAccountContent({ provider }: Props) {
                 type="submit"
                 text={t('delete')}
                 fill="content"
-                onClick={() => { setShowModal(true) }}
+                onClick={onShowModalClick}
             />
-            <Modal onCloseClicked={() => { setShowModal(false); }} title={t('deleteAccount')} opened={showModal}>
+            <Modal onCloseClicked={onCloseClick} title={t('deleteAccount')} opened={showModal}>
                 <DeleteAccountForm provider={provider} />
             </Modal>
         </>

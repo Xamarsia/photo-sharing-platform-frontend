@@ -1,11 +1,14 @@
 "use client";
 
 import { useCallback } from 'react';
-import { getSearchUsersPage } from '@/actions/user-actions';
-import InfiniteLoading from '../common/infinite-loading/InfiniteLoading';
-import ProfilePreviewsList from '../profile/ProfilePreviewsList';
-import styles from '@/styles/text/text.module.css';
 import { useTranslations } from 'next-intl';
+import { getSearchUsersPage } from '@/actions/user-actions';
+
+import styles from '@/styles/text/text.module.css';
+
+import InfiniteLoading from '@/components/common/infinite-loading/InfiniteLoading';
+import ProfilePreviewsList from '@/components/profile/ProfilePreviewsList';
+
 
 type Props = {
     query: string | string[],

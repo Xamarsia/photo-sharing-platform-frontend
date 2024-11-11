@@ -6,7 +6,7 @@ import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
 
 import { useTranslations } from 'next-intl';
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 
 import { getValidationErrors } from '@/lib/zod/validation';
 import { updateUniqueUsernameSchema, updateUsernameSchema } from '@/lib/zod/schemas/profile/changeUsername';
@@ -24,7 +24,7 @@ export default function ChangeUsernameForm({ oldUsername, onSubmit }: Props) {
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const t = useTranslations('form');
 
-    async function onUpdate(event: FormEvent<HTMLFormElement>) {
+    const onUpdate = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
 
         if (!isFormChanged) {
@@ -46,9 +46,9 @@ export default function ChangeUsernameForm({ oldUsername, onSubmit }: Props) {
             return;
         }
         onSubmit(username);
-    }
+    }, [isFormChanged, username, errors, onSubmit]);
 
-    async function onUsernameChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+    const onUsernameChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
         setUsername(event.target.value);
 
         const response = updateUsernameSchema.safeParse({
@@ -57,18 +57,21 @@ export default function ChangeUsernameForm({ oldUsername, onSubmit }: Props) {
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
         setErrors(errorsMap);
-    }
+    }, [username, errors]);
+
+    const onFormChange = useCallback(() => {
+        setIsFormChanged(true);
+    }, [isFormChanged]);
 
     return (
-        <form onSubmit={onUpdate} onChange={() => { setIsFormChanged(true); }}>
-
+        <form onSubmit={onUpdate} onChange={onFormChange}>
             <div>
                 <Input
                     type="text"
                     name="username"
                     value={username}
                     title={t('username')}
-                    onChange={(e) => { onUsernameChangeHendler(e) }}
+                    onChange={onUsernameChangeHendler}
                     required
                     state={errors.has("username") ? 'invalid' : 'valid'}
                 />

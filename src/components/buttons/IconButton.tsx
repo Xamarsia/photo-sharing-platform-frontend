@@ -2,7 +2,7 @@
 
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 
 type Props = {
@@ -15,8 +15,14 @@ type Props = {
 
 export default function IconButton({ icon, hoveredIcon, className, onClick }: Props) {
     const [isHovering, setIsHovered] = useState<boolean>(false);
-    const onMouseEnter = () => setIsHovered(true);
-    const onMouseLeave = () => setIsHovered(false);
+
+    const onMouseEnter = useCallback(() => {
+        setIsHovered(true);
+    }, [isHovering]);
+
+    const onMouseLeave = useCallback(() => {
+        setIsHovered(false);
+    }, [isHovering]);
 
     return (
         <button

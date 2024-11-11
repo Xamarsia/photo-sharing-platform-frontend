@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useTranslations } from 'next-intl';
-import { ChangeEvent, FormEvent, SetStateAction, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, SetStateAction, useCallback, useMemo, useState } from "react";
 
 import Textarea from "@/components/common/Textarea";
 import TextButton from "@/components/buttons/TextButton";
@@ -32,7 +32,7 @@ export default function EditPostForm({ post }: Props) {
     const t = useTranslations('form');
     const router = useRouter();
 
-    const onImageSelected = (file: SetStateAction<File | undefined>) => {
+    const onImageSelected = useCallback((file: SetStateAction<File | undefined>) => {
         setSelectedImage(file);
         const response = updateRequiredFileSchema.safeParse({
             file: file,
@@ -45,9 +45,9 @@ export default function EditPostForm({ post }: Props) {
         } else {
             errors.delete("file");
         }
-    };
+    }, [selectedImage, errors]);
 
-    function onDescriptionChangeHendler(event: ChangeEvent<HTMLTextAreaElement>): void {
+    const onDescriptionChangeHendler = useCallback((event: ChangeEvent<HTMLTextAreaElement>): void => {
         setDescription(event.target.value);
 
         const response = updateDescriptionSchema.safeParse({
@@ -62,9 +62,9 @@ export default function EditPostForm({ post }: Props) {
         } else {
             errors.delete(event.target.name);
         }
-    }
+    }, [description, errors]);
 
-    async function onUpdate(event: FormEvent<HTMLFormElement>) {
+    const onUpdate = useCallback(async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const response = editPostValidationSchema.safeParse({
@@ -94,7 +94,7 @@ export default function EditPostForm({ post }: Props) {
             const newPost: PostDTO | undefined = await updatePostInfo(post.id, body);
         }
         router.push(`/../post/${post.id}`);
-    }
+    }, [selectedImage, description, defaultImageExist, isFormChanged, errors]);
 
     let imageSrc = useMemo((): string | undefined => {
         if (selectedImage) {
@@ -105,11 +105,19 @@ export default function EditPostForm({ post }: Props) {
         return undefined;
     }, [selectedImage, defaultImageExist, post])
 
+    const onFormChange = useCallback(() => {
+        setIsFormChanged(true);
+    }, [isFormChanged]);
+
+    const onDefaultImageRemoved = useCallback(() => {
+        setDefaultImageExist(false);
+    }, [defaultImageExist]);
+
     return (
-        <form onSubmit={onUpdate} onChange={() => setIsFormChanged(true)} className='flex flex-col gap-y-3'>
+        <form onSubmit={onUpdate} onChange={onFormChange} className='flex flex-col gap-y-3'>
             <h1 className={`${styles['h1']}`}>{t('editPost')}</h1>
             <div>
-                <FileSelector onImageSelected={onImageSelected} defaultImageExist={defaultImageExist} onDefaultImageRemoved={() => { setDefaultImageExist(false); }}>
+                <FileSelector onImageSelected={onImageSelected} defaultImageExist={defaultImageExist} onDefaultImageRemoved={onDefaultImageRemoved}>
                     {imageSrc && <DragAndDropFullPreview src={imageSrc} />}
                 </FileSelector>
                 <FormFieldError text={errors.get("file")} />
@@ -121,7 +129,7 @@ export default function EditPostForm({ post }: Props) {
                     value={description}
                     title={t('description')}
                     name="description"
-                    onChange={(e) => onDescriptionChangeHendler(e)}
+                    onChange={onDescriptionChangeHendler}
                     state={errors.has("description") ? 'invalid' : 'valid'}
                 />
                 <FormFieldError text={errors.get("description")} />

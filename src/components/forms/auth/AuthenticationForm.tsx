@@ -6,7 +6,7 @@ import styles from '@/styles/text/text.module.css';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { FirebaseError } from 'firebase/app';
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
@@ -33,7 +33,7 @@ export default function AuthenticationForm() {
     const t = useTranslations('form');
     const router = useRouter();
 
-    async function handleSignUpWithEmailAndPassword(event: FormEvent<HTMLFormElement>) {
+    const onSignUpWithEmailAndPassword = useCallback(async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const response = await authFormValidationSchema.safeParseAsync({
@@ -75,17 +75,17 @@ export default function AuthenticationForm() {
         if (credential) {
             router.push('/auth/registration');
         }
-    }
+    }, [email, password, confirmPassword, errors, showAlert]);
 
-    async function handleSignUnWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {
+    const onSignUnWithGoogle = useCallback(async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         const credential: UserCredential | undefined = await signUpWithGoogle();
         if (credential) {
             router.push('/auth/registration');
         }
-    }
+    }, []);
 
-    async function onEmailChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+    const onEmailChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
 
         const response = emailChangeValidationSchema.safeParse({
@@ -100,9 +100,9 @@ export default function AuthenticationForm() {
         } else {
             errors.delete(event.target.name);
         }
-    }
+    }, [email, errors]);
 
-    async function onPasswordChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+    const onPasswordChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
 
         const response = setPasswordSchema.safeParse({
@@ -117,9 +117,9 @@ export default function AuthenticationForm() {
             errorsMap.set('email', emailError);
         }
         setErrors(errorsMap);
-    }
+    }, [password, confirmPassword, errors]);
 
-    async function onConfirmPasswordChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+    const onConfirmPasswordChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setConfirmPassword(event.target.value);
 
         const response = setPasswordSchema.safeParse({
@@ -134,12 +134,16 @@ export default function AuthenticationForm() {
         }
 
         setErrors(errorsMap);
-    }
+    }, [password, confirmPassword, errors]);
+
+    const onFormChange = useCallback((event: FormEvent<HTMLFormElement>) => {
+        setFormIsValid(event.currentTarget.checkValidity());
+    }, [formIsValid]);
 
 
     return (
-        <form onSubmit={handleSignUpWithEmailAndPassword}
-            onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
+        <form onSubmit={onSignUpWithEmailAndPassword}
+            onChange={onFormChange}
             className='flex flex-col justify-between h-[464px]'>
             <div className='flex flex-col gap-y-3'>
                 <h1 className={`${styles['h1']}`}>{t('signUp')}</h1>
@@ -147,7 +151,7 @@ export default function AuthenticationForm() {
                 <TextIconButton
                     style='secondary'
                     text={t('continueWithGoogle')}
-                    onClick={handleSignUnWithGoogle}
+                    onClick={onSignUnWithGoogle}
                     icon={google}
                     fill="parent"
                 />
@@ -160,7 +164,7 @@ export default function AuthenticationForm() {
                         value={email}
                         title={t('email')}
                         state={errors.has("email") ? 'invalid' : 'valid'}
-                        onChange={(e) => onEmailChangeHendler(e)}
+                        onChange={onEmailChangeHendler}
                         required
                     />
                     <FormFieldError text={errors.get("email")} />
@@ -172,7 +176,7 @@ export default function AuthenticationForm() {
                         value={password}
                         title={t('password')}
                         state={errors.has("password") ? 'invalid' : 'valid'}
-                        onChange={(e) => { onPasswordChangeHendler(e) }}
+                        onChange={onPasswordChangeHendler}
                         required
                     />
                     <FormFieldError text={errors.get("password")} />
@@ -184,7 +188,7 @@ export default function AuthenticationForm() {
                         value={confirmPassword}
                         title={t('repeatPassword')}
                         state={errors.has("confirmPassword") ? 'invalid' : 'valid'}
-                        onChange={(e) => { onConfirmPasswordChangeHendler(e) }}
+                        onChange={onConfirmPasswordChangeHendler}
                         required
                     />
                     <FormFieldError text={errors.get("confirmPassword")} />

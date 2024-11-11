@@ -5,7 +5,7 @@ import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
 
 import { useTranslations } from 'next-intl';
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { getValidationErrors } from '@/lib/zod/validation';
 import { updateEmailSchema } from '@/lib/zod/schemas/profile/changeEmail';
 
@@ -21,7 +21,7 @@ export default function ChangeEmailForm({ oldEmail, onSubmit }: Props) {
     const [email, setEmail] = useState<string>(oldEmail);
     const t = useTranslations('form');
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    const onChangeEmailFormSubmit = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
 
         if (!isFormChanged || !email) {
@@ -44,9 +44,9 @@ export default function ChangeEmailForm({ oldEmail, onSubmit }: Props) {
         }
 
         onSubmit(email);
-    }
+    }, [email, isFormChanged, errors]);
 
-    async function onEmailChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+    const onEmailChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
         event.preventDefault();
         setEmail(event.target.value);
 
@@ -56,17 +56,21 @@ export default function ChangeEmailForm({ oldEmail, onSubmit }: Props) {
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
         setErrors(errorsMap);
-    }
+    }, [email, errors]);
+
+    const onFormChange = useCallback(() => {
+        setIsFormChanged(true);
+    }, [isFormChanged]);
 
     return (
-        <form onSubmit={handleSubmit} onChange={(e) => { setIsFormChanged(true) }}>
+        <form onSubmit={onChangeEmailFormSubmit} onChange={onFormChange}>
             <div>
                 <Input
                     type="text"
                     name="email"
                     value={email}
                     title={t('email')}
-                    onChange={(e) => onEmailChangeHendler(e)}
+                    onChange={onEmailChangeHendler}
                     required
                 />
                 <FormFieldError text={errors.get("email")} />

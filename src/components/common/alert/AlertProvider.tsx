@@ -1,7 +1,7 @@
 "use client";
 
 
-import React, { ReactNode, createContext, useEffect, useState } from 'react';
+import React, { ReactNode, createContext, useCallback, useEffect, useState } from 'react';
 import Alert from '@/components/common/alert/Alert';
 
 
@@ -26,9 +26,9 @@ export default function AlertProvider({ children }: { children: ReactNode }) {
     const [alerts, setAlerts] = useState<Alert[]>([]);
 
     // Function to hide an alert based on its index
-    const hideAlert = (index: number): void => {
+    const hideAlert = useCallback((index: number): void => {
         setAlerts((alert) => alert.filter((value, i) => i !== index));
-    };
+    }, [alerts]);
 
     // UseEffect hook to remove the first alert message after 8 seconds
     useEffect(() => {

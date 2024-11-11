@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { FirebaseError } from 'firebase/app';
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 
 import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
@@ -17,8 +17,9 @@ import TextIconButton from '@/components/buttons/TextIconButton';
 import google from '@/public/google/google-icon-logo.svg';
 
 import { getValidationErrors } from '@/lib/zod/validation';
-import { emailChangeValidationSchema, signInFormValidationSchema } from '@/lib/zod/schemas/auth/signIn';
 import { signInWithEmailPassword, signInWithGoogle } from '@/lib/firebase/auth';
+import { emailChangeValidationSchema, signInFormValidationSchema } from '@/lib/zod/schemas/auth/signIn';
+
 import { useAlert } from '@/utils/useAlert';
 import { UserCredential } from 'firebase/auth';
 import { isUserRegistered } from '@/actions/user-actions';
@@ -33,7 +34,7 @@ export default function SignInForm() {
     const { showAlert } = useAlert();
     const router = useRouter();
 
-    async function handleSignInWithEmailAndPassword(event: FormEvent<HTMLFormElement>) {
+    const onSignInWithEmailAndPassword = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
 
         const response = signInFormValidationSchema.safeParse({
@@ -74,9 +75,9 @@ export default function SignInForm() {
                 return;
             }
         }
-    }
+    }, [email, password, formIsValid, errors]);
 
-    async function handleSignInWithGoogle(event: React.MouseEvent<HTMLButtonElement>) {
+    const onSignInWithGoogle = useCallback(async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
         event.preventDefault();
         const credential: UserCredential | undefined = await signInWithGoogle();
         if (credential) {
@@ -86,9 +87,9 @@ export default function SignInForm() {
                 return;
             }
         }
-    }
+    }, []);
 
-    async function onEmailChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+    const onEmailChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
         setEmail(event.target.value);
 
         const response = emailChangeValidationSchema.safeParse({
@@ -97,14 +98,20 @@ export default function SignInForm() {
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
         setErrors(errorsMap);
-    }
+    }, []);
+
+    const onFormChange = useCallback((event: FormEvent<HTMLFormElement>): void => {
+        setFormIsValid(event.currentTarget.checkValidity());
+    }, []);
+
+    const onPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+        setPassword(e.target.value);
+    }, []);
 
 
     return (
-        <form onSubmit={handleSignInWithEmailAndPassword}
-            onChange={(e) =>
-                setFormIsValid(e.currentTarget.checkValidity())
-            }
+        <form onSubmit={onSignInWithEmailAndPassword}
+            onChange={onFormChange}
             className='flex flex-col justify-between h-[464px]'>
             <div className='flex flex-col gap-y-3'>
                 <h1 className={`${styles['h1']}`}>{t('signIn')}</h1>
@@ -112,7 +119,7 @@ export default function SignInForm() {
                 <TextIconButton
                     style='secondary'
                     text={t('continueWithGoogle')}
-                    onClick={handleSignInWithGoogle}
+                    onClick={onSignInWithGoogle}
                     icon={google}
                     fill="parent"
                 />
@@ -126,7 +133,7 @@ export default function SignInForm() {
                         title={t('email')}
                         state={errors.has("email") ? 'invalid' : 'valid'}
                         value={email}
-                        onChange={(e) => onEmailChangeHendler(e)}
+                        onChange={onEmailChangeHendler}
                         required
                     />
                     <FormFieldError text={errors.get("email")} />
@@ -138,7 +145,7 @@ export default function SignInForm() {
                         title={t('password')}
                         state={errors.has("password") ? 'invalid' : 'valid'}
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={onPasswordChange}
                         required
                     />
                     <FormFieldError text={errors.get("password")} />

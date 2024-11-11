@@ -1,7 +1,7 @@
 "use client";
 
 
-import { ChangeEvent, FormEvent, SetStateAction, useState } from "react";
+import { ChangeEvent, FormEvent, SetStateAction, useCallback, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
@@ -25,7 +25,7 @@ export default function CreatePostForm() {
     const t = useTranslations('form');
     const router = useRouter();
 
-    const onImageSelected = (file: SetStateAction<File | undefined>) => {
+    const onImageSelected = useCallback((file: SetStateAction<File | undefined>): void => {
         setSelectedImage(file);
 
         const response = updateRequiredFileSchema.safeParse({
@@ -39,9 +39,9 @@ export default function CreatePostForm() {
         } else {
             errors.delete("file");
         }
-    };
+    }, [selectedImage, errors]);
 
-    async function onCreate(event: FormEvent<HTMLFormElement>) {
+    const onCreate = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
 
         const response = createPostValidationSchema.safeParse({
@@ -67,9 +67,9 @@ export default function CreatePostForm() {
                 router.push(`${post.id}`);
             }
         }
-    }
+    }, [selectedImage, description, errors]);
 
-    function onDescriptionChangeHendler(event: ChangeEvent<HTMLTextAreaElement>): void {
+    const onDescriptionChangeHendler = useCallback((event: ChangeEvent<HTMLTextAreaElement>): void => {
         setDescription(event.target.value);
 
         const response = updateDescriptionSchema.safeParse({
@@ -84,7 +84,7 @@ export default function CreatePostForm() {
         } else {
             errors.delete(event.target.name);
         }
-    }
+    }, [description, errors]);
 
     return (
         <form onSubmit={onCreate} className='flex flex-col gap-y-3'>
@@ -102,7 +102,7 @@ export default function CreatePostForm() {
                     value={description}
                     title={t('description')}
                     name="description"
-                    onChange={(e) => onDescriptionChangeHendler(e)}
+                    onChange={onDescriptionChangeHendler}
                     state={errors.has("description") ? 'invalid' : 'valid'}
                 />
                 <FormFieldError text={errors.get("description")} />

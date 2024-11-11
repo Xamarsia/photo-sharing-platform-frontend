@@ -1,7 +1,7 @@
 "use client";
 
 
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 
 import SearchInput from "@/components/common/search/SearchInput";
 import { usePathname, useRouter } from "next/navigation";
@@ -19,21 +19,21 @@ export default function SearchBar() {
         }
     }, [pathname]);
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const onSubmit = useCallback((e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         if (query) {
             router.push(`/search/?query=${query}`);
         }
-    };
+    }, [query]);
 
-    const onSearchChanged = (e: ChangeEvent<HTMLInputElement>) => {
+    const onSearchChanged = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
         e.preventDefault();
         const query: string = e.target.value;
         setQuery(query);
-    };
+    }, [query]);
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
             <SearchInput value={query} onChange={onSearchChanged} />
         </form>
     )

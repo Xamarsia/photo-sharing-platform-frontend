@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 
 import Modal from "@/components/common/Modal";
 import StatCounter from "@/components/common/stats/StatCounter";
-import InfiniteLoading from "../infinite-loading/InfiniteLoading";
+import InfiniteLoading from "@/components/common/infinite-loading/InfiniteLoading";
 import ProfilePreviewsList from "@/components/profile/ProfilePreviewsList";
 
 import styles from '@/styles/text/text.module.css';
@@ -22,19 +22,19 @@ export default function StatsInfo({ profile }: StatsInfoProps) {
     const [modalContent, setModalContent] = useState<ModalContent>();
     const t = useTranslations('form');
 
-    const handleModal = () => {
-        setShowModal(!showModal)
-    };
+    const onCloseModalClick = useCallback(() => {
+        setShowModal(!showModal);
+    }, [showModal]);
 
-    const onFollowersClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-        handleModal();
+    const onFollowersClick = useCallback((event: React.MouseEvent<HTMLAnchorElement>): void => {
+        onCloseModalClick();
         setModalContent("FOLLOWERS");
-    };
+    }, [modalContent, onCloseModalClick]);
 
-    const onFollowingsClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-        handleModal();
+    const onFollowingsClick = useCallback((event: React.MouseEvent<HTMLAnchorElement>): void => {
+        onCloseModalClick();
         setModalContent("FOLLOWINGS");
-    };
+    }, [modalContent, onCloseModalClick]);
 
     const getFollowings = useCallback((page: number) => {
         return getFollowingsPage(profile.userDTO.username, page)
@@ -51,7 +51,7 @@ export default function StatsInfo({ profile }: StatsInfoProps) {
             <StatCounter text={t('followers')} count={profile.followersCount} onClick={onFollowersClick} />
             <StatCounter text={t('followings')} count={profile.followingsCount} onClick={onFollowingsClick} />
 
-            <Modal title={t('followers')} onCloseClicked={handleModal} opened={showModal && modalContent == "FOLLOWERS"}>
+            <Modal title={t('followers')} onCloseClicked={onCloseModalClick} opened={showModal && modalContent == "FOLLOWERS"}>
                 <div className="flex flex-col items-center overflow-y-auto h-96">
                     <InfiniteLoading<UserDTO>
                         fetchPage={getFollowers}
@@ -60,7 +60,7 @@ export default function StatsInfo({ profile }: StatsInfoProps) {
                 </div>
             </Modal>
 
-            <Modal title={t('followings')} onCloseClicked={handleModal} opened={showModal && modalContent == "FOLLOWINGS"}>
+            <Modal title={t('followings')} onCloseClicked={onCloseModalClick} opened={showModal && modalContent == "FOLLOWINGS"}>
                 <div className="flex flex-col items-center overflow-y-auto h-96">
                     <InfiniteLoading<UserDTO>
                         fetchPage={getFollowings}

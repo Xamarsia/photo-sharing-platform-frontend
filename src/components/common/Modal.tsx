@@ -20,15 +20,15 @@ export default function Modal({ title, children, opened, onCloseClicked }: Props
     const modal = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
+        const onClickOutside = (event: MouseEvent) => {
             if (opened && !modal.current?.contains(event.target as Node)) {
                 onCloseClicked();
             }
         }
         if (opened) {
-            document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('mousedown', onClickOutside);
         } else {
-            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('mousedown', onClickOutside);
         }
     }, [opened]);
 

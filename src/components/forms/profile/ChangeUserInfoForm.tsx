@@ -8,7 +8,7 @@ import FormFieldError from '@/components/common/FormFieldError';
 
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 
 import { updateUserInfo } from '@/actions/user-actions';
 import { getValidationErrors } from '@/lib/zod/validation';
@@ -31,7 +31,7 @@ export default function ChangeUserInfoForm({ user }: Props) {
     const t = useTranslations('form');
     const router = useRouter();
 
-    async function handleUserInfoUpdate(event: FormEvent<HTMLFormElement>) {
+    const onUserInfoUpdateFormSubmit = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
 
         if (!isFormChanged) {
@@ -61,9 +61,9 @@ export default function ChangeUserInfoForm({ user }: Props) {
 
         const newUser: UserDTO | undefined = await updateUserInfo(body);
         router.push(`/${user.username}`);
-    }
+    }, [fullName, description, isFormChanged, user, errors]);
 
-    async function onFullNameChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+    const onFullNameChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
         setFullName(event.target.value);
 
         const response = fullNameValidationSchema.safeParse({
@@ -78,9 +78,9 @@ export default function ChangeUserInfoForm({ user }: Props) {
         } else {
             errors.delete(event.target.name);
         }
-    }
+    }, [fullName, errors]);
 
-    async function onDescriptionChangeHendler(event: ChangeEvent<HTMLTextAreaElement>) {
+    const onDescriptionChangeHendler = useCallback((event: ChangeEvent<HTMLTextAreaElement>): void => {
         setDescription(event.target.value);
 
         const response = updateDescriptionSchema.safeParse({
@@ -95,17 +95,21 @@ export default function ChangeUserInfoForm({ user }: Props) {
         } else {
             errors.delete(event.target.name);
         }
-    }
+    }, [description, errors]);
+
+    const onFormChange = useCallback((): void => {
+        setIsFormChanged(true);
+    }, [isFormChanged]);
 
     return (
-        <form onSubmit={handleUserInfoUpdate} onChange={(e) => { setIsFormChanged(true) }}>
+        <form onSubmit={onUserInfoUpdateFormSubmit} onChange={onFormChange}>
             <div>
                 <Input
                     type="text"
                     name="fullName"
                     value={fullName}
                     title={t('fullName')}
-                    onChange={(e) => onFullNameChangeHendler(e)}
+                    onChange={onFullNameChangeHendler}
                     state={errors.has("fullName") ? 'invalid' : 'valid'}
                 />
                 <FormFieldError text={errors.get("fullName")} />
@@ -116,7 +120,7 @@ export default function ChangeUserInfoForm({ user }: Props) {
                     value={description}
                     title={t('description')}
                     name="description"
-                    onChange={(e) => onDescriptionChangeHendler(e)}
+                    onChange={onDescriptionChangeHendler}
                     state={errors.has("description") ? 'invalid' : 'valid'}
                 />
                 <FormFieldError text={errors.get("description")} />

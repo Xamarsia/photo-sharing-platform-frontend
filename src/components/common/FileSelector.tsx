@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, SetStateAction, useState } from 'react';
+import { ReactNode, SetStateAction, useCallback, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -29,33 +29,35 @@ export default function FileSelector({ rounded, children, defaultImageExist, onD
     const [dragActive, setDragActive] = useState<boolean>(false);
     const t = useTranslations('FileSelector');
 
-    function imageChangeHendler(file: SetStateAction<File | undefined>): void {
+    const imageChangeHendler = useCallback((file: SetStateAction<File | undefined>): void => {
         setSelectedImage(file);
         onImageSelected(file);
-    };
+    }, [selectedImage, onImageSelected]);
 
-    function onDragLeave(e: React.DragEvent<HTMLDivElement>): void {
+    const onDragLeave = useCallback((e: React.DragEvent<HTMLDivElement>): void => {
         e.preventDefault();
         if (!defaultImageExist) {
             setDragActive(false);
         }
-    };
+    }, [defaultImageExist, dragActive]);
 
-    function onDragOver(e: React.DragEvent<HTMLDivElement>): void {
+
+    const onDragOver = useCallback((e: React.DragEvent<HTMLDivElement>): void => {
         e.preventDefault();
         if (!defaultImageExist) {
             setDragActive(true);
         }
-    };
+    }, [defaultImageExist, dragActive]);
 
-    function onDragEnter(e: React.DragEvent<HTMLDivElement>): void {
+
+    const onDragEnter = useCallback((e: React.DragEvent<HTMLDivElement>): void => {
         e.preventDefault();
         if (!defaultImageExist) {
             setDragActive(true);
         }
-    };
+    }, [defaultImageExist, dragActive]);
 
-    function onDrop(e: React.DragEvent<HTMLDivElement>): void {
+    const onDrop = useCallback((e: React.DragEvent<HTMLDivElement>): void => {
         e.preventDefault();
 
         if (defaultImageExist) {
@@ -67,25 +69,28 @@ export default function FileSelector({ rounded, children, defaultImageExist, onD
             const file = e.dataTransfer.files[0];
             imageChangeHendler(file);
         }
-    };
+    }, [defaultImageExist, dragActive]);
 
-    const onImageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+
+    const onImageChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
         if (!event.target.files || event.target.files.length === 0) {
             return;
         }
 
         const file = event.target.files[0];
         imageChangeHendler(file);
-    };
+    }, []);
 
-    const onCloseClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+    const onCloseClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
 
         if (defaultImageExist && onDefaultImageRemoved) {
             onDefaultImageRemoved();
         }
         imageChangeHendler(undefined);
-    };
+    }, [defaultImageExist, onDefaultImageRemoved]);
+
 
     return (
         <div className={`relative w-full aspect-square hover:bg-gray-100 bg-gray-50 border border-gray-200 border-dashed

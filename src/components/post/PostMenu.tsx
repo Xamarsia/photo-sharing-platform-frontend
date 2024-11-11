@@ -2,7 +2,7 @@
 
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
@@ -40,20 +40,36 @@ export default function PostMenuComponent({ detailedPost }: Props) {
     const t = useTranslations('form');
     const router = useRouter();
 
-    async function onDeletePost() {
+    const onDeletePost = useCallback(async () => {
         await deletePost(post.id);
         router.push(`/${author.username}`);
-    }
+    }, [post, author]);
 
-    async function followProfile() {
+    const followProfile = useCallback(async () => {
         setFollowing(true);
         await follow(author.username);
-    }
+    }, [following, author]);
 
-    async function unfollowProfile() {
+    const unfollowProfile = useCallback(async () => {
         setFollowing(false);
         await unfollow(author.username);
-    }
+    }, [following, author]);
+
+    const onShowDropdownClick = useCallback(() => {
+        setShowDropdown(!showDropdown);
+    }, [showDropdown]);
+
+    const onOutsideClick = useCallback(() => {
+        setShowDropdown(false);
+    }, [showDropdown]);
+
+    const onCloseModalClick = useCallback(() => {
+        setShowModal(false);
+    }, [showModal]);
+
+    const onShowModalClick = useCallback(() => {
+        setShowModal(true);
+    }, [showModal]);
 
     return (
         <div className='flex justify-around items-center'>
@@ -67,21 +83,21 @@ export default function PostMenuComponent({ detailedPost }: Props) {
             <IconButton
                 icon={ellipsisHorizontal}
                 hoveredIcon={hoveredEllipsisHorizontal}
-                onClick={(e) => { setShowDropdown(!showDropdown) }}
+                onClick={onShowDropdownClick}
                 className={showDropdown ? "pointer-events-none" : ""}
             />
-            <Dropdown isVisible={showDropdown} onOutsideClicked={() => setShowDropdown(false)}>
+            <Dropdown isVisible={showDropdown} onOutsideClicked={onOutsideClick}>
                 {isUserPostOwner
                     ? <>
                         <DropdownButton style='primary' text={t('editPost')} onClick={() => { router.push(`/post/${post.id}/edit`); }} />
-                        <DropdownButton style='remove' text={t('deletePost')} onClick={() => { setShowModal(true); }} />
+                        <DropdownButton style='remove' text={t('deletePost')} onClick={onShowModalClick} />
                     </>
                     : following
                         ? <DropdownButton style='remove' text={t('unfollow')} onClick={unfollowProfile} />
                         : <DropdownButton style='primary' text={t('follow')} onClick={followProfile} />
                 }
             </Dropdown>
-            <Modal onCloseClicked={() => { setShowModal(false); }} title={t('deletePost')} opened={showModal}>
+            <Modal onCloseClicked={onCloseModalClick} title={t('deletePost')} opened={showModal}>
                 <div className='flex flex-col gap-20'>
                     <p>{t('deleteThisPost')}</p>
                     <TextButton style="remove" text={t('delete')} onClick={onDeletePost} />

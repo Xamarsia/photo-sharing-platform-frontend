@@ -4,7 +4,7 @@ import TextButton from '@/components/buttons/TextButton';
 import FileSelector from "@/components/common/FileSelector";
 import FormFieldError from '@/components/common/FormFieldError';
 
-import { FormEvent, SetStateAction, useMemo, useState } from "react";
+import { FormEvent, SetStateAction, useCallback, useMemo, useState } from "react";
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -28,7 +28,7 @@ export default function ChangeProfileImageForm({ user, onDeleteProfileImage }: P
     const t = useTranslations('form');
     const router = useRouter();
 
-    const onImageSelected = (file: SetStateAction<File | undefined>) => {
+    const onImageSelected = useCallback((file: SetStateAction<File | undefined>): void => {
         setSelectedImage(file);
         const response = updateProfileImageSchema.safeParse({
             file: file,
@@ -36,9 +36,10 @@ export default function ChangeProfileImageForm({ user, onDeleteProfileImage }: P
 
         const errorsMap: Map<string | number, string> = getValidationErrors(response);
         setErrors(errorsMap);
-    };
+    }, [selectedImage, errors]);
 
-    async function onUpdate(event: FormEvent<HTMLFormElement>) {
+
+    const onUpdate = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
 
         const response = updateProfileImageSchema.safeParse({
@@ -61,7 +62,7 @@ export default function ChangeProfileImageForm({ user, onDeleteProfileImage }: P
             return;
         }
         router.push(`/${user.username}`);
-    }
+    }, [selectedImage, defaultImageExist, errors]);
 
     let imageSrc = useMemo((): string | undefined => {
         if (selectedImage) {
@@ -72,11 +73,21 @@ export default function ChangeProfileImageForm({ user, onDeleteProfileImage }: P
         return undefined;
     }, [selectedImage, defaultImageExist, user])
 
+
+    const onFormChange = useCallback(() => {
+        setIsFormChanged(true);
+    }, [isFormChanged]);
+
+    const onDefaultImageRemoved = useCallback(() => {
+        setDefaultImageExist(false);
+        setIsFormChanged(true);
+    }, [defaultImageExist, isFormChanged]);
+
     return (
-        <form onSubmit={onUpdate} onChange={(e) => { setIsFormChanged(true) }}>
+        <form onSubmit={onUpdate} onChange={onFormChange}>
             <div>
                 <div className='size-72'>
-                    <FileSelector onDefaultImageRemoved={() => { setDefaultImageExist(false); setIsFormChanged(true); }} onImageSelected={onImageSelected} rounded defaultImageExist={defaultImageExist} >
+                    <FileSelector onDefaultImageRemoved={onDefaultImageRemoved} onImageSelected={onImageSelected} rounded defaultImageExist={defaultImageExist} >
                         {imageSrc && <Image className={`size-72 rounded-full object-cover object-center`}
                             src={imageSrc} quality={60} alt="Profile image" width={500} height={500} />}
                     </FileSelector>

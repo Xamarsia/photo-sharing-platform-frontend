@@ -4,16 +4,16 @@ import styles from '@/styles/text/text.module.css';
 
 import StatsInfo from '@/components/common/stats/StatsInfo';
 import TextButton from '@/components/buttons/TextButton';
+import PostsPreviewGrid from '@/components/post/PostsPreviewGrid';
 import ProfileImage from '@/components/profile/image/ProfileImage';
+import InfiniteLoading from '@/components/common/infinite-loading/InfiniteLoading';
 
 import { follow, getUserPostPreviewsPage, unfollow } from "@/actions/user-actions";
 
+import { UserState } from '@/constants';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { UserState } from '@/constants';
 import { useCallback, useState } from 'react';
-import InfiniteLoading from '../common/infinite-loading/InfiniteLoading';
-import PostsPreviewGrid from '../post/PostsPreviewGrid';
 
 
 type Props = {
@@ -27,20 +27,23 @@ export default function Profile({ profile }: Props) {
     const router = useRouter();
     const t = useTranslations('form');
 
-
-    async function followProfile(): Promise<void> {
+    const followProfile = useCallback(async (): Promise<void> => {
         setFollowing(true);
         await follow(user.username);
-    }
+    }, [following, user]);
 
-    async function unfollowProfile(): Promise<void> {
+    const unfollowProfile = useCallback(async (): Promise<void> => {
         setFollowing(false);
         await unfollow(user.username);
-    }
+    }, [following, user]);
 
     const getUserPostPreviews = useCallback((page: number) => {
-        return getUserPostPreviewsPage(profile.userDTO.username, page)
-    }, [profile.userDTO.username]);
+        return getUserPostPreviewsPage(profile.userDTO.username, page);
+    }, [profile]);
+
+    const onEditProfileClicked = useCallback(() => {
+        router.push('/profile/edit/info');
+    }, []);
 
     return (
         <div className="flex flex-grow flex-col flex-shrink items-center justify-center mt-4 lg:m-4 gap-4 max-w-7xl">
@@ -60,7 +63,7 @@ export default function Profile({ profile }: Props) {
                 <div className="flex flex-row items-center basis-1/3 my-4">
 
                     {user.state == UserState.Current
-                        ? <TextButton fill="parent" text={t('editProfile')} onClick={(e) => { router.push('/profile/edit/info') }} />
+                        ? <TextButton fill="parent" text={t('editProfile')} onClick={onEditProfileClicked} />
                         : (following
                             ? <TextButton style={"secondary"} text={t('unfollow')} onClick={unfollowProfile} />
                             : <TextButton style={"primary"} text={t('follow')} onClick={followProfile} />

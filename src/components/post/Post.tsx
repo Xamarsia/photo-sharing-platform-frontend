@@ -1,7 +1,7 @@
 "use client";
 
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import Card from '@/components/common/Card';
 import PostMenu from '@/components/post/PostMenu';
@@ -27,15 +27,15 @@ export default function Post({ detailedPost }: Props) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
     const [liking, setLiking] = useState<boolean>(detailedPost.state == LikeState.Like);
 
-    async function onLikePost(): Promise<void> {
+    const onLikePost = useCallback(async (): Promise<void> => {
         setLiking(true);
         await like(post.id);
-    }
+    }, [liking, post]);
 
-    async function onDeleteLike(): Promise<void> {
+    const onDeleteLike = useCallback(async (): Promise<void> => {
         setLiking(false);
         await deleteLike(post.id);
-    }
+    }, [liking, post]);
 
     return (
         <Card>

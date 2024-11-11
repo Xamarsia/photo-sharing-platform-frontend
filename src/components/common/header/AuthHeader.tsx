@@ -2,13 +2,18 @@ import 'server-only';
 
 import Logo from "@/components/common/Logo";
 import SearchBar from "@/components/common/search/SearchBar";
-import HeaderMenu from "@/components/common/header/HeaderMenu";
+import AuthHeaderMenu from '@/components/common/header/AuthHeaderMenu';
 
 import { getCurrentUser } from "@/actions/actions";
+import { notFound } from 'next/navigation';
 
 
-export default async function Header() {
+export default async function AuthHeader() {
     const user: UserDTO | undefined = await getCurrentUser();
+
+    if (!user) {
+        notFound();
+    }
 
     return (
         <header
@@ -16,10 +21,10 @@ export default async function Header() {
             border-y bg-white border-gray-100 h-20 px-4 md:px-8 gap-2 md:gap-4 z-10"
         >
             <Logo />
-            <div className={`grow max-w-[580px] ${user ? "block" : "hidden"}`}>
+            <div className='grow max-w-[580px] block'>
                 <SearchBar />
             </div>
-            <HeaderMenu user={user} />
+            <AuthHeaderMenu user={user} />
         </header>
     )
 }

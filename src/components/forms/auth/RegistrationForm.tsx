@@ -7,7 +7,7 @@ import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { registerUser } from '@/actions/user-actions';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -24,7 +24,7 @@ export default function RegistrationForm() {
     const t = useTranslations('form');
     const router = useRouter();
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    const onFormSubmit = useCallback(async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const response = await signUpFormValidationSchema.safeParseAsync({
@@ -48,9 +48,10 @@ export default function RegistrationForm() {
         if (newUser) {
             router.push(`/${newUser.username}`);
         }
-    }
+    }, [username, fullName, errors]);
 
-    async function onUsernameChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+
+    const onUsernameChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
 
         const response = updateUsernameSchema.safeParse({
@@ -64,10 +65,10 @@ export default function RegistrationForm() {
         } else {
             errors.delete(event.target.name);
         }
-    }
+    }, [username, errors]);
 
 
-    async function onFullNameChangeHendler(event: ChangeEvent<HTMLInputElement>) {
+    const onFullNameChangeHendler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setFullName(event.target.value);
 
         const response = fullNameValidationSchema.safeParse({
@@ -81,11 +82,15 @@ export default function RegistrationForm() {
         } else {
             errors.delete(event.target.name);
         }
-    }
+    }, [fullName, errors]);
+
+    const onFormChange = useCallback((event: FormEvent<HTMLFormElement>) => {
+        setFormIsValid(event.currentTarget.checkValidity());
+    }, [formIsValid]);
 
     return (
-        <form onSubmit={handleSubmit}
-            onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
+        <form onSubmit={onFormSubmit}
+            onChange={onFormChange}
             className='flex flex-col justify-between h-[464px]'>
             <div className='flex flex-col gap-y-3'>
                 <h1 className={`${styles['h1']}`}>{t('signUp')}</h1>
@@ -96,7 +101,7 @@ export default function RegistrationForm() {
                         name="username"
                         value={username}
                         title={t('username')}
-                        onChange={(e) => onUsernameChangeHendler(e)}
+                        onChange={onUsernameChangeHendler}
                         state={errors.has("username") ? 'invalid' : 'valid'}
                     />
                     <FormFieldError text={errors.get("username")} />
@@ -108,7 +113,7 @@ export default function RegistrationForm() {
                         name="fullName"
                         value={fullName}
                         title={t('fullName')}
-                        onChange={(e) => onFullNameChangeHendler(e)}
+                        onChange={onFullNameChangeHendler}
                         state={errors.has("fullName") ? 'invalid' : 'valid'}
                     />
                     <FormFieldError text={errors.get("fullName")} />

@@ -6,6 +6,7 @@ import { getAuthenticatedUser } from '@/actions/user-actions';
 
 import ChangeUsernameContent from '@/components/page-contents/ChangeUsernameContent';
 import SettingsPage from '@/components/common/SettingsPage';
+import { notFound } from 'next/navigation';
 
 
 export const metadata: Metadata = {
@@ -16,10 +17,13 @@ export const metadata: Metadata = {
 export default async function ChangeUsernamePage() {
     const user: UserDTO | undefined = await getAuthenticatedUser();
     const t = await getTranslations('editProfile');
-
+    if (!user) {
+        notFound();
+    }
+    
     return (
         <SettingsPage title={t('changeUsername')} >
-            {user && <ChangeUsernameContent oldUsername={user.username} />}
+            <ChangeUsernameContent oldUsername={user.username} />
         </SettingsPage>
     );
 }

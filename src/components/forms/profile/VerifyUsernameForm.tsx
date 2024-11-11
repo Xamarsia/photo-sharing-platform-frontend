@@ -2,7 +2,7 @@
 
 import styles from '@/styles/text/text.module.css';
 
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { useTranslations } from 'next-intl';
 
 import Input from '@/components/common/Input';
@@ -25,7 +25,7 @@ export default function VerifyUsernameForm({ newUsername, onSubmit }: Props) {
     const t = useTranslations('form');
     const { showAlert } = useAlert();
 
-    async function handleEmailVerification(event: FormEvent<HTMLFormElement>) {
+    const onEmailVerificationSubmit = useCallback(async (event: FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
 
         const credential: UserCredential | undefined | FirebaseError = await reauthenticate(password);
@@ -52,12 +52,19 @@ export default function VerifyUsernameForm({ newUsername, onSubmit }: Props) {
         if (onSubmit) {
             onSubmit();
         }
-    }
+    }, [password, showAlert]);
 
+    const onFormChange = useCallback((event: FormEvent<HTMLFormElement>): void => {
+        setFormIsValid(event.currentTarget.checkValidity());
+    }, [formIsValid]);
+
+    const onPasswordChange = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
+        setPassword(e.target.value);
+    }, [password]);
 
     return (
-        <form onSubmit={handleEmailVerification}
-            onChange={(e) => setFormIsValid(e.currentTarget.checkValidity())}
+        <form onSubmit={onEmailVerificationSubmit}
+            onChange={onFormChange}
             className='flex flex-col justify-between h-[464px]'>
             <div className='flex flex-col gap-y-3'>
                 <p className={`${styles['base-text']}`}>{t('resetUsernameMessage')}</p>
@@ -67,7 +74,7 @@ export default function VerifyUsernameForm({ newUsername, onSubmit }: Props) {
                     name="password"
                     title={t('password')}
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={onPasswordChange}
                     required
                 />
             </div>
