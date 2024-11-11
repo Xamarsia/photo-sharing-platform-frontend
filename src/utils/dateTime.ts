@@ -8,7 +8,7 @@ export function formatDateTime(dateString: string): string {
             hour: 'numeric',
             minute: 'numeric',
             hourCycle: 'h24',
-            timeZone: 'America/New_York',
+            timeZone: process.env.TIME_ZONE,
         }
-    ).format(new Date(dateString + 'Z'))
+    ).format(new Date(dateString))
 }
