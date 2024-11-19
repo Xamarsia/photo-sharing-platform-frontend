@@ -1,9 +1,0 @@
-/* styles */
-
-.primary {
-    @apply text-center text-white font-semibold
-}
-
-.delete {
-    @apply text-white font-semibold
-}

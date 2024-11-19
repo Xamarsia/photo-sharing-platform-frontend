@@ -1,0 +1,35 @@
+/* common */
+
+.placeholder {
+    @apply text-gray-700 font-light disabled:bg-slate-50 disabled:text-slate-500 text-sm leading-5
+}
+
+/* base styles */
+
+.base-text {
+    @apply block font-normal text-justify text-gray-800 text-sm placeholder-gray-400
+}
+
+.button-text {
+    @apply text-sm text-center font-semibold
+}
+
+.main-info {
+    @apply text-gray-950 text-sm font-medium
+}
+
+.secondary-info {
+    @apply text-gray-500 text-sm font-normal text-justify
+}
+
+.primary-link {
+    @apply bg-transparent text-sm font-semibold underline text-blue-500 hover:text-blue-700
+}
+
+.secondary-link {
+    @apply bg-transparent text-sm font-medium hover:underline text-gray-500 hover:text-gray-700
+}
+
+.h1 {
+    @apply text-slate-800 font-normal tracking-normal text-2xl
+}
