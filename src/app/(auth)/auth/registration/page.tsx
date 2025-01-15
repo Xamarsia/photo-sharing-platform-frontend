@@ -28,7 +28,7 @@ export default async function RegistrationPage() {
 
     return (
         <Card>
-            <RegistrationForm />,
+            <RegistrationForm />
         </Card>
     );
 }

@@ -28,10 +28,12 @@ export default function AuthHeaderMenu({ user }: Props) {
     }, []);
 
     const onEditProfileClick = useCallback(() => {
+        setShowDropdown(false);
         router.push('/profile/edit/info');
     }, []);
 
     const onMyProfileClick = useCallback(() => {
+        setShowDropdown(false);
         if (user) {
             router.push(`/${user.username}`);
         }
