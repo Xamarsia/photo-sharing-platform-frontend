@@ -24,10 +24,10 @@ import { UserCredential } from 'firebase/auth';
 
 
 export default function AuthenticationForm() {
-    const [password, setPassword] = useState<string>("password");
-    const [confirmPassword, setConfirmPassword] = useState<string>("password");
-    const [email, setEmail] = useState<string>("localpart@domain.com");
-    const [formIsValid, setFormIsValid] = useState<boolean>(true);
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [formIsValid, setFormIsValid] = useState<boolean>(false);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const { showAlert } = useAlert();
     const t = useTranslations('form');

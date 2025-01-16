@@ -19,7 +19,7 @@ type Props = {
 
 
 export default function VerifyEmailForm({ newEmail }: Props) {
-    const [password, setPassword] = useState<string>("password");
+    const [password, setPassword] = useState<string>("");
     const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const [confirmPressed, setConfirmPressed] = useState<boolean>(false);
     const t = useTranslations('form');

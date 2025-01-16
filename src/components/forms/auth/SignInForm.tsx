@@ -26,9 +26,9 @@ import { isUserRegistered } from '@/actions/user-actions';
 
 
 export default function SignInForm() {
-    const [password, setPassword] = useState<string>("password");
-    const [email, setEmail] = useState<string>("localpart@domain.com");
-    const [formIsValid, setFormIsValid] = useState<boolean>(true);
+    const [password, setPassword] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [formIsValid, setFormIsValid] = useState<boolean>(false);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const t = useTranslations('form');
     const { showAlert } = useAlert();
