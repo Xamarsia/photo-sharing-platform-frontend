@@ -20,7 +20,7 @@ import IconButton from '@/components/buttons/IconButton';
 
 
 export default function ResetPasswordForm() {
-    const [email, setEmail] = useState<string>("localpart@domain.com");
+    const [email, setEmail] = useState<string>("");
     const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const [resetPressed, setResetPressed] = useState<boolean>(false);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());

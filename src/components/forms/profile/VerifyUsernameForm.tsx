@@ -20,7 +20,7 @@ type Props = {
 
 
 export default function VerifyUsernameForm({ newUsername, onSubmit }: Props) {
-    const [password, setPassword] = useState<string>("password");
+    const [password, setPassword] = useState<string>("");
     const [formIsValid, setFormIsValid] = useState<boolean>(true);
     const t = useTranslations('form');
     const { showAlert } = useAlert();

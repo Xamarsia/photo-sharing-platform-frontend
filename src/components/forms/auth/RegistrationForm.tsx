@@ -17,9 +17,9 @@ import { getValidationErrors } from '@/lib/zod/validation';
 
 
 export default function RegistrationForm() {
-    const [username, setUsername] = useState<string>("username");
+    const [username, setUsername] = useState<string>("");
     const [fullName, setFullName] = useState<string>("");
-    const [formIsValid, setFormIsValid] = useState<boolean>(true);
+    const [formIsValid, setFormIsValid] = useState<boolean>(false);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const t = useTranslations('form');
     const router = useRouter();
