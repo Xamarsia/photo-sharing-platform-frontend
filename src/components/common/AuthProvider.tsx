@@ -17,12 +17,9 @@ export default function AuthProvider({ children }: Props) {
         auth.onIdTokenChanged(async (user) => {
             if (!user) {
                 saveTokenToHttpOnlyCookies("");
-                console.log("token: empty")
-
             } else {
                 const token: string = await user.getIdToken();
                 saveTokenToHttpOnlyCookies(token);
-                console.log("token: ", token)
             }
         });
     }, []);
