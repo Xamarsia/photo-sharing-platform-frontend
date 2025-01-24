@@ -34,9 +34,9 @@ export default function DefaultProfileImage({ username, preview }: Props) {
     return (
         <div
             className={`border relative inline-flex items-center justify-center overflow-hidden rounded-full 
-            ${preview ? 'size-12' : 'size-72'} ${brColours[colourIndex]} ${bgColours[colourIndex]}`}
+            ${preview ? 'size-12' : 'size-32 md:size-72'} ${brColours[colourIndex]} ${bgColours[colourIndex]}`}
         >
-            <span className={`font-normal ${preview ? "text-xl" : "text-9xl"} ${txtColours[colourIndex]} `}>{username ? username.slice(0, 2) : "XX"}</span>
+            <span className={`font-normal ${preview ? "text-xl" : "text-6xl md:text-9xl"} ${txtColours[colourIndex]} `}>{username ? username.slice(0, 2) : "XX"}</span>
         </div>
     )
 }

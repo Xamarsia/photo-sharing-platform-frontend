@@ -58,7 +58,7 @@ export default function AlertProvider({ children }: { children: ReactNode }) {
 
     return (
         <AlertContext.Provider value={contextValue}>
-            <div className='absolute w-full z-[51] bottom-0 flex justify-center'>
+            <div className='absolute w-full z-[51] bottom-0 flex justify-center items-center flex-col'>
                 {alerts.map((alert, index) => (
                     <Alert
                         message={alert.message}

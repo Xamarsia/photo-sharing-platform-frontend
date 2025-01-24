@@ -48,7 +48,7 @@ export const fullNameSchema = z.optional(z.string()
 );
 
 export const descriptionSchema = z.optional(z.string()
-    .max(3000, "Description must contain no more than 3000 characters")
+    .max(1000, "Description must contain no more than 1000 characters")
 );
 
 export const setPasswordSchema = z.object({

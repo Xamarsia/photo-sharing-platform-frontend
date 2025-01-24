@@ -26,6 +26,7 @@ export default function Profile({ profile }: Props) {
     const [following, setFollowing] = useState<boolean>(user.state == UserState.Follow);
     const router = useRouter();
     const t = useTranslations('form');
+    const [more, setMore] = useState<boolean>(true);
 
     const followProfile = useCallback(async (): Promise<void> => {
         setFollowing(true);
@@ -45,18 +46,22 @@ export default function Profile({ profile }: Props) {
         router.push('/profile/edit/info');
     }, []);
 
+    const onMoreClick = useCallback(() => {
+        setMore(!more);
+    }, [more]);
+
     return (
         <div className="flex flex-grow flex-col flex-shrink items-center justify-center mt-4 lg:m-4 gap-4 max-w-7xl">
-            <div className="flex flex-col items-center gap-4 w-11/12 max-w-lg">
+            <div className="flex flex-col items-center gap-4 w-11/12 max-w-2xl break-all">
                 <ProfileImage profileImageExist={user.isProfileImageExist} username={user.username} />
-                <h1 className={`${styles['h1']} text-center`}>{user.fullName}</h1>
-
-                <span className={`${styles['secondary-info']}`}>
-                    {user.username}
-                </span>
-
-                <p className={`${styles['base-text']}`}>
-                    {user.description}
+                <h1 className={`${styles['h1']} text-center`}>{user.username}</h1>
+                <p className={`${styles['base-text']}`}>{more ? user.description?.substring(0, 200) : user.description}
+                    {user.description && user.description.length > 200 &&
+                        <>
+                            <span className={`${!more && "hidden"}`}>...</span>
+                            <button onClick={onMoreClick} className={`${styles['secondary-link']} mx-4`}>{more ? t("more") : t('less')}</button>
+                        </>
+                    }
                 </p>
 
                 <StatsInfo profile={profile} />
