@@ -1,7 +1,7 @@
 services:
   frontend-api:
     container_name: frontend-api
-    image: xamarsia/spsp-frontend:0.0.1
+    image: xamarsia/spsp-frontend:0.0.4
     env_file:
       - .env
     ports:
@@ -13,4 +13,3 @@ networks:
   external_network:
     name: microservice_network
     external: true
-    
