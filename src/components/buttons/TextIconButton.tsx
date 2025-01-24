@@ -28,7 +28,7 @@ export default function TextIconButton({ icon, text, fill, style = 'primary', on
                 `}
             >
                 <Image src={icon} alt="icon" className='size-5' />
-                <h1 className={`hidden md:block ${fill == 'parent' && 'w-full'}`}>{text}</h1>
+                <h1 className={`block ${fill == 'parent' && 'w-full'}`}>{text}</h1>
             </button>
         </div>
     )

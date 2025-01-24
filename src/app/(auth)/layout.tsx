@@ -15,7 +15,7 @@ export default async function AuthLayout({
     <AuthProvider>
       <UnauthorizedGuard>
         <UnAuthHeader />
-        <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20 z-30'>
+        <main className='flex flex-grow relative flex-shrink-0 bg-gray-50 mt-20'>
           <AlertProvider>
             <div className='flex flex-grow flex-shrink justify-center items-center m-4'>
               {children}

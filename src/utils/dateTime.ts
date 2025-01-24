@@ -3,7 +3,7 @@ export function formatDateTime(dateString: string): string {
         process.env.LOCALE,
         {
             year: "numeric",
-            month: 'long',
+            month: 'short',
             day: 'numeric',
             hour: 'numeric',
             minute: 'numeric',

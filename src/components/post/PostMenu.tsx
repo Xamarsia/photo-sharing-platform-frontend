@@ -72,13 +72,13 @@ export default function PostMenuComponent({ detailedPost }: Props) {
     }, [showModal]);
 
     return (
-        <div className='flex justify-around items-center'>
-            <Link href={`/${post.username}`}>
+        <div className='flex justify-around items-center shrink-0'>
+            <Link href={`/${post.username}`} className='min-h-12 min-w-12'>
                 <ProfileImage profileImageExist={author.isProfileImageExist} username={author.username} preview />
             </Link>
-            <div className="flex-1 flex gap-2 mx-4">
-                <span className={`${styles['main-info']}`}>{author.username}</span>
-                <time dateTime={createdDate} className={`${styles['secondary-info']} truncate`}>{createdDate}</time>
+            <div className="flex-1 flex mx-4 w-16 flex-col">
+                <span className={`${styles['main-info']} text-clip overflow-x-hidden`}>{author.username}</span>
+                <time dateTime={createdDate} className={`${styles['secondary-info']}`}>{createdDate}</time>
             </div>
             <IconButton
                 icon={ellipsisHorizontal}
