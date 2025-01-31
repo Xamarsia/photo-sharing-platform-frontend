@@ -86,9 +86,9 @@ export default function ChangeProfileImageForm({ user, onDeleteProfileImage }: P
     return (
         <form onSubmit={onUpdate} onChange={onFormChange}>
             <div>
-                <div className='size-72'>
+                <div className='size-60'>
                     <FileSelector onDefaultImageRemoved={onDefaultImageRemoved} onImageSelected={onImageSelected} rounded defaultImageExist={defaultImageExist} >
-                        {imageSrc && <Image className={`size-72 rounded-full object-cover object-center`}
+                        {imageSrc && <Image className={`size-60 rounded-full object-cover object-center`}
                             src={imageSrc} quality={60} alt="Profile image" width={500} height={500} />}
                     </FileSelector>
                 </div>

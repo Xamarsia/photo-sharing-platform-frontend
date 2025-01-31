@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 type Props = {
-    username?: string
+    username: string
     preview?: boolean
 }
 
@@ -19,10 +19,7 @@ const brColours: Array<string> = ['border-gray-200, border-red-200', 'border-ora
 
 export default function DefaultProfileImage({ username, preview }: Props) {
 
-    const colourIndex = useMemo((username?: string): number => {
-        if (!username) {
-            return 0;
-        }
+    const colourIndex = useMemo((): number => {
         let sum: number = 0;
         for (let i = 0; i < username.length; i++) {
             sum = username.charCodeAt(i);
@@ -34,9 +31,9 @@ export default function DefaultProfileImage({ username, preview }: Props) {
     return (
         <div
             className={`border relative inline-flex items-center justify-center overflow-hidden rounded-full 
-            ${preview ? 'size-12' : 'size-32 md:size-72'} ${brColours[colourIndex]} ${bgColours[colourIndex]}`}
+            ${preview ? 'size-12' : 'size-32 md:size-60'} ${brColours[colourIndex]} ${bgColours[colourIndex]}`}
         >
-            <span className={`font-normal ${preview ? "text-xl" : "text-6xl md:text-9xl"} ${txtColours[colourIndex]} `}>{username ? username.slice(0, 2) : "XX"}</span>
+            <span className={`font-normal ${preview ? "text-xl" : "text-6xl md:text-8xl"} ${txtColours[colourIndex]}`}>{username.slice(0, 2).toLowerCase()}</span>
         </div>
     )
 }
