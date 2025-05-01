@@ -1,10 +1,10 @@
 'use server'
 
-import { authFetch, JSONRequest } from "@/lib/auth-controller";
+import { spspFetch, JSONRequest } from "@/lib/auth-controller";
 
 
 export async function createPost(data: FormData): Promise<PostDTO | undefined> {
-    const res: Response = await authFetch(`/post/create`, { method: 'POST', body: data, });
+    const res: Response = await spspFetch(`/post/create`, { method: 'POST', body: data, });
     if (!res.ok) {
         return undefined;
     }
@@ -13,7 +13,7 @@ export async function createPost(data: FormData): Promise<PostDTO | undefined> {
 }
 
 export async function getDetailedPost(postId: number): Promise<DetailedPostDTO | undefined> {
-    const res: Response = await authFetch(`/post/${postId}/detailed`, { method: 'GET' });
+    const res: Response = await spspFetch(`/post/${postId}/detailed`, { method: 'GET' });
     if (!res.ok) {
         return undefined;
     }
@@ -22,7 +22,7 @@ export async function getDetailedPost(postId: number): Promise<DetailedPostDTO |
 }
 
 export async function getPost(postId: number): Promise<PostDTO | undefined> {
-    const res: Response = await authFetch(`/post/${postId}`, { method: 'GET' });
+    const res: Response = await spspFetch(`/post/${postId}`, { method: 'GET' });
     if (!res.ok) {
         return undefined;
     }
@@ -31,7 +31,7 @@ export async function getPost(postId: number): Promise<PostDTO | undefined> {
 }
 
 export async function updatePostImage(postId: number, data: FormData): Promise<void> {
-    const res: Response = await authFetch(`/post/${postId}/updateImage`, { method: 'PUT', body: data, });
+    const res: Response = await spspFetch(`/post/${postId}/updateImage`, { method: 'PUT', body: data, });
     if (!res.ok) {
         return undefined;
     }
@@ -40,7 +40,7 @@ export async function updatePostImage(postId: number, data: FormData): Promise<v
 
 export async function updatePostInfo(postId: number, data: UpdatePostRequest): Promise<PostDTO | undefined> {
     const req: RequestInit = await JSONRequest(data, { method: 'PUT' });
-    const res: Response = await authFetch(`/post/${postId}/updatePostInfo`, req);
+    const res: Response = await spspFetch(`/post/${postId}/updatePostInfo`, req);
 
     if (!res.ok) {
         return undefined;
@@ -51,7 +51,7 @@ export async function updatePostInfo(postId: number, data: UpdatePostRequest): P
 }
 
 export async function deletePost(postId: number): Promise<void> {
-    const res: Response = await authFetch(`/post/${postId}`, { method: 'DELETE' });
+    const res: Response = await spspFetch(`/post/${postId}`, { method: 'DELETE' });
     if (!res.ok) {
         return;
     }
@@ -59,7 +59,7 @@ export async function deletePost(postId: number): Promise<void> {
 }
 
 export async function like(postId: number): Promise<void> {
-    const res: Response = await authFetch(`/like/${postId}`, { method: 'POST' });
+    const res: Response = await spspFetch(`/like/${postId}`, { method: 'POST' });
     console.log("like: ", res.ok);
     if (!res.ok) {
         return undefined;
@@ -69,7 +69,7 @@ export async function like(postId: number): Promise<void> {
 }
 
 export async function deleteLike(postId: number): Promise<void> {
-    const res: Response = await authFetch(`/like/${postId}`, { method: 'DELETE' });
+    const res: Response = await spspFetch(`/like/${postId}`, { method: 'DELETE' });
     if (!res.ok) {
         return undefined;
     }
