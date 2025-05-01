@@ -8,7 +8,7 @@ type Props = {
     text: string,
     icon: string,
     fill?: 'content' | 'parent',
-    style?: 'primary' | 'secondary' | undefined,
+    style?: 'primary' | 'secondary',
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void,
 }
 

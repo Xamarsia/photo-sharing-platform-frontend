@@ -7,7 +7,7 @@ import Loader from '@/components/common/Loader';
 
 
 type Props<T> = {
-    emptyResult?: ReactNode | undefined,
+    emptyResult?: ReactNode,
     displayItems: (items: T[]) => ReactNode,
     fetchPage: (page: number) => Promise<Page<T>>,
 }

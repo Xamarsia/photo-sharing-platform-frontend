@@ -1,6 +1,6 @@
 
 type Props = {
-    text?: string | undefined,
+    text?: string,
 }
 
 

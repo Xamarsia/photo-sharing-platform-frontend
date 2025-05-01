@@ -9,7 +9,7 @@ type Props = {
     type?: 'button' | 'submit',
     fill?: 'content' | 'parent',
     disabled?: boolean,
-    style?: 'primary' | 'secondary' | 'remove' | undefined,
+    style?: 'primary' | 'secondary' | 'remove',
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void,
 }
 

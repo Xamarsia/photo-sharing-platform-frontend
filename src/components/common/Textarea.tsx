@@ -2,15 +2,15 @@ import { ChangeEvent } from "react"
 
 
 type Props = {
-    name?: string | undefined,
-    value?: string | undefined,
-    title?: string | undefined,
+    id?: string,
+    name?: string,
+    rows?: number,
+    value?: string,
+    title?: string,
+    maxLength?: number,
+    required?: boolean,
+    placeholder?: string,
     state?: 'invalid' | 'valid'
-    placeholder?: string | undefined,
-    rows?: number | undefined,
-    maxLength?: number | undefined,
-    required?: boolean | undefined,
-    id?: string | undefined,
     onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void,
 }
 
@@ -32,7 +32,7 @@ export default function Textarea({ name, value, title, rows, maxLength, required
                 border border-gray-100 focus:border-blue-500 rounded-xl
                 font-normal text-gray-800
                 ${state == 'invalid' && '[&:not(:placeholder-shown):not(:focus)]:border-red-500'}`
-            }
+                }
             />
             <label className={`px-3 
                 transition-all pointer-events-none h-full text-gray-400 
