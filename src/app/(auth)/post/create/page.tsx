@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 
 
 export default async function CreatePostPage() {
-
     return (
         <Card>
             <CreatePostForm />

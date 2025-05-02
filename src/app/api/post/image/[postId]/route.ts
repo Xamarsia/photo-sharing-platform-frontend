@@ -1,4 +1,4 @@
-import { authFetch } from "@/lib/auth-controller";
+import { spspFetch } from "@/lib/auth-controller";
 
 
 type Props = {
@@ -12,6 +12,6 @@ export async function GET(
 ) {
     const postId: number = (await params).postId;
 
-    const avatarResponse: Response = await authFetch(`/post/${postId}/image`, { method: 'GET', });
+    const avatarResponse: Response = await spspFetch(`/post/${postId}/image`, { method: 'GET', });
     return avatarResponse;
 }

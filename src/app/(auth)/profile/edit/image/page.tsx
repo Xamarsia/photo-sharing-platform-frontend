@@ -1,11 +1,10 @@
 import 'server-only';
 
+import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import ChangeProfileImageContent from '@/components/page-contents/ChangeProfileImageContent';
 import SettingsPage from '@/components/common/SettingsPage';
-import { getAuthenticatedUser } from '@/actions/user-actions';
-import { Metadata } from 'next';
+import ChangeProfileImageContent from '@/components/page-contents/ChangeProfileImageContent';
 
 
 export const metadata: Metadata = {
@@ -14,12 +13,11 @@ export const metadata: Metadata = {
 
 
 export default async function ChangeProfileImagePage() {
-  const user: UserDTO | undefined = await getAuthenticatedUser();
   const t = await getTranslations('editProfile');
 
   return (
     <SettingsPage title={t('changeProfileImage')}>
-      {user && <ChangeProfileImageContent user={user} />}
+      <ChangeProfileImageContent />
     </SettingsPage>
   );
 }

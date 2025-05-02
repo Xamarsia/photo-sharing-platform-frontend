@@ -4,8 +4,8 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { getAuthenticatedApp } from '@/lib/firebase/serverApp';
 
-import ChangeEmailContent from '@/components/page-contents/ChangeEmailContent';
 import SettingsPage from '@/components/common/SettingsPage';
+import ChangeEmailContent from '@/components/page-contents/ChangeEmailContent';
 
 
 export const metadata: Metadata = {
