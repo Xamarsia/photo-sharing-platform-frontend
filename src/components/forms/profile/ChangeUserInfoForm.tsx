@@ -1,26 +1,23 @@
 "use client";
 
 
-import Input from '@/components/common/Input';
-import Textarea from "@/components/common/Textarea";
 import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
+import { GetCurrentUserOrRedirect } from '@/components/common/guards/UserProvider';
+import Input from '@/components/common/Input';
+import Textarea from "@/components/common/Textarea";
 
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 
 import { updateUserInfo } from '@/actions/user-actions';
-import { getValidationErrors } from '@/lib/zod/validation';
 import { fullNameValidationSchema, updateDescriptionSchema, updateUserInfoValidationSchema } from '@/lib/zod/schemas/profile/changeUserInfo';
+import { getValidationErrors } from '@/lib/zod/validation';
 
 
-type Props = {
-    user: UserDTO,
-}
-
-
-export default function ChangeUserInfoForm({ user }: Props) {
+export default function ChangeUserInfoForm() {
+    const user: UserDTO = GetCurrentUserOrRedirect();
     const defaultFullName: string | undefined = (user.fullName == null ? undefined : user.fullName);
     const defaultDescription: string | undefined = (user.description == null ? undefined : user.description);
 
@@ -60,8 +57,8 @@ export default function ChangeUserInfoForm({ user }: Props) {
         }
 
         const newUser: UserDTO | undefined = await updateUserInfo(body);
-        router.push(`/${user.username}`);
-    }, [fullName, description, isFormChanged, user, errors]);
+        router.push(`/${newUser?.username}`);
+    }, [fullName, description, isFormChanged, user.fullName, user.description, errors]);
 
     const onFullNameChangeHendler = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
         setFullName(e.target.value);

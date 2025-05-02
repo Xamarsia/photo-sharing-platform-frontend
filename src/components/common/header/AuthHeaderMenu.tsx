@@ -1,15 +1,16 @@
 "use client";
 
+import { signOut } from "@/lib/firebase/auth";
 import { useTranslations } from 'next-intl';
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 
-import Dropdown from "@/components/common/Dropdown";
 import DropdownButton from "@/components/buttons/DropdownButton";
 import TextIconButton from "@/components/buttons/TextIconButton";
-import { GetCurrentUserOrRedirect } from "@/components/common/guards/Providers";
+import Dropdown from "@/components/common/Dropdown";
+import { GetCurrentUserOrRedirect } from "@/components/common/guards/UserProvider";
 import ProfileImage from "@/components/profile/image/ProfileImage";
-import { signOut } from "@/lib/firebase/auth";
+
 import plus from '@/public/plus/plus-white.svg';
 
 

@@ -1,29 +1,30 @@
 "use client";
 
+
 import TextButton from '@/components/buttons/TextButton';
 import FileSelector from "@/components/common/FileSelector";
 import FormFieldError from '@/components/common/FormFieldError';
-
-import { FormEvent, SetStateAction, useCallback, useMemo, useState } from "react";
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-
+import { getValidationErrors } from '@/lib/zod/validation';
 import { updateProfileImage } from '@/actions/user-actions';
 import { updateProfileImageSchema } from '@/lib/zod/schemas/profile/changeProfileImage';
-import { getValidationErrors } from '@/lib/zod/validation';
+
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { FormEvent, SetStateAction, useCallback, useMemo, useState } from "react";
 
 
 type Props = {
-    user: UserDTO,
+    username: string,
+    isProfileImageExist: boolean,
     onDeleteProfileImage: () => void,
 }
 
 
-export default function ChangeProfileImageForm({ user, onDeleteProfileImage }: Props) {
+export default function ChangeProfileImageForm({ username, isProfileImageExist, onDeleteProfileImage }: Props) {
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<File | undefined>(undefined);
-    const [defaultImageExist, setDefaultImageExist] = useState<boolean>(user.isProfileImageExist);
+    const [defaultImageExist, setDefaultImageExist] = useState<boolean>(isProfileImageExist);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());
     const t = useTranslations('form');
     const router = useRouter();
@@ -57,21 +58,21 @@ export default function ChangeProfileImageForm({ user, onDeleteProfileImage }: P
             let formData = new FormData();
             formData.append('file', selectedImage);
             await updateProfileImage(formData);
-        } else if (user.isProfileImageExist && !defaultImageExist) {
+        } else if (isProfileImageExist && !defaultImageExist) {
             await onDeleteProfileImage();
             return;
         }
-        router.push(`/${user.username}`);
+        router.push(`/${username}`);
     }, [selectedImage, defaultImageExist, errors]);
 
     let imageSrc = useMemo((): string | undefined => {
         if (selectedImage) {
             return URL.createObjectURL(selectedImage);
-        } else if (user.isProfileImageExist && defaultImageExist) {
-            return `/api/user/avatar/${user.username}`;
+        } else if (isProfileImageExist && defaultImageExist) {
+            return `/api/user/avatar/${username}`;
         }
         return undefined;
-    }, [selectedImage, defaultImageExist, user])
+    }, [selectedImage, defaultImageExist, username, isProfileImageExist])
 
 
     const onFormChange = useCallback(() => {

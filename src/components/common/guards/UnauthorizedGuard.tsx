@@ -1,8 +1,9 @@
-import 'server-only';
+'use client';
 
-import { getCurrentUser } from "@/actions/actions";
-import { ReactNode } from "react";
+
+import { GetCurrentUser } from '@/components/common/guards/UserProvider';
 import { redirect } from 'next/navigation';
+import { ReactNode } from "react";
 
 
 type Props = {
@@ -10,16 +11,13 @@ type Props = {
 }
 
 
-export default async function UnauthorizedGuard({ children }: Props) {
-    const user: UserDTO | undefined = await getCurrentUser();
-
-    if (user != undefined) {
+export default function UnauthorizedGuard({ children }: Props) {
+    const currentUser: UserDTO | undefined = GetCurrentUser();
+    if (currentUser != undefined) {
         redirect("/");
     }
 
     return (
-        <>
-            {children}
-        </>
+        children
     );
 }

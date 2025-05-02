@@ -1,21 +1,15 @@
 "use client";
 
-
-import Modal from '@/components/common/Modal';
-import VerifyUsernameForm from '@/components/forms/profile/VerifyUsernameForm';
-import ChangeUsernameForm from '@/components/forms/profile/ChangeUsernameForm';
-
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from "react";
 
+import Modal from '@/components/common/Modal';
+import ChangeUsernameForm from '@/components/forms/profile/ChangeUsernameForm';
+import VerifyUsernameForm from '@/components/forms/profile/VerifyUsernameForm';
 
-type Props = {
-    oldUsername: string,
-}
 
-
-export default function ChangeUsernameContent({ oldUsername }: Props) {
+export default function ChangeUsernameContent() {
     const [newUsername, setNewUsername] = useState<string | undefined>(undefined);
     const [showModal, setShowModal] = useState<boolean>(false);
     const router = useRouter();
@@ -37,7 +31,7 @@ export default function ChangeUsernameContent({ oldUsername }: Props) {
 
     return (
         <>
-            <ChangeUsernameForm onSubmit={onChangeUsernameFormSubmit} oldUsername={oldUsername} />
+            <ChangeUsernameForm onSubmit={onChangeUsernameFormSubmit} />
             {newUsername &&
                 <Modal title={t('verifyNewUsername')} onCloseClicked={onCloseClick} opened={showModal}>
                     <VerifyUsernameForm newUsername={newUsername} onSubmit={onVerifyUsernameFormSubmit} />

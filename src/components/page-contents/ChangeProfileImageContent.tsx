@@ -1,30 +1,27 @@
 "use client";
 
-import Modal from '@/components/common/Modal';
-import TextButton from '@/components/buttons/TextButton';
-import ChangeProfileImageForm from '@/components/forms/profile/ChangeProfileImageForm';
 
-import { useCallback, useState } from "react";
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { useCallback, useState } from "react";
+
+import Modal from '@/components/common/Modal';
+import TextButton from '@/components/buttons/TextButton';
+import { GetCurrentUserOrRedirect } from '@/components/common/guards/UserProvider';
+import ChangeProfileImageForm from '@/components/forms/profile/ChangeProfileImageForm';
 
 import { deleteProfileImage } from '@/actions/user-actions';
 
 
-
-type Props = {
-    user: UserDTO,
-}
-
-
-export default function ChangeProfileImageContent({ user }: Props) {
+export default function ChangeProfileImageContent() {
     const [showModal, setShowModal] = useState<boolean>(false);
+    const currentUser: UserDTO = GetCurrentUserOrRedirect();
     const t = useTranslations('form');
     const router = useRouter();
 
     const onDeleteProfileImage = useCallback(async () => {
         await deleteProfileImage();
-        router.push(`/${user.username}`);
+        router.push(`/${currentUser.username}`);
     }, []);
 
     const onCloseClick = useCallback(() => {
@@ -35,9 +32,10 @@ export default function ChangeProfileImageContent({ user }: Props) {
         setShowModal(true);
     }, [showModal]);
 
+
     return (
         <>
-            <ChangeProfileImageForm onDeleteProfileImage={onShowModalClick} user={user} />
+            <ChangeProfileImageForm onDeleteProfileImage={onShowModalClick} username={currentUser.username} isProfileImageExist={currentUser.isProfileImageExist} />
             <Modal onCloseClicked={onCloseClick} title={t('removeProfileImage')} opened={showModal}>
                 <div className='flex flex-col gap-20'>
                     <p>{t('removeProfileImageMessage')}</p>
