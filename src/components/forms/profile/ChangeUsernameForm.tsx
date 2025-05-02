@@ -1,24 +1,25 @@
 "use client";
 
 
-import Input from '@/components/common/Input';
 import TextButton from '@/components/buttons/TextButton';
 import FormFieldError from '@/components/common/FormFieldError';
+import { GetCurrentUserOrRedirect } from '@/components/common/guards/UserProvider';
+import Input from '@/components/common/Input';
 
 import { useTranslations } from 'next-intl';
 import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 
-import { getValidationErrors } from '@/lib/zod/validation';
 import { updateUniqueUsernameSchema, updateUsernameSchema } from '@/lib/zod/schemas/profile/changeUsername';
+import { getValidationErrors } from '@/lib/zod/validation';
 
 
 type Props = {
-    oldUsername: string,
     onSubmit: (username: string) => void,
 }
 
 
-export default function ChangeUsernameForm({ oldUsername, onSubmit }: Props) {
+export default function ChangeUsernameForm({onSubmit }: Props) {
+    const oldUsername:string = GetCurrentUserOrRedirect().username;
     const [isFormChanged, setIsFormChanged] = useState<boolean>(false);
     const [username, setUsername] = useState<string>(oldUsername);
     const [errors, setErrors] = useState<Map<string | number, string>>(new Map());

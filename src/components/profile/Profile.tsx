@@ -1,19 +1,19 @@
 "use client"
 
-import styles from '@/styles/text/text.module.css';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
-import StatsInfo from '@/components/common/stats/StatsInfo';
+import { UserState } from '@/constants';
+import styles from '@/styles/text/text.module.css';
+import { follow, getUserPostPreviewsPage, unfollow } from "@/actions/user-actions";
+
 import TextButton from '@/components/buttons/TextButton';
+import AuthWrapper from '@/components/common/AuthWrapper';
+import StatsInfo from '@/components/common/stats/StatsInfo';
 import PostsPreviewGrid from '@/components/post/PostsPreviewGrid';
 import ProfileImage from '@/components/profile/image/ProfileImage';
 import InfiniteLoading from '@/components/common/infinite-loading/InfiniteLoading';
-
-import { follow, getUserPostPreviewsPage, unfollow } from "@/actions/user-actions";
-
-import { UserState } from '@/constants';
-import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
-import { useCallback, useState } from 'react';
 
 
 type Props = {
@@ -54,7 +54,8 @@ export default function Profile({ profile }: Props) {
         <div className="flex flex-grow flex-col flex-shrink items-center justify-center mt-4 lg:m-4 gap-4 max-w-7xl">
             <div className="flex flex-col items-center gap-4 w-11/12 max-w-2xl break-all">
                 <ProfileImage profileImageExist={user.isProfileImageExist} username={user.username} />
-                <h1 className={`${styles['h1']} text-center`}>{user.username}</h1>
+                <h1 className={`${styles['h1']} text-center m-2`}>{user.username}</h1>
+                <h2 className={`${styles['h2']} text-center`}>{user.fullName}</h2>
                 <p className={`${styles['base-text']}`}>{more ? user.description?.substring(0, 200) : user.description}
                     {user.description && user.description.length > 200 &&
                         <>
@@ -66,14 +67,15 @@ export default function Profile({ profile }: Props) {
 
                 <StatsInfo profile={profile} />
                 <div className="flex flex-row items-center basis-1/3 my-4">
-
-                    {user.state == UserState.Current
-                        ? <TextButton fill="parent" text={t('editProfile')} onClick={onEditProfileClicked} />
-                        : (following
-                            ? <TextButton style={"secondary"} text={t('unfollow')} onClick={unfollowProfile} />
-                            : <TextButton style={"primary"} text={t('follow')} onClick={followProfile} />
-                        )
-                    }
+                    <AuthWrapper
+                        auth={user.state == UserState.Current
+                            ? <TextButton fill="parent" text={t('editProfile')} onClick={onEditProfileClicked} />
+                            : (following
+                                ? <TextButton style={"secondary"} text={t('unfollow')} onClick={unfollowProfile} />
+                                : <TextButton style={"primary"} text={t('follow')} onClick={followProfile} />
+                            )
+                        }
+                    />
                 </div>
             </div>
 

@@ -1,10 +1,12 @@
 "use client";
 
 
+import styles from '@/styles/text/text.module.css';
+
 import Link from 'next/link';
-import { useCallback, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
 import { UserState } from '@/constants';
 import { formatDateTime } from '@/utils/dateTime';
@@ -14,11 +16,9 @@ import { follow, unfollow } from "@/actions/user-actions";
 import Modal from '@/components/common/Modal';
 import Dropdown from '@/components/common/Dropdown';
 import IconButton from '@/components/buttons/IconButton';
+import TextButton from '@/components/buttons/TextButton';
 import DropdownButton from '@/components/buttons/DropdownButton';
 import ProfileImage from '@/components/profile/image/ProfileImage';
-import TextButton from '@/components/buttons/TextButton';
-
-import styles from '@/styles/text/text.module.css';
 
 import ellipsisHorizontal from '@/public/ellipsis-horizontal/ellipsis-horizontal.svg';
 import hoveredEllipsisHorizontal from '@/public/ellipsis-horizontal/ellipsis-horizontal-hovered.svg';
@@ -29,10 +29,11 @@ type Props = {
 }
 
 
-export default function PostMenuComponent({ detailedPost }: Props) {
+export default function AuthPostMenu({ detailedPost }: Props) {
     const [post] = useState<PostDTO>(detailedPost.postDTO);
     const [author] = useState<UserDTO>(detailedPost.authorDTO);
     const [showModal, setShowModal] = useState<boolean>(false);
+
     const [isUserPostOwner] = useState<boolean>(author.state == UserState.Current);
     const createdDate: string = formatDateTime(post.createdDate);
     const [following, setFollowing] = useState<boolean>(author.state == UserState.Follow);
@@ -86,6 +87,7 @@ export default function PostMenuComponent({ detailedPost }: Props) {
                 onClick={onShowDropdownClick}
                 className={showDropdown ? "pointer-events-none" : ""}
             />
+
             <Dropdown isVisible={showDropdown} onOutsideClicked={onOutsideClick}>
                 {isUserPostOwner
                     ? <>
@@ -97,6 +99,7 @@ export default function PostMenuComponent({ detailedPost }: Props) {
                         : <DropdownButton style='primary' text={t('follow')} onClick={followProfile} />
                 }
             </Dropdown>
+
             <Modal onCloseClicked={onCloseModalClick} title={t('deletePost')} opened={showModal}>
                 <div className='flex flex-col gap-20'>
                     <p>{t('deleteThisPost')}</p>

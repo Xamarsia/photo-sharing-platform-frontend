@@ -1,25 +1,22 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { signOut } from "@/lib/firebase/auth";
 import { useTranslations } from 'next-intl';
+import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 
-import Dropdown from "@/components/common/Dropdown";
 import DropdownButton from "@/components/buttons/DropdownButton";
 import TextIconButton from "@/components/buttons/TextIconButton";
+import Dropdown from "@/components/common/Dropdown";
+import { GetCurrentUserOrRedirect } from "@/components/common/guards/UserProvider";
 import ProfileImage from "@/components/profile/image/ProfileImage";
 
 import plus from '@/public/plus/plus-white.svg';
-import { signOut } from "@/lib/firebase/auth";
 
 
-type Props = {
-    user: UserDTO,
-}
-
-
-export default function AuthHeaderMenu({ user }: Props) {
+export default function AuthHeaderMenu() {
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
+    const currentUser: UserDTO = GetCurrentUserOrRedirect();
     const t = useTranslations('form');
     const router = useRouter();
 
@@ -34,10 +31,10 @@ export default function AuthHeaderMenu({ user }: Props) {
 
     const onMyProfileClick = useCallback(() => {
         setShowDropdown(false);
-        if (user) {
-            router.push(`/${user.username}`);
+        if (currentUser) {
+            router.push(`/${currentUser.username}`);
         }
-    }, [user]);
+    }, [currentUser]);
 
     const onOutsideClick = useCallback(() => {
         setShowDropdown(false);
@@ -54,7 +51,7 @@ export default function AuthHeaderMenu({ user }: Props) {
             </div>
 
             <button onClick={onShowDropdown} className={showDropdown ? "pointer-events-none" : ""}>
-                <ProfileImage profileImageExist={user.isProfileImageExist} username={user.username} preview />
+                <ProfileImage profileImageExist={currentUser.isProfileImageExist} username={currentUser.username} preview />
             </button>
 
             <Dropdown isVisible={showDropdown} onOutsideClicked={onOutsideClick}>

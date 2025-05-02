@@ -4,14 +4,14 @@ import { ChangeEvent } from "react";
 
 
 type Props = {
-    name?: string | undefined,
-    type: 'text' | 'email' | 'password',
-    title?: string | undefined,
-    value?: string | undefined,
+    id?: string,
+    name?: string,
+    title?: string,
+    value?: string,
+    placeholder?: string,
+    required?: boolean,
     state?: 'invalid' | 'valid'
-    placeholder?: string | undefined,
-    required?: boolean | undefined,
-    id?: string | undefined,
+    type: 'text' | 'email' | 'password',
     onChange: (e: ChangeEvent<HTMLInputElement>) => void,
 }
 

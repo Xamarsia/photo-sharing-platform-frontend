@@ -1,15 +1,15 @@
 import styles from '@/styles/text/text.module.css';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { useCallback, useState } from 'react';
 
 import TextButton from '@/components/buttons/TextButton';
+import AuthWrapper from '@/components/common/AuthWrapper';
 import ProfileImage from '@/components/profile/image/ProfileImage';
 
-import { follow, unfollow } from "@/actions/user-actions";
 import { UserState } from '@/constants';
-
-import { useCallback, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { follow, unfollow } from "@/actions/user-actions";
 
 
 type Props = {
@@ -42,14 +42,14 @@ export default function ProfilePreview({ user }: Props) {
                     <span className={`${styles['secondary-info']} truncate`}>{user.description}</span>
                 </div>
             </div>
-            <>
-                {user.state != UserState.Current &&
+            <AuthWrapper
+                auth={user.state != UserState.Current &&
                     (following
                         ? <TextButton style={"secondary"} text={t('unfollow')} onClick={unfollowProfile} />
                         : <TextButton style={"primary"} text={t('follow')} onClick={followProfile} />
                     )
                 }
-            </>
+            />
         </div>
     )
 }

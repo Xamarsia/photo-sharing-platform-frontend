@@ -1,7 +1,7 @@
 'use server'
 
 import { ProviderID } from '@/constants';
-import { authFetch } from '@/lib/auth-controller';
+import { spspFetch } from '@/lib/auth-controller';
 import { getEmail, getProvider } from '@/lib/firebase/serverApp';
 import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
 
@@ -21,7 +21,7 @@ export async function saveTokenToHttpOnlyCookies(token: string): Promise<void> {
 }
 
 export async function getCurrentUser(): Promise<UserDTO | undefined> {
-  const res: Response = await authFetch('/user', { method: 'GET', });
+  const res: Response = await spspFetch('/user', { method: 'GET', });
   if (!res.ok) {
     return undefined;
   }

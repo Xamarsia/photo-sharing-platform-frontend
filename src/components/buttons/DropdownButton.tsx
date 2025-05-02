@@ -1,8 +1,8 @@
 "use client";
 
 type Props = {
-    text: string | undefined,
-    style?: 'primary' | 'remove' | undefined,
+    text: string,
+    style?: 'primary' | 'remove',
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void,
 }
 

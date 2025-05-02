@@ -10,7 +10,7 @@ import { useCallback, useState } from "react";
 
 
 type Props = {
-    oldEmail: string
+    oldEmail: string,
 }
 
 export default function ChangeEmailContent({ oldEmail }: Props) {

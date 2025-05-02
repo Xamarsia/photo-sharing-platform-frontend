@@ -3,10 +3,9 @@ import 'server-only';
 import Card from '@/components/common/Card';
 import EditPostForm from '@/components/forms/post/EditPostForm';
 
-import { getPost } from '@/actions/post-actions';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-
+import { getPost } from '@/actions/post-actions';
 
 
 type Props = {

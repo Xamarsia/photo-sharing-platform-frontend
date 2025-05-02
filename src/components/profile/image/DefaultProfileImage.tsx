@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 
 type Props = {
-    username: string
-    preview?: boolean
+    username: string,
+    preview?: boolean,
 }
 
 const bgColours: Array<string> = ['bg-gray-100, bg-red-100', 'bg-orange-100', 'bg-amber-100', 'bg-yellow-100', 'bg-lime-100', 'bg-green-100', 'bg-emerald-100', 'bg-teal-100',
