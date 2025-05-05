@@ -1,5 +1,6 @@
 "use client";
 
+import styles from '@/styles/text/text.module.css';
 
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
@@ -14,7 +15,6 @@ import UnAuthPostMenu from '@/components/post/UnAuthPostMenu';
 
 import { deleteLike, like } from "@/actions/post-actions";
 import { LikeState } from '@/constants';
-import styles from '@/styles/text/text.module.css';
 
 import heartDisabled from '@/public/heart/heart-disabled.svg';
 import heart from '@/public/heart/heart.svg';
@@ -60,7 +60,7 @@ export default function Post({ detailedPost }: Props) {
                         </>
                     }
                 </p> 
-                <div className='flex items-center justify-end gap-4 '>
+                <div className='flex items-center justify-end gap-4'>
                     <LikesInfo post={post} />
 
                     <AuthWrapper
