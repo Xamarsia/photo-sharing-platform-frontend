@@ -35,7 +35,7 @@ export async function registerUser(data: RegisterRequest): Promise<UserDTO | und
 }
 
 export async function createAuth(): Promise<boolean> {
-    const res: Response = await spspFetch('/auth', { method: 'POST', });
+    const res: Response = await spspFetch('/auth/', { method: 'POST', });
     return res.ok;
 }
 
@@ -161,7 +161,7 @@ export async function deleteProfileImage(): Promise<void> {
 }
 
 export async function deleteAccount(): Promise<void> {
-    const res: Response = await spspFetch(`/user`, { method: 'DELETE' });
+    const res: Response = await spspFetch(`/user/`, { method: 'DELETE' });
     if (!res.ok) {
         return undefined;
     }

@@ -21,7 +21,7 @@ export async function saveTokenToHttpOnlyCookies(token: string): Promise<void> {
 }
 
 export async function getCurrentUser(): Promise<UserDTO | undefined> {
-  const res: Response = await spspFetch('/user', { method: 'GET', });
+  const res: Response = await spspFetch('/user/', { method: 'GET', });
   if (!res.ok) {
     return undefined;
   }
