@@ -1,7 +1,7 @@
 services:
   frontend-api:
     container_name: frontend-api
-    image: xamarsia/spsp-frontend:0.0.7
+    image: xamarsia/spsp-frontend:1.0.0
     env_file:
       - .env
     ports:
