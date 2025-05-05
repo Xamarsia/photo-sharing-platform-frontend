@@ -27,7 +27,7 @@
 }
 
 .secondary-link {
-    @apply bg-transparent text-sm font-normal hover:underline text-gray-500 hover:text-gray-700 break-all
+    @apply bg-transparent text-sm font-normal hover:underline text-gray-500 hover:text-gray-700 break-all cursor-pointer
 }
 
 .h1 {

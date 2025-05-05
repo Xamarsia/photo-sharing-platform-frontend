@@ -1,5 +1,7 @@
 "use client";
 
+import styles from '@/styles/text/text.module.css';
+
 import { ReactNode, useEffect, useRef } from "react";
 
 import IconButton from "@/components/buttons/IconButton";
@@ -7,7 +9,6 @@ import IconButton from "@/components/buttons/IconButton";
 import xMark from '@/public/x-mark/x-mark.svg';
 import xMarkHovered from '@/public/x-mark/x-mark-hovered.svg';
 
-import styles from '@/styles/text/text.module.css';
 
 type Props = {
     title: string,

@@ -1,5 +1,7 @@
 "use client";
 
+import styles from '@/styles/text/text.module.css';
+
 import { useCallback, useState } from "react";
 import { useTranslations } from 'next-intl';
 
@@ -8,7 +10,6 @@ import StatCounter from "@/components/common/stats/StatCounter";
 import ProfilePreviewsList from "@/components/profile/ProfilePreviewsList";
 import InfiniteLoading from "@/components/common/infinite-loading/InfiniteLoading";
 
-import styles from '@/styles/text/text.module.css';
 import { getUsersLikedPostPage } from "@/actions/user-actions";
 
 
@@ -28,11 +29,9 @@ export default function LikesInfo({ post }: Props) {
         return getUsersLikedPostPage(post.id, page)
     }, [post]);
 
-
     return (
-        <div>
+        <>
             <StatCounter text={t('likes')} count={post.likes} onClick={onOpenModalClick} />
-
             <Modal title={t('likes')} onCloseClicked={onOpenModalClick} opened={showModal}>
                 <div className="flex flex-col items-center overflow-y-auto h-96">
                     <InfiniteLoading<UserDTO>
@@ -41,6 +40,6 @@ export default function LikesInfo({ post }: Props) {
                         emptyResult={<span className={`${styles['secondary-info']} m-4`}>{t('listEmpty')}</span>} />
                 </div>
             </Modal>
-        </div>
+        </>
     )
 }
