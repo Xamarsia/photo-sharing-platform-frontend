@@ -62,7 +62,7 @@
     "reset": "Reset",
     "forgotPassword": "Forgot password?",
     "resetPassword": "Reset your password",
-    "resetPasswordMessage": "Enter your email address or username and we will send you a link to reset your password",
+    "resetPasswordMessage": "Enter your email address and we will send you a link to reset your password",
     "resetPasswordMessageSended": "The link to reset your password was sent to your email. Please, open your email to continue. You can close this window",
     "resetEmailMessage": "After confirming your password, you will receive a verification link to a new email address. After verification, the email address will be changed",
     "resetEmailMessageSended": "A new email confirmation link has been sent. Please, open your email to continue",
@@ -80,7 +80,7 @@
     "tooManyRequests": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
   },
   "footer": {
-    "copyrightText": "© 2024 Simple Photo Sharing Platform",
+    "copyrightText": "© Simple Photo Sharing Platform",
     "about": "About",
     "privacyPolicy": "Privacy Policy",
     "contact": "Contact"
