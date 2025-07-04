@@ -5,6 +5,17 @@
   This projeect is a frontend of [SPSP](https://github.com/Xamarsia/spsp-deployment) project. It implemented using Next.js ( React ) framework and Typescript for static type checking. Frontend components are stateless.
 </h1>
 
+## Table Of Content
+
+- [Links](#links)
+- [Development stack](#development-stack)
+  - [Frontend](#frontend)
+  - [General](#general)
+- [Environment setup](#environment-setup)
+- [Build & Run](#build--run)
+- [Future Enhancements](#future-enhancements)
+- [License](#license)
+
 ## Links
 
 - [`simple-photo-sharing-platform`](https://github.com/Xamarsia/simple-photo-sharing-platform): backend of the SPSP project.
@@ -71,7 +82,7 @@
 ## Build & Run
 
 1. Open project in VS Code.
-2. [Reopen project in Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)
+2. [Reopen project in Dev Container](https://code.visualstudio.com/docs/devcontainers/containers).
 3. To run application, open the terminal and execute the following command:
 
      ```bash
