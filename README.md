@@ -9,7 +9,7 @@
 
 - [`simple-photo-sharing-platform`](https://github.com/Xamarsia/simple-photo-sharing-platform): backend of the SPSP project.
 
-It is implemented using Spring framework.
+     It is implemented using Spring framework and implemented as REST API.
 
 - [`spsp-deployment`](https://github.com/Xamarsia/spsp-deployment): main repository of SPSP project.
 
@@ -33,56 +33,54 @@ It is implemented using Spring framework.
 
 <!-- # Setup -->
 
-## Development
-
-### Setup environment
+## Environment setup
 
 1. Install Visual Studio Code (`ms-vscode-remote.remote-containers` extension).
 2. Install Docker Engine  [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository) and  [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/).
-3. Create docker network.
+3. Docker network `microservice_network` required for further communication with the backend.
 
-`microservice_network` are required for further communication with the backend. Execute the following command to create the network if it has not been created previously:
+   Execute the following command to create the network if it has not been created previously:
 
-```bash
-docker network create microservice_network
-```
+    ```bash
+     docker network create microservice_network
+    ```
 
 4. Clone project.
 
-### Setup environment variables
+5. Setup the environment variables by creating `.env` file in the root of the project directory with the following content (see [`.env.template`](.env.template)):
 
-Create `.env` file in the root of the project with following content from `.env.template` file.
+     ```ini
+     # .env
 
-```ini
-# .env
+     NEXT_PUBLIC_FIREBASE_API_KEY="Firebase API key"
+     NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="Firebase Auth Domain"
+     NEXT_PUBLIC_FIREBASE_PROJECT_ID="Firebase Project Id"
+     NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="Firebase Storage Bucket"
+     NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="Firebase Messaging Sender Id"
+     NEXT_PUBLIC_FIREBASE_APP_ID="Firebase App Id"
 
-NEXT_PUBLIC_FIREBASE_API_KEY="Firebase API key"
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="Firebase Auth Domain"
-NEXT_PUBLIC_FIREBASE_PROJECT_ID="Firebase Project Id"
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="Firebase Storage Bucket"
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="Firebase Messaging Sender Id"
-NEXT_PUBLIC_FIREBASE_APP_ID="Firebase App Id"
+     BACKEND_URL="http://server-api:8080" # URL to backend
 
-BACKEND_URL="http://server-api:8080" # URL to backend
+     # date format for Intl.DateTimeFormat
+     LOCALE = "en-US"
+     TIME_ZONE = "Canada/Eastern"
+     ```
 
-# date format for Intl.DateTimeFormat
-LOCALE = "en-US"
-TIME_ZONE = "Canada/Eastern"
-```
+     Refer to the [Firebase setup](https://github.com/Xamarsia/spsp-deployment/tree/main#setup-firebase) article to understand about the source of the `NEXT_PUBLIC_FIREBASE_*` variables.
 
-Refer to the [Firebase setup](https://github.com/Xamarsia/spsp-deployment/tree/main#setup-firebase) article to understand about the source of the NEXT_PUBLIC_FIREBASE_* variables.
-
-### Run
+## Build & Run
 
 1. Open project in VS Code.
 2. [Reopen project in Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)
-3. To run project, open the terminal and execute the following command:
+3. To run application, open the terminal and execute the following command:
 
-```bash
-pnpm run dev
-```
+     ```bash
+     pnpm run dev
+     ```
 
-4. [Run backend](https://github.com/Xamarsia/simple-photo-sharing-platform/tree/main#run).
+     This will trigger the build process and then will run it.
+
+4. [Setup environment](https://github.com/Xamarsia/simple-photo-sharing-platform/tree/main#environment-setup) for backend and [Run](https://github.com/Xamarsia/simple-photo-sharing-platform/tree/main#build--run) it.
 5. Open http://localhost:3000 with your browser to see the result.
 
 ## Future Enhancements
