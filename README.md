@@ -67,15 +67,14 @@ Although some changes were made during the final stages of development, the prot
 - __News Page:__ News feed of posts is displayed for all users.
   - Infinite scrolling implemented.
 - __Not Found:__ Not found page for incorrect routing.
-  - The UI adapts on laptop views for screens wider than 448px (28rem).
 - __Form Validation:__ Server-side validation for user inputs and data integrity.
   - Display validation errors on the input fields when it fails.
 - __Alerts:__ Display an alert when the request fails.
-
 - __Device Compatibility:__ Compatible with various devices to ensure a smooth user experience.
   - Web platform with responsive design which adapts the layout and content to various screen sizes
 - __Responsive design:__ Adaptive user interfaces that adjust seamlessly from smartphone to laptop screen sizes.
   - The UI adapts on smartphone views for screens with widths ranging from 320px (20rem) to 448px (28rem).
+  - The UI adapts on laptop views for screens wider than 448px (28rem).
 
 ## Related Projects
 
