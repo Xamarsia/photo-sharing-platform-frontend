@@ -9,7 +9,7 @@
 
 - [Description](#description)
 - [Related Projects](#related-projects)
-- [Development stack](#development-stack)
+- [Development Stack](#development-stack)
 - [Project Features](#project-features)
 - [UI Prototype](#ui-prototype)
   - [UI Prototype V 1.0](#ui-prototype-v-10)
@@ -17,9 +17,9 @@
 - [Screenshots](#screenshots)
   - [Desktop](#desktop)
   - [Mobile](#mobile)
-- [Environment setup](#environment-setup)
+- [Environment Setup](#environment-setup)
 - [Build & Run](#build--run)
-  - [Useful commands](#useful-commands)
+  - [Useful Commands](#useful-commands)
 - [Future Enhancements](#future-enhancements)
 - [License](#license)
 
@@ -47,7 +47,7 @@ The application is written in TypeScript, providing strong typing and enhanced d
 
 - [`spsp-deployment`](https://github.com/Xamarsia/spsp-deployment): main repository of SPSP project.
 
-## Development stack
+## Development Stack
 
 - `Next.js` ( React ) - React framework that enables client and server rendering, advanced routing, nested layouts, data fetching.
 - `TypeScript` for static type checking.
@@ -122,7 +122,7 @@ The second prototype was created primarily to focus on styles and layout sizes.
   <img alt="SignIn" width="48%" src="https://github.com/user-attachments/assets/fd833466-fc7b-4e07-864d-3160e9ab1242" />
 </p>
 
-## Environment setup
+## Environment Setup
 
 1. Install Visual Studio Code (`ms-vscode-remote.remote-containers` extension).
 2. Install Docker Engine  [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository) and  [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/).
@@ -170,7 +170,7 @@ The second prototype was created primarily to focus on styles and layout sizes.
 4. [Setup environment](https://github.com/Xamarsia/simple-photo-sharing-platform/tree/main#environment-setup) for backend and [Run](https://github.com/Xamarsia/simple-photo-sharing-platform/tree/main#build--run) it.
 5. Open <http://localhost:3000> with your browser to see the result.
 
-### Useful commands
+### Useful Commands
 
 - `pnpm run build` - Builds project.
 - `pnpm run dev` - Builds and runs project for development.
