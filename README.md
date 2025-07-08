@@ -2,7 +2,7 @@
   <p> Photo Sharing Platform Frontend (SPSP Frontend)</p>
   <h4 align="left">Demo: https://spspdemo.online/</h4>
 
-  This project is a frontend of [SPSP](https://github.com/Xamarsia/spsp-deployment) project. It implemented using Next.js ( React ) framework and Typescript for static type checking.
+  This repository is a frontend of [SPSP](https://github.com/Xamarsia/spsp-deployment) project. It is implemented using Typescript and Next.js ( React ) framework.
 </h1>
 
 ## Table Of Content
@@ -25,51 +25,43 @@
 
 ## Description
 
-Photo Sharing Platform Frontend project is a frontend of [SPSP](https://github.com/Xamarsia/spsp-deployment) project.
+Photo Sharing Platform Frontend project is a UI of [SPSP](https://github.com/Xamarsia/spsp-deployment) project.
 
-The application is designed to foster user interaction and content sharing through posts.
+This application is web-based and built to be compatible with various devices.
 
-A post consists of an image and an optional description. SPSP offers an intuitive interface that allows users to create, update, and delete posts effortlessly.
+Prototype of the application is designed in Figma.
 
-Users can create customizable profiles that reflect their personality through profile picture, bios, and a collection of their posts. The platform encourages social connectivity with follow and unfollow functionalities.
-
-This application is designed on Figma (see UI Prototipe) and developed using Next.js.
-
-It is web-based and built to be compatible with various devices. The frontend components are stateless.
-
-The application is written in TypeScript, providing strong typing and enhanced developer experience through improved code quality and maintainability.
+The application is written in TypeScript, using Next.js; components are stateless.
 
 ## Related Projects
 
 - [`simple-photo-sharing-platform`](https://github.com/Xamarsia/simple-photo-sharing-platform): backend of the SPSP project.
 
-     It is implemented using Spring framework and implemented as REST API.
-
 - [`spsp-deployment`](https://github.com/Xamarsia/spsp-deployment): main repository of SPSP project.
 
 ## Development Stack
 
-- `Next.js` ( React ) - React framework that enables client and server rendering, advanced routing, nested layouts, data fetching.
-- `TypeScript` for static type checking.
-- `Tailwind CSS` for CSS styling.
-- `ESLint` for code linting.
-- `Zod` for forms validation.
-- `Firebase Auth` for providing security authentication.
-- `Docker` - helps create and manage an isolated environment for building, sharing, and running applications.
+- `Next.js` ( React ) - for client and server rendering, advanced routing, nested layouts, data fetching.
+- `TypeScript` - for static type checking.
+- `Tailwind CSS` - for simplified CSS styling.
+- `ESLint` - for code linting.
+- `Zod` - for frontend forms validation.
+- `Firebase Auth` - for providing security authentication.
+- `Docker` - for isolated development enviroment, deployment.
 
 ## Project Features
 
 - __User Authentication:__ Sign In, Sign Up, and Sign Out functionalities are provided, along with an option for Password Reset.
-  - Authentication using email addresses and passwords or popular identity provider Google.
-  - Authentication is implemented using Firebase Authentication because it leverages industry standards such as OAuth 2.0.
-- __Unauthorized Preview:__ Non-authenticated users can view a news feed, posts, and other users' profiles.
+  - Authentication using email address and password or external identity provider ( Google ).
+  - Authentication is implemented using OAuth 2.0 ( Firebase Authentication ).
+- __Unauthorized Preview:__ Non-authenticated users can view a news feed, posts, and other user's profiles.
 - __User Profiles:__ Customizable profiles with profile picture, bios and posts.
   - Users also have the option to delete their profiles.
 - __User Interaction:__  Follow and unfollow functionality.
   - Only authorized users are permitted to follow or unfollow users.
   - All users can view the list of followers or followings.
 - __User Search:__ Search for users by username or full name.
-- __Content Sharing:__ Intuitive interface for viewing, creating, updating, or deleting posts.
+- __Content Sharing:__ Interface for viewing, creating, updating, or deleting posts.
   - Post previews are displayed on their author's profile in order from newest to oldest.
 - __Content Interaction:__ Like and dislike feature for posts to enhance user engagement.
   - Only authorized users are permitted to like or dislike posts.
@@ -79,7 +71,7 @@ The application is written in TypeScript, providing strong typing and enhanced d
 - __Not Found:__ Not found page for incorrect routing.
 - __Form Validation:__ Server-side validation for user inputs and data integrity.
   - Display validation errors on the input fields when it fails.
-- __Alerts:__ Display an alert when the request fails.
+- __Alerts:__ Display alerts when the requests fail.
 - __Device Compatibility:__ Compatible with various devices to ensure a smooth user experience.
   - Web platform with responsive design which adapts the layout and content to various screen sizes
 - __Responsive design:__ Adaptive user interfaces that adjust seamlessly from smartphone to laptop screen sizes.
@@ -88,7 +80,7 @@ The application is written in TypeScript, providing strong typing and enhanced d
 
 ## UI Prototype
 
-This frontend application was designed in Figma prior to development, resulting in a clear and visually appealing user interface.
+This frontend application has been designed in Figma prior to development.
 
 The design process in Figma ensured that the layout, color schemes, typography, and overall aesthetics aligned with the project goals.
 
@@ -125,8 +117,9 @@ The second prototype was created primarily to focus on styles and layout sizes.
 ## Environment Setup
 
 1. Install Visual Studio Code (`ms-vscode-remote.remote-containers` extension).
-2. Install Docker Engine  [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository) and  [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/).
-3. Docker network `microservice_network` required for further communication with the backend.
+2. [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository) and go through [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/).
+3. Clone project.
+4. Docker network `microservice_network` required for further communication between the frontend and the backend.
 
     Execute the following command to create the network if it has not been created previously:
 
@@ -134,7 +127,6 @@ The second prototype was created primarily to focus on styles and layout sizes.
     docker network create microservice_network
     ```
 
-4. Clone project.
 5. Setup the environment variables by creating `.env` file in the root of the project directory with the following content (see [`.env.template`](.env.template)):
 
     ```ini
@@ -212,7 +204,7 @@ The second prototype was created primarily to focus on styles and layout sizes.
 
 ## Future Enhancements
 
-- [ ] Adding functionality for comments and tags.
+- [ ] Add functionality for comments and hashtags.
 - [ ] Increase test coverage.
 
 ## License
