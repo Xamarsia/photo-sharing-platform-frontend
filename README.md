@@ -1,9 +1,10 @@
 <h1 align="center">
-  <p> Photo Sharing Platform Frontend (SPSP Frontend)</p>
-  <h4 align="left">Demo: https://spspdemo.online/</h4>
-
-  This repository is a frontend of [SPSP](https://github.com/Xamarsia/spsp-deployment) project. It is implemented using Typescript and Next.js ( React ) framework.
+  Photo Sharing Platform Frontend (SPSP Frontend)
 </h1>
+
+__Demo: [spspdemo.online](https://spspdemo.online/)__
+
+This repository is a frontend of [SPSP](https://github.com/Xamarsia/spsp-deployment) project. It is implemented using Typescript and Next.js ( React ) framework.
 
 ## Table Of Content
 
@@ -52,22 +53,21 @@ The application is written in TypeScript, using Next.js; components are stateles
 ## Project Features
 
 - __User Authentication:__ Sign In, Sign Up, and Sign Out functionalities are provided, along with an option for Password Reset.
-  - Authentication using email address and password or external identity provider ( Google ).
+  - Supports authentication via email and password or external identity provider ( Google ).
   - Authentication is implemented using OAuth 2.0 ( Firebase Authentication ).
 - __Unauthorized Preview:__ Non-authenticated users can view a news feed, posts, and other user's profiles.
 - __User Profiles:__ Customizable profiles with profile picture, bios and posts.
-  - Users also have the option to delete their profiles.
+  - Users can delete their profiles.
 - __User Interaction:__ Follow and unfollow functionality.
   - Only authorized users are permitted to follow or unfollow users.
   - All users can view the list of followers or followings.
 - __User Search:__ Search for users by username or full name.
 - __Content Sharing:__ Interface for viewing, creating, updating, or deleting posts.
-  - Post previews are displayed on their author's profile in order from newest to oldest.
+  - Post previews are displayed on author's profile in order from newest to oldest.
 - __Content Interaction:__ Like and dislike feature for posts to enhance user engagement.
   - Only authorized users are permitted to like or dislike posts.
   - All users can view the list of users who liked a post.
-- __News Page:__ News feed of posts is displayed for all users.
-  - Infinite scrolling implemented.
+- __News Page:__ News feed displays posts for all users with infinite scrolling.
 - __Not Found:__ Not found page for incorrect routing.
 - __Form Validation:__ Server-side validation for user inputs and data integrity.
   - Display validation errors on the input fields when it fails.
@@ -81,13 +81,13 @@ The application is written in TypeScript, using Next.js; components are stateles
 ## UI Prototype
 
 This frontend application has been designed in Figma prior to development.
-The design process in Figma ensured that the layout, color schemes, typography, and overall aesthetics aligned with the project goals.
+The design process ensured that the layout, color schemes, typography, and overall aesthetics aligned with the project goals.
 
-Although some changes were made during the final stages of development, the prototype still retains its core functionality and visual design.
+Although some adjustments were made during the final development stages, the prototype still retains its core functionality and visual design.
 
 ### UI Prototype V 1.0
 
-This initial prototype was created on a smartphone without any special styles. The main goal was to understand the consistency of the components and the layout of the pages.
+This initial prototype was created on a smartphone without any special styles, focusing primarily on the consistency of the components and the layout of the pages.
 
 [SPSP Prototype V 1.0 Smartphone](https://www.figma.com/design/QdF9eraM5d03OU5veQ9Eno/SPSP-Prototype-1.0-Smartphone?t=zIo7kOkAvCnF3ZwC-1)
 
@@ -100,7 +100,7 @@ This initial prototype was created on a smartphone without any special styles. T
 
 ### UI Prototype V 2.0
 
-The second prototype was created primarily to focus on styles and layout sizes.
+The second prototype was made to focus on styles and layout sizes.
 
 [SPSP Prototype V 2.0](https://www.figma.com/design/JE4wZvS2xRHong3E1sXi5x/SPSP-Prototype-2.0?node-id=0-1&t=dz18uLli4jOSue5b-1)
 
@@ -116,8 +116,8 @@ The second prototype was created primarily to focus on styles and layout sizes.
 ## Environment Setup
 
 1. Install Visual Studio Code (`ms-vscode-remote.remote-containers` extension).
-2. [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository) and go through [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/).
-3. Clone project.
+2. [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository) and follow the [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/).
+3. Clone the project repository.
 4. Docker network `microservice_network` required for further communication between the frontend and the backend.
 
     Execute the following command to create the network if it has not been created previously:
@@ -166,7 +166,7 @@ The second prototype was created primarily to focus on styles and layout sizes.
 - `pnpm run build` - Builds project.
 - `pnpm run dev` - Builds and runs project for development.
 - `pnpm run lint` - Runs lint.
-- `pnpm run start` - starts project if build exists.
+- `pnpm run start` - Starts project if build exists.
 
 ## Screenshots
 
