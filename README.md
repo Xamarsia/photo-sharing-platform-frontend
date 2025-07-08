@@ -29,7 +29,7 @@ Photo Sharing Platform Frontend project is a UI of [SPSP](https://github.com/Xam
 
 This application is web-based and built to be compatible with various devices.
 
-Prototype of the application is designed in Figma.
+Prototype of the application is designed in Figma (see [UI Prototipe](#ui-prototype)).
 
 The application is written in TypeScript, using Next.js; components are stateless.
 
@@ -57,7 +57,7 @@ The application is written in TypeScript, using Next.js; components are stateles
 - __Unauthorized Preview:__ Non-authenticated users can view a news feed, posts, and other user's profiles.
 - __User Profiles:__ Customizable profiles with profile picture, bios and posts.
   - Users also have the option to delete their profiles.
-- __User Interaction:__  Follow and unfollow functionality.
+- __User Interaction:__ Follow and unfollow functionality.
   - Only authorized users are permitted to follow or unfollow users.
   - All users can view the list of followers or followings.
 - __User Search:__ Search for users by username or full name.
@@ -81,7 +81,6 @@ The application is written in TypeScript, using Next.js; components are stateles
 ## UI Prototype
 
 This frontend application has been designed in Figma prior to development.
-
 The design process in Figma ensured that the layout, color schemes, typography, and overall aesthetics aligned with the project goals.
 
 Although some changes were made during the final stages of development, the prototype still retains its core functionality and visual design.
