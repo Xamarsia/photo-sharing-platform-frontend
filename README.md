@@ -30,7 +30,7 @@ Photo Sharing Platform Frontend project is a UI of [SPSP](https://github.com/Xam
 
 This application is web-based and built to be compatible with various devices.
 
-Prototype of the application is designed in Figma (see [UI Prototipe](#ui-prototype)).
+Prototype of the application is designed in Figma (see [UI Prototype](#ui-prototype)).
 
 The application is written in TypeScript, using Next.js; components are stateless.
 
@@ -48,11 +48,12 @@ The application is written in TypeScript, using Next.js; components are stateles
 - `ESLint` - for code linting.
 - `Zod` - for frontend forms validation.
 - `Firebase Auth` - for providing security authentication.
-- `Docker` - for isolated development enviroment, deployment.
+- `Docker` - for isolated development environment, deployment.
+- `Figma` - for project prototyping.
 
 ## Project Features
 
-- __User Authentication:__ Sign In, Sign Up, and Sign Out functionalities are provided, along with an option for Password Reset.
+- __User Authentication:__ Sign In, Sign Up, and Sign Out functionalities, including password reset option.
   - Supports authentication via email and password or external identity provider ( Google ).
   - Authentication is implemented using OAuth 2.0 ( Firebase Authentication ).
 - __Unauthorized Preview:__ Non-authenticated users can view a news feed, posts, and other user's profiles.
@@ -73,7 +74,7 @@ The application is written in TypeScript, using Next.js; components are stateles
   - Display validation errors on the input fields when it fails.
 - __Alerts:__ Display alerts when the requests fail.
 - __Device Compatibility:__ Compatible with various devices to ensure a smooth user experience.
-  - Web platform with responsive design which adapts the layout and content to various screen sizes
+  - Web platform with responsive design which adapts the layout and content to various screen sizes.
 - __Responsive design:__ Adaptive user interfaces that adjust seamlessly from smartphone to laptop screen sizes.
   - The UI adapts on smartphone views for screens with widths ranging from 320px (20rem) to 448px (28rem).
   - The UI adapts on laptop views for screens wider than 448px (28rem).
@@ -144,7 +145,7 @@ The second prototype was made to focus on styles and layout sizes.
     TIME_ZONE = "Canada/Eastern"
     ```
 
-    Refer to the [Firebase setup](https://github.com/Xamarsia/spsp-deployment/tree/main#setup-firebase) article to understand about the source of the `NEXT_PUBLIC_FIREBASE_*` variables.
+    Refer to the [Firebase setup](https://github.com/Xamarsia/spsp-deployment/tree/main#firebase-setup) article to understand about the source of the `NEXT_PUBLIC_FIREBASE_*` variables.
 
 ## Build & Run
 
