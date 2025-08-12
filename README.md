@@ -13,8 +13,8 @@ This repository is a frontend of [SPSP](https://github.com/Xamarsia/spsp-deploym
 - [Development Stack](#development-stack)
 - [Project Features](#project-features)
 - [UI Prototype](#ui-prototype)
-  - [UI Prototype V 1.0](#ui-prototype-v-10)
-  - [UI Prototype V 2.0](#ui-prototype-v-20)
+  - [UI Prototype V 1.0 Smartphone](#ui-prototype-v-10-smartphone)
+  - [UI Prototype V 1.0 PC](#ui-prototype-v-10-pc)
 - [Screenshots](#screenshots)
   - [Desktop](#desktop)
   - [Mobile](#mobile)
@@ -86,7 +86,7 @@ The design process ensured that the layout, color schemes, typography, and overa
 
 Although some adjustments were made during the final development stages, the prototype still retains its core functionality and visual design.
 
-### UI Prototype V 1.0
+### UI Prototype V 1.0 Smartphone
 
 This initial prototype was created on a smartphone without any special styles, focusing primarily on the consistency of the components and the layout of the pages.
 
@@ -99,7 +99,7 @@ This initial prototype was created on a smartphone without any special styles, f
   <img alt="SignIn" width="24%" src="https://github.com/user-attachments/assets/1eb3d9ab-13c1-49af-87dc-21e0230979ed" />
 </p>
 
-### UI Prototype V 2.0
+### UI Prototype V 1.0 PC
 
 The second prototype was made to focus on styles and layout sizes.
 
