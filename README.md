@@ -2,8 +2,6 @@
   Photo Sharing Platform Frontend (SPSP Frontend)
 </h1>
 
-__Demo: [spspdemo.online](https://spspdemo.online/)__
-
 This repository is a frontend of [SPSP](https://github.com/Xamarsia/spsp-deployment) project. It is implemented using Typescript and Next.js ( React ) framework.
 
 ## Table Of Content
